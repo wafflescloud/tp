@@ -274,13 +274,16 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* will like to manage a significant number of contacts of other cat caretakers
+* will like to keep track of the cats present around campus
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+* manage contacts faster than a typical mouse/GUI driven app
+* keep track of cats' details around campus
 
 
 ### User stories
@@ -338,7 +341,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Cats of NUS**: A society in NUS for cats lover and care takers 
+* **SOPs**: Standard Of Procedures 
+* **PIC**: Person in charge of the members of the Cats of NUS
+* **General User**: Users that fits the target audience of this address book
 
 --------------------------------------------------------------------------------------------------------------------
 
