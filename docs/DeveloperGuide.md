@@ -540,7 +540,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
  
 
 ### Non-Functional Requirements
-
 1. The software should work on any mainstream OS as long as it has Java 17 or above installed.
 2. The software should be able to hold up to 1000 entries without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using typed commands in a command-line interface (CLI) than using a graphical user interface (GUI)
@@ -549,6 +548,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. The software should work without requiring an installer.
 7. The graphical user interface (GUI) should support standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%, and be usable for resolutions 1280x720 and higher and for screen scale 150%.
 8. The software should be packaged into a single JAR file.
+9. This product is not required to handle messaging/calling other Cats of NUS members. 
+10. This product is not required to handle sending notifications to users about feeding times.
 
 *{More to be added}*
 
