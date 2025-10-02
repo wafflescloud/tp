@@ -334,6 +334,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. This product is not required to handle messaging/calling other Cats of NUS members.
 5. This product is not required to handle sending notifications to users about feeding times.
+6. This product is not required to communicate with/store data in the cloud.
 
 *{More to be added}*
 
