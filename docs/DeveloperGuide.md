@@ -273,7 +273,8 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
+* is a member of Cats of NUS
+* has a need to manage a significant number of contacts
 * will like to manage a significant number of contacts of other cat caretakers
 * will like to keep track of the cats present around campus
 * prefer desktop apps over other types
@@ -281,9 +282,11 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
+
 **Value proposition**: 
 * manage contacts faster than a typical mouse/GUI driven app
 * keep track of cats' details around campus
+
 
 
 ### User stories
@@ -328,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | member of Cats of NUS                                | edit special reminders I set before                                                         | change timing/date/frequency of each reminder                                  |
 | `*`      | member of Cats of NUS                                | be reminded of when to feed the cats                                                        | feed the cats on time                                                          |
 
-*{More to be added}*
+
 
 ### Use cases
 
