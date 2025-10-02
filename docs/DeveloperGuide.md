@@ -342,7 +342,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Cats of NUS**: A society in NUS for cats lover and care takers 
-* **SOPs**: Standard Of Procedures 
 * **PIC**: Person in charge of the members of the Cats of NUS
 * **General User**: Users that fits the target audience of this address book
 
