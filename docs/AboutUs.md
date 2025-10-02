@@ -15,7 +15,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/blurfrost.png" width="200px">
 
-[[homepage](https://github.com/blurfrost)]
 [[github](https://github.com/blurfrost)]
 [[portfolio](team/blurfrost.md)]
 
