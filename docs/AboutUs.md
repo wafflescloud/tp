@@ -11,15 +11,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Keith Shen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/blurfrost.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://github.com/blurfrost)]
+[[github](https://github.com/blurfrost)]
+[[portfolio](team/blurfrost.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Documentation, UI
 
 ### Jane Doe
 
