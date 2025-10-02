@@ -302,14 +302,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, where `user` refers to a cat caretaker using the Furiends app to manage contacts, unless specificed otherwise)
 
+(For all use cases below, the System is the AddressBook and the Actor is the User,  
+where "User" refers to a cat caretaker using the Furiends app to manage contacts.  
+The unique identifier for persons and animals is their name.)  
+
 **Use case: UC01 - Add a person**
 
 **MSS**
 
-1. User requests to add a new person by providing details (e.g., name, phone, responsibilities).  
-2. AddressBook validates the details.  
-3. AddressBook adds the person to the list.  
-4. AddressBook shows a confirmation message and the updated list.  
+1. User requests to add a new person by providing the person’s name, phone number, and email together  
+2. AddressBook validates the details  
+3. AddressBook adds the person to the list  
+4. AddressBook shows a confirmation message and the updated list  
 Use case ends  
 
 **Extensions**
@@ -318,18 +322,19 @@ Use case ends
     2a1. AddressBook shows an error message.  
     Use case ends  
 
-3a. The person already exists in the list.  
+3a. A person with the same name already exists in the list.  
     3a1. AddressBook shows a duplicate warning.  
-    Use case ends 
+    Use case ends  
+
 
 **Use case: UC02 - Delete a person**
 
 **MSS**
 
-1. User requests to list persons  
-2. AddressBook shows a list of persons  
-3. User requests to delete a specific person in the list  
-4. AddressBook deletes the person  
+1. User requests to delete a person by specifying the person’s name  
+2. AddressBook checks if the person exists  
+3. AddressBook deletes the person  
+4. AddressBook shows a confirmation message and the updated list  
 Use case ends  
 
 **Extensions**
@@ -337,20 +342,20 @@ Use case ends
 2a. The list is empty.  
     Use case ends  
 
-3a. The given index is invalid.  
-    3a1. AddressBook shows an error message.  
-    Use case ends
+2b. The given name does not match any person.  
+    2b1. AddressBook shows an error message.  
+    Use case ends  
+
 
 **Use case: UC03 - Edit a person**
 
 **MSS**
 
-1. User requests to list persons  
-2. AddressBook shows a list of persons  
-3. User requests to edit the details of a specific person in the list  
-4. AddressBook validates the new details  
-5. AddressBook updates the person’s information  
-6. AddressBook shows a confirmation message and the updated list  
+1. User requests to edit a person by providing the person’s name together with the updated details (phone number, email, animal being fed, and/or date and time of feeding)  
+2. AddressBook checks if the person exists  
+3. AddressBook validates the new details  
+4. AddressBook updates the person’s information  
+5. AddressBook shows a confirmation message and the updated list  
 Use case ends  
 
 **Extensions**
@@ -358,45 +363,43 @@ Use case ends
 2a. The list is empty.  
     Use case ends  
 
-3a. The given index is invalid.  
+2b. The given name does not match any person.  
+    2b1. AddressBook shows an error message.  
+    Use case ends  
+
+3a. One or more new details are invalid.  
     3a1. AddressBook shows an error message.  
     Use case ends  
 
-4a. One or more new details are invalid.  
-    4a1. AddressBook shows an error message.  
-    Use case ends  
-
-5a. The updated details duplicate an existing person.  
-    5a1. AddressBook shows a duplicate warning.  
+4a. The updated details duplicate another person’s name.  
+    4a1. AddressBook shows a duplicate warning.  
     Use case ends
+
 
 **Use case: UC04 - Find a person**
 
 **MSS**
 
-1. User requests to find a person by specifying a name  
-2. AddressBook searches the contact list for matching persons  
-3. AddressBook shows a list of matching persons  
+1. User requests to find a person by specifying the person’s name  
+2. AddressBook searches the contact list for a matching person  
+3. AddressBook shows the person’s details  
 Use case ends  
 
 **Extensions**
 
-2a. No persons match the given keyword.  
+2a. No person matches the given name.  
     2a1. AddressBook shows an empty result message.  
     Use case ends  
 
-2b. The search keyword is invalid (e.g., empty input).  
-    2b1. AddressBook shows an error message.  
-    Use case ends  
 
 **Use case: UC05 - Add an animal**
 
 **MSS**
 
-1. User requests to add a new animal by providing details (e.g., name, description, medical notes).  
-2. AddressBook validates the details.  
-3. AddressBook adds the animal to the list.  
-4. AddressBook shows a confirmation message and the updated list.  
+1. User requests to add a new animal by providing the animal’s name, description, and location together  
+2. AddressBook validates the details  
+3. AddressBook adds the animal to the list  
+4. AddressBook shows a confirmation message and the updated list  
 Use case ends  
 
 **Extensions**
@@ -405,7 +408,7 @@ Use case ends
     2a1. AddressBook shows an error message.  
     Use case ends  
 
-3a. The animal already exists in the list.  
+3a. An animal with the same name already exists in the list.  
     3a1. AddressBook shows a duplicate warning.  
     Use case ends  
 
@@ -414,10 +417,10 @@ Use case ends
 
 **MSS**
 
-1. User requests to list animals  
-2. AddressBook shows a list of animals  
-3. User requests to delete a specific animal in the list  
-4. AddressBook deletes the animal  
+1. User requests to delete an animal by specifying the animal’s name  
+2. AddressBook checks if the animal exists  
+3. AddressBook deletes the animal  
+4. AddressBook shows a confirmation message and the updated list  
 Use case ends  
 
 **Extensions**
@@ -425,8 +428,8 @@ Use case ends
 2a. The list is empty.  
     Use case ends  
 
-3a. The given index is invalid.  
-    3a1. AddressBook shows an error message.  
+2b. The given name does not match any animal.  
+    2b1. AddressBook shows an error message.  
     Use case ends  
 
 
@@ -434,12 +437,11 @@ Use case ends
 
 **MSS**
 
-1. User requests to list animals  
-2. AddressBook shows a list of animals  
-3. User requests to edit the details of a specific animal in the list  
-4. AddressBook validates the new details  
-5. AddressBook updates the animal’s information  
-6. AddressBook shows a confirmation message and the updated list  
+1. User requests to edit an animal by providing the animal’s name together with the updated description and/or location  
+2. AddressBook checks if the animal exists  
+3. AddressBook validates the new details  
+4. AddressBook updates the animal’s information  
+5. AddressBook shows a confirmation message and the updated list  
 Use case ends  
 
 **Extensions**
@@ -447,16 +449,16 @@ Use case ends
 2a. The list is empty.  
     Use case ends  
 
-3a. The given index is invalid.  
+2b. The given name does not match any animal.  
+    2b1. AddressBook shows an error message.  
+    Use case ends  
+
+3a. One or more new details are invalid.  
     3a1. AddressBook shows an error message.  
     Use case ends  
 
-4a. One or more new details are invalid.  
-    4a1. AddressBook shows an error message.  
-    Use case ends  
-
-5a. The updated details duplicate an existing animal.  
-    5a1. AddressBook shows a duplicate warning.  
+4a. The updated details duplicate another animal’s name.  
+    4a1. AddressBook shows a duplicate warning.  
     Use case ends  
 
 
@@ -464,20 +466,17 @@ Use case ends
 
 **MSS**
 
-1. User requests to find an animal by specifying a search keyword (e.g., name, description, medical notes)  
-2. AddressBook searches the animal list for matching entries  
-3. AddressBook shows a list of matching animals  
+1. User requests to find an animal by specifying the animal’s name  
+2. AddressBook searches the animal list for a matching entry  
+3. AddressBook shows the animal’s details  
 Use case ends  
 
 **Extensions**
 
-2a. No animals match the given keyword.  
+2a. No animal matches the given name.  
     2a1. AddressBook shows an empty result message.  
     Use case ends  
-
-2b. The search keyword is invalid (e.g., empty input).  
-    2b1. AddressBook shows an error message.  
-    Use case ends
+ 
 
 ### Non-Functional Requirements
 
