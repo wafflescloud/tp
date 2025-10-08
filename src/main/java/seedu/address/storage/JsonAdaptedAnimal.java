@@ -45,7 +45,8 @@ public class JsonAdaptedAnimal {
      */
     public Animal toModelType() throws IllegalValueException {
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, AnimalName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    AnimalName.class.getSimpleName()));
         }
         if (!AnimalName.isValidName(name)) {
             throw new IllegalValueException(AnimalName.MESSAGE_CONSTRAINTS);
@@ -53,7 +54,8 @@ public class JsonAdaptedAnimal {
         final AnimalName modelName = new AnimalName(name);
 
         if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Description.class.getSimpleName()));
         }
         if (!Description.isValidDescription(description)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
@@ -61,7 +63,8 @@ public class JsonAdaptedAnimal {
         final Description modelDescription = new Description(description);
 
         if (location == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Location.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Location.class.getSimpleName()));
         }
         if (!Location.isValidLocation(location)) {
             throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
