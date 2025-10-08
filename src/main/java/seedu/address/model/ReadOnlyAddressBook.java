@@ -1,7 +1,7 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Animal;
+import seedu.address.model.animal.Animal;
 import seedu.address.model.person.Person;
 
 /**
@@ -15,6 +15,9 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
+    /**
+     * Returns an unmodifiable view of the animals list.
+     * This list will not contain any duplicate animals.
+     */
     ObservableList<Animal> getAnimalList();
-
 }

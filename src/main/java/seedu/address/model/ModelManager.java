@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Animal;
+import seedu.address.model.animal.Animal;
 import seedu.address.model.person.Person;
 
 /**
@@ -23,20 +23,18 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final FilteredList<Animal> filteredAnimal;
+    private final FilteredList<Animal> filteredAnimals;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
-
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredAnimal = new FilteredList<>(this.addressBook.getAnimalList());
+        filteredAnimals = new FilteredList<>(this.addressBook.getAnimalList());
     }
 
     public ModelManager() {
@@ -90,6 +88,8 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    //=========== Person Operations =========================================================================
+
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -102,11 +102,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteAnimal(Animal target) {
-        addressBook.removeAnimal(target);
-    }
-
-    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -115,24 +110,39 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+    }
+
+    //=========== Animal Operations =========================================================================
+
+    @Override
+    public boolean hasAnimal(Animal animal) {
+        requireNonNull(animal);
+        return addressBook.hasAnimal(animal);
+    }
+
+    @Override
+    public void deleteAnimal(Animal target) {
+        addressBook.removeAnimal(target);
+    }
+
+    @Override
+    public void addAnimal(Animal animal) {
+        addressBook.addAnimal(animal);
+        updateFilteredAnimalList(PREDICATE_SHOW_ALL_ANIMALS);
+    }
+
+    @Override
+    public void setAnimal(Animal target, Animal editedAnimal) {
+        requireAllNonNull(target, editedAnimal);
+        addressBook.setAnimal(target, editedAnimal);
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
-    }
-
-    @Override
-    public ObservableList<Animal> getFilteredAnimalList() {
-        return filteredAnimal;
     }
 
     @Override
@@ -141,13 +151,27 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Filtered Animal List Accessors =============================================================
+
+    @Override
+    public ObservableList<Animal> getFilteredAnimalList() {
+        return filteredAnimals;
+    }
+
+    @Override
+    public void updateFilteredAnimalList(Predicate<Animal> predicate) {
+        requireNonNull(predicate);
+        filteredAnimals.setPredicate(predicate);
+    }
+
+    //=========== Utility Methods ==========================================================================
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof ModelManager)) {
             return false;
         }
@@ -155,7 +179,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredAnimals.equals(otherModelManager.filteredAnimals);
     }
-
 }
