@@ -44,6 +44,10 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane personListPanelPlaceholder;
 
+    // change here to animal list
+    @FXML
+    private StackPane personListPanelPlaceholderDuplicateRight;
+
     @FXML
     private StackPane resultDisplayPlaceholder;
 
@@ -112,6 +116,11 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        // Add duplicated temporay person list on the right side
+        // change here to animal list
+        PersonListPanel personListPanelRight = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholderDuplicateRight.getChildren().add(personListPanelRight.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
