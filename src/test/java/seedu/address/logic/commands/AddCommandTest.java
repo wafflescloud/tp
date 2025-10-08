@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.animal.Animal;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -155,6 +156,36 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAnimal(Animal animal) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAnimal(Animal target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAnimal(Animal animal) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAnimal(Animal target, Animal editedAnimal) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Animal> getFilteredAnimalList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredAnimalList(Predicate<Animal> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
