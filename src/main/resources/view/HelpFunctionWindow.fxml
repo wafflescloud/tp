@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
+
+<fx:root resizable="false" title="Command Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <icons>
+    <Image url="@/images/help_icon.png" />
+  </icons>
+  <scene>
+    <Scene>
+      <VBox spacing="8.0" alignment="TOP_LEFT" style="-fx-padding: 12;" minWidth="400.0" minHeight="200.0" prefWidth="400.0" prefHeight="200.0">
+        <children>
+          <Label fx:id="commandTitleLabel" style="-fx-font-size: 14pt; -fx-font-weight: bold" />
+          <Label fx:id="commandDescriptionLabel" wrapText="true" />
+        </children>
+      </VBox>
+    </Scene>
+  </scene>
+</fx:root>
