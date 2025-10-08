@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# Furiends Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -273,62 +273,273 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
+* is a member of Cats of NUS
 * has a need to manage a significant number of contacts
+* will like to manage a significant number of contacts of other cat caretakers
+* will like to keep track of the cats present around campus
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: 
+* manage contacts faster than a typical mouse/GUI driven app
+* keep track of cats' details around campus
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                              | I want to …​                                                                                | So that I can…​                                                                |
+|----------|------------------------------------------------------|---------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| `* * *`  | new user                                             | view a guide to using this application                                                      | refer to the guide when I forget how to use the application                    |
+| `* * *`  | general user                                         | view the list of added contact entries                                                      | keep track of all contact entries I added                                      |
+| `* * *`  | general user                                         | add a contact entry                                                                         | keep track of their information for later use                                  |
+| `* * *`  | general user                                         | delete a contact entry                                                                      | remove irrelevant contacts that I do not need to keep track of anymore         |
+| `* * *`  | general user                                         | edit a contact entry                                                                        | ensure that my contact information is up to date                               |
+| `* * *`  | general animal lover in NUS                          | keep track of the animals I encountered in NUS                                              | visit them whenever I am free                                                  |
+| `* * *`  | general animal feeder in NUS                         | add contact entry of an existing feeder of NUS                                              | keep track of their information for later use                                  |
+| `* * *`  | general animal feeder in NUS                         | delete contact entry of an existing feeder of NUS                                           | remove irrelevant contacts that I do not need to keep track of anymore         |
+| `* * *`  | general animal feeder in NUS                         | update contact entry of an existing feeder of NUS                                           | keep their information updated so as to stay in contact with them              |
+| `* * *`  | member of Cats of NUS                                | view the list of added contact entries of Cats of NUS members                               | keep track of all contact entries of added members                             |
+| `* * *`  | member of Cats of NUS                                | view the list of added contact entries of cats                                              | keep track of all contract entries of added cats                               |
+| `* * *`  | member of Cats of NUS                                | add a contact entry of a Cats of NUS member                                                 | keep track of his/her information for later use                                |
+| `* * *`  | member of Cats of NUS                                | add a contact entry of a cat                                                                | keep track of its information for later use                                    |
+| `* * *`  | member of Cats of NUS                                | delete a contact entry of a Cats of NUS member                                              | remove irrelevant entries that I do not need to keep track of anymore          |
+| `* * *`  | member of Cats of NUS                                | delete a contact entry of a cat                                                             | remove irrelevant entries that I do not need to keep track of anymore          |
+| `* * *`  | member of Cats of NUS                                | edit a contact entry of a Cats of NUS member                                                | update his/her information when necessary                                      |
+| `* * *`  | member of Cats of NUS                                | edit a contact entry of a cat                                                               | update its information when necessary                                          |
+| `* *`    | new user                                             | search the contact list of caretakers of animals in NUS                                     | get acquainted with these caretakers                                           |
+| `* *`    | new user                                             | search the list of animals found in NUS                                                     | get to understand the diversity of animals found around the NUS Campus         |
+| `* *`    | general user                                         | find a contact entry by name                                                                | get information of contact entries easily                                      |
+| `* *`    | general animal lover in NUS                          | filter out various organisations of people                                                  | learn about various animal care groups in NUS                                  |
+| `* *`    | general animal lover in NUS                          | favourite certain animals                                                                   | visit them more often                                                          |
+| `* *`    | general animal lover in NUS                          | store photographs of animals I have taken in NUS                                            | consolidate these photographs of animals on campus, and view them in one place |
+| `* *`    | member of Cats of NUS                                | find the contact entry of a Cats of NUS member by name                                      | locate details of members without having to go through the entire list         |
+| `* *`    | member of Cats of NUS                                | find the contact entry of a cat by name                                                     | locate details of cats without having to go through the entire list            |
+| `* *`    | member of Cats of NUS                                | add a quick note ("looked sick", "shy today")                                               | remind myself to inform the people in charge                                   |
+| `* *`    | member of Cats of NUS                                | obtain the photo of each of the cats on campus                                              | recognise them when feeding them                                               |
+| `* *`    | Person In Charge (PIC) of the members of Cats of NUS | assign roles (member, shift lead, logistics, moderator)                                     | know who is in my team and what they are in charge of                          |
+| `* *`    | organised user                                       | categorise contacts (Cats of NUS members, existing feeder of NUS, animals encountered etc)  | differentiate contact entries easily                                           |
+| `*`      | PIC of the members of Cats of NUS                    | add fixed feeding stations and assign cats                                                  | keep track of feeding locations and cats assigned to each locations            |
+| `*`      | PIC of the members of Cats of NUS                    | edit fixed feeding stations and its assigned cats                                           | update feeding locations and cats assigned to each location                    |
+| `*`      | member of Cats of NUS                                | view a list/map of fixed feeding stations and the cats assigned to each                     | go straight to the right spot to feed the cats                                 |
+| `*`      | member of Cats of NUS                                | set special reminders to myself (special diet for the station I am feeding for on that day) | be reminded of what I have to do, that is out of my routine                    |
+| `*`      | member of Cats of NUS                                | edit special reminders I set before                                                         | change timing/date/frequency of each reminder                                  |
+| `*`      | member of Cats of NUS                                | be reminded of when to feed the cats                                                        | feed the cats on time                                                          |
 
-*{More to be added}*
+
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, where `user` refers to a cat caretaker using the Furiends app to manage contacts, unless specified otherwise) 
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a new person by providing the person’s name, phone number, and email together
+2. AddressBook validates the details
+3. AddressBook adds the person to the list
+4. AddressBook shows a confirmation message and the updated list
 
-    Use case ends.
+    Use case ends
+
+**Extensions**
+
+* 2a. One or more details are missing or invalid.
+    
+    * 2a1. AddressBook shows an error message.
+        
+        Use case ends
+* 3a. A person with the same name already exists in the list.
+    
+    * 3a1. AddressBook shows a duplicate warning.
+        
+        Use case ends
+
+
+**Use case: UC02 - Delete a person**
+
+**MSS**
+
+1. User requests to delete a person by specifying the person’s name
+2. AddressBook checks if the person exists
+3. AddressBook deletes the person
+4. AddressBook shows a confirmation message and the updated list
+
+    Use case ends
 
 **Extensions**
 
 * 2a. The list is empty.
+        
+    Use case ends
+* 2b. The given name does not match any person.
+    
+    * 2b1. AddressBook shows an error message.
+        
+        Use case ends
 
-  Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: UC03 - Edit a person**
 
+**MSS**
+
+1. User requests to edit a person by providing the person’s name together with the updated details (phone number, email, animal being fed, and/or date and time of feeding)
+2. AddressBook checks if the person exists
+3. AddressBook validates the new details
+4. AddressBook updates the person’s information
+5. AddressBook shows a confirmation message and the updated list
+
+    Use case ends
+
+**Extensions**
+
+* 2a. The list is empty.
+        
+    Use case ends
+* 2b. The given name does not match any person.
+    
+    * 2b1. AddressBook shows an error message.
+        
+        Use case ends
+* 3a. One or more new details are invalid.
+    
     * 3a1. AddressBook shows an error message.
+        
+        Use case ends
+* 4a. The updated details duplicate another person’s name.
+    
+    * 4a1. AddressBook shows a duplicate warning.
+        
+        Use case ends
 
-      Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: UC04 - Find a person**
+
+**MSS**
+
+1. User requests to find a person by specifying the person’s name
+2. AddressBook searches the contact list for a matching person
+3. AddressBook shows the person’s details
+
+    Use case ends
+
+**Extensions**
+
+* 2a. No person matches the given name.
+    
+    * 2a1. AddressBook shows an empty result message.
+        
+        Use case ends
+
+
+**Use case: UC05 - Add an animal**
+
+**MSS**
+
+1. User requests to add a new animal by providing the animal’s name, description, and location together
+2. AddressBook validates the details
+3. AddressBook adds the animal to the list
+4. AddressBook shows a confirmation message and the updated list
+
+    Use case ends
+
+**Extensions**
+
+* 2a. One or more details are missing or invalid.
+    
+    * 2a1. AddressBook shows an error message.
+        
+        Use case ends
+* 3a. An animal with the same name already exists in the list.
+    
+    * 3a1. AddressBook shows a duplicate warning.
+        
+        Use case ends
+
+
+**Use case: UC06 - Delete an animal**
+
+**MSS**
+
+1. User requests to delete an animal by specifying the animal’s name
+2. AddressBook checks if the animal exists
+3. AddressBook deletes the animal
+4. AddressBook shows a confirmation message and the updated list
+
+    Use case ends
+
+**Extensions**
+
+* 2a. The list is empty.
+        
+    Use case ends
+* 2b. The given name does not match any animal.
+    
+    * 2b1. AddressBook shows an error message.
+        
+        Use case ends
+
+
+**Use case: UC07 - Edit an animal**
+
+**MSS**
+
+1. User requests to edit an animal by providing the animal’s name together with the updated description and/or location
+2. AddressBook checks if the animal exists
+3. AddressBook validates the new details
+4. AddressBook updates the animal’s information
+5. AddressBook shows a confirmation message and the updated list
+
+    Use case ends
+
+**Extensions**
+
+* 2a. The list is empty.
+        
+    Use case ends
+* 2b. The given name does not match any animal.
+    
+    * 2b1. AddressBook shows an error message.
+        
+        Use case ends
+* 3a. One or more new details are invalid.
+    
+    * 3a1. AddressBook shows an error message.
+        
+        Use case ends
+* 4a. The updated details duplicate another animal’s name.
+    
+    * 4a1. AddressBook shows a duplicate warning.
+        
+        Use case ends
+
+
+**Use case: UC08 - Find an animal**
+
+**MSS**
+
+1. User requests to find an animal by specifying the animal’s name
+2. AddressBook searches the animal list for a matching entry
+3. AddressBook shows the animal’s details
+
+    Use case ends
+
+**Extensions**
+
+* 2a. No animal matches the given name.
+    
+    * 2a1. AddressBook shows an empty result message.
+        
+        Use case ends
+ 
 
 ### Non-Functional Requirements
-
 1. The software should work on any mainstream OS as long as it has Java 17 or above installed.
 2. The software should be able to hold up to 1000 entries without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using typed commands in a command-line interface (CLI) than using a graphical user interface (GUI)
@@ -337,13 +548,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. The software should work without requiring an installer.
 7. The graphical user interface (GUI) should support standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%, and be usable for resolutions 1280x720 and higher and for screen scale 150%.
 8. The software should be packaged into a single JAR file.
+9. This product is not required to handle messaging/calling other Cats of NUS members. 
+10. This product is not required to handle sending notifications to users about feeding times.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Cats of NUS**: A society in NUS for cats lover and care takers 
+* **PIC**: Person in charge of the members of the Cats of NUS
+* **General User**: Users that fits the target audience of this address book
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.animal;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -7,13 +7,16 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Name {
+public class AnimalName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names should only contain alphanumeric characters and spaces, not be blank, "
+            + "and be at most 30 characters long";
+
+    public static final int MAX_LENGTH = 30;
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
@@ -21,11 +24,11 @@ public class Name {
     public final String fullName;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code AnimalName}.
      *
      * @param name A valid name.
      */
-    public Name(String name) {
+    public AnimalName(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         fullName = name;
@@ -35,7 +38,7 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= MAX_LENGTH;
     }
 
 
@@ -51,11 +54,11 @@ public class Name {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof AnimalName)) {
             return false;
         }
 
-        Name otherName = (Name) other;
+        AnimalName otherName = (AnimalName) other;
         return fullName.equals(otherName.fullName);
     }
 
