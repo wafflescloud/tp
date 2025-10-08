@@ -17,6 +17,15 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    // New constants for additional rows
+    public static final String SUPPORTED_COMMANDS_HEADER_TEXT = "List of supported commands:";
+    public static final String SUPPORTED_COMMANDS_CONTENT_TEXT = String.join("\n",
+            "addPerson",
+            "addAnimal",
+            "delete",
+            "edit",
+            "find",
+            "help");
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -27,6 +36,12 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label helpMessage;
 
+    @FXML
+    private Label supportedCommandsHeader;
+
+    @FXML
+    private Label supportedCommandsContent;
+
     /**
      * Creates a new HelpWindow.
      *
@@ -35,6 +50,8 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        supportedCommandsHeader.setText(SUPPORTED_COMMANDS_HEADER_TEXT);
+        supportedCommandsContent.setText(SUPPORTED_COMMANDS_CONTENT_TEXT);
     }
 
     /**
