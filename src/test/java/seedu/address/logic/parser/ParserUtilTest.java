@@ -57,23 +57,23 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseName_null_throwsNullPointerException() {
+    public void parsePersonName_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parsePersonName((String) null));
     }
 
     @Test
-    public void parseName_invalidValue_throwsParseException() {
+    public void parsePersonName_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parsePersonName(INVALID_NAME));
     }
 
     @Test
-    public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
+    public void parsePersonName_validValueWithoutWhitespace_returnsName() throws Exception {
         PersonName expectedName = new PersonName(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parsePersonName(VALID_NAME));
     }
 
     @Test
-    public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+    public void parsePersonName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         PersonName expectedName = new PersonName(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parsePersonName(nameWithWhitespace));
