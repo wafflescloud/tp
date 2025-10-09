@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.person.Animal;
+import seedu.address.model.animal.Animal;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,6 +19,7 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -49,17 +50,16 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code animal} for display to the user.
+     */
     public static String format(Animal animal) {
         final StringBuilder builder = new StringBuilder();
         builder.append(animal.getName())
-                .append("; Phone: ")
-                .append(animal.getPhone())
-                .append("; Email: ")
-                .append(animal.getEmail())
-                .append("; Address: ")
-                .append(animal.getAddress())
-                .append("; Tags: ");
-        animal.getTags().forEach(builder::append);
+                .append("; Description: ")
+                .append(animal.getDescription())
+                .append("; Location: ")
+                .append(animal.getLocation());
         return builder.toString();
     }
 
