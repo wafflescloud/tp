@@ -20,6 +20,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "";
+    public static final String MESSAGE_INVALID_TYPE = " The contact type provided is invalid, "
+            + " valid type: person, animal";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
