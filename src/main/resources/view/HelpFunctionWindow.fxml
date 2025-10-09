@@ -14,9 +14,12 @@
   </icons>
   <scene>
     <Scene>
-      <VBox spacing="8.0" alignment="TOP_LEFT" style="-fx-padding: 12;" minWidth="400.0" minHeight="200.0" prefWidth="400.0" prefHeight="200.0">
+      <stylesheets>
+        <URL value="@HelpFunctionWindow.css" />
+      </stylesheets>
+      <VBox spacing="8.0" alignment="TOP_LEFT" style="-fx-padding: 12;" minWidth="600.0" minHeight="250.0" prefWidth="600.0" prefHeight="250.0">
         <children>
-          <Label fx:id="commandTitleLabel" style="-fx-font-size: 14pt; -fx-font-weight: bold" />
+          <Label fx:id="commandTitleLabel" />
           <Label fx:id="commandDescriptionLabel" wrapText="true" />
         </children>
       </VBox>
