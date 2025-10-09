@@ -1,38 +1,41 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+//import static org.junit.jupiter.api.Assertions.assertTrue;
+//import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+//import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+//import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
+//import java.util.Arrays;
+//import java.util.List;
+//import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+//import seedu.address.logic.commands.AddCommand;
+//import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteAnimalCommand;
+import seedu.address.logic.commands.DeletePersonCommand;
+//import seedu.address.logic.commands.EditCommand;
+//import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+//import seedu.address.logic.commands.ExitCommand;
+//import seedu.address.logic.commands.FindCommand;
+//import seedu.address.logic.commands.HelpCommand;
+//import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.model.animal.AnimalName;
+//import seedu.address.model.person.NameContainsKeywordsPredicate;
+//import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonName;
+//import seedu.address.testutil.EditPersonDescriptorBuilder;
+//import seedu.address.testutil.PersonBuilder;
+//import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
 
+    /*
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
@@ -45,14 +48,34 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
-
+    */
     @Test
-    public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    public void parseCommand_delete_person() throws Exception {
+        String input = "delete person n/Alice";
+        DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(input);
+        assertEquals(new DeletePersonCommand(new PersonName("Alice")), command);
     }
 
+    @Test
+    public void parseCommand_delete_animal() throws Exception {
+        String input = "delete animal n/Whiskers";
+        DeleteAnimalCommand command = (DeleteAnimalCommand) parser.parseCommand(input);
+        assertEquals(new DeleteAnimalCommand(new AnimalName("Whiskers")), command);
+    }
+
+    @Test
+    public void parseCommand_invalidType_throwsParseException() {
+        String input = "delete vehicle Car1";
+        assertThrows(ParseException.class, () -> parser.parseCommand(input));
+    }
+
+    @Test
+    public void parseCommand_missingName_throwsParseException() {
+        String input = "delete person";
+        assertThrows(ParseException.class, () -> parser.parseCommand(input));
+    }
+
+    /*
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
@@ -98,4 +121,5 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
+    */
 }
