@@ -37,6 +37,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
 import seedu.address.model.Model;
@@ -70,7 +71,7 @@ public class EditPersonCommandParserTest {
         assertParseFailure(parser, Person.PERSON_TYPE + " " + VALID_NAME_AMY, EditPersonCommand.MESSAGE_NOT_EDITED);
 
         // no type and no field specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_TYPE_FORMAT);
+        assertParseFailure(parser, "", EditCommand.MESSAGE_USAGE);
     }
 
     //    @Test

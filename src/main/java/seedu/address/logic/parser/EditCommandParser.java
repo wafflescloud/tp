@@ -36,7 +36,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         // arguments after "edit"
         if (args.isEmpty()) {
-            throw new ParseException(MESSAGE_INVALID_TYPE);
+            throw new ParseException(EditCommand.MESSAGE_USAGE);
         }
 
         String[] parts = args.trim().split(" ", 2);
