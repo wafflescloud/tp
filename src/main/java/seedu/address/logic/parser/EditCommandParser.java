@@ -1,9 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_TYPE;
-import static seedu.address.logic.parser.AddressBookParser.BASIC_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -14,7 +12,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
-import java.util.regex.Matcher;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditPersonCommand;
@@ -37,21 +34,19 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(args.trim());
-
-        if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-        }
-
         // arguments after "edit"
-        String arguments = matcher.group("arguments").trim();
-        if (arguments.isEmpty()) {
+        if (args.isEmpty()) {
             throw new ParseException(MESSAGE_INVALID_TYPE);
         }
 
-        String[] parts = arguments.split("\\s+", 2);
-        String type = parts[0].toLowerCase();
+        String[] parts = args.trim().split(" ", 2);
+        String type = parts[0].toLowerCase().trim();
         String remainArgs = parts.length > 1 ? parts[1] : "";
+        System.out.println(remainArgs);
+
+        if (remainArgs.isEmpty()) {
+            throw new ParseException(EditPersonCommand.MESSAGE_NOT_EDITED);
+        }
 
         switch (type) {
 
@@ -72,6 +67,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * @throws ParseException if the user input does not conform to the expected format
      */
     public EditPersonCommand editPersonParse(String args) throws ParseException {
+        System.out.println(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 

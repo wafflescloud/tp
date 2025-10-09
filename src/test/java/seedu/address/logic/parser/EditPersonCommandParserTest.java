@@ -22,7 +22,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.EditCommand.COMMAND_WORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -65,13 +64,13 @@ public class EditPersonCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no type specified
-        assertParseFailure(parser, "edit " + VALID_NAME_AMY, MESSAGE_INVALID_TYPE_FORMAT);
+        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_TYPE_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "edit person " + VALID_NAME_AMY, EditPersonCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, Person.PERSON_TYPE + " " + VALID_NAME_AMY, EditPersonCommand.MESSAGE_NOT_EDITED);
 
         // no type and no field specified
-        assertParseFailure(parser, "edit", MESSAGE_INVALID_TYPE_FORMAT);
+        assertParseFailure(parser, "", MESSAGE_INVALID_TYPE_FORMAT);
     }
 
     //    @Test
@@ -116,7 +115,7 @@ public class EditPersonCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         PersonName personName = model.getFilteredPersonList().get(targetIndex.getZeroBased()).getName();
-        String userInput = COMMAND_WORD + " " + Person.PERSON_TYPE + " " + personName
+        String userInput = Person.PERSON_TYPE + " " + personName
                 + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
@@ -132,7 +131,7 @@ public class EditPersonCommandParserTest {
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
         PersonName personName = model.getFilteredPersonList().get(targetIndex.getZeroBased()).getName();
-        String userInput = COMMAND_WORD + " " + Person.PERSON_TYPE + " " + personName
+        String userInput = Person.PERSON_TYPE + " " + personName
                 + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
@@ -147,31 +146,31 @@ public class EditPersonCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_PERSON;
         PersonName personName = model.getFilteredPersonList().get(targetIndex.getZeroBased()).getName();
-        String userInput = COMMAND_WORD + " " + Person.PERSON_TYPE + " " + personName + NAME_DESC_AMY;
+        String userInput = Person.PERSON_TYPE + " " + personName + NAME_DESC_AMY;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditPersonCommand expectedCommand = new EditPersonCommand(personName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
-        userInput = COMMAND_WORD + " " + Person.PERSON_TYPE + " " + personName + PHONE_DESC_AMY;
+        userInput = Person.PERSON_TYPE + " " + personName + PHONE_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
         expectedCommand = new EditPersonCommand(personName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
-        userInput = COMMAND_WORD + " " + Person.PERSON_TYPE + " " + personName + EMAIL_DESC_AMY;
+        userInput = Person.PERSON_TYPE + " " + personName + EMAIL_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
         expectedCommand = new EditPersonCommand(personName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
-        userInput = COMMAND_WORD + " " + Person.PERSON_TYPE + " " + personName + ADDRESS_DESC_AMY;
+        userInput = Person.PERSON_TYPE + " " + personName + ADDRESS_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
         expectedCommand = new EditPersonCommand(personName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
-        userInput = COMMAND_WORD + " " + Person.PERSON_TYPE + " " + personName + TAG_DESC_FRIEND;
+        userInput = Person.PERSON_TYPE + " " + personName + TAG_DESC_FRIEND;
         descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
         expectedCommand = new EditPersonCommand(personName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -185,21 +184,21 @@ public class EditPersonCommandParserTest {
         // valid followed by invalid
         Index targetIndex = INDEX_FIRST_PERSON;
         PersonName personName = model.getFilteredPersonList().get(targetIndex.getZeroBased()).getName();
-        String userInput = COMMAND_WORD + " " + Person.PERSON_TYPE + " " + personName
+        String userInput = Person.PERSON_TYPE + " " + personName
                 + INVALID_PHONE_DESC + PHONE_DESC_BOB;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid followed by valid
-        userInput = COMMAND_WORD + " " + Person.PERSON_TYPE + " " + personName
+        userInput = Person.PERSON_TYPE + " " + personName
                 + PHONE_DESC_BOB + INVALID_PHONE_DESC;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // multiple valid fields repeated
-        userInput = COMMAND_WORD + " " + Person.PERSON_TYPE + " " + personName
+        userInput = Person.PERSON_TYPE + " " + personName
                 + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
                 + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
                 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
@@ -208,7 +207,7 @@ public class EditPersonCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
 
         // multiple invalid values
-        userInput = COMMAND_WORD + " " + Person.PERSON_TYPE + " " + personName
+        userInput = Person.PERSON_TYPE + " " + personName
                 + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
                 + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC;
 
@@ -220,7 +219,7 @@ public class EditPersonCommandParserTest {
     public void parse_resetTags_success() {
         Index targetIndex = INDEX_THIRD_PERSON;
         PersonName personName = model.getFilteredPersonList().get(targetIndex.getZeroBased()).getName();
-        String userInput = COMMAND_WORD + " " + Person.PERSON_TYPE + " " + personName + TAG_EMPTY;
+        String userInput = Person.PERSON_TYPE + " " + personName + TAG_EMPTY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
         EditPersonCommand expectedCommand = new EditPersonCommand(personName, descriptor);
