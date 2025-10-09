@@ -12,6 +12,9 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Animal {
 
+    // Identify contact type of Animal
+    private static final String ANIMAL_TYPE = "animal";
+
     // Identity fields
     private final AnimalName name;
 

@@ -16,6 +16,9 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    // Identify contact type of Person
+    public static final String PERSON_TYPE = "person";
+
     // Identity fields
     private final PersonName name;
     private final Phone phone;

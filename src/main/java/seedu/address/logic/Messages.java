@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.animal.Animal;
 import seedu.address.model.person.Person;
 
 /**
@@ -49,4 +50,16 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code animal} for display to the user.
+     */
+    public static String format(Animal animal) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(animal.getName())
+                .append("; Description: ")
+                .append(animal.getDescription())
+                .append("; Location: ")
+                .append(animal.getLocation());
+        return builder.toString();
+    }
 }
