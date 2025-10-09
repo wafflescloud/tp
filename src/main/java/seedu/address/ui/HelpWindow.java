@@ -1,9 +1,9 @@
 package seedu.address.ui;
 
-import java.util.logging.Logger;
-import java.util.Map;
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,6 +23,8 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
     public static final String SUPPORTED_COMMANDS_HEADER_TEXT = "List of supported commands:";
 
+    private static final Map<String, ArrayList<String>> COMMAND_LIST = new HashMap<>();
+
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
@@ -37,8 +39,6 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private VBox commandLinksContainer;
-
-    private static final Map<String, ArrayList<String>> COMMAND_LIST = new HashMap<>();
 
     /**
      * Creates a new HelpWindow.
@@ -73,14 +73,17 @@ public class HelpWindow extends UiPart<Stage> {
         // addAnimal command with detailed description
         ArrayList<String> addAnimalDescription = new ArrayList<>();
         addAnimalDescription.add("Adds a new animal record to the system.");
-        addAnimalDescription.add("Command format: addAnimal /name <animal name> /description <animal description> /location <animal location>");
-        addAnimalDescription.add("Example: addAnimal /name Bob /description Brown tabby with stripes /location Near Block 14 canteen");
+        addAnimalDescription.add("Command format: addAnimal /name <animal name> "
+                                + "/description <animal description> /location <animal location>");
+        addAnimalDescription.add("Example: addAnimal /name Bob /description Brown tabby with stripes "
+                                + "/location Near Block 14 canteen");
         COMMAND_LIST.put("addAnimal", addAnimalDescription);
 
         // addPerson command with detailed description
         ArrayList<String> addPersonDescription = new ArrayList<>();
         addPersonDescription.add("Adds a new person record to the system.");
-        addPersonDescription.add("Command format: addPerson /name <contact name> /phoneNumber <8-digit> /email <address>");
+        addPersonDescription.add("Command format: addPerson /name <contact name> "
+                                + "/phoneNumber <8-digit> /email <address>");
         addPersonDescription.add("Example: addPerson /name John Doe /phoneNumber 91234567 /email johndoe@gmail.com");
         COMMAND_LIST.put("addPerson", addPersonDescription);
 
