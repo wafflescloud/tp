@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -24,13 +23,19 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.animal.Animal;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.AnimalBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddPersonCommand(null));
+    }
+
+    @Test
+    public void constructor_nullAnimal_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddAnimalCommand(null));
     }
 
     @Test
@@ -38,34 +43,57 @@ public class AddCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddPersonCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(AddPersonCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_animalAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingAnimalAdded modelStub = new ModelStubAcceptingAnimalAdded();
+        Animal validAnimal = new AnimalBuilder().build();
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        CommandResult commandResult = new AddAnimalCommand(validAnimal).execute(modelStub);
+
+        assertEquals(String.format(AddAnimalCommand.MESSAGE_SUCCESS, Messages.format(validAnimal)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validAnimal), modelStub.animalsAdded);
     }
 
     @Test
-    public void equals() {
+    public void execute_duplicatePerson_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        AddPersonCommand addCommand = new AddPersonCommand(validPerson);
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        assertThrows(CommandException.class, AddPersonCommand.MESSAGE_DUPLICATE_PERSON, (
+                ) -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicateAnimal_throwsCommandException() {
+        Animal validAnimal = new AnimalBuilder().build();
+        AddAnimalCommand addCommand = new AddAnimalCommand(validAnimal);
+        ModelStub modelStub = new ModelStubWithAnimal(validAnimal);
+
+        assertThrows(CommandException.class, AddAnimalCommand.MESSAGE_DUPLICATE_ANIMAL, (
+                ) -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void equals_person() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        AddPersonCommand addAliceCommand = new AddPersonCommand(alice);
+        AddPersonCommand addBobCommand = new AddPersonCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        AddPersonCommand addAliceCommandCopy = new AddPersonCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -79,10 +107,43 @@ public class AddCommandTest {
     }
 
     @Test
-    public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+    public void equals_animal() {
+        Animal max = new AnimalBuilder().withName("Max").build();
+        Animal bella = new AnimalBuilder().withName("Bella").build();
+        AddAnimalCommand addMaxCommand = new AddAnimalCommand(max);
+        AddAnimalCommand addBellaCommand = new AddAnimalCommand(bella);
+
+        // same object -> returns true
+        assertTrue(addMaxCommand.equals(addMaxCommand));
+
+        // same values -> returns true
+        AddAnimalCommand addMaxCommandCopy = new AddAnimalCommand(max);
+        assertTrue(addMaxCommand.equals(addMaxCommandCopy));
+
+        // different types -> returns false
+        assertFalse(addMaxCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(addMaxCommand.equals(null));
+
+        // different animal -> returns false
+        assertFalse(addMaxCommand.equals(addBellaCommand));
+    }
+
+    @Test
+    public void toStringMethod_person() {
+        Person validPerson = new PersonBuilder().withName("Alice").build();
+        AddPersonCommand command = new AddPersonCommand(validPerson);
+        String expected = AddPersonCommand.class.getCanonicalName() + "{toAdd=" + validPerson + "}";
+        assertEquals(expected, command.toString());
+    }
+
+    @Test
+    public void toStringMethod_animal() {
+        Animal validAnimal = new AnimalBuilder().withName("Max").build();
+        AddAnimalCommand command = new AddAnimalCommand(validAnimal);
+        String expected = AddAnimalCommand.class.getCanonicalName() + "{toAdd=" + validAnimal + "}";
+        assertEquals(expected, command.toString());
     }
 
     /**
@@ -232,4 +293,45 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * A Model stub that contains a single animal.
+     */
+    private class ModelStubWithAnimal extends ModelStub {
+        private final Animal animal;
+
+        ModelStubWithAnimal(Animal animal) {
+            requireNonNull(animal);
+            this.animal = animal;
+        }
+
+        @Override
+        public boolean hasAnimal(Animal animal) {
+            requireNonNull(animal);
+            return this.animal.isSameAnimal(animal);
+        }
+    }
+
+    /**
+     * A Model stub that always accept the animal being added.
+     */
+    private class ModelStubAcceptingAnimalAdded extends ModelStub {
+        final ArrayList<Animal> animalsAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasAnimal(Animal animal) {
+            requireNonNull(animal);
+            return animalsAdded.stream().anyMatch(animal::isSameAnimal);
+        }
+
+        @Override
+        public void addAnimal(Animal animal) {
+            requireNonNull(animal);
+            animalsAdded.add(animal);
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
+    }
 }

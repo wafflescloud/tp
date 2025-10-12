@@ -12,27 +12,20 @@ import seedu.address.model.animal.Animal;
 import seedu.address.model.animal.AnimalName;
 
 /**
- * Deletes a animal identified using contact's name from the address book.
+ * Deletes an animal identified using its name from the address book.
  */
 public class DeleteAnimalCommand extends DeleteCommand {
 
-    public static final String COMMAND_WORD = "delete";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the animal identified by the name used in the displayed person list.\n"
-            + "Parameters: NAME (must be a string)\n"
-            + "Example: " + COMMAND_WORD + " ";
-
     public static final String MESSAGE_DELETED_ANIMAL_SUCCESS = "Deleted Animal: %1$s";
+    public static final String MESSAGE_INVALID_ANIMAL_NAME = "No animal with this name was found in the address book";
 
     private final AnimalName name;
 
     /**
-     * Constructs a {@code DeletePersonCommand} to delete an entity with the given {@code Name} and {@code type}.
-     *
-     * @param name The name of the entity (person or animal) to delete.
+     * Creates a DeleteAnimalCommand to delete the animal with the specified {@code name}
      */
     public DeleteAnimalCommand(AnimalName name) {
+        requireNonNull(name);
         this.name = name;
     }
 
@@ -40,10 +33,11 @@ public class DeleteAnimalCommand extends DeleteCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Animal> list = model.getFilteredAnimalList();
+
         Animal animalToDelete = list.stream()
-                .filter(p -> p.getName().equals(name))
+                .filter(animal -> animal.getName().equals(name))
                 .findFirst()
-                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME));
+                .orElseThrow(() -> new CommandException(MESSAGE_INVALID_ANIMAL_NAME));
 
         model.deleteAnimal(animalToDelete);
         return new CommandResult(String.format(MESSAGE_DELETED_ANIMAL_SUCCESS, Messages.format(animalToDelete)));
@@ -59,8 +53,8 @@ public class DeleteAnimalCommand extends DeleteCommand {
             return false;
         }
 
-        DeleteAnimalCommand otherDeleteAnimalCommand = (DeleteAnimalCommand) other;
-        return name.equals(otherDeleteAnimalCommand.name);
+        DeleteAnimalCommand otherCommand = (DeleteAnimalCommand) other;
+        return name.equals(otherCommand.name);
     }
 
     @Override

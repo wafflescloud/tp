@@ -1,18 +1,14 @@
-package seedu.address.logic.parser.addCommandParser;
+package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.AddAnimalCommand;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.animal.Animal;
 import seedu.address.model.animal.AnimalName;
@@ -44,7 +40,8 @@ public class AddAnimalCommandParser implements Parser<AddCommand> {
         Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
 
         Animal animal = new Animal(name, description, location);
-        return new AddCommand(animal);
+
+        return new AddAnimalCommand(animal);
     }
 
     /**

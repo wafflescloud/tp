@@ -12,26 +12,14 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonName;
 
 /**
- * Deletes a person/animal identified using contact's name from the address book.
+ * Deletes a person identified using contact's name from the address book.
  */
 public class DeletePersonCommand extends DeleteCommand {
 
-    public static final String COMMAND_WORD = "delete";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person/animal identified by the name used in the displayed person list.\n"
-            + "Parameters: NAME (must be a string)\n"
-            + "Example: " + COMMAND_WORD + " ";
-
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETED_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     private final PersonName name;
 
-    /**
-     * Constructs a {@code DeletePersonCommand} to delete an entity with the given {@code Name} and {@code type}.
-     *
-     * @param name The name of the entity (person or animal) to delete.
-     */
     public DeletePersonCommand(PersonName name) {
         this.name = name;
     }
@@ -39,7 +27,6 @@ public class DeletePersonCommand extends DeleteCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         List<Person> list = model.getFilteredPersonList();
         Person personToDelete = list.stream()
                 .filter(p -> p.getName().equals(name))
@@ -47,7 +34,7 @@ public class DeletePersonCommand extends DeleteCommand {
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME));
 
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETED_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
     @Override
@@ -63,7 +50,6 @@ public class DeletePersonCommand extends DeleteCommand {
         DeletePersonCommand otherDeletePersonCommand = (DeletePersonCommand) other;
         return name.equals(otherDeletePersonCommand.name);
     }
-
 
     @Override
     public String toString() {
