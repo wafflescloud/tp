@@ -11,10 +11,6 @@ import seedu.address.commons.util.ToStringBuilder;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Animal {
-
-    // Identify contact type of Animal
-    public static final String ANIMAL_TYPE = "animal";
-
     // Identity fields
     private final AnimalName name;
 
