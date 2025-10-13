@@ -11,7 +11,9 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.animal.Animal;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.AnimalBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -33,16 +35,36 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertCommandSuccess(new AddPersonCommand(validPerson), model,
+                String.format(AddPersonCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(new AddPersonCommand(personInList), model,
+                AddPersonCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
+    @Test
+    public void execute_newAnimal_success() {
+        Animal validAnimal = new AnimalBuilder().build();
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addAnimal(validAnimal);
+
+        assertCommandSuccess(new AddAnimalCommand(validAnimal), model,
+                String.format(AddAnimalCommand.MESSAGE_SUCCESS, Messages.format(validAnimal)),
+                expectedModel);
+    }
+
+    @Test
+    public void execute_duplicateAnimal_throwsCommandException() {
+        Animal validAnimal = new AnimalBuilder().build();
+        model.addAnimal(validAnimal);
+
+        assertCommandFailure(new AddAnimalCommand(validAnimal), model,
+                AddAnimalCommand.MESSAGE_DUPLICATE_ANIMAL);
+    }
 }

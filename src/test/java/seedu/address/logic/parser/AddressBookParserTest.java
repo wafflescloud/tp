@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 //import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 //import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+// import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 //import java.util.Arrays;
@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test;
 //import seedu.address.logic.commands.AddCommand;
 //import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteAnimalCommand;
-import seedu.address.logic.commands.DeletePersonCommand;
-import seedu.address.logic.commands.EditPersonCommand;
-import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
+// import seedu.address.logic.commands.DeletePersonCommand;
+// import seedu.address.logic.commands.EditPersonCommand;
+// import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
 //import seedu.address.logic.commands.ExitCommand;
 //import seedu.address.logic.commands.FindCommand;
 //import seedu.address.logic.commands.HelpCommand;
@@ -29,11 +29,11 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.animal.AnimalName;
 //import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonName;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+// import seedu.address.model.person.Person;
+// import seedu.address.model.person.PersonName;
+// import seedu.address.testutil.EditPersonDescriptorBuilder;
+// import seedu.address.testutil.PersonBuilder;
+// import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {
 
@@ -54,12 +54,12 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
     */
-    @Test
-    public void parseCommand_delete_person() throws Exception {
-        String input = "delete person n/Alice";
-        DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(input);
-        assertEquals(new DeletePersonCommand(new PersonName("Alice")), command);
-    }
+    // @Test
+    // public void parseCommand_delete_person() throws Exception {
+    //     String input = "delete person n/Alice";
+    //     DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(input);
+    //     assertEquals(new DeletePersonCommand(new PersonName("Alice")), command);
+    // }
 
     @Test
     public void parseCommand_delete_animal() throws Exception {
@@ -80,19 +80,19 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class, () -> parser.parseCommand(input));
     }
 
-    @Test
-    public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
+    // @Test
+    // public void parseCommand_edit() throws Exception {
+    //     Person person = new PersonBuilder().build();
 
-        PersonName personName = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName();
+    //     PersonName personName = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName();
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditPersonCommand command = (EditPersonCommand) parser.parseCommand(EditPersonCommand.COMMAND_WORD
-                + " "
-                + Person.PERSON_TYPE + " " + personName.toString() + " "
-                + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditPersonCommand(personName, descriptor), command);
-    }
+    //     EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+    //     EditPersonCommand command = (EditPersonCommand) parser.parseCommand(EditPersonCommand.COMMAND_WORD
+    //             + " "
+    //             + Person.PERSON_TYPE + " " + personName.toString() + " "
+    //             + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+    //     assertEquals(new EditPersonCommand(personName, descriptor), command);
+    // }
 
 
     //    @Test

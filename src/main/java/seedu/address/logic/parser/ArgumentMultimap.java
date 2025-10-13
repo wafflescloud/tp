@@ -75,4 +75,19 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("ArgumentMultimap:\n");
+
+        argMultimap.forEach((prefix, values) -> {
+            builder.append(prefix)
+                   .append(" -> ")
+                   .append(values)
+                   .append("\n");
+        });
+
+        return builder.toString();
+    }
 }
