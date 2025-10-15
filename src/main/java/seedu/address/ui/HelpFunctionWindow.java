@@ -1,7 +1,11 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.function.Consumer;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -12,12 +16,16 @@ public class HelpFunctionWindow extends UiPart<Stage> {
     private static final String FXML = "HelpFunctionWindow.fxml";
 
     private final String commandName;
+    private Consumer<String> commandTextSetter;
 
     @FXML
     private Label commandTitleLabel;
 
     @FXML
     private Label commandDescriptionLabel;
+
+    @FXML
+    private VBox contentContainer;
 
     /**
      * Constructs a HelpFunctionWindow for the given command name.
@@ -30,13 +38,93 @@ public class HelpFunctionWindow extends UiPart<Stage> {
         populate();
     }
 
+    /**
+     * Constructs a HelpFunctionWindow for the given command name with a command text setter.
+     *
+     * @param commandName Name of the command.
+     * @param commandTextSetter Function to set text in the command box.
+     */
+    public HelpFunctionWindow(String commandName, Consumer<String> commandTextSetter) {
+        super(FXML, new Stage());
+        this.commandName = commandName;
+        this.commandTextSetter = commandTextSetter;
+        populate();
+    }
+
     private void populate() {
         commandTitleLabel.setText(commandName);
+        commandTitleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;");
+
         String desc = HelpWindow.getDescriptionForCommand(commandName);
         if (desc == null) {
-            commandDescriptionLabel.setText("description: (no description found)");
+            commandDescriptionLabel.setText("Description: (no description found)");
         } else {
-            commandDescriptionLabel.setText("description: " + desc);
+            // Only show the first line (description) in the description label
+            String[] lines = desc.split("\n");
+            if (lines.length > 0) {
+                commandDescriptionLabel.setText("Description: " + lines[0]);
+            }
+        }
+        commandDescriptionLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: white;");
+
+        populateContent();
+    }
+
+    /**
+     * Populates the content container with command formats and examples in the desired order.
+     */
+    private void populateContent() {
+        if (contentContainer == null) {
+            return;
+        }
+
+        contentContainer.getChildren().clear();
+
+        ArrayList<String> commandDetails = HelpWindow.getCommandList().get(commandName);
+        if (commandDetails == null) {
+            return;
+        }
+
+        for (String line : commandDetails) {
+            if (line.startsWith("Command format:")) {
+                createCommandFormatSection(line);
+            } else if (line.startsWith("Example:")) {
+                Label exampleLabel = new Label(line);
+                exampleLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: white;");
+                exampleLabel.setWrapText(true);
+                contentContainer.getChildren().add(exampleLabel);
+            }
+        }
+    }
+
+    /**
+     * Creates a command format section with inline buttons.
+     */
+    private void createCommandFormatSection(String formatLine) {
+        // Extract the format part after "Command format: "
+        String format = formatLine.substring("Command format: ".length());
+
+        // Add the "command format (click to copy):" label
+        Label formatLabel = new Label("Command format (click to copy):");
+        formatLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white;");
+        contentContainer.getChildren().add(formatLabel);
+
+        // Handle multiple formats separated by "OR"
+        String[] formats = format.split(" OR ");
+
+        for (String singleFormat : formats) {
+            Label formatLink = new Label(singleFormat.trim());
+            formatLink.setStyle("-fx-underline: true; -fx-cursor: hand; -fx-text-fill: white; "
+                              + "-fx-font-size: 14px; -fx-padding: 4px 0;");
+
+            formatLink.setOnMouseClicked(event -> {
+                if (commandTextSetter != null) {
+                    commandTextSetter.accept(singleFormat.trim());
+                }
+                getRoot().close();
+            });
+
+            contentContainer.getChildren().add(formatLink);
         }
     }
 

@@ -17,10 +17,11 @@
       <stylesheets>
         <URL value="@HelpFunctionWindow.css" />
       </stylesheets>
-      <VBox spacing="8.0" alignment="TOP_LEFT" style="-fx-padding: 12;" minWidth="600.0" minHeight="250.0" prefWidth="600.0" prefHeight="250.0">
+      <VBox spacing="8.0" alignment="TOP_LEFT" style="-fx-padding: 16;" minWidth="650.0" minHeight="300.0" prefWidth="650.0" prefHeight="300.0">
         <children>
-          <Label fx:id="commandTitleLabel" />
-          <Label fx:id="commandDescriptionLabel" wrapText="true" />
+          <Label fx:id="commandTitleLabel" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+          <Label fx:id="commandDescriptionLabel" wrapText="true" style="-fx-font-size: 14px;" />
+          <VBox fx:id="contentContainer" spacing="4.0" />
         </children>
       </VBox>
     </Scene>

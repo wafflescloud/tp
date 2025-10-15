@@ -24,6 +24,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String SUPPORTED_COMMANDS_HEADER_TEXT = "List of supported commands:";
 
     private static final Map<String, ArrayList<String>> COMMAND_LIST = new HashMap<>();
+    private static CommandBox commandBoxReference = null;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -122,7 +123,7 @@ public class HelpWindow extends UiPart<Stage> {
      * Creates individual clickable labels for each command and adds them to the commandLinksContainer.
      */
     private void createCommandLinks() {
-        commandLinksContainer.getChildren().clear(); // Clear any existing children
+        commandLinksContainer.getChildren().clear();
 
         for (String command : COMMAND_LIST.keySet()) {
             Label commandLink = new Label(command);
@@ -165,11 +166,24 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
+     * Sets the CommandBox reference for use in command help windows.
+     * @param commandBox The CommandBox instance to reference.
+     */
+    public static void setCommandBoxReference(CommandBox commandBox) {
+        commandBoxReference = commandBox;
+    }
+
+    /**
      * Opens a detailed help window for a specific command without showing the main help window.
      * @param commandName The name of the command to show help for.
      */
     public static void openCommandHelp(String commandName) {
-        HelpFunctionWindow functionWindow = new HelpFunctionWindow(commandName);
+        HelpFunctionWindow functionWindow;
+        if (commandBoxReference != null) {
+            functionWindow = new HelpFunctionWindow(commandName, commandBoxReference::setCommandText);
+        } else {
+            functionWindow = new HelpFunctionWindow(commandName);
+        }
         functionWindow.show();
     }
 
@@ -177,7 +191,7 @@ public class HelpWindow extends UiPart<Stage> {
     /**
      * Exposes the commandList (immutable view suggestion in future). Currently returns backing map.
      */
-    public Map<String, ArrayList<String>> getCommandList() {
+    public static Map<String, ArrayList<String>> getCommandList() {
         return COMMAND_LIST;
     }
 
