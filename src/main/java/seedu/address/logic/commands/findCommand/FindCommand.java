@@ -14,9 +14,9 @@ public abstract class FindCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "1. To find a person:\n"
             + "Example: " + COMMAND_WORD + " "
-            + TYPE_PERSON + "luna bob"
+            + TYPE_PERSON + " luna bob"
             + "\n\n"
             + "2. To find an animal:\n"
             + "Example: " + COMMAND_WORD + " "
-            + TYPE_ANIMAL + "alice peter";
+            + TYPE_ANIMAL + " alice peter";
 }
