@@ -11,9 +11,9 @@ package seedu.address.logic.parser;
 //import seedu.address.logic.commands.FindCommand;
 //import seedu.address.model.person.NameContainsKeywordsPredicate;
 
-public class FindCommandParserPersonTest {
+public class FindPersonCommandParserTest {
 
-    private FindCommandParserPerson parser = new FindCommandParserPerson();
+    private FindPersonCommandParser parser = new FindPersonCommandParser();
 
     /*
     @Test

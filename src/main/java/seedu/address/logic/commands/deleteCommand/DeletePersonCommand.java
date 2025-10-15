@@ -32,7 +32,8 @@ public class DeletePersonCommand extends DeleteCommand {
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME));
 
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(Messages.MESSAGE_DELETED_PERSON_SUCCESS, Messages.format(personToDelete)));
+        return new CommandResult(String.format(Messages.MESSAGE_DELETED_PERSON_SUCCESS,
+            Messages.format(personToDelete)));
     }
 
     @Override

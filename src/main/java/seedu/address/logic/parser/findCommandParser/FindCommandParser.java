@@ -1,15 +1,15 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.FindCommand;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.logic.parser.CliSyntax;
-
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new FindCommand object.
+ */
 public class FindCommandParser implements Parser<FindCommand> {
-    
+
     @Override
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();

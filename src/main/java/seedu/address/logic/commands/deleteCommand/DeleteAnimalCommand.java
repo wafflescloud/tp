@@ -37,7 +37,8 @@ public class DeleteAnimalCommand extends DeleteCommand {
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_ANIMAL_DISPLAYED_NAME));
 
         model.deleteAnimal(animalToDelete);
-        return new CommandResult(String.format(Messages.MESSAGE_DELETED_ANIMAL_SUCCESS, Messages.format(animalToDelete)));
+        return new CommandResult(String.format(Messages.MESSAGE_DELETED_ANIMAL_SUCCESS,
+                Messages.format(animalToDelete)));
     }
 
     @Override
