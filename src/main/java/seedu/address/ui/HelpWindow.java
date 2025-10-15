@@ -165,13 +165,14 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens a detailed help window for a specific command.
+     * Opens a detailed help window for a specific command without showing the main help window.
      * @param commandName The name of the command to show help for.
      */
-    private void openCommandHelp(String commandName) {
+    public static void openCommandHelp(String commandName) {
         HelpFunctionWindow functionWindow = new HelpFunctionWindow(commandName);
         functionWindow.show();
     }
+
 
     /**
      * Exposes the commandList (immutable view suggestion in future). Currently returns backing map.
