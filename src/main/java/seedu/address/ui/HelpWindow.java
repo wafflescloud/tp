@@ -74,33 +74,36 @@ public class HelpWindow extends UiPart<Stage> {
         // addAnimal command with detailed description
         ArrayList<String> addAnimalDescription = new ArrayList<>();
         addAnimalDescription.add("Adds a new animal record to the system.");
-        addAnimalDescription.add("Command format: addAnimal /name <animal name> "
-                                + "/description <animal description> /location <animal location>");
-        addAnimalDescription.add("Example: addAnimal /name Bob /description Brown tabby with stripes "
-                                + "/location Near Block 14 canteen");
-        COMMAND_LIST.put("addAnimal", addAnimalDescription);
+        addAnimalDescription.add("Command format: add animal /n<animal name> "
+                                + "/d<animal description> /l<animal location>");
+        addAnimalDescription.add("Example: add animal /nBob /dBrown tabby with stripes "
+                                + "/lNear Block 14 canteen");
+        COMMAND_LIST.put("add animal", addAnimalDescription);
 
         // addPerson command with detailed description
         ArrayList<String> addPersonDescription = new ArrayList<>();
         addPersonDescription.add("Adds a new person record to the system.");
-        addPersonDescription.add("Command format: addPerson /name <contact name> "
-                                + "/phoneNumber <8-digit> /email <address>");
-        addPersonDescription.add("Example: addPerson /name John Doe /phoneNumber 91234567 /email johndoe@gmail.com");
-        COMMAND_LIST.put("addPerson", addPersonDescription);
+        addPersonDescription.add("Command format: add person /n<name> "
+                                + "/p<phone> /e<email> /a<address> [t/<tag>...]");
+        addPersonDescription.add("Example: add person /nJohn Doe /p91234567 /ejohndoe@gmail.com a/123 Jack Street "
+                                + "t/friend t/funny");
+        COMMAND_LIST.put("add person", addPersonDescription);
 
         // delete command with detailed description
         ArrayList<String> addDeleteDescription = new ArrayList<>();
         addDeleteDescription.add("Deletes an existing record from the system.");
-        addDeleteDescription.add("Command format: delete /person <name> OR delete /animal <name>");
-        addDeleteDescription.add("Example: delete /person John Tan");
-        addDeleteDescription.add("Example: delete /animal Hehehehehaw");
+        addDeleteDescription.add("Command format: delete person n/<name> OR delete animal n/<name>");
+        addDeleteDescription.add("Example: delete person n/John Tan");
+        addDeleteDescription.add("Example: delete animal n/Hehehehehaw");
         COMMAND_LIST.put("delete", addDeleteDescription);
 
         // edit command with detailed description
         ArrayList<String> addEditDescription = new ArrayList<>();
         addEditDescription.add("Edits an existing record from the system.");
-        addEditDescription.add("Command format: edit <contact name> /<field name> <edited detail>");
-        addEditDescription.add("Example: edit John Doe /person John Tan");
+        addEditDescription.add("Command format: edit person <name> [n/name] [p/phone] [e/email] [a/address] [t/tag...]"
+                              + " OR edit animal <name> [n/animal name] [d/animal description] [l/animal location]");
+        addEditDescription.add("Example: edit person John Doe p/98765432 a/321, Jane Street");
+        addEditDescription.add("Example: edit animal Bob n/Bobby");
         COMMAND_LIST.put("edit", addEditDescription);
 
         // find command with detailed description
