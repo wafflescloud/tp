@@ -1,21 +1,21 @@
 #copyButton, #helpMessage, #supportedCommandsHeader, #supportedCommandsContent {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 #copyButton {
-    -fx-background-color: dimgray;
+    -fx-background-color: #a66117;
 }
 
 #copyButton:hover {
-    -fx-background-color: gray;
+    -fx-background-color: #faf9ed;
 }
 
 #copyButton:armed {
-    -fx-background-color: darkgray;
+    -fx-background-color: #a66117;
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #f9f3ec;
 }
 
 #supportedCommandsHeader {

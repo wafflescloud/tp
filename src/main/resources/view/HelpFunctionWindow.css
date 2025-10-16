@@ -1,15 +1,15 @@
 .root {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #f9f3ec;
 }
 
 #commandTitleLabel {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-font-size: 14pt;
     -fx-font-weight: bold;
 }
 
 #commandDescriptionLabel {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-wrap-text: true;
 }
 
