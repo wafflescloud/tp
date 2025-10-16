@@ -130,7 +130,7 @@ public class HelpWindow extends UiPart<Stage> {
 
         for (String command : COMMAND_LIST.keySet()) {
             Label commandLink = new Label(command);
-            commandLink.setStyle("-fx-underline: true; -fx-cursor: hand; -fx-text-fill: #FFFFFF;");
+            commandLink.setStyle("-fx-underline: true; -fx-cursor: hand; -fx-text-fill: black;");
             commandLink.setOnMouseClicked(event -> openCommandHelp(command));
             commandLinksContainer.getChildren().add(commandLink);
         }
