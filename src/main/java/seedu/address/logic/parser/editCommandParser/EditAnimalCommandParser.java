@@ -28,6 +28,8 @@ public class EditAnimalCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_LOCATION);
 
+        String animalName = argMultimap.getPreamble().trim();
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_LOCATION);
 
         EditAnimalDescriptor editAnimalDescriptor = new EditAnimalDescriptor();
@@ -47,8 +49,6 @@ public class EditAnimalCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        AnimalName name = ParserUtil.parseAnimalName(argMultimap.getValue(PREFIX_NAME).get());
-
-        return new EditAnimalCommand(name, editAnimalDescriptor);
+        return new EditAnimalCommand(new AnimalName(animalName), editAnimalDescriptor);
     }
 }

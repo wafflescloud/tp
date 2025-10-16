@@ -25,7 +25,7 @@ public abstract class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " John Doe "
+            + "Example: " + COMMAND_WORD + " person John Doe "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com\n"
             + "\n"
@@ -34,7 +34,7 @@ public abstract class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_LOCATION + "LOCATION] "
-            + "Example: " + COMMAND_WORD + " Kitty "
+            + "Example: " + COMMAND_WORD + " animal Kitty "
             + PREFIX_DESCRIPTION + "Grey Cat "
             + PREFIX_LOCATION + "UTOWN";
 

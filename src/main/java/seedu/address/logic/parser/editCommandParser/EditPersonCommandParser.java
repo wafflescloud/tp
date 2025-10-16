@@ -36,6 +36,8 @@ public class EditPersonCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
+        String personName = argMultimap.getPreamble().trim();
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
@@ -59,9 +61,7 @@ public class EditPersonCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        PersonName name = ParserUtil.parsePersonName(argMultimap.getValue(PREFIX_NAME).get());
-
-        return new EditPersonCommand(name, editPersonDescriptor);
+        return new EditPersonCommand(new PersonName(personName), editPersonDescriptor);
     }
 
     /**

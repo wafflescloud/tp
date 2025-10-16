@@ -39,7 +39,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (type.equals(CliSyntax.TYPE_PERSON)) {
             return new EditPersonCommandParser().parse(rest);
         } else if (type.equals(CliSyntax.TYPE_ANIMAL)) {
-            return null;
+            return new EditAnimalCommandParser().parse(rest);
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
