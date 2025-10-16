@@ -97,7 +97,8 @@ public class HelpWindow extends UiPart<Stage> {
         // edit command with detailed description
         ArrayList<String> addEditDescription = new ArrayList<>();
         addEditDescription.add("Edits an existing record from the system.");
-        addEditDescription.add("Command format: edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/address] [t/tag...]"
+        addEditDescription.add("Command format: edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/address] [t/tag...] "
+                              + "[f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]"
                               + " OR edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION]");
         addEditDescription.add("Example: edit person John Doe p/98765432 a/321, Jane Street");
         addEditDescription.add("Example: edit animal Bob n/Bobby");
