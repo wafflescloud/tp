@@ -155,7 +155,7 @@ Format: `edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION]​`
 Examples:
 *  `edit animal Fluffy l/Void Deck` Edits the location of the animal with name `Fluffy` to be `Void Deck`.
 
-### Locating persons by name: `find`
+### Locating persons by name: `find person`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -169,23 +169,49 @@ Format: `find person KEYWORD [KEYWORD]...`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find alex david` returns `Alex Yeoh`, `David Li`. Note that the 'animal' portion is still shown.<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Locating animals by name: `find animal`
+
+Finds animals whose names contain any of the given keywords.
+
+Format: `find animal KEYWORD [KEYWORD]...`
+
+* The search is case-insensitive. e.g `fluffy` will match `Fluffy`
+* The order of the keywords does not matter. e.g. `Cutie Pie` will match `Pie Cutie`
+* Only the name is searched.
+* Only full words will be matched e.g. `Fluff` will not match `Fluffy`
+* Animals matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Cutie` will return `Cutie Pie`, `Cutie Patootie` (if both animals are stored in the application)
+
+Examples:
+* `find max luna` returns `Max`, `Luna`. Note that the 'person' portion is still shown.<br>
+  ![result for 'find max luna'](images/findMaxLunaResult.png)
+
+### Deleting a person : `delete person`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete person n/NAME`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person with the specified `NAME`.
+* The name is case-sensitive.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete person n/John Doe` Deletes the person with name `John Doe` from the address book.
+
+### Deleting an animal : `delete animal`
+
+Deletes the specified animal from the address book.
+
+Format: `delete animal n/NAME`
+
+* Deletes the animal with the specified `NAME`.
+* The name is case-sensitive.
+
+Examples:
+* `delete animal n/Fluffy` Deletes the animal with name `Fluffy` from the address book.
 
 ### Clearing all entries : `clear`
 
@@ -201,7 +227,7 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Furiends data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
@@ -210,13 +236,9 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, Furiends will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
