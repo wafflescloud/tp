@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,17 +25,20 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<FeedingSession> feedingSessions = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(PersonName name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(PersonName name, Phone phone, Email email, Address address, Set<Tag> tags,
+            Set<FeedingSession> feedingSession) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.feedingSessions.addAll(feedingSession);
     }
 
     public PersonName getName() {
@@ -59,6 +63,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable feeding sessions set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<FeedingSession> getFeedingSessions() {
+        return Collections.unmodifiableSet(feedingSessions);
     }
 
     /**
@@ -94,7 +106,8 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && feedingSessions.equals(otherPerson.feedingSessions);
     }
 
     @Override
@@ -111,6 +124,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("feeding sessions", feedingSessions)
                 .toString();
     }
 
