@@ -53,7 +53,7 @@ public class HelpFunctionWindow extends UiPart<Stage> {
 
     private void populate() {
         commandTitleLabel.setText(commandName);
-        commandTitleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;");
+        commandTitleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: black;");
 
         String desc = HelpWindow.getDescriptionForCommand(commandName);
         if (desc == null) {
@@ -65,7 +65,7 @@ public class HelpFunctionWindow extends UiPart<Stage> {
                 commandDescriptionLabel.setText("Description: " + lines[0]);
             }
         }
-        commandDescriptionLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: white;");
+        commandDescriptionLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: black;");
 
         populateContent();
     }
@@ -90,7 +90,7 @@ public class HelpFunctionWindow extends UiPart<Stage> {
                 createCommandFormatSection(line);
             } else if (line.startsWith("Example:")) {
                 Label exampleLabel = new Label(line);
-                exampleLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: white;");
+                exampleLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: black;");
                 exampleLabel.setWrapText(true);
                 contentContainer.getChildren().add(exampleLabel);
             }
@@ -106,7 +106,7 @@ public class HelpFunctionWindow extends UiPart<Stage> {
 
         // Add the "command format (click to copy):" label
         Label formatLabel = new Label("Command format (click to copy):");
-        formatLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white;");
+        formatLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: black;");
         contentContainer.getChildren().add(formatLabel);
 
         // Handle multiple formats separated by "OR"
@@ -114,7 +114,7 @@ public class HelpFunctionWindow extends UiPart<Stage> {
 
         for (String singleFormat : formats) {
             Label formatLink = new Label(singleFormat.trim());
-            formatLink.setStyle("-fx-underline: true; -fx-cursor: hand; -fx-text-fill: white; "
+            formatLink.setStyle("-fx-underline: true; -fx-cursor: hand; -fx-text-fill: black; "
                               + "-fx-font-size: 14px; -fx-padding: 4px 0;");
 
             formatLink.setOnMouseClicked(event -> {
