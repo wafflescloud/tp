@@ -93,11 +93,11 @@ the corresponding command format to the command box as shown below.
 ![automatic copying](images/helpAutomaticInput.png)
 
 
-### Adding a person: `add`
+### Adding a person: `add person`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
@@ -105,8 +105,17 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add person n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
+### Adding an animal: `add animal`
+
+Adds an animal to the address book.
+
+Format: `add n/NAME d/DESCRIPTION l/LOCATION​`
+
+Examples:
+* `add animal n/Fluffy d/White cat l/Ang Mo Kio`
 
 ### Listing all persons : `list`
 
