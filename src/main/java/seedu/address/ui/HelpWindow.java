@@ -126,26 +126,25 @@ public class HelpWindow extends UiPart<Stage> {
     private void createCommandLinks() {
         commandLinksContainer.getChildren().clear();
 
-        for (String command : COMMAND_LIST.keySet()) {
-            Label commandLink = new Label(command);
-            commandLink.setStyle("-fx-underline: true; -fx-cursor: hand; -fx-text-fill: black;");
-            commandLink.setOnMouseClicked(event -> openCommandHelp(command));
-            commandLinksContainer.getChildren().add(commandLink);
-        }
+        // Sort commands alphabetically
+        COMMAND_LIST.keySet().stream()
+                .sorted()
+                .forEach(command -> {
+                    Label commandLink = new Label(command);
+                    commandLink.setStyle("-fx-underline: true; -fx-cursor: hand; -fx-text-fill: black;");
+                    commandLink.setOnMouseClicked(event -> openCommandHelp(command));
+                    commandLinksContainer.getChildren().add(commandLink);
+                });
     }
 
     /**
-     * Returns a string with all command keys separated by a newline. Order is unspecified.
+     * Returns a string with all command keys separated by a newline in alphabetical order.
      */
     public String getCommands() {
-        StringBuilder sb = new StringBuilder();
-        for (String key : COMMAND_LIST.keySet()) {
-            if (sb.length() > 0) {
-                sb.append('\n');
-            }
-            sb.append(key);
-        }
-        return sb.toString();
+        return COMMAND_LIST.keySet().stream()
+                .sorted()
+                .reduce((a, b) -> a + '\n' + b)
+                .orElse("");
     }
 
     /**
