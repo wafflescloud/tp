@@ -74,34 +74,31 @@ public class HelpWindow extends UiPart<Stage> {
         // addAnimal command with detailed description
         ArrayList<String> addAnimalDescription = new ArrayList<>();
         addAnimalDescription.add("Adds a new animal record to the system.");
-        addAnimalDescription.add("Command format: add animal /n<animal name> "
-                                + "/d<animal description> /l<animal location>");
-        addAnimalDescription.add("Example: add animal /nBob /dBrown tabby with stripes "
-                                + "/lNear Block 14 canteen");
+        addAnimalDescription.add("Command format: add animal n/NAME d/DESCRIPTION l/LOCATION");
+        addAnimalDescription.add("Example: add animal n/Bob d/Brown tabby with stripes l/Near Block 14 canteen");
         COMMAND_LIST.put("add animal", addAnimalDescription);
 
         // addPerson command with detailed description
         ArrayList<String> addPersonDescription = new ArrayList<>();
         addPersonDescription.add("Adds a new person record to the system.");
-        addPersonDescription.add("Command format: add person /n<name> "
-                                + "/p<phone> /e<email> /a<address> [t/<tag>...]");
-        addPersonDescription.add("Example: add person /nJohn Doe /p91234567 /ejohndoe@gmail.com a/123 Jack Street "
+        addPersonDescription.add("Command format: add person n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...");
+        addPersonDescription.add("Example: add person n/John Doe p/91234567 e/johndoe@gmail.com a/123 Jack Street "
                                 + "t/friend t/funny");
         COMMAND_LIST.put("add person", addPersonDescription);
 
         // delete command with detailed description
         ArrayList<String> addDeleteDescription = new ArrayList<>();
         addDeleteDescription.add("Deletes an existing record from the system.");
-        addDeleteDescription.add("Command format: delete person n/<name> OR delete animal n/<name>");
+        addDeleteDescription.add("Command format: delete person n/NAME OR delete animal n/NAME");
         addDeleteDescription.add("Example: delete person n/John Tan");
-        addDeleteDescription.add("Example: delete animal n/Hehehehehaw");
+        addDeleteDescription.add("Example: delete animal n/Fluffy");
         COMMAND_LIST.put("delete", addDeleteDescription);
 
         // edit command with detailed description
         ArrayList<String> addEditDescription = new ArrayList<>();
         addEditDescription.add("Edits an existing record from the system.");
-        addEditDescription.add("Command format: edit person <name> [n/name] [p/phone] [e/email] [a/address] [t/tag...]"
-                              + " OR edit animal <name> [n/animal name] [d/animal description] [l/animal location]");
+        addEditDescription.add("Command format: edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/address] [t/tag...]"
+                              + " OR edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION]");
         addEditDescription.add("Example: edit person John Doe p/98765432 a/321, Jane Street");
         addEditDescription.add("Example: edit animal Bob n/Bobby");
         COMMAND_LIST.put("edit", addEditDescription);
@@ -109,16 +106,17 @@ public class HelpWindow extends UiPart<Stage> {
         // find command with detailed description
         ArrayList<String> addFindDescription = new ArrayList<>();
         addFindDescription.add("Searches a record from the system.");
-        addFindDescription.add("Command format: find <keyword>");
-        addFindDescription.add("Example: find Sam");
+        addFindDescription.add("Command format: find person NAME OR find animal NAME");
+        addFindDescription.add("Example: find person Sam");
+        addFindDescription.add("Example: find animal Bella");
         COMMAND_LIST.put("find", addFindDescription);
 
         // help command with detailed description
         ArrayList<String> addHelpDescription = new ArrayList<>();
-        addHelpDescription.add("Opens the help window.");
-        addHelpDescription.add("Command format: help OR help <command name>");
+        addHelpDescription.add("Opens the help window, or shows detailed help for a specified command.");
+        addHelpDescription.add("Command format: help [COMMAND]");
         addHelpDescription.add("Example: help");
-        addHelpDescription.add("Example: help addPerson");
+        addHelpDescription.add("Example: help add person");
         COMMAND_LIST.put("help", addHelpDescription);
     }
 
@@ -128,26 +126,25 @@ public class HelpWindow extends UiPart<Stage> {
     private void createCommandLinks() {
         commandLinksContainer.getChildren().clear();
 
-        for (String command : COMMAND_LIST.keySet()) {
-            Label commandLink = new Label(command);
-            commandLink.setStyle("-fx-underline: true; -fx-cursor: hand; -fx-text-fill: black;");
-            commandLink.setOnMouseClicked(event -> openCommandHelp(command));
-            commandLinksContainer.getChildren().add(commandLink);
-        }
+        // Sort commands alphabetically
+        COMMAND_LIST.keySet().stream()
+                .sorted()
+                .forEach(command -> {
+                    Label commandLink = new Label(command);
+                    commandLink.setStyle("-fx-underline: true; -fx-cursor: hand; -fx-text-fill: black;");
+                    commandLink.setOnMouseClicked(event -> openCommandHelp(command));
+                    commandLinksContainer.getChildren().add(commandLink);
+                });
     }
 
     /**
-     * Returns a string with all command keys separated by a newline. Order is unspecified.
+     * Returns a string with all command keys separated by a newline in alphabetical order.
      */
     public String getCommands() {
-        StringBuilder sb = new StringBuilder();
-        for (String key : COMMAND_LIST.keySet()) {
-            if (sb.length() > 0) {
-                sb.append('\n');
-            }
-            sb.append(key);
-        }
-        return sb.toString();
+        return COMMAND_LIST.keySet().stream()
+                .sorted()
+                .reduce((a, b) -> a + '\n' + b)
+                .orElse("");
     }
 
     /**
