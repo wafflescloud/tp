@@ -72,12 +72,25 @@ Furiends is a **desktop app for managing contacts, optimized for use via a Comma
 
 Displays a window, which links to the user guide, as well as a list of commands. <br>
 
+Format: `help [command]` <br>
 
-Each command is clickable to open another window, which shows additional details regarding the command's usage.
+The general help window (in the image below) can be opened by entering `help` in the command box.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+Each command is clickable to open another window, which shows additional details regarding the command's usage. <br>
+This window can also be opened by entering `help <command>` in the command box. <br>
+In the example below, when clicking the `help` command (as shown in the image above), a new window will pop up to show
+the details of the `help` command and its usage. 
+(The below window can also be opened by entering `help help` in the command box.)
+
+![help window](images/helpWindowExample.png)
+
+Clicking on the command format template will copy the command format to the command box in the main application window
+and close this window. For example, clicking on the command format template `help <command name>` will copy 
+the corresponding command format to the command box as shown below.
+
+![automatic copying](images/helpAutomaticInput.png)
 
 
 ### Adding a person: `add`
