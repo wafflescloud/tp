@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FEEDING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -19,23 +21,24 @@ public abstract class EditCommand extends Command {
             + "by the name used in the displayed person/animal list. "
             + "Existing values will be overwritten by the input values.\n"
             + "1. To edit a person: \n"
-            + "Parameters: NAME (must < 30 characters) "
+            + "Parameters: NAME "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_FEEDING + "ANIMAL_NAME " + PREFIX_DATETIME + "YYYY-MM-DD HH:MM]...\n"
             + "Example: " + COMMAND_WORD + " person John Doe "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com\n"
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_FEEDING + "Max " + PREFIX_DATETIME + "2025-01-01 14:30\n"
             + "\n"
             + "2. To edit an animal: \n"
-            + "Parameters: NAME (must < 30 characters) "
+            + "Parameters: NAME "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_LOCATION + "LOCATION] "
             + "Example: " + COMMAND_WORD + " animal Kitty "
             + PREFIX_DESCRIPTION + "Grey Cat "
             + PREFIX_LOCATION + "UTOWN";
-
 }
