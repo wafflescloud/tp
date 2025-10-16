@@ -23,7 +23,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         // arguments after "edit"
         if (args.isEmpty()) {
-            throw new ParseException(EditCommand.MESSAGE_USAGE);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
         String trimmedArgs = args.trim();
