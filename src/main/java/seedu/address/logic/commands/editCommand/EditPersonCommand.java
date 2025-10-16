@@ -6,7 +6,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -15,7 +14,9 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.animal.Animal;
 import seedu.address.model.feedingsession.FeedingSession;
+import seedu.address.model.feedingsession.IntermediateFeedingSession;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
@@ -58,7 +59,23 @@ public class EditPersonCommand extends EditCommand {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME));
 
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        // Convert intermediate feeding sessions to actual feeding sessions
+        Set<FeedingSession> feedingSessions = new HashSet<>();
+        if (editPersonDescriptor.getIntermediateFeedingSessions().isPresent()) {
+            for (IntermediateFeedingSession ifs : editPersonDescriptor.getIntermediateFeedingSessions().get()) {
+                // Find the animal in the model
+                Animal animal = model.getFilteredAnimalList().stream()
+                        .filter(a -> a.getName().fullName.equals(ifs.getAnimalName()))
+                        .findFirst()
+                        .orElseThrow(() -> new CommandException("Animal not found: " + ifs.getAnimalName()));
+
+                feedingSessions.add(new FeedingSession(animal, ifs.getDateTime()));
+            }
+        }
+
+        // Update the editPersonDescriptor with resolved feeding sessions
+        EditPersonDescriptor resolvedDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        Person editedPerson = createEditedPerson(personToEdit, resolvedDescriptor, feedingSessions);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -71,9 +88,11 @@ public class EditPersonCommand extends EditCommand {
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code editPersonDescriptor} and {@code feedingSessions}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit,
+            EditPersonDescriptor editPersonDescriptor,
+            Set<FeedingSession> feedingSessions) {
         assert personToEdit != null;
 
         PersonName updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -81,9 +100,14 @@ public class EditPersonCommand extends EditCommand {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Set<FeedingSession> updatedFeedingSessions = new HashSet<>();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedFeedingSessions);
+        // Merge existing feeding sessions with new ones if no new sessions provided
+        Set<FeedingSession> updatedFeedingSessions = feedingSessions.isEmpty()
+                ? personToEdit.getFeedingSessions()
+                : feedingSessions;
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedTags, updatedFeedingSessions);
     }
 
 
@@ -121,12 +145,13 @@ public class EditPersonCommand extends EditCommand {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Set<IntermediateFeedingSession> intermediateFeedingSessions;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code tags} and {@code intermediateFeedingSessions} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -134,13 +159,14 @@ public class EditPersonCommand extends EditCommand {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setIntermediateFeedingSessions(toCopy.intermediateFeedingSessions);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, intermediateFeedingSessions);
         }
 
         public void setName(PersonName name) {
@@ -192,6 +218,25 @@ public class EditPersonCommand extends EditCommand {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code intermediateFeedingSessions} to this object's {@code intermediateFeedingSessions}.
+         * A defensive copy of {@code intermediateFeedingSessions} is used internally.
+         */
+        public void setIntermediateFeedingSessions(Set<IntermediateFeedingSession> intermediateFeedingSessions) {
+            this.intermediateFeedingSessions = (intermediateFeedingSessions != null)
+                    ? new HashSet<>(intermediateFeedingSessions)
+                    : null;
+        }
+
+        /**
+         * Returns an unmodifiable intermediate feeding sessions set.
+         */
+        public Optional<Set<IntermediateFeedingSession>> getIntermediateFeedingSessions() {
+            return (intermediateFeedingSessions != null)
+                    ? Optional.of(Collections.unmodifiableSet(intermediateFeedingSessions))
+                    : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -203,23 +248,27 @@ public class EditPersonCommand extends EditCommand {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            return getName().equals(e.getName())
+                    && getPhone().equals(e.getPhone())
+                    && getEmail().equals(e.getEmail())
+                    && getAddress().equals(e.getAddress())
+                    && getTags().equals(e.getTags())
+                    && getIntermediateFeedingSessions().equals(e.getIntermediateFeedingSessions());
         }
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
-                    .toString();
+            StringBuilder sb = new StringBuilder();
+            sb.append(getClass().getCanonicalName())
+                    .append("{name=").append(getName().orElse(null))
+                    .append(", phone=").append(getPhone().orElse(null))
+                    .append(", email=").append(getEmail().orElse(null))
+                    .append(", address=").append(getAddress().orElse(null))
+                    .append(", tags=").append(getTags().orElse(null))
+                    .append(", intermediateFeedingSessions=").append(getIntermediateFeedingSessions().orElse(null))
+                    .append("}");
+            return sb.toString();
         }
     }
 }
