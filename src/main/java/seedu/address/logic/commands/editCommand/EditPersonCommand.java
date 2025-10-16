@@ -15,7 +15,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.Name;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
@@ -33,14 +32,14 @@ public class EditPersonCommand extends EditCommand {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_INVALID_PERSON_NAME = "The person is not found in the address book";
 
-    private final Name name;
+    private final PersonName name;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param name of the person in the filtered person list to edit
+     * @param name name of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditPersonCommand(Name name, EditPersonDescriptor editPersonDescriptor) {
+    public EditPersonCommand(PersonName name, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(name);
         requireNonNull(editPersonDescriptor);
 
@@ -52,20 +51,11 @@ public class EditPersonCommand extends EditCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        Person personToEdit = null;
-
-        for (Person person : lastShownList) {
-            if (person.getName().equals(name)) {
-                personToEdit = person;
-                break;
-            }
-        }
-
-        if (personToEdit == null) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_NAME);
-        }
+        List<Person> list = model.getFilteredPersonList();
+        Person personToEdit = list.stream()
+                .filter(p -> p.getName().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME));
 
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
@@ -114,7 +104,7 @@ public class EditPersonCommand extends EditCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("personName", name)
+                .add("name", name)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }

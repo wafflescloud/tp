@@ -37,9 +37,9 @@
 
 // import seedu.address.commons.core.index.Index;
 // import seedu.address.logic.Messages;
-// import seedu.address.logic.commands.EditCommand;
-// import seedu.address.logic.commands.EditPersonCommand;
-// import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
+// import seedu.address.logic.commands.editCommand.EditCommand;
+// import seedu.address.logic.commands.editCommand.EditPersonCommand;
+// import seedu.address.logic.commands.editCommand.EditPersonCommand.EditPersonDescriptor;
 // import seedu.address.model.Model;
 // import seedu.address.model.ModelManager;
 // import seedu.address.model.UserPrefs;

@@ -9,11 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
- * Represents an edit command that edits contact information of a person or an animal from the address book.
- * <p>
- * This is an abstract class to be extended by specific edit commands such as
- * {@link EditPersonCommand}.
- * </p>
+ * Edits an entity identified using its name from the address book.
  */
 public abstract class EditCommand extends Command {
 
@@ -22,7 +18,7 @@ public abstract class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person/animal identified "
             + "by the name used in the displayed person/animal list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "For Person, \n"
+            + "1. To edit a person: \n"
             + "Parameters: NAME (must < 30 characters) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
@@ -31,9 +27,9 @@ public abstract class EditCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " John Doe "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com"
-            + "\n\n"
-            + "For Animal, \n"
+            + PREFIX_EMAIL + "johndoe@example.com\n"
+            + "\n"
+            + "2. To edit an animal: \n"
             + "Parameters: NAME (must < 30 characters) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "

@@ -12,7 +12,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.Name;
 import seedu.address.model.animal.Animal;
 import seedu.address.model.animal.AnimalName;
 import seedu.address.model.animal.Description;
@@ -21,7 +20,7 @@ import seedu.address.model.animal.Location;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditAnimalCommand extends Command {
+public class EditAnimalCommand extends EditCommand {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -30,14 +29,14 @@ public class EditAnimalCommand extends Command {
     public static final String MESSAGE_DUPLICATE_ANIMAL = "This animal already exists in the address book";
     public static final String MESSAGE_INVALID_ANIMAL_NAME = "The animal is not found in the address book";
 
-    private final Name name;
+    private final AnimalName name;
     private final EditAnimalDescriptor editAnimalDescriptor;
 
     /**
      * @param name of the person in the filtered animal list to edit
      * @param editAnimalDescriptor details to edit the animal with
      */
-    public EditAnimalCommand(Name name, EditAnimalDescriptor editAnimalDescriptor) {
+    public EditAnimalCommand(AnimalName name, EditAnimalDescriptor editAnimalDescriptor) {
         requireNonNull(name);
         requireNonNull(editAnimalDescriptor);
 
@@ -49,20 +48,13 @@ public class EditAnimalCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Animal> lastShownList = model.getFilteredAnimalList();
+        List<Animal> list = model.getFilteredAnimalList();
 
-        Animal animalToEdit = null;
+        Animal animalToEdit = list.stream()
+                .filter(animal -> animal.getName().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_ANIMAL_DISPLAYED_NAME));
 
-        for (Animal animal : lastShownList) {
-            if (animal.getName().equals(name)) {
-                animalToEdit = animal;
-                break;
-            }
-        }
-
-        if (animalToEdit == null) {
-            throw new CommandException(MESSAGE_INVALID_ANIMAL_NAME);
-        }
 
         Animal editedAnimal = createEditedAnimal(animalToEdit, editAnimalDescriptor);
 
@@ -73,7 +65,6 @@ public class EditAnimalCommand extends Command {
         model.setAnimal(animalToEdit, editedAnimal);
         model.updateFilteredAnimalList(PREDICATE_SHOW_ALL_ANIMALS);
         return new CommandResult(String.format(MESSAGE_EDIT_ANIMAL_SUCCESS, Messages.format(editedAnimal)));
-
     }
 
     /**
@@ -98,7 +89,7 @@ public class EditAnimalCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditAnimalCommand)) {
             return false;
         }
 
