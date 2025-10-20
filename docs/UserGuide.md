@@ -6,7 +6,7 @@
 
 # Furiends User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Furiends is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Furiends can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -18,28 +18,27 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-W14-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your Furiends application.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar furiends.jar` command 
+   to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. Type the command in the command box (displaying "Enter command here...") and press Enter to execute it.<br>
+   Some simple commands you can try:
 
+   * `help` : Shows the help page with the full list of commands.
+   
    * `list` : Lists all contacts.
-
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
 
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -50,10 +49,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add person n/NAME...`, `NAME` is a parameter which can be used as `add person n/John Doe...`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME ... [t/TAG]` can be used as `n/John Doe ... t/friend` (friend tag added) 
+  or as `n/John Doe ... `(no tag provided).
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -61,26 +61,43 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters 
+  (such as `list`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Displays a window, which links to the user guide, as well as a list of commands. <br>
+
+Format: `help [command]` <br>
+
+The general help window (in the image below) can be opened by entering `help` in the command box.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+Each command is clickable to open another window, which shows additional details regarding the command's usage. <br>
+This window can also be opened by entering `help <command>` in the command box. <br>
+In the example below, when clicking the `help` command (as shown in the image above), a new window will pop up to show
+the details of the `help` command and its usage. 
+(The below window can also be opened by entering `help help` in the command box.)
+
+![help window](images/helpWindowExample.png)
+
+Clicking on the command format template will copy the command format to the command box in the main application window
+and close this window. For example, clicking on the command format template `help <command name>` will copy 
+the corresponding command format to the command box as shown below.
+
+![automatic copying](images/helpAutomaticInput.png)
 
 
-### Adding a person: `add`
+### Adding a person: `add person`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
@@ -88,8 +105,17 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add person n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
+### Adding an animal: `add animal`
+
+Adds an animal to the address book.
+
+Format: `add n/NAME d/DESCRIPTION l/LOCATION​`
+
+Examples:
+* `add animal n/Fluffy d/White cat l/Ang Mo Kio`
 
 ### Listing all persons : `list`
 
@@ -97,13 +123,13 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a person : `edit person`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person with the specified `NAME`. The name is case-sensitive.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -111,14 +137,29 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit person John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person 
+    with name `John Doe` to be `91234567` and `johndoe@example.com` respectively.
+*  `edit person Betty Crower n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and 
+    clears all existing tags.
 
-### Locating persons by name: `find`
+### Editing an animal : `edit animal`
+
+Edits an existing animal in the address book.
+
+Format: `edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION]​`
+
+* Edits the animal with the specified `NAME`. The name is case-sensitive.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+*  `edit animal Fluffy l/Void Deck` Edits the location of the animal with name `Fluffy` to be `Void Deck`.
+
+### Locating persons by name: `find person`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find person KEYWORD [MORE_KEYWORDS]...`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -128,23 +169,49 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find alex david` returns `Alex Yeoh`, `David Li`. Note that the 'animal' portion is still shown.<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Locating animals by name: `find animal`
+
+Finds animals whose names contain any of the given keywords.
+
+Format: `find animal KEYWORD [MORE_KEYWORDS]...`
+
+* The search is case-insensitive. e.g `fluffy` will match `Fluffy`
+* The order of the keywords does not matter. e.g. `Cutie Pie` will match `Pie Cutie`
+* Only the name is searched.
+* Only full words will be matched e.g. `Fluff` will not match `Fluffy`
+* Animals matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Cutie` will return `Cutie Pie`, `Cutie Patootie` (if both animals are stored in the application)
+
+Examples:
+* `find max luna` returns `Max`, `Luna`. Note that the 'person' portion is still shown.<br>
+  ![result for 'find max luna'](images/findMaxLunaResult.png)
+
+### Deleting a person : `delete person`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete person n/NAME`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person with the specified `NAME`.
+* The name is case-sensitive.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete person n/John Doe` Deletes the person with name `John Doe` from the address book.
+
+### Deleting an animal : `delete animal`
+
+Deletes the specified animal from the address book.
+
+Format: `delete animal n/NAME`
+
+* Deletes the animal with the specified `NAME`.
+* The name is case-sensitive.
+
+Examples:
+* `delete animal n/Fluffy` Deletes the animal with name `Fluffy` from the address book.
 
 ### Clearing all entries : `clear`
 
@@ -160,7 +227,7 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Furiends data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
@@ -169,13 +236,9 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, Furiends will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -195,12 +258,17 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+Action                | Format, Examples
+----------------------|------------------------------------------------------------------------------------------------
+**Add Person**        | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br>e.g.,`add person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Animal**        | `add animal n/NAME d/DESCRIPTION l/LOCATION​` <br> e.g., `add animaln/Fluffy d/White cat l/Ang Mo Kio`
+**Clear**             | `clear`
+**Delete Person**     | `delete person n/NAME`<br> e.g., `delete person n/John Doe`
+**Delete Animal**     | `delete animal n/NAME`<br> e.g., `delete animal n/Fluffy`
+**Edit Person**       | `edit person NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit person John Doe n/James Lee e/jameslee@example.com`
+**Edit Animal**       | `edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION]`<br> e.g., `edit animal Fluffy l/Void Deck`
+**Exit**              | `exit`
+**Find Person**       | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find Animal**       | `find animal KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Fluffy Max`
+**List**              | `list`
+**Help**              | `help [COMMAND]`<br> e.g. `help` <br> e.g. `help add person`

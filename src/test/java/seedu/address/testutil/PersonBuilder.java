@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonName;
@@ -23,6 +24,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Set<Tag> tags;
+    private Set<FeedingSession> feedingSessions;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -32,6 +34,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         tags = new HashSet<>();
+        feedingSessions = new HashSet<>();
     }
 
     /**
@@ -76,8 +79,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Set<FeedingSession>} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFeedingSessions(Set<FeedingSession> feedingSessions) {
+        this.feedingSessions = new HashSet<>(feedingSessions);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, tags);
+        return new Person(name, phone, email, tags, feedingSessions);
     }
 
 }

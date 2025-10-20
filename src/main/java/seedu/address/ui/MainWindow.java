@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private AnimalListPanel animalListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private CommandBox commandBox;
@@ -45,9 +46,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane personListPanelPlaceholder;
 
-    // change here to animal list
     @FXML
-    private StackPane personListPanelPlaceholderDuplicateRight;
+    private StackPane animalListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -118,10 +118,8 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        // Add duplicated temporay person list on the right side
-        // change here to animal list
-        PersonListPanel personListPanelRight = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholderDuplicateRight.getChildren().add(personListPanelRight.getRoot());
+        animalListPanel = new AnimalListPanel(logic.getFilteredAnimalList());
+        animalListPanelPlaceholder.getChildren().add(animalListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -152,5 +155,19 @@ public class ParserUtil {
             throw new ParseException(Location.MESSAGE_CONSTRAINTS);
         }
         return new Location(trimmedLocation);
+    }
+
+    /**
+     * Parses a {@code String datetime} into a {@code LocalDateTime}.
+     * Expected format: yyyy-MM-dd HH:mm
+     */
+    public static LocalDateTime parseDateTime(String datetime) throws ParseException {
+        requireNonNull(datetime);
+        String trimmedDateTime = datetime.trim();
+        try {
+            return LocalDateTime.parse(trimmedDateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        } catch (DateTimeParseException e) {
+            throw new ParseException("DateTime must be in format: yyyy-MM-dd HH:mm");
+        }
     }
 }

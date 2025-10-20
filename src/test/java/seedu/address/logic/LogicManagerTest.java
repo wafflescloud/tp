@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -168,7 +169,13 @@ public class LogicManagerTest {
         String addCommand = AddCommand.COMMAND_WORD + " person"
                 + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+
+        // Update PersonBuilder to include empty feeding sessions
+        Person expectedPerson = new PersonBuilder(AMY)
+                .withTags()
+                .withFeedingSessions(new HashSet<>())
+                .build();
+
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

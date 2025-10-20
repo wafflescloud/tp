@@ -11,8 +11,14 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.feedingsession.FeedingSession;
+import seedu.address.testutil.AnimalBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -32,28 +38,41 @@ public class PersonTest {
         assertFalse(ALICE.isSamePerson(null));
 
         // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Person editedAlice = new PersonBuilder(ALICE)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .withTags(VALID_TAG_HUSBAND)
+                .withFeedingSessions(new HashSet<>())
+                .build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        editedAlice = new PersonBuilder(ALICE)
+                .withName(VALID_NAME_BOB)
+                .withFeedingSessions(new HashSet<>())
+                .build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
-        Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        Person editedBob = new PersonBuilder(BOB)
+                .withName(VALID_NAME_BOB.toLowerCase())
+                .withFeedingSessions(new HashSet<>())
+                .build();
         assertFalse(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
+        editedBob = new PersonBuilder(BOB)
+                .withName(nameWithTrailingSpaces)
+                .withFeedingSessions(new HashSet<>())
+                .build();
         assertFalse(BOB.isSamePerson(editedBob));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Person aliceCopy = new PersonBuilder(ALICE).build();
+        Person aliceCopy = new PersonBuilder(ALICE).withFeedingSessions(new HashSet<>()).build();
         assertTrue(ALICE.equals(aliceCopy));
 
         // same object -> returns true
@@ -69,26 +88,51 @@ public class PersonTest {
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
-        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        Person editedAlice = new PersonBuilder(ALICE)
+                .withName(VALID_NAME_BOB)
+                .withFeedingSessions(new HashSet<>())
+                .build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different phone -> returns false
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        editedAlice = new PersonBuilder(ALICE)
+                .withPhone(VALID_PHONE_BOB)
+                .withFeedingSessions(new HashSet<>())
+                .build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different email -> returns false
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        editedAlice = new PersonBuilder(ALICE)
+                .withEmail(VALID_EMAIL_BOB)
+                .withFeedingSessions(new HashSet<>())
+                .build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new PersonBuilder(ALICE)
+                .withTags(VALID_TAG_HUSBAND)
+                .withFeedingSessions(new HashSet<>())
+                .build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different feeding sessions -> returns false
+        Set<FeedingSession> differentFeedingSessions = new HashSet<>();
+        differentFeedingSessions.add(new FeedingSession(new AnimalBuilder().build(), LocalDateTime.now()));
+        editedAlice = new PersonBuilder(ALICE)
+                .withFeedingSessions(differentFeedingSessions)
+                .build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", tags=" + ALICE.getTags() + "}";
+        String expected = Person.class.getCanonicalName()
+                + "{name=" + ALICE.getName()
+                + ", phone=" + ALICE.getPhone()
+                + ", email=" + ALICE.getEmail()
+                + ", tags=" + ALICE.getTags()
+                + ", feeding sessions=" + ALICE.getFeedingSessions()
+                + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
