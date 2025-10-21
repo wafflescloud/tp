@@ -78,7 +78,7 @@ public class EditAnimalCommand extends EditCommand {
         Description updatedDescription = editAnimalDescriptor.getDescription().orElse(animalToEdit.getDescription());
         Location updatedLocation = editAnimalDescriptor.getLocation().orElse(animalToEdit.getLocation());
 
-        return new Animal(updatedName, updatedDescription, updatedLocation);
+        return new Animal(updatedName, updatedDescription, updatedLocation, null);
     }
 
 

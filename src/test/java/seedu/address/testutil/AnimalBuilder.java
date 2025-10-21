@@ -1,9 +1,14 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.model.animal.Animal;
 import seedu.address.model.animal.AnimalName;
 import seedu.address.model.animal.Description;
 import seedu.address.model.animal.Location;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Animal objects.
@@ -17,6 +22,7 @@ public class AnimalBuilder {
     private AnimalName name;
     private Description description;
     private Location location;
+    private Set<Tag> tags;
 
     /**
      * Creates an {@code AnimalBuilder} with default details.
@@ -25,6 +31,7 @@ public class AnimalBuilder {
         name = new AnimalName(DEFAULT_NAME);
         description = new Description(DEFAULT_DESCRIPTION);
         location = new Location(DEFAULT_LOCATION);
+        tags = new HashSet<>();
     }
 
     /**
@@ -36,6 +43,7 @@ public class AnimalBuilder {
         name = animalToCopy.getName();
         description = animalToCopy.getDescription();
         location = animalToCopy.getLocation();
+        tags = new HashSet<>(animalToCopy.getTags());
     }
 
     /**
@@ -71,7 +79,15 @@ public class AnimalBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Animal} that we are building.
+     */
+    public AnimalBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
     public Animal build() {
-        return new Animal(name, description, location);
+        return new Animal(name, description, location, tags);
     }
 }

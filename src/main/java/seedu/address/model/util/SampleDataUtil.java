@@ -49,16 +49,16 @@ public class SampleDataUtil {
         return new Animal[] {
             new Animal(new AnimalName("Max"),
                 new Description("Golden Retriever, friendly and well-trained"),
-                new Location("Block A, Kennel 1")),
+                new Location("Block A, Kennel 1"), getTagSet("Alex")),
             new Animal(new AnimalName("Luna"),
                 new Description("Persian cat, white fur, blue eyes"),
-                new Location("Block B, Cat Room 3")),
+                new Location("Block B, Cat Room 3"), getTagSet("Bernice")),
             new Animal(new AnimalName("Charlie"),
                 new Description("German Shepherd, good guard dog"),
-                new Location("Block A, Kennel 5")),
+                new Location("Block A, Kennel 5"), getTagSet("Charlotte")),
             new Animal(new AnimalName("Bella"),
                 new Description("Siamese cat, very playful"),
-                new Location("Block B, Cat Room 2"))
+                new Location("Block B, Cat Room 2"), getTagSet("David"))
         };
     }
 
