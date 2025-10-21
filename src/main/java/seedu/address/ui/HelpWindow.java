@@ -72,19 +72,13 @@ public class HelpWindow extends UiPart<Stage> {
 
         // TODO: Make this info editable outside of the program (e.g. store these descriptions in a JSON or text file)
         // addAnimal command with detailed description
-        ArrayList<String> addAnimalDescription = new ArrayList<>();
-        addAnimalDescription.add("Adds a new animal record to the system.");
-        addAnimalDescription.add("Command format: add animal n/NAME d/DESCRIPTION l/LOCATION");
-        addAnimalDescription.add("Example: add animal n/Bob d/Brown tabby with stripes l/Near Block 14 canteen");
-        COMMAND_LIST.put("add animal", addAnimalDescription);
-
-        // addPerson command with detailed description
-        ArrayList<String> addPersonDescription = new ArrayList<>();
-        addPersonDescription.add("Adds a new person record to the system.");
-        addPersonDescription.add("Command format: add person n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...");
-        addPersonDescription.add("Example: add person n/John Doe p/91234567 e/johndoe@gmail.com a/123 Jack Street "
-                                + "t/friend t/funny");
-        COMMAND_LIST.put("add person", addPersonDescription);
+        ArrayList<String> addDescription = new ArrayList<>();
+        addDescription.add("Adds a new person or animal record to the system.");
+        addDescription.add("Command format: add animal n/NAME d/DESCRIPTION l/LOCATION"
+                          + " OR add person n/NAME p/PHONE e/EMAIL [t/TAG]...");
+        addDescription.add("Example: add animal n/Bob d/Brown tabby with stripes l/Near Block 14 canteen");
+        addDescription.add("Example: add person n/John Doe p/91234567 e/johndoe@gmail.com t/friend t/funny");
+        COMMAND_LIST.put("add", addDescription);
 
         // delete command with detailed description
         ArrayList<String> addDeleteDescription = new ArrayList<>();
@@ -97,7 +91,7 @@ public class HelpWindow extends UiPart<Stage> {
         // edit command with detailed description
         ArrayList<String> addEditDescription = new ArrayList<>();
         addEditDescription.add("Edits an existing record from the system.");
-        addEditDescription.add("Command format: edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/address] [t/tag...] "
+        addEditDescription.add("Command format: edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/tag...] "
                               + "[f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]"
                               + " OR edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION]");
         addEditDescription.add("Example: edit person John Doe p/98765432 a/321, Jane Street");
