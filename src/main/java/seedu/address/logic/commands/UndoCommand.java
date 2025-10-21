@@ -20,11 +20,8 @@ public class UndoCommand extends Command {
         requireNonNull(model);
 
         if (!model.canUndo()) {
-            System.out.println("penis");
             throw new CommandException(MESSAGE_FAILURE);
         }
-
-        System.out.println("penis2");
 
         model.undo();
         return new CommandResult(MESSAGE_SUCCESS);
