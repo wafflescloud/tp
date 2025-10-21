@@ -283,7 +283,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * is reasonably comfortable using CLI apps
 
 
-**Value proposition**: 
+**Value proposition**:
 * manage contacts faster than a typical mouse/GUI driven app
 * keep track of cats' details around campus
 
@@ -335,7 +335,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, where `user` refers to a cat caretaker using the Furiends app to manage contacts, unless specified otherwise) 
+(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, where `user` refers to a cat caretaker using the Furiends app to manage contacts, unless specified otherwise)
 
 **Use case: UC01 - Add a person**
 
@@ -351,14 +351,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. One or more details are missing or invalid.
-    
+
     * 2a1. AddressBook shows an error message.
-        
+
         Use case ends
 * 3a. A person with the same name already exists in the list.
-    
+
     * 3a1. AddressBook shows a duplicate warning.
-        
+
         Use case ends
 
 
@@ -376,12 +376,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
-        
+
     Use case ends
 * 2b. The given name does not match any person.
-    
+
     * 2b1. AddressBook shows an error message.
-        
+
         Use case ends
 
 
@@ -400,22 +400,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
-        
+
     Use case ends
 * 2b. The given name does not match any person.
-    
+
     * 2b1. AddressBook shows an error message.
-        
+
         Use case ends
 * 3a. One or more new details are invalid.
-    
+
     * 3a1. AddressBook shows an error message.
-        
+
         Use case ends
 * 4a. The updated details duplicate another person’s name.
-    
+
     * 4a1. AddressBook shows a duplicate warning.
-        
+
         Use case ends
 
 
@@ -423,7 +423,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to find a person by specifying the person’s name
+1. User requests to find a person by specifying the person’s name or substring of their name
 2. AddressBook searches the contact list for a matching person
 3. AddressBook shows the person’s details
 
@@ -432,9 +432,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. No person matches the given name.
-    
+
     * 2a1. AddressBook shows an empty result message.
-        
+
         Use case ends
 
 
@@ -452,14 +452,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. One or more details are missing or invalid.
-    
+
     * 2a1. AddressBook shows an error message.
-        
+
         Use case ends
 * 3a. An animal with the same name already exists in the list.
-    
+
     * 3a1. AddressBook shows a duplicate warning.
-        
+
         Use case ends
 
 
@@ -477,12 +477,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
-        
+
     Use case ends
 * 2b. The given name does not match any animal.
-    
+
     * 2b1. AddressBook shows an error message.
-        
+
         Use case ends
 
 
@@ -501,22 +501,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
-        
+
     Use case ends
 * 2b. The given name does not match any animal.
-    
+
     * 2b1. AddressBook shows an error message.
-        
+
         Use case ends
 * 3a. One or more new details are invalid.
-    
+
     * 3a1. AddressBook shows an error message.
-        
+
         Use case ends
 * 4a. The updated details duplicate another animal’s name.
-    
+
     * 4a1. AddressBook shows a duplicate warning.
-        
+
         Use case ends
 
 
@@ -524,7 +524,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to find an animal by specifying the animal’s name
+1. User requests to find an animal by specifying the animal’s name or substring of their name
 2. AddressBook searches the animal list for a matching entry
 3. AddressBook shows the animal’s details
 
@@ -533,11 +533,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. No animal matches the given name.
-    
+
     * 2a1. AddressBook shows an empty result message.
-        
+
         Use case ends
- 
+
 
 ### Non-Functional Requirements
 1. The software should work on any mainstream OS as long as it has Java 17 or above installed.
@@ -548,7 +548,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. The software should work without requiring an installer.
 7. The graphical user interface (GUI) should support standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%, and be usable for resolutions 1280x720 and higher and for screen scale 150%.
 8. The software should be packaged into a single JAR file.
-9. This product is not required to handle messaging/calling other Cats of NUS members. 
+9. This product is not required to handle messaging/calling other Cats of NUS members.
 10. This product is not required to handle sending notifications to users about feeding times.
 
 *{More to be added}*
@@ -556,7 +556,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Cats of NUS**: A society in NUS for cats lover and care takers 
+* **Cats of NUS**: A society in NUS for cats lover and care takers
 * **PIC**: Person in charge of the members of the Cats of NUS
 * **General User**: Users that fits the target audience of this address book
 
