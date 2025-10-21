@@ -54,7 +54,8 @@ public class EditAnimalDescriptorTest {
         String expected = EditAnimalDescriptor.class.getCanonicalName() + "{name="
                 + editAnimalDescriptor.getName().orElse(null) + ", description="
                 + editAnimalDescriptor.getDescription().orElse(null) + ", location="
-                + editAnimalDescriptor.getLocation().orElse(null) + "}";
+                + editAnimalDescriptor.getLocation().orElse(null) + ", tags="
+                + editAnimalDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editAnimalDescriptor.toString());
     }
 }

@@ -3,9 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ANIMALS;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -16,6 +18,7 @@ import seedu.address.model.animal.Animal;
 import seedu.address.model.animal.AnimalName;
 import seedu.address.model.animal.Description;
 import seedu.address.model.animal.Location;
+import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -77,8 +80,9 @@ public class EditAnimalCommand extends EditCommand {
         AnimalName updatedName = editAnimalDescriptor.getName().orElse(animalToEdit.getName());
         Description updatedDescription = editAnimalDescriptor.getDescription().orElse(animalToEdit.getDescription());
         Location updatedLocation = editAnimalDescriptor.getLocation().orElse(animalToEdit.getLocation());
+        Set<Tag> updatedTags = editAnimalDescriptor.getTags().orElse(animalToEdit.getTags());
 
-        return new Animal(updatedName, updatedDescription, updatedLocation, null);
+        return new Animal(updatedName, updatedDescription, updatedLocation, updatedTags);
     }
 
 
@@ -115,6 +119,7 @@ public class EditAnimalCommand extends EditCommand {
         private AnimalName name;
         private Description description;
         private Location location;
+        private Set<Tag> tags;
 
         public EditAnimalDescriptor() {}
 
@@ -125,13 +130,14 @@ public class EditAnimalCommand extends EditCommand {
             setName(toCopy.name);
             setDescription(toCopy.description);
             setLocation(toCopy.location);
+            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, description, location);
+            return CollectionUtil.isAnyNonNull(name, description, location, tags);
         }
 
         public void setName(AnimalName name) {
@@ -158,6 +164,23 @@ public class EditAnimalCommand extends EditCommand {
             return Optional.ofNullable(location);
         }
 
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<Tag>> getTags() {
+            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -170,18 +193,22 @@ public class EditAnimalCommand extends EditCommand {
             }
 
             EditAnimalDescriptor otherEditAnimalDescriptor = (EditAnimalDescriptor) other;
-            return Objects.equals(name, otherEditAnimalDescriptor.name)
-                    && Objects.equals(description, otherEditAnimalDescriptor.description)
-                    && Objects.equals(location, otherEditAnimalDescriptor.location);
+            return getName().equals(otherEditAnimalDescriptor.getName())
+                    && getDescription().equals(otherEditAnimalDescriptor.getDescription())
+                    && getLocation().equals(otherEditAnimalDescriptor.getLocation())
+                    && getTags().equals(otherEditAnimalDescriptor.getTags());
         }
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("description", description)
-                    .add("location", location)
-                    .toString();
+            StringBuilder sb = new StringBuilder();
+            sb.append(getClass().getCanonicalName())
+                    .append("{name=").append(getName().orElse(null))
+                    .append(", description=").append(getDescription().orElse(null))
+                    .append(", location=").append(getLocation().orElse(null))
+                    .append(", tags=").append(getTags().orElse(null))
+                    .append("}");
+            return sb.toString();
         }
     }
 }
