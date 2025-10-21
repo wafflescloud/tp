@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Stack;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -25,6 +26,9 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Animal> filteredAnimals;
 
+    private final Stack<State> undoStack;
+    private final Stack<State> redoStack;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -33,15 +37,17 @@ public class ModelManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredAnimals = new FilteredList<>(this.addressBook.getAnimalList());
+        this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredAnimals = new FilteredList<>(this.addressBook.getAnimalList());
+        this.undoStack = new Stack<>();
+        this.redoStack = new Stack<>();
     }
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+    // =========== UserPrefs ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -76,7 +82,7 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    // =========== AddressBook ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -88,7 +94,39 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
-    //=========== Person Operations =========================================================================
+    // =========== State ===============================================================================
+
+    @Override
+    public void saveState() {
+        undoStack.push(new State(addressBook));
+        redoStack.clear();
+    }
+
+    @Override
+    public boolean canUndo() {
+        return !undoStack.isEmpty();
+    }
+
+    @Override
+    public boolean canRedo() {
+        return !redoStack.isEmpty();
+    }
+
+    @Override
+    public void undo() {
+        assert canUndo() : "Implementation error: undo() called when canUndo() is false";
+        redoStack.push(new State(addressBook));
+        addressBook.resetData(undoStack.pop().getAddressBook());
+    }
+
+    @Override
+    public void redo() {
+        assert canRedo() : "Implementation error: redo() called when canRedo() is false";
+        undoStack.push(new State(addressBook));
+        addressBook.resetData(redoStack.pop().getAddressBook());
+    }
+
+    // =========== Person Operations =========================================================================
 
     @Override
     public boolean hasPerson(Person person) {
@@ -98,22 +136,25 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
+        saveState();
         addressBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
+        saveState();
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
+        saveState();
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
     }
 
-    //=========== Animal Operations =========================================================================
+    // =========== Animal Operations =========================================================================
 
     @Override
     public boolean hasAnimal(Animal animal) {
@@ -123,22 +164,25 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteAnimal(Animal target) {
+        saveState();
         addressBook.removeAnimal(target);
     }
 
     @Override
     public void addAnimal(Animal animal) {
+        saveState();
         addressBook.addAnimal(animal);
         updateFilteredAnimalList(PREDICATE_SHOW_ALL_ANIMALS);
     }
 
     @Override
     public void setAnimal(Animal target, Animal editedAnimal) {
+        saveState();
         requireAllNonNull(target, editedAnimal);
         addressBook.setAnimal(target, editedAnimal);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    // =========== Filtered Person List Accessors =============================================================
 
     @Override
     public ObservableList<Person> getFilteredPersonList() {
@@ -151,7 +195,7 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    //=========== Filtered Animal List Accessors =============================================================
+    // =========== Filtered Animal List Accessors =============================================================
 
     @Override
     public ObservableList<Animal> getFilteredAnimalList() {
@@ -164,7 +208,7 @@ public class ModelManager implements Model {
         filteredAnimals.setPredicate(predicate);
     }
 
-    //=========== Utility Methods ==========================================================================
+    // =========== Utility Methods ==========================================================================
 
     @Override
     public boolean equals(Object other) {

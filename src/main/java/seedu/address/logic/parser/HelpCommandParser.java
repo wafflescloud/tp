@@ -24,14 +24,11 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         String trimmedArgs = args.trim();
 
         if (trimmedArgs.isEmpty()) {
-            // No arguments provided, show general help window
             return new HelpCommand();
         } else {
-            // Validate that the command exists
             if (HelpWindow.getDescriptionForCommand(trimmedArgs) == null) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND, trimmedArgs));
             }
-            // Command name provided and is valid, show specific command help
             return new HelpCommand(trimmedArgs);
         }
     }
