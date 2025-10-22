@@ -1,10 +1,14 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.animal.Animal;
+
 
 /**
  * An UI component that displays information of a {@code Animal}.
@@ -33,6 +37,8 @@ public class AnimalCard extends UiPart<Region> {
     private Label description;
     @FXML
     private Label animalLocation;
+    @FXML
+    private FlowPane tags;
 
     /**
      * Creates a {@code AnimalCode} with the given {@code Animal} and name to display.
@@ -44,5 +50,8 @@ public class AnimalCard extends UiPart<Region> {
         name.setText(animal.getName().fullName);
         description.setText(animal.getDescription().value);
         animalLocation.setText(animal.getLocation().value);
+        animal.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

@@ -36,7 +36,9 @@ public abstract class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_LOCATION + "LOCATION] "
+            + "[" + PREFIX_TAG + "TAG]... "
             + "Example: " + COMMAND_WORD + " animal Kitty "
             + PREFIX_DESCRIPTION + "Grey Cat "
-            + PREFIX_LOCATION + "UTOWN";
+            + PREFIX_LOCATION + "UTOWN"
+            + PREFIX_TAG + "Alex";
 }
