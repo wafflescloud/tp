@@ -275,12 +275,12 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 Action                | Format, Examples
 ----------------------|------------------------------------------------------------------------------------------------
-**Add Person**        | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br>e.g.,`add person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Person**        | `add person n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`<br>e.g.,`add person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Add Animal**        | `add animal n/NAME d/DESCRIPTION l/LOCATION​` <br> e.g., `add animaln/Fluffy d/White cat l/Ang Mo Kio`
 **Clear**             | `clear`
 **Delete Person**     | `delete person n/NAME`<br> e.g., `delete person n/John Doe`
 **Delete Animal**     | `delete animal n/NAME`<br> e.g., `delete animal n/Fluffy`
-**Edit Person**       | `edit person NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit person John Doe n/James Lee e/jameslee@example.com`
+**Edit Person**       | `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… [f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]…​`<br> e.g.,`edit person John Doe n/James Lee e/jameslee@example.com`
 **Edit Animal**       | `edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION]`<br> e.g., `edit animal Fluffy l/Void Deck`
 **Exit**              | `exit`
 **Find Person**       | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
