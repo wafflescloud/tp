@@ -16,7 +16,7 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Animal> PREDICATE_SHOW_ALL_ANIMALS = unused -> true;
 
-    //=========== UserPrefs ==================================================================================
+    // =========== UserPrefs ==================================================================================
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -48,7 +48,7 @@ public interface Model {
      */
     void setAddressBookFilePath(Path addressBookFilePath);
 
-    //=========== AddressBook ===============================================================================
+    // =========== AddressBook ===============================================================================
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
@@ -58,7 +58,34 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
-    //=========== Person Operations =========================================================================
+    // =========== State ===============================================================================
+
+    /**
+     *  Returns true if the model has previous address book states to restore.
+     */
+    boolean canUndo();
+
+    /**
+     * Returns true if the model has undone address book states to restore.
+     */
+    boolean canRedo();
+
+    /**
+     * Restores the model's address book to its previous state.
+     */
+    void undo();
+
+    /**
+     * Restores the model's address book to its previously undone state.
+     */
+    void redo();
+
+    /**
+     * Saves the current address book state for undo/redo.
+     */
+    void saveState();
+
+    // =========== Person Operations =========================================================================
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -84,7 +111,7 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    //=========== Filtered Person List Accessors ============================================================
+    // =========== Filtered Person List Accessors ============================================================
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
@@ -95,7 +122,7 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    //=========== Animal Operations ========================================================================
+    // =========== Animal Operations ========================================================================
 
     /**
      * Returns true if an animal with the same identity as {@code animal} exists in the address book.
@@ -121,7 +148,7 @@ public interface Model {
      */
     void setAnimal(Animal target, Animal editedAnimal);
 
-    //=========== Filtered Animal List Accessors ===========================================================
+    // =========== Filtered Animal List Accessors ===========================================================
 
     /** Returns an unmodifiable view of the filtered animal list */
     ObservableList<Animal> getFilteredAnimalList();
