@@ -32,8 +32,10 @@ public abstract class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_LOCATION + "LOCATION\n"
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " animal "
             + PREFIX_NAME + "Max "
             + PREFIX_DESCRIPTION + "Golden Retriever, friendly "
-            + PREFIX_LOCATION + "Block A, Kennel 1";
+            + PREFIX_LOCATION + "Block A, Kennel 1"
+            + PREFIX_TAG + "Alex";
 }
