@@ -27,6 +27,15 @@ public class PersonListPanel extends UiPart<Region> {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+
+        personListView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                Person selectedPerson = personListView.getSelectionModel().getSelectedItem();
+                if (selectedPerson != null) {
+                    ProfileWindow.openProfile(selectedPerson);
+                }
+            }
+        });
     }
 
     /**
