@@ -4,7 +4,7 @@ skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 skinparam ClassBackgroundColor #FFFFAA
 
-title After command "add n/David"
+title After command "delete person David"
 
 package States <<rectangle>> {
     class State1 as "<u>ab0:AddressBook</u>"
@@ -18,4 +18,4 @@ State2 -[hidden]right-> State3
 class Pointer as "Current State" #FFFFFF
 
 Pointer -up-> State3
-@end
+@enduml
