@@ -13,11 +13,11 @@
     -fx-font-weight: bold;
 }
 
-#phone, #email {
+#phone, #email, #location, #description {
     -fx-font-size: 16px;
 }
 
-#copyPhoneButton, #copyEmailButton {
+#copy, #copyEmail {
     -fx-background-color: transparent;
     -fx-cursor: hand;
     -fx-padding: 3 10 3 10;
@@ -26,7 +26,7 @@
     -fx-border-color: transparent;
 }
 
-#copyPhoneButton ImageView, #copyEmailButton ImageView {
+#copy ImageView, #copyEmail ImageView {
     -fx-effect: none;
     -fx-opacity: 1;
     -fx-scale-x: 1;
@@ -34,26 +34,24 @@
     -fx-transition: all 0.2s ease;
 }
 
-#copyPhoneButton:hover, #copyEmailButton:hover {
+#copy:hover, #copyEmail:hover {
     -fx-background-color: #faf9ed;
     -fx-border-color: #a66117;
     -fx-border-width: 1;
 }
 
-#copyPhoneButton:hover ImageView, #copyEmailButton:hover ImageView {
-    -fx-effect: brightness(0.7);
+#copy:hover ImageView, #copyEmail:hover ImageView {
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
     -fx-opacity: 0.85;
 }
 
-#copyPhoneButton:pressed, #copyEmailButton:pressed {
+#copy:pressed, #copyEmail:pressed {
     -fx-background-color: #7b4a0f;
     -fx-border-color: #5b350b;
 }
 
-#copyPhoneButton:pressed ImageView, #copyEmailButton:pressed ImageView {
-    -fx-effect: brightness(1.2);
+#copy:pressed ImageView, #copyEmail:pressed ImageView {
     -fx-scale-x: 0.95;
     -fx-scale-y: 0.95;
     -fx-opacity: 1;
@@ -68,9 +66,16 @@
     -fx-font-size: 11px;
 }
 
-/* Feeding box styling */
-#feedingBox {
-    -fx-fill: #f0c987;
-    -fx-arc-width: 10;
-    -fx-arc-height: 10;
+#feedingSessionScrollPane {
+    -fx-background-color: #f9f3ec;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-fit-to-width: true; /* Custom property — does not always work alone */
+    -fx-max-width: Infinity;
+    -fx-pref-width: 100%;
+}
+
+#feedingSessionContainer {
+    -fx-background-color: #f9f3ec;
+    -fx-padding: 10 0
 }

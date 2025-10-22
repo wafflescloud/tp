@@ -32,7 +32,7 @@ public class PersonListPanel extends UiPart<Region> {
             if (event.getClickCount() == 2) {
                 Person selectedPerson = personListView.getSelectionModel().getSelectedItem();
                 if (selectedPerson != null) {
-                    ProfileWindow.openProfile(selectedPerson);
+                    PersonProfileWindow.openProfile(selectedPerson);
                 }
             }
         });

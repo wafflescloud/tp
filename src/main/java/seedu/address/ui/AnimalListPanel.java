@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.animal.Animal;
+import seedu.address.model.person.Person;
 
 /**
  * Panel containing the list of animals.
@@ -27,6 +28,14 @@ public class AnimalListPanel extends UiPart<Region> {
         super(FXML);
         animalListView.setItems(personList);
         animalListView.setCellFactory(listView -> new AnimalListViewCell());
+        animalListView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                Animal selectedAnimal = animalListView.getSelectionModel().getSelectedItem();
+                if (selectedAnimal != null) {
+                    AnimalProfileWindow.openProfile(selectedAnimal);
+                }
+            }
+        });
     }
 
     /**

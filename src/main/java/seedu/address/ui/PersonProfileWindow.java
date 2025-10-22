@@ -18,9 +18,9 @@ import seedu.address.model.person.Person;
  * This window is displayed as a pop-up window containing the person's name, phone, email,
  * tags, and their most recent feeding session (if any).
  */
-public class ProfileWindow extends UiPart<Stage> {
+public class PersonProfileWindow extends UiPart<Stage> {
 
-    private static final String FXML = "ProfileWindow.fxml";
+    private static final String FXML = "PersonProfileWindow.fxml";
 
     /** The person whose profile is being displayed. */
     private final Person person;
@@ -39,11 +39,11 @@ public class ProfileWindow extends UiPart<Stage> {
     @FXML private Button copyPhoneButton;
 
     /**
-     * Creates a new ProfileWindow instance for the specified {@code person}.
+     * Creates a new PersonProfileWindow instance for the specified {@code person}.
      *
      * @param person The person whose profile is to be shown.
      */
-    public ProfileWindow(Person person) {
+    public PersonProfileWindow(Person person) {
         super(FXML, new Stage());
         this.person = person;
 
@@ -80,7 +80,7 @@ public class ProfileWindow extends UiPart<Stage> {
      * @param person The person to display in the profile window.
      */
     public static void openProfile(Person person) {
-        ProfileWindow window = new ProfileWindow(person);
+        PersonProfileWindow window = new PersonProfileWindow(person);
         window.show();
     }
 
