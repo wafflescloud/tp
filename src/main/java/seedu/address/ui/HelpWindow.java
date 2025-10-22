@@ -81,38 +81,56 @@ public class HelpWindow extends UiPart<Stage> {
         COMMAND_LIST.put("add", addDescription);
 
         // delete command with detailed description
-        ArrayList<String> addDeleteDescription = new ArrayList<>();
-        addDeleteDescription.add("Deletes an existing record from the system.");
-        addDeleteDescription.add("Command format: delete person n/NAME OR delete animal n/NAME");
-        addDeleteDescription.add("Example: delete person n/John Tan");
-        addDeleteDescription.add("Example: delete animal n/Fluffy");
-        COMMAND_LIST.put("delete", addDeleteDescription);
+        ArrayList<String> deleteDescription = new ArrayList<>();
+        deleteDescription.add("Deletes an existing record from the system.");
+        deleteDescription.add("Command format: delete person n/NAME OR delete animal n/NAME");
+        deleteDescription.add("Example: delete person n/John Tan");
+        deleteDescription.add("Example: delete animal n/Fluffy");
+        COMMAND_LIST.put("delete", deleteDescription);
 
         // edit command with detailed description
-        ArrayList<String> addEditDescription = new ArrayList<>();
-        addEditDescription.add("Edits an existing record from the system.");
-        addEditDescription.add("Command format: edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/tag...] "
+        ArrayList<String> editDescription = new ArrayList<>();
+        editDescription.add("Edits an existing record from the system.");
+        editDescription.add("Command format: edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/tag...] "
                               + "[f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]"
                               + " OR edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION]");
-        addEditDescription.add("Example: edit person John Doe p/98765432 a/321, Jane Street");
-        addEditDescription.add("Example: edit animal Bob n/Bobby");
-        COMMAND_LIST.put("edit", addEditDescription);
+        editDescription.add("Example: edit person John Doe p/98765432 a/321, Jane Street");
+        editDescription.add("Example: edit animal Bob n/Bobby");
+        COMMAND_LIST.put("edit", editDescription);
 
         // find command with detailed description
-        ArrayList<String> addFindDescription = new ArrayList<>();
-        addFindDescription.add("Searches a record from the system.");
-        addFindDescription.add("Command format: find person NAME OR find animal NAME");
-        addFindDescription.add("Example: find person Sam");
-        addFindDescription.add("Example: find animal Bella");
-        COMMAND_LIST.put("find", addFindDescription);
+        ArrayList<String> findDescription = new ArrayList<>();
+        findDescription.add("Searches a record from the system.");
+        findDescription.add("Command format: find person NAME OR find animal NAME");
+        findDescription.add("Example: find person Sam");
+        findDescription.add("Example: find animal Bella");
+        COMMAND_LIST.put("find", findDescription);
 
         // help command with detailed description
-        ArrayList<String> addHelpDescription = new ArrayList<>();
-        addHelpDescription.add("Opens the help window, or shows detailed help for a specified command.");
-        addHelpDescription.add("Command format: help [COMMAND]");
-        addHelpDescription.add("Example: help");
-        addHelpDescription.add("Example: help add person");
-        COMMAND_LIST.put("help", addHelpDescription);
+        ArrayList<String> helpDescription = new ArrayList<>();
+        helpDescription.add("Opens the help window, or shows detailed help for a specified command.");
+        helpDescription.add("Command format: help [COMMAND]");
+        helpDescription.add("Example: help");
+        helpDescription.add("Example: help add person");
+        COMMAND_LIST.put("help", helpDescription);
+
+        // list command with detailed description
+        ArrayList<String> listDescription = new ArrayList<>();
+        listDescription.add("Lists all persons and animals in the system.");
+        listDescription.add("Command format: list");
+        COMMAND_LIST.put("list", listDescription);
+
+        // clear command with detailed description
+        ArrayList<String> clearDescription = new ArrayList<>();
+        clearDescription.add("Clears all stored person and animal records.");
+        clearDescription.add("Command format: clear");
+        COMMAND_LIST.put("clear", clearDescription);
+        
+        // exit command with detailed description
+        ArrayList<String> exitDescription = new ArrayList<>();
+        exitDescription.add("Exits the application.");
+        exitDescription.add("Command format: exit");
+        COMMAND_LIST.put("exit", exitDescription);
     }
 
     /**
