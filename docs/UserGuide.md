@@ -9,6 +9,32 @@
 Furiends is a **desktop app tailored towards animal lovers, specifically individuals who are tasked to feed stray animals.** It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Furiends can help you manage people and animals, as well as allocate people to certain animals for scheduled feeding, faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
+
+## Table of Contents
+
+- [Quick start](#quick-start)
+- [Overview of GUI](#overview-of-gui)
+- [Features](#features)
+  - [Viewing help : `help`](#viewing-help--help)
+  - [Adding a person: `add person`](#adding-a-person-add-person)
+  - [Adding an animal: `add-animal`](#adding-an-animal-add-animal)
+  - [Listing all persons : `list`](#listing-all-persons--list)
+  - [Editing a person : `edit person`](#editing-a-person--edit-person)
+  - [Editing an animal : `edit animal`](#editing-an-animal--edit-animal)
+  - [Locating persons by name: `find person`](#locating-persons-by-name-find-person)
+  - [Locating animals by name: `find animal`](#locating-animals-by-name-find-animal)
+  - [Deleting a person : `delete person`](#deleting-a-person--delete-person)
+  - [Deleting an animal : `delete animal`](#deleting-an-animal--delete-animal)
+  - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+  - [Undoing the last change: `undo`](#undoing-the-last-change-undo)
+  - [Redoing an undone change: `redo`](#redoing-an-undone-change-redo)
+  - [Exiting the program : `exit`](#exiting-the-program--exit)
+  - [Saving the data](#saving-the-data)
+  - [Editing the data file](#editing-the-data-file)
+- [FAQ](#faq)
+- [Known issues](#known-issues)
+- [Command summary](#command-summary)
+
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -22,7 +48,7 @@ Furiends is a **desktop app tailored towards animal lovers, specifically individ
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Furiends application.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar furiends.jar` command 
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar furiends.jar` command
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -32,7 +58,7 @@ Furiends is a **desktop app tailored towards animal lovers, specifically individ
    Some simple commands you can try:
 
    * `help` : Shows the help page with the full list of commands.
-   
+
    * `list` : Lists all contacts.
 
    * `clear` : Deletes all contacts.
@@ -65,16 +91,22 @@ The GUI is made up of the following components:
   e.g. in `add person n/NAME...`, `NAME` is a parameter which can be used as `add person n/John Doe...`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME ... [t/TAG]` can be used as `n/John Doe ... t/friend` (friend tag added) 
+  e.g `n/NAME ... [t/TAG]` can be used as `n/John Doe ... t/friend` (friend tag added)
   or as `n/John Doe ... `(no tag provided).
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…` after them can be used multiple times, including zero times.
+  For example, `[t/TAG]…` can be omitted, used once as `t/friend`, or used multiple times as `t/friend t/family`.
+
+  Similarly, `[f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]…` allows you to assign any number of feeding sessions to a person.
+  For example:
+  * `f/Max dt/2025-01-01 10:00`
+  * `f/Max dt/2025-01-01 10:00 f/Luna dt/2025-01-02 09:30`
+  * (or you can omit feeding sessions entirely)
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters 
+* Extraneous parameters for commands that do not take in parameters
   (such as `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 
@@ -92,15 +124,17 @@ The general help window (in the image below) can be opened by entering `help` in
 ![help message](images/helpMessage.png)
 
 Each command is clickable to open another window, which shows additional details regarding the command's usage. <br>
+
 This window can also be opened by entering `help <command>` in the command box. <br>
+
 In the example below, when clicking the `help` command (as shown in the image above), a new window will pop up to show
-the details of the `help` command and its usage. 
+the details of the `help` command and its usage.
 (The below window can also be opened by entering `help help` in the command box.)
 
 ![help window](images/helpWindowExample.png)
 
 Clicking on the command format template will copy the command format to the command box in the main application window
-and close this window. For example, clicking on the command format template `help <command name>` will copy 
+and close this window. For example, clicking on the command format template `help <command name>` will copy
 the corresponding command format to the command box as shown below.
 
 ![automatic copying](images/helpAutomaticInput.png)
@@ -111,10 +145,7 @@ Adds a person to the address book.
 
 Format: `add person n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 
-<box type="tip" seamless>
-
-**Tip:** A person can have any number of tags (including 0)
-</box>
+* You may assign any number of tags (including none) to a person.
 
 Examples:
 * `add person n/John Doe p/98765432 e/johnd@example.com`
@@ -151,9 +182,9 @@ Format: `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… [f/ANIMAL_NAME
 The `ANIMAL_NAME` is the name of the animal to be assigned, and `YYYY-MM-DD HH:MM` is the date and time of feeding.
 
 Examples:
-*  `edit person John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person 
+*  `edit person John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person
     with name `John Doe` to be `91234567` and `johndoe@example.com` respectively.
-*  `edit person Betty Crower n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and 
+*  `edit person Betty Crower n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and
     clears all existing tags.
 *  `edit person Alice f/Fluffy dt/2024-07-01 10:00` Assigns the animal `Fluffy` to the person `Alice` for feeding on `1st July 2024, 10am`.
 
@@ -186,6 +217,7 @@ Format: `find person KEYWORD [MORE_KEYWORDS]...`
 
 Examples:
 * `find person alex david` returns `Alex Yeoh`, `David Li`. Note that the 'animal' portion is still shown.<br>
+
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Locating animals by name: `find animal`
@@ -203,6 +235,7 @@ Format: `find animal KEYWORD [MORE_KEYWORDS]...`
 
 Examples:
 * `find animal max luna` returns `Max`, `Luna`. Note that the 'person' portion is still shown.<br>
+
   ![result for 'find max luna'](images/findMaxLunaResult.png)
 
 ### Deleting a person : `delete person`
@@ -234,6 +267,30 @@ Examples:
 Clears all entries from the address book.
 
 Format: `clear`
+
+### Undoing the last change: `undo`
+
+Reverts the address book to its previous state before the last modifying command.
+
+Format: `undo`
+
+* Only works for commands that change the address book (e.g., add, edit, delete).
+* If there are no changes to undo, an error message will be shown.
+
+Example:
+* `undo` Reverts the last add, edit, or delete command.
+
+### Redoing an undone change: `redo`
+
+Restores the address book to the state before the last undo command.
+
+Format: `redo`
+
+* Only works immediately after an `undo` command.
+* If there are no changes to redo, an error message will be shown.
+
+Example:
+* `redo` Re-applies the last change that was undone.
 
 ### Exiting the program : `exit`
 
@@ -283,6 +340,8 @@ Action                | Format, Examples
 **Delete Animal**     | `delete animal n/NAME`<br> e.g., `delete animal n/Fluffy`
 **Edit Person**       | `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… [f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]…​`<br> e.g.,`edit person John Doe n/James Lee e/jameslee@example.com`
 **Edit Animal**       | `edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION] [t/TAG]…`<br> e.g., `edit animal Fluffy l/Void Deck`
+**Undo**              | `undo`
+**Redo**              | `redo`
 **Exit**              | `exit`
 **Find Person**       | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find Animal**       | `find animal KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Fluffy Max`
