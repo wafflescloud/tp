@@ -179,7 +179,7 @@ Format: `find person KEYWORD [MORE_KEYWORDS]...`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Substrings can be searched. e.g. `an` will match `Hans`, `Andy`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
@@ -196,7 +196,7 @@ Format: `find animal KEYWORD [MORE_KEYWORDS]...`
 * The search is case-insensitive. e.g `fluffy` will match `Fluffy`
 * The order of the keywords does not matter. e.g. `Cutie Pie` will match `Pie Cutie`
 * Only the name is searched.
-* Only full words will be matched e.g. `Fluff` will not match `Fluffy`
+* Substrings can be matched e.g. `Fluff` will match `Fluffy` and `Kerfluff`
 * Animals matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Cutie` will return `Cutie Pie`, `Cutie Patootie` (if both animals are stored in the application)
 
