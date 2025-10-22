@@ -125,7 +125,7 @@ public class HelpWindow extends UiPart<Stage> {
         clearDescription.add("Clears all stored person and animal records.");
         clearDescription.add("Command format: clear");
         COMMAND_LIST.put("clear", clearDescription);
-        
+
         // exit command with detailed description
         ArrayList<String> exitDescription = new ArrayList<>();
         exitDescription.add("Exits the application.");
