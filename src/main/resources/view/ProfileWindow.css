@@ -1,0 +1,81 @@
+#profileContainer {
+    -fx-background-color: #f9f3ec;
+}
+
+.label {
+    -fx-text-fill: black;
+    -fx-font-size: 13px;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+#name {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+#phone, #email, #location, #description {
+    -fx-font-size: 16px;
+}
+
+#copy, #copyEmail {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-padding: 3 10 3 10;
+    -fx-font-size: 12px;
+    -fx-border-radius: 3;
+    -fx-border-color: transparent;
+}
+
+#copy ImageView, #copyEmail ImageView {
+    -fx-effect: none;
+    -fx-opacity: 1;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-transition: all 0.2s ease;
+}
+
+#copy:hover, #copyEmail:hover {
+    -fx-background-color: #faf9ed;
+    -fx-border-color: #a66117;
+    -fx-border-width: 1;
+}
+
+#copy:hover ImageView, #copyEmail:hover ImageView {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-opacity: 0.85;
+}
+
+#copy:pressed, #copyEmail:pressed {
+    -fx-background-color: #7b4a0f;
+    -fx-border-color: #5b350b;
+}
+
+#copy:pressed ImageView, #copyEmail:pressed ImageView {
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+    -fx-opacity: 1;
+}
+
+/* Tag labels */
+#tags .label {
+    -fx-background-color: derive(#bf7a0b, 50%);
+    -fx-text-fill: black;
+    -fx-padding: 3 6 3 6;
+    -fx-background-radius: 4;
+    -fx-font-size: 11px;
+}
+
+#feedingSessionScrollPane {
+    -fx-background-color: #f9f3ec;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-fit-to-width: true; /* Custom property — does not always work alone */
+    -fx-max-width: Infinity;
+    -fx-pref-width: 100%;
+}
+
+#feedingSessionContainer {
+    -fx-background-color: #f9f3ec;
+    -fx-padding: 10 0
+}

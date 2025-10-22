@@ -27,6 +27,14 @@ public class AnimalListPanel extends UiPart<Region> {
         super(FXML);
         animalListView.setItems(personList);
         animalListView.setCellFactory(listView -> new AnimalListViewCell());
+        animalListView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                Animal selectedAnimal = animalListView.getSelectionModel().getSelectedItem();
+                if (selectedAnimal != null) {
+                    AnimalProfileWindow.openProfile(selectedAnimal);
+                }
+            }
+        });
     }
 
     /**

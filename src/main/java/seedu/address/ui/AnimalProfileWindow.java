@@ -1,0 +1,70 @@
+package seedu.address.ui;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.stage.Stage;
+import seedu.address.model.animal.Animal;
+
+/**
+ * A window that shows detailed information of an {@link Animal}.
+ * This window is displayed as a pop-up window containing the animal's name,
+ * description, and location.
+ */
+public class AnimalProfileWindow extends UiPart<Stage> {
+
+    private static final String FXML = "AnimalProfileWindow.fxml";
+
+    private final Animal animal;
+
+    @FXML
+    private Label name;
+
+    @FXML
+    private Label description;
+
+    @FXML
+    private Label locationLabel;
+
+    /**
+     * Creates a new AnimalProfileWindow for the specified {@code animal}.
+     */
+    public AnimalProfileWindow(Animal animal) {
+        super(FXML, new Stage());
+        this.animal = animal;
+
+        name.setText(animal.getName().fullName);
+        description.setText(animal.getDescription().value);
+        locationLabel.setText(animal.getLocation().value);
+    }
+
+    /**
+     * Shows the animal profile window and centers it on screen.
+     */
+    public void show() {
+        getRoot().show();
+        getRoot().centerOnScreen();
+    }
+
+    /**
+     * Opens an animal profile window for the specified {@code animal}.
+     */
+    public static void openProfile(Animal animal) {
+        AnimalProfileWindow window = new AnimalProfileWindow(animal);
+        window.show();
+    }
+
+    /**
+     * Copies the animal's location to the system clipboard.
+     * This method is triggered by clicking the location copy button
+     * in the animal profile window.
+     */
+    @FXML
+    private void copyLocation() {
+        ClipboardContent content = new ClipboardContent();
+        content.putString(animal.getLocation().value);
+        Clipboard.getSystemClipboard().setContent(content);
+    }
+
+}
