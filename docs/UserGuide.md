@@ -343,7 +343,7 @@ Action                | Format, Examples
 **Undo**              | `undo`
 **Redo**              | `redo`
 **Exit**              | `exit`
-**Find Person**       | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Find Animal**       | `find animal KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Fluffy Max`
+**Find Person**       | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James jam Jake`
+**Find Animal**       | `find animal KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Fluffy fluff Max`
 **List**              | `list`
 **Help**              | `help [COMMAND]`<br> e.g. `help` <br> e.g. `help add person`
