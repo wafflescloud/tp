@@ -131,7 +131,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons and animals in the address book.
 
 Format: `list`
 
@@ -139,7 +139,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… [f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]…​`
 
 * Edits the person with the specified `NAME`. The name is case-sensitive.
 * At least one of the optional fields must be provided.
@@ -147,12 +147,15 @@ Format: `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+* To assign an animal to a person for feeding, include the `f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM` field. <br>
+The `ANIMAL_NAME` is the name of the animal to be assigned, and `YYYY-MM-DD HH:MM` is the date and time of feeding.
 
 Examples:
 *  `edit person John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person 
     with name `John Doe` to be `91234567` and `johndoe@example.com` respectively.
 *  `edit person Betty Crower n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and 
     clears all existing tags.
+*  `edit person Alice f/Fluffy dt/2024-07-01 10:00` Assigns the animal `Fluffy` to the person `Alice` for feeding on `1st July 2024, 10am`.
 
 ### Editing an animal : `edit animal`
 
