@@ -26,6 +26,7 @@ Furiends is a **desktop app tailored towards animal lovers, specifically individ
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+   For more details on the GUI, refer to the [Overview of GUI](#overview-of-gui) section.
 
 5. Type the command in the command box (displaying "Enter command here...") and press Enter to execute it.<br>
    Some simple commands you can try:
@@ -39,6 +40,18 @@ Furiends is a **desktop app tailored towards animal lovers, specifically individ
    * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Overview of GUI
+![Ui](images/Ui_explanation.png)
+
+The GUI is made up of the following components:
+1. **Options Panel**: Contains menu bars to exit (File > Exit) and open the help panel (Help > Help).
+2. **Command Box**: Commands are entered in this text box. Press the Enter key to execute the command.
+3. **Feedback Box**: The app displays the result of the executed command in this box.
+4. **Person View**: Displays the list of persons stored in the address book.
+5. **Animal View**: Displays the list of animals stored in the address book.
 
 --------------------------------------------------------------------------------------------------------------------
 
