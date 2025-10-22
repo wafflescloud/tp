@@ -22,21 +22,16 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         String trimmedArgs = args.trim();
 
         if (trimmedArgs.isEmpty()) {
-            // No arguments provided, show general help window
             return new HelpCommand();
         } else {
             try {
                 String commandName = validateAndExtractCommandName(trimmedArgs);
 
-                // Validate that the base command exists
                 if (HelpWindow.getDescriptionForCommand(commandName) == null) {
-                    // Command doesn't exist, show general help with unrecognized message
                     return new HelpCommand(null, true);
                 }
-                // Command name provided and is valid, show specific command help
                 return new HelpCommand(commandName);
             } catch (ParseException e) {
-                // Invalid command combination, show general help with unrecognized message
                 return new HelpCommand(null, true);
             }
         }
@@ -54,32 +49,25 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         String[] argParts = args.split("\\s+");
         String baseCommand = argParts[0];
 
-        // For single word commands, return as is
         if (argParts.length == 1) {
             return baseCommand;
         }
 
-        // For multi-word commands, validate specific combinations
         if (argParts.length == 2) {
             switch (baseCommand) {
-                case "add":
-                case "delete":
-                case "edit":
-                case "find":
-                    if (argParts[1].equals("person") || argParts[1].equals("animal")) {
-                        return baseCommand;
-                    }
-                    break;
-                default:
-                    // Base command not recognized for multi-word combinations
-                    break;
+            case "add":
+            case "delete":
+            case "edit":
+            case "find":
+                if (argParts[1].equals("person") || argParts[1].equals("animal")) {
+                    return baseCommand;
+                }
+                break;
+            default:
+                break;
             }
-
-            // If we reach here, it's an invalid combination
             throw new ParseException("Invalid command combination");
         }
-
-        // For commands with more than 2 words, reject them
         throw new ParseException("Invalid command combination");
     }
 }
