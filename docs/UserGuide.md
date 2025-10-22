@@ -22,7 +22,7 @@ Furiends is a **desktop app for managing contacts, optimized for use via a Comma
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Furiends application.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar furiends.jar` command 
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar furiends.jar` command
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -31,7 +31,7 @@ Furiends is a **desktop app for managing contacts, optimized for use via a Comma
    Some simple commands you can try:
 
    * `help` : Shows the help page with the full list of commands.
-   
+
    * `list` : Lists all contacts.
 
    * `clear` : Deletes all contacts.
@@ -52,7 +52,7 @@ Furiends is a **desktop app for managing contacts, optimized for use via a Comma
   e.g. in `add person n/NAME...`, `NAME` is a parameter which can be used as `add person n/John Doe...`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME ... [t/TAG]` can be used as `n/John Doe ... t/friend` (friend tag added) 
+  e.g `n/NAME ... [t/TAG]` can be used as `n/John Doe ... t/friend` (friend tag added)
   or as `n/John Doe ... `(no tag provided).
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
@@ -61,7 +61,7 @@ Furiends is a **desktop app for managing contacts, optimized for use via a Comma
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters 
+* Extraneous parameters for commands that do not take in parameters
   (such as `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 
@@ -81,13 +81,13 @@ The general help window (in the image below) can be opened by entering `help` in
 Each command is clickable to open another window, which shows additional details regarding the command's usage. <br>
 This window can also be opened by entering `help <command>` in the command box. <br>
 In the example below, when clicking the `help` command (as shown in the image above), a new window will pop up to show
-the details of the `help` command and its usage. 
+the details of the `help` command and its usage.
 (The below window can also be opened by entering `help help` in the command box.)
 
 ![help window](images/helpWindowExample.png)
 
 Clicking on the command format template will copy the command format to the command box in the main application window
-and close this window. For example, clicking on the command format template `help <command name>` will copy 
+and close this window. For example, clicking on the command format template `help <command name>` will copy
 the corresponding command format to the command box as shown below.
 
 ![automatic copying](images/helpAutomaticInput.png)
@@ -137,9 +137,9 @@ Format: `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
     specifying any tags after it.
 
 Examples:
-*  `edit person John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person 
+*  `edit person John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person
     with name `John Doe` to be `91234567` and `johndoe@example.com` respectively.
-*  `edit person Betty Crower n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and 
+*  `edit person Betty Crower n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and
     clears all existing tags.
 
 ### Editing an animal : `edit animal`
@@ -164,13 +164,13 @@ Format: `find person KEYWORD [MORE_KEYWORDS]...`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Any substrings of the Person's name will be matched. e.g. `han` will match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find alex david` returns `Alex Yeoh`, `David Li`. Note that the 'animal' portion is still shown.<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find ale david` returns `Alex Yeoh`, `David Li`. Note that the 'animal' portion is still shown.<br>
+  ![result for 'find ale david'](images/findAlexDavidResult.png)
 
 ### Locating animals by name: `find animal`
 
@@ -181,13 +181,13 @@ Format: `find animal KEYWORD [MORE_KEYWORDS]...`
 * The search is case-insensitive. e.g `fluffy` will match `Fluffy`
 * The order of the keywords does not matter. e.g. `Cutie Pie` will match `Pie Cutie`
 * Only the name is searched.
-* Only full words will be matched e.g. `Fluff` will not match `Fluffy`
+* Any substrings of the Animal's name will be matched. e.g. `fluff` will match `Fluffy`
 * Animals matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Cutie` will return `Cutie Pie`, `Cutie Patootie` (if both animals are stored in the application)
 
 Examples:
-* `find max luna` returns `Max`, `Luna`. Note that the 'person' portion is still shown.<br>
-  ![result for 'find max luna'](images/findMaxLunaResult.png)
+* `find ma luna` returns `Max`, `Luna`. Note that the 'person' portion is still shown.<br>
+  ![result for 'find ma luna'](images/findMaxLunaResult.png)
 
 ### Deleting a person : `delete person`
 
@@ -268,7 +268,7 @@ Action                | Format, Examples
 **Edit Person**       | `edit person NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit person John Doe n/James Lee e/jameslee@example.com`
 **Edit Animal**       | `edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION]`<br> e.g., `edit animal Fluffy l/Void Deck`
 **Exit**              | `exit`
-**Find Person**       | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Find Animal**       | `find animal KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Fluffy Max`
+**Find Person**       | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James jam Jake`
+**Find Animal**       | `find animal KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Fluffy fluff Max`
 **List**              | `list`
 **Help**              | `help [COMMAND]`<br> e.g. `help` <br> e.g. `help add person`
