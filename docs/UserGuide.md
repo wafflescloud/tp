@@ -124,10 +124,10 @@ Examples:
 
 Adds an animal to the address book.
 
-Format: `add animal n/NAME d/DESCRIPTION l/LOCATION​`
+Format: `add animal n/NAME d/DESCRIPTION l/LOCATION [t/TAG]…​`
 
 Examples:
-* `add animal n/Fluffy d/White cat l/Ang Mo Kio`
+* `add animal n/Fluffy d/White cat l/Ang Mo Kio t/shy`
 
 ### Listing all persons : `list`
 
@@ -161,7 +161,7 @@ Examples:
 
 Edits an existing animal in the address book.
 
-Format: `edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION]​`
+Format: `edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION] [t/TAG]…​`
 
 * Edits the animal with the specified `NAME`. The name is case-sensitive.
 * At least one of the optional fields must be provided.
@@ -169,6 +169,7 @@ Format: `edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION]​`
 
 Examples:
 *  `edit animal Fluffy l/Void Deck` Edits the location of the animal with name `Fluffy` to be `Void Deck`.
+*  `edit animal Kitty n/Catty t/` Edits the name of the animal with name `Kitty` to be `Catty` and clears all existing tags.
 
 ### Locating persons by name: `find person`
 
@@ -276,12 +277,12 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 Action                | Format, Examples
 ----------------------|------------------------------------------------------------------------------------------------
 **Add Person**        | `add person n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`<br>e.g.,`add person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Add Animal**        | `add animal n/NAME d/DESCRIPTION l/LOCATION​` <br> e.g., `add animal n/Fluffy d/White cat l/Ang Mo Kio`
+**Add Animal**        | `add animal n/NAME d/DESCRIPTION l/LOCATION [t/TAG]…​` <br> e.g., `add animal n/Fluffy d/White cat l/Ang Mo Kio`
 **Clear**             | `clear`
 **Delete Person**     | `delete person n/NAME`<br> e.g., `delete person n/John Doe`
 **Delete Animal**     | `delete animal n/NAME`<br> e.g., `delete animal n/Fluffy`
 **Edit Person**       | `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… [f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]…​`<br> e.g.,`edit person John Doe n/James Lee e/jameslee@example.com`
-**Edit Animal**       | `edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION]`<br> e.g., `edit animal Fluffy l/Void Deck`
+**Edit Animal**       | `edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION] [t/TAG]…`<br> e.g., `edit animal Fluffy l/Void Deck`
 **Exit**              | `exit`
 **Find Person**       | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find Animal**       | `find animal KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Fluffy Max`
