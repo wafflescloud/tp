@@ -124,7 +124,7 @@ Examples:
 
 Adds an animal to the address book.
 
-Format: `add n/NAME d/DESCRIPTION l/LOCATION​`
+Format: `add animal n/NAME d/DESCRIPTION l/LOCATION​`
 
 Examples:
 * `add animal n/Fluffy d/White cat l/Ang Mo Kio`
@@ -184,7 +184,7 @@ Format: `find person KEYWORD [MORE_KEYWORDS]...`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find alex david` returns `Alex Yeoh`, `David Li`. Note that the 'animal' portion is still shown.<br>
+* `find person alex david` returns `Alex Yeoh`, `David Li`. Note that the 'animal' portion is still shown.<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Locating animals by name: `find animal`
@@ -201,7 +201,7 @@ Format: `find animal KEYWORD [MORE_KEYWORDS]...`
   e.g. `Cutie` will return `Cutie Pie`, `Cutie Patootie` (if both animals are stored in the application)
 
 Examples:
-* `find max luna` returns `Max`, `Luna`. Note that the 'person' portion is still shown.<br>
+* `find animal max luna` returns `Max`, `Luna`. Note that the 'person' portion is still shown.<br>
   ![result for 'find max luna'](images/findMaxLunaResult.png)
 
 ### Deleting a person : `delete person`
@@ -276,7 +276,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 Action                | Format, Examples
 ----------------------|------------------------------------------------------------------------------------------------
 **Add Person**        | `add person n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`<br>e.g.,`add person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Add Animal**        | `add animal n/NAME d/DESCRIPTION l/LOCATION​` <br> e.g., `add animaln/Fluffy d/White cat l/Ang Mo Kio`
+**Add Animal**        | `add animal n/NAME d/DESCRIPTION l/LOCATION​` <br> e.g., `add animal n/Fluffy d/White cat l/Ang Mo Kio`
 **Clear**             | `clear`
 **Delete Person**     | `delete person n/NAME`<br> e.g., `delete person n/John Doe`
 **Delete Animal**     | `delete animal n/NAME`<br> e.g., `delete animal n/Fluffy`
