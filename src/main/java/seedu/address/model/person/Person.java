@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.feedingsession.FeedingSession;
@@ -24,7 +25,8 @@ public class Person {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<FeedingSession> feedingSessions = new HashSet<>();
+    private final Set<FeedingSession> feedingSessions = new TreeSet<>((a, b) ->
+            a.getFeedingTime().compareTo(b.getFeedingTime()));
 
     /**
      * Every field must be present and not null.
