@@ -25,6 +25,11 @@
     -color-border-command: #383838;
     -color-border-command-bottom: #ffffff;
 
+    /* Override JavaFX default focus colors */
+    -fx-focus-color: -color-bg-selected;
+    -fx-faint-focus-color: derive(-color-bg-selected, 50%);
+    -fx-accent: -color-bg-accent;
+
     /* Derived colors */
     -color-bg-primary-20: derive(-color-bg-primary, 20%);
     -color-bg-primary-10: derive(-color-bg-primary, 10%);
@@ -235,6 +240,22 @@
     -fx-text-fill: -color-text-primary;
 }
 
+.context-menu .menu-item {
+    -fx-background-color: -color-bg-primary-50;
+    -fx-text-fill: -color-text-primary;
+    -fx-padding: 4px 8px;
+}
+
+.context-menu .menu-item:hover,
+.context-menu .menu-item:focused {
+    -fx-background-color: -color-bg-hover;
+    -fx-text-fill: -color-text-primary;
+}
+
+.context-menu .menu-item .label {
+    -fx-text-fill: inherit;
+}
+
 .menu-bar {
     -fx-background-color: -color-bg-primary-20;
 }
@@ -244,6 +265,26 @@
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: -color-text-primary;
     -fx-opacity: 0.9;
+}
+
+.menu-bar > .container > .menu-button {
+    -fx-background-color: -color-bg-primary-20;
+    -fx-padding: 4px 8px;
+}
+
+.menu-bar > .container > .menu-button:hover {
+    -fx-background-color: -color-bg-hover;
+    -fx-text-fill: -color-text-primary;
+}
+
+.menu-bar > .container > .menu-button:focused {
+    -fx-background-color: -color-bg-selected;
+    -fx-text-fill: -color-text-primary;
+}
+
+.menu-bar > .container > .menu-button:showing {
+    -fx-background-color: -color-bg-selected;
+    -fx-text-fill: -color-text-primary;
 }
 
 .menu .left-container {
@@ -291,12 +332,12 @@
 }
 
 .button:default {
-    -fx-background-color: -fx-focus-color;
+    -fx-background-color: -color-bg-tertiary;
     -fx-text-fill: -color-text-secondary;
 }
 
 .button:default:hover {
-    -fx-background-color: derive(-fx-focus-color, 30%);
+    -fx-background-color: derive(-color-bg-tertiary, 30%);
 }
 
 .dialog-pane {
