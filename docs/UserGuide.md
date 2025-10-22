@@ -6,7 +6,7 @@
 
 # Furiends User Guide
 
-Furiends is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Furiends can get your contact management tasks done faster than traditional GUI apps.
+Furiends is a **desktop app tailored towards animal lovers, specifically individuals who are tasked to feed stray animals.** It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Furiends can help you manage people and animals, as well as allocate people to certain animals for scheduled feeding, faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -92,12 +92,11 @@ the corresponding command format to the command box as shown below.
 
 ![automatic copying](images/helpAutomaticInput.png)
 
-
 ### Adding a person: `add person`
 
 Adds a person to the address book.
 
-Format: `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add person n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 
 <box type="tip" seamless>
 
