@@ -6,7 +6,7 @@
 
 # Furiends User Guide
 
-Furiends is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Furiends can get your contact management tasks done faster than traditional GUI apps.
+Furiends is a **desktop app tailored towards animal lovers, specifically individuals who are tasked to feed stray animals.** It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Furiends can help you manage people and animals, as well as allocate people to certain animals for scheduled feeding, faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -26,6 +26,7 @@ Furiends is a **desktop app for managing contacts, optimized for use via a Comma
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+   For more details on the GUI, refer to the [Overview of GUI](#overview-of-gui) section.
 
 5. Type the command in the command box (displaying "Enter command here...") and press Enter to execute it.<br>
    Some simple commands you can try:
@@ -39,6 +40,18 @@ Furiends is a **desktop app for managing contacts, optimized for use via a Comma
    * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Overview of GUI
+![Ui](images/Ui_explanation.png)
+
+The GUI is made up of the following components:
+1. **Options Panel**: Contains menu bars to exit (File > Exit) and open the help panel (Help > Help).
+2. **Command Box**: Commands are entered in this text box. Press the Enter key to execute the command.
+3. **Feedback Box**: The app displays the result of the executed command in this box.
+4. **Person View**: Displays the list of persons stored in the address book.
+5. **Animal View**: Displays the list of animals stored in the address book.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -92,12 +105,11 @@ the corresponding command format to the command box as shown below.
 
 ![automatic copying](images/helpAutomaticInput.png)
 
-
 ### Adding a person: `add person`
 
 Adds a person to the address book.
 
-Format: `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add person n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 
 <box type="tip" seamless>
 
@@ -105,21 +117,21 @@ Format: `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 </box>
 
 Examples:
-* `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add person n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add person n/John Doe p/98765432 e/johnd@example.com`
+* `add person n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/criminal`
 
 ### Adding an animal: `add animal`
 
 Adds an animal to the address book.
 
-Format: `add n/NAME d/DESCRIPTION l/LOCATION [t/TAG]…​`
+Format: `add animal n/NAME d/DESCRIPTION l/LOCATION [t/TAG]…​`
 
 Examples:
 * `add animal n/Fluffy d/White cat l/Ang Mo Kio t/shy`
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons and animals in the address book.
 
 Format: `list`
 
@@ -127,7 +139,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… [f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]…​`
 
 * Edits the person with the specified `NAME`. The name is case-sensitive.
 * At least one of the optional fields must be provided.
@@ -135,12 +147,15 @@ Format: `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+* To assign an animal to a person for feeding, include the `f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM` field. <br>
+The `ANIMAL_NAME` is the name of the animal to be assigned, and `YYYY-MM-DD HH:MM` is the date and time of feeding.
 
 Examples:
 *  `edit person John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person 
     with name `John Doe` to be `91234567` and `johndoe@example.com` respectively.
 *  `edit person Betty Crower n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and 
     clears all existing tags.
+*  `edit person Alice f/Fluffy dt/2024-07-01 10:00` Assigns the animal `Fluffy` to the person `Alice` for feeding on `1st July 2024, 10am`.
 
 ### Editing an animal : `edit animal`
 
@@ -165,12 +180,12 @@ Format: `find person KEYWORD [MORE_KEYWORDS]...`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Substrings can be searched. e.g. `an` will match `Hans`, `Andy`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find alex david` returns `Alex Yeoh`, `David Li`. Note that the 'animal' portion is still shown.<br>
+* `find person alex david` returns `Alex Yeoh`, `David Li`. Note that the 'animal' portion is still shown.<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Locating animals by name: `find animal`
@@ -182,12 +197,12 @@ Format: `find animal KEYWORD [MORE_KEYWORDS]...`
 * The search is case-insensitive. e.g `fluffy` will match `Fluffy`
 * The order of the keywords does not matter. e.g. `Cutie Pie` will match `Pie Cutie`
 * Only the name is searched.
-* Only full words will be matched e.g. `Fluff` will not match `Fluffy`
+* Substrings can be matched e.g. `Fluff` will match `Fluffy` and `Kerfluff`
 * Animals matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Cutie` will return `Cutie Pie`, `Cutie Patootie` (if both animals are stored in the application)
 
 Examples:
-* `find max luna` returns `Max`, `Luna`. Note that the 'person' portion is still shown.<br>
+* `find animal max luna` returns `Max`, `Luna`. Note that the 'person' portion is still shown.<br>
   ![result for 'find max luna'](images/findMaxLunaResult.png)
 
 ### Deleting a person : `delete person`
@@ -261,13 +276,13 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 Action                | Format, Examples
 ----------------------|------------------------------------------------------------------------------------------------
-**Add Person**        | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br>e.g.,`add person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Add Animal**        | `add animal n/NAME d/DESCRIPTION l/LOCATION [t/TAG]…​` <br> e.g., `add animaln/Fluffy d/White cat l/Ang Mo Kio t/shy`
+**Add Person**        | `add person n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`<br>e.g.,`add person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Animal**        | `add animal n/NAME d/DESCRIPTION l/LOCATION [t/TAG]…​` <br> e.g., `add animal n/Fluffy d/White cat l/Ang Mo Kio`
 **Clear**             | `clear`
 **Delete Person**     | `delete person n/NAME`<br> e.g., `delete person n/John Doe`
 **Delete Animal**     | `delete animal n/NAME`<br> e.g., `delete animal n/Fluffy`
-**Edit Person**       | `edit person NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit person John Doe n/James Lee e/jameslee@example.com`
-**Edit Animal**       | `edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION] [t/TAG]…​`<br> e.g., `edit animal Fluffy l/Void Deck t/rowdy`
+**Edit Person**       | `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… [f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]…​`<br> e.g.,`edit person John Doe n/James Lee e/jameslee@example.com`
+**Edit Animal**       | `edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION] [t/TAG]…`<br> e.g., `edit animal Fluffy l/Void Deck`
 **Exit**              | `exit`
 **Find Person**       | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find Animal**       | `find animal KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Fluffy Max`
