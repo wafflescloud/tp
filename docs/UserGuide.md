@@ -8,8 +8,6 @@
 
 Furiends is a **desktop app tailored towards animal lovers, specifically individuals who are tasked to feed stray animals.** It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Furiends can help you manage people and animals, as well as allocate people to certain animals for scheduled feeding, faster than traditional GUI apps.
 
-<!-- * Table of Contents -->
-
 ## Table of Contents
 
 - [Quick start](#quick-start)
@@ -34,8 +32,6 @@ Furiends is a **desktop app tailored towards animal lovers, specifically individ
 - [FAQ](#faq)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
-
-<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
