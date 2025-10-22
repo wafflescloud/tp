@@ -19,16 +19,32 @@ public class HelpCommand extends Command {
     private final String commandName;
     private final boolean isUnrecognizedCommand;
 
+    /**
+     * Creates a HelpCommand that shows the general help window.
+     * This constructor is used when no specific command is specified.
+     */
     public HelpCommand() {
         this.commandName = null;
         this.isUnrecognizedCommand = false;
     }
 
+    /**
+     * Creates a HelpCommand that shows help for a specific command.
+     *
+     * @param commandName The name of the command to show help for.
+     */
     public HelpCommand(String commandName) {
         this.commandName = commandName;
         this.isUnrecognizedCommand = false;
     }
 
+    /**
+     * Creates a HelpCommand with the specified command name and recognition status.
+     * This constructor is used when handling unrecognized commands.
+     *
+     * @param commandName The name of the command (may be unrecognized).
+     * @param isUnrecognizedCommand Whether the command was recognized or not.
+     */
     public HelpCommand(String commandName, boolean isUnrecognizedCommand) {
         this.commandName = commandName;
         this.isUnrecognizedCommand = isUnrecognizedCommand;
@@ -37,11 +53,9 @@ public class HelpCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         if (commandName == null || isUnrecognizedCommand) {
-            // Show general help window for null command or unrecognized command
             String message = isUnrecognizedCommand ? UNRECOGNIZED_COMMAND_MESSAGE : SHOWING_HELP_MESSAGE;
             return new CommandResult(message, true, false);
         } else {
-            // Show specific command help window directly
             HelpWindow.openCommandHelp(commandName);
             return new CommandResult("Showing help for " + commandName, false, false);
         }
