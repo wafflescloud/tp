@@ -10,6 +10,7 @@ Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
 Class HelpWindow
+Class HelpFunctionWindow
 Class ResultDisplay
 Class PersonListPanel
 Class PersonCard
@@ -37,6 +38,7 @@ MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
 PersonListPanel -down-> "*" PersonCard
+HelpWindow --> "*" HelpFunctionWindow
 
 MainWindow -left-|> UiPart
 
@@ -46,6 +48,7 @@ PersonListPanel --|> UiPart
 PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+HelpFunctionWindow --|> UiPart
 
 PersonCard ..> Model
 UiManager -right-> Logic
