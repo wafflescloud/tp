@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicatePerson;
+import seedu.address.model.person.PersonMatchesKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -22,15 +24,25 @@ public class FindPersonCommandParser implements Parser<FindCommand> {
      */
     @Override
     public FindCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG);
 
         List<String> nameValues = argMultimap.getAllValues(PREFIX_NAME);
-        if (nameValues.isEmpty()) {
+        List<String> tagValues = argMultimap.getAllValues(PREFIX_TAG);
+
+        boolean hasNames = nameValues != null && !nameValues.isEmpty();
+        boolean hasTags = tagValues != null && !tagValues.isEmpty();
+
+        if (!hasNames && !hasTags) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
         }
 
-        return new FindPersonCommand(new NameContainsKeywordsPredicatePerson(nameValues));
+        if (hasNames && !hasTags) {
+            return new FindPersonCommand(new NameContainsKeywordsPredicatePerson(nameValues));
+        }
+
+        // Use combined predicate when tags are present (with or without names)
+        return new FindPersonCommand(new PersonMatchesKeywordsPredicate(nameValues, tagValues));
     }
 
 }
