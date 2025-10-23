@@ -11,12 +11,13 @@ public abstract class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons/animals whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "the specified substrings (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Each n/ flag specifies a substring to search for.\n"
             + "1. To find a person:\n"
             + "Example: " + COMMAND_WORD + " "
-            + TYPE_PERSON + " luna bob"
+            + TYPE_PERSON + " n/luna n/bob"
             + "\n\n"
             + "2. To find an animal:\n"
             + "Example: " + COMMAND_WORD + " "
-            + TYPE_ANIMAL + " alice peter";
+            + TYPE_ANIMAL + " n/ma n/lu";
 }
