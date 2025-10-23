@@ -3,7 +3,6 @@ package seedu.address.model.animal;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -19,7 +18,7 @@ public class NameContainsKeywordsPredicateAnimal implements Predicate<Animal> {
     @Override
     public boolean test(Animal animal) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(animal.getName().fullName, keyword));
+                .anyMatch(keyword -> animal.getName().fullName.toLowerCase().contains(keyword.toLowerCase()));
     }
 
     @Override
