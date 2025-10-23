@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.StackPane;
 import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.person.Person;
 
@@ -48,7 +48,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label feedingTime;
     @FXML
-    private Rectangle feedingBox;
+    private StackPane feedingBox;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -66,18 +66,15 @@ public class PersonCard extends UiPart<Region> {
 
         // Set feeding session details if available
         if (!person.getFeedingSessions().isEmpty()) {
-            // Get the first feeding session (can be enhanced to show multiple later)
             FeedingSession firstSession = person.getFeedingSessions().iterator().next();
             animalName.setText(firstSession.getAnimal().getName().fullName);
             feedingDate.setText(firstSession.getFeedingTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             feedingTime.setText(firstSession.getFeedingTime().format(DateTimeFormatter.ofPattern("HH:mm")));
             feedingBox.setVisible(true);
+            feedingBox.setManaged(true);
         } else {
-            // Hide feeding session labels if no sessions exist
-            animalName.setVisible(false);
-            feedingDate.setVisible(false);
-            feedingTime.setVisible(false);
             feedingBox.setVisible(false);
+            feedingBox.setManaged(false);
         }
     }
 }
