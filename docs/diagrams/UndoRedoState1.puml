@@ -4,7 +4,7 @@ skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 skinparam ClassBackgroundColor #FFFFAA
 
-title After command "delete 5"
+title After command "add person n/David p/91234567 e/david@gmail.com"
 
 package States <<rectangle>> {
     class State1 as "<u>ab0:AddressBook</u>"
@@ -20,4 +20,4 @@ hide State3
 class Pointer as "Current State" #FFFFFF
 
 Pointer -up-> State2
-@end
+@enduml
