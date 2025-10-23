@@ -7,15 +7,14 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.VBox?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="100" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="250" />
+      <ColumnConstraints hgrow="ALWAYS" minWidth="0" />
     </columnConstraints>
     <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
       <padding>
@@ -27,26 +26,38 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="name" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="phone" styleClass="cell_small_label" />
+      <Label fx:id="email" styleClass="cell_small_label" />
     </VBox>
 
-    <StackPane alignment="TOP_RIGHT" GridPane.columnIndex="1">
+    <StackPane fx:id="feedingBox"
+               GridPane.columnIndex="1"
+               GridPane.halignment="RIGHT"
+               GridPane.valignment="CENTER"
+               GridPane.hgrow="NEVER"
+               maxWidth="150"
+               minHeight="80"
+               style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 2; -fx-background-radius: 10; -fx-border-radius: 10;">
+      <GridPane.margin>
+        <Insets right="12" />
+      </GridPane.margin>
+      <maxHeight>
+        <Region fx:constant="USE_PREF_SIZE" />
+      </maxHeight>
       <padding>
         <Insets top="5" right="15" bottom="5" left="5" />
       </padding>
-      <Rectangle fx:id="feedingBox" width="120" height="80" arcWidth="10" arcHeight="10"
-                 fill="transparent" stroke="black" strokeWidth="2"/>
-      <VBox fx:id="feedingVBox" alignment="TOP_LEFT" minHeight="80">
+
+      <VBox fx:id="feedingVBox">
         <padding>
-          <Insets top="5" right="5" bottom="5" left="15" />
+          <Insets top="5" right="5" bottom="5" left="10" />
         </padding>
-        <Label fx:id="animalName" styleClass="cell_big_label" text="\$animal" />
-        <Label fx:id="feedingDate" styleClass="cell_small_label" text="\$date" />
-        <Label fx:id="feedingTime" styleClass="cell_small_label" text="\$time" />
+        <Label fx:id="animalName" styleClass="cell_big_label" />
+        <Label fx:id="feedingDate" styleClass="cell_small_label" />
+        <Label fx:id="feedingTime" styleClass="cell_small_label" />
       </VBox>
     </StackPane>
   </GridPane>
