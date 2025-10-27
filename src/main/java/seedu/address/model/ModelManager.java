@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Stack;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -13,6 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.animal.Animal;
+import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.person.Person;
 
 /**
@@ -151,7 +154,17 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         saveState();
         requireAllNonNull(target, editedPerson);
+
+        boolean nameChanged = !target.getName().equals(editedPerson.getName());
+
         addressBook.setPerson(target, editedPerson);
+
+        if (nameChanged) {
+            updateFeedingSessionsForPersonNameChange(
+                    target.getName().toString(),
+                    editedPerson.getName().toString()
+            );
+        }
     }
 
     // =========== Animal Operations =========================================================================
@@ -179,7 +192,17 @@ public class ModelManager implements Model {
     public void setAnimal(Animal target, Animal editedAnimal) {
         saveState();
         requireAllNonNull(target, editedAnimal);
+
+        boolean nameChanged = !target.getName().equals(editedAnimal.getName());
+
         addressBook.setAnimal(target, editedAnimal);
+
+        if (nameChanged) {
+            updateFeedingSessionsForAnimalNameChange(
+                    target.getName().toString(),
+                    editedAnimal.getName().toString()
+            );
+        }
     }
 
     // =========== Filtered Person List Accessors =============================================================
@@ -206,6 +229,84 @@ public class ModelManager implements Model {
     public void updateFilteredAnimalList(Predicate<Animal> predicate) {
         requireNonNull(predicate);
         filteredAnimals.setPredicate(predicate);
+    }
+
+    // =========== Utility Methods ==========================================================================
+
+    /**
+     * Updates all feeding sessions in all animals when a person's name changes.
+     * Creates new Animal objects with updated feeding sessions.
+     *
+     * @param oldName The old name of the person
+     * @param newName The new name of the person
+     */
+    private void updateFeedingSessionsForPersonNameChange(String oldName, String newName) {
+        ObservableList<Animal> animalList = addressBook.getAnimalList();
+
+        for (Animal animal : animalList) {
+            Set<FeedingSession> oldSessions = animal.getFeedingSessions();
+            Set<FeedingSession> newSessions = new HashSet<>();
+            boolean hasChanges = false;
+
+            for (FeedingSession session : oldSessions) {
+                if (session.getPersonName().equals(oldName)) {
+                    newSessions.add(new FeedingSession(newName, session.getAnimalName(),
+                            session.getFeedingTime()));
+                    hasChanges = true;
+                } else {
+                    newSessions.add(session);
+                }
+            }
+
+            if (hasChanges) {
+                Animal updatedAnimal = new Animal(
+                        animal.getName(),
+                        animal.getDescription(),
+                        animal.getLocation(),
+                        animal.getTags(),
+                        newSessions
+                );
+                addressBook.setAnimal(animal, updatedAnimal);
+            }
+        }
+    }
+
+    /**
+     * Updates all feeding sessions in all persons when an animal's name changes.
+     * Creates new Person objects with updated feeding sessions.
+     *
+     * @param oldName The old name of the animal
+     * @param newName The new name of the animal
+     */
+    private void updateFeedingSessionsForAnimalNameChange(String oldName, String newName) {
+        ObservableList<Person> personList = addressBook.getPersonList();
+
+        for (Person person : personList) {
+            Set<FeedingSession> oldSessions = person.getFeedingSessions();
+            Set<FeedingSession> newSessions = new HashSet<>();
+            boolean hasChanges = false;
+
+            for (FeedingSession session : oldSessions) {
+                if (session.getAnimalName().equals(oldName)) {
+                    newSessions.add(new FeedingSession(session.getPersonName(), newName,
+                            session.getFeedingTime()));
+                    hasChanges = true;
+                } else {
+                    newSessions.add(session);
+                }
+            }
+
+            if (hasChanges) {
+                Person updatedPerson = new Person(
+                        person.getName(),
+                        person.getPhone(),
+                        person.getEmail(),
+                        person.getTags(),
+                        newSessions
+                );
+                addressBook.setPerson(person, updatedPerson);
+            }
+        }
     }
 
     // =========== Utility Methods ==========================================================================

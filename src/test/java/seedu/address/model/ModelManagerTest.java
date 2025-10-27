@@ -129,4 +129,126 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
+
+    @Test
+    public void setPerson_nameChanged_feedingSessionsUpdatedInAnimals() {
+        modelManager = new ModelManager();
+
+        seedu.address.model.person.Person matt = new seedu.address.testutil.PersonBuilder()
+                .withName("Matt")
+                .withPhone("12345678")
+                .withEmail("matt@example.com")
+                .build();
+
+        seedu.address.model.animal.Animal max = new seedu.address.testutil.AnimalBuilder()
+                .withName("Max")
+                .withDescription("Dog")
+                .withLocation("Shelter A")
+                .build();
+
+        modelManager.addPerson(matt);
+        modelManager.addAnimal(max);
+
+        java.time.LocalDateTime feedingTime = java.time.LocalDateTime.of(2024, 10, 15, 10, 0);
+        seedu.address.model.feedingsession.FeedingSession session =
+                new seedu.address.model.feedingsession.FeedingSession(matt, max, feedingTime);
+
+        java.util.Set<seedu.address.model.feedingsession.FeedingSession> sessions = new java.util.HashSet<>();
+        sessions.add(session);
+
+        seedu.address.model.person.Person mattWithSession = new seedu.address.model.person.Person(
+                matt.getName(), matt.getPhone(), matt.getEmail(), matt.getTags(), sessions);
+        seedu.address.model.animal.Animal maxWithSession = new seedu.address.model.animal.Animal(
+                max.getName(), max.getDescription(), max.getLocation(), max.getTags(), sessions);
+
+        modelManager.setPerson(matt, mattWithSession);
+        modelManager.setAnimal(max, maxWithSession);
+
+        seedu.address.model.person.Person matthew = new seedu.address.testutil.PersonBuilder()
+                .withName("Matthew")
+                .withPhone("12345678")
+                .withEmail("matt@example.com")
+                .withFeedingSessions(sessions)
+                .build();
+
+        modelManager.setPerson(mattWithSession, matthew);
+
+        seedu.address.model.animal.Animal updatedAnimal = modelManager.getFilteredAnimalList().stream()
+                .filter(a -> a.getName().toString().equals("Max"))
+                .findFirst()
+                .orElseThrow();
+
+        boolean hasUpdatedSession = updatedAnimal.getFeedingSessions().stream()
+                .anyMatch(s -> s.getPersonName().equals("Matthew")
+                        && s.getAnimalName().equals("Max")
+                        && s.getFeedingTime().equals(feedingTime));
+
+        assertTrue(hasUpdatedSession, "Animal's feeding session should have updated person name");
+
+        boolean hasOldName = updatedAnimal.getFeedingSessions().stream()
+                .anyMatch(s -> s.getPersonName().equals("Matt"));
+
+        assertFalse(hasOldName, "Animal's feeding session should not contain old person name");
+    }
+
+    @Test
+    public void setAnimal_nameChanged_feedingSessionsUpdatedInPersons() {
+        modelManager = new ModelManager();
+
+        seedu.address.model.person.Person john = new seedu.address.testutil.PersonBuilder()
+                .withName("John")
+                .withPhone("87654321")
+                .withEmail("john@example.com")
+                .build();
+
+        seedu.address.model.animal.Animal buddy = new seedu.address.testutil.AnimalBuilder()
+                .withName("Buddy")
+                .withDescription("Cat")
+                .withLocation("Shelter B")
+                .build();
+
+        modelManager.addPerson(john);
+        modelManager.addAnimal(buddy);
+
+        java.time.LocalDateTime feedingTime = java.time.LocalDateTime.of(2024, 10, 16, 14, 30);
+        seedu.address.model.feedingsession.FeedingSession session =
+                new seedu.address.model.feedingsession.FeedingSession(john, buddy, feedingTime);
+
+        java.util.Set<seedu.address.model.feedingsession.FeedingSession> sessions = new java.util.HashSet<>();
+        sessions.add(session);
+
+        seedu.address.model.person.Person johnWithSession = new seedu.address.model.person.Person(
+                john.getName(), john.getPhone(), john.getEmail(), john.getTags(), sessions);
+        seedu.address.model.animal.Animal buddyWithSession = new seedu.address.model.animal.Animal(
+                buddy.getName(), buddy.getDescription(), buddy.getLocation(), buddy.getTags(), sessions);
+
+        modelManager.setPerson(john, johnWithSession);
+        modelManager.setAnimal(buddy, buddyWithSession);
+
+        seedu.address.model.animal.Animal fluffy = new seedu.address.testutil.AnimalBuilder()
+                .withName("Fluffy")
+                .withDescription("Cat")
+                .withLocation("Shelter B")
+                .withFeedingSessions(sessions)
+                .build();
+
+        modelManager.setAnimal(buddyWithSession, fluffy);
+
+        seedu.address.model.person.Person updatedPerson = modelManager.getFilteredPersonList().stream()
+                .filter(p -> p.getName().toString().equals("John"))
+                .findFirst()
+                .orElseThrow();
+
+        boolean hasUpdatedSession = updatedPerson.getFeedingSessions().stream()
+                .anyMatch(s -> s.getPersonName().equals("John")
+                        && s.getAnimalName().equals("Fluffy")
+                        && s.getFeedingTime().equals(feedingTime));
+
+        assertTrue(hasUpdatedSession, "Person's feeding session should have updated animal name");
+
+        boolean hasOldName = updatedPerson.getFeedingSessions().stream()
+                .anyMatch(s -> s.getAnimalName().equals("Buddy"));
+
+        assertFalse(hasOldName, "Person's feeding session should not contain old animal name");
+    }
 }

@@ -91,6 +91,14 @@ public class AnimalBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Set<FeedingSession>} of the {@code Animal} that we are building.
+     */
+    public AnimalBuilder withFeedingSessions(Set<FeedingSession> feedingSessions) {
+        this.feedingSessions = new HashSet<>(feedingSessions);
+        return this;
+    }
+
     public Animal build() {
         return new Animal(name, description, location, tags, feedingSessions);
     }
