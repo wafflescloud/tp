@@ -18,4 +18,5 @@ public class CliSyntax {
     /* Type definitions */
     public static final Type TYPE_PERSON = new Type("person");
     public static final Type TYPE_ANIMAL = new Type("animal");
+    public static final Type TYPE_FEEDING_SESSION = new Type("feed");
 }
