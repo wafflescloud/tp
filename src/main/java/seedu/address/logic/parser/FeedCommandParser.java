@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FEEDING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FEEDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.time.LocalDateTime;
@@ -28,16 +28,16 @@ public class FeedCommandParser implements Parser<FeedCommand> {
     @Override
     public FeedCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_FEEDING, PREFIX_NAME, PREFIX_DATETIME);
+                ArgumentTokenizer.tokenize(args, PREFIX_FEEDER, PREFIX_NAME, PREFIX_DATETIME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_FEEDING, PREFIX_NAME, PREFIX_DATETIME)
+        if (!arePrefixesPresent(argMultimap, PREFIX_FEEDER, PREFIX_NAME, PREFIX_DATETIME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FeedCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FEEDING, PREFIX_NAME, PREFIX_DATETIME);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FEEDER, PREFIX_NAME, PREFIX_DATETIME);
 
-        PersonName personName = ParserUtil.parsePersonName(argMultimap.getValue(PREFIX_FEEDING).get());
+        PersonName personName = ParserUtil.parsePersonName(argMultimap.getValue(PREFIX_FEEDER).get());
         String animalName = argMultimap.getValue(PREFIX_NAME).get().trim();
         LocalDateTime feedingTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
 

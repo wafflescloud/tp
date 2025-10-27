@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FEEDING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FEEDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.time.LocalDateTime;
@@ -28,12 +28,12 @@ public class FeedCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records a feeding session for an animal. "
             + "Parameters: "
-            + PREFIX_FEEDING + "PERSON_NAME "
+            + PREFIX_FEEDER + "PERSON_NAME "
             + PREFIX_NAME + "ANIMAL_NAME "
             + PREFIX_DATETIME + "DATETIME\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Max "
-            + PREFIX_FEEDING + "James Tan "
+            + PREFIX_FEEDER + "James Tan "
             + PREFIX_DATETIME + "2025-12-25 09:00";
 
     public static final String MESSAGE_SUCCESS = """
