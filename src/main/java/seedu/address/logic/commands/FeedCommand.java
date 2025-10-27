@@ -83,7 +83,7 @@ public class FeedCommand extends Command {
                 .orElseThrow(() -> new CommandException(
                         String.format(MESSAGE_ANIMAL_NOT_FOUND, animalName)));
 
-        FeedingSession newFeedingSession = new FeedingSession(animal, feedingTime);
+        FeedingSession newFeedingSession = new FeedingSession(person, animal, feedingTime);
 
         Set<FeedingSession> updatedFeedingSessions = new HashSet<>(person.getFeedingSessions());
         updatedFeedingSessions.add(newFeedingSession);

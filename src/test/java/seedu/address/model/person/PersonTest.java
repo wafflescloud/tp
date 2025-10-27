@@ -117,7 +117,10 @@ public class PersonTest {
 
         // different feeding sessions -> returns false
         Set<FeedingSession> differentFeedingSessions = new HashSet<>();
-        differentFeedingSessions.add(new FeedingSession(new AnimalBuilder().build(), LocalDateTime.now()));
+        differentFeedingSessions.add(new FeedingSession(
+                new PersonBuilder().build(),
+                new AnimalBuilder().build(),
+                LocalDateTime.now()));
         editedAlice = new PersonBuilder(ALICE)
                 .withFeedingSessions(differentFeedingSessions)
                 .build();
