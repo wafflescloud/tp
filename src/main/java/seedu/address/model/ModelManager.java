@@ -140,6 +140,9 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         saveState();
+
+        removeFeedingSessionsForDeletedPerson(target.getName().toString());
+
         addressBook.removePerson(target);
     }
 
@@ -178,6 +181,9 @@ public class ModelManager implements Model {
     @Override
     public void deleteAnimal(Animal target) {
         saveState();
+
+        removeFeedingSessionsForDeletedAnimal(target.getName().toString());
+
         addressBook.removeAnimal(target);
     }
 
@@ -290,6 +296,76 @@ public class ModelManager implements Model {
                 if (session.getAnimalName().equals(oldName)) {
                     newSessions.add(new FeedingSession(session.getPersonName(), newName,
                             session.getFeedingTime()));
+                    hasChanges = true;
+                } else {
+                    newSessions.add(session);
+                }
+            }
+
+            if (hasChanges) {
+                Person updatedPerson = new Person(
+                        person.getName(),
+                        person.getPhone(),
+                        person.getEmail(),
+                        person.getTags(),
+                        newSessions
+                );
+                addressBook.setPerson(person, updatedPerson);
+            }
+        }
+    }
+
+    /**
+     * Removes all feeding sessions involving a deleted person from all animals.
+     * Creates new Animal objects without the deleted person's feeding sessions.
+     *
+     * @param deletedPersonName The name of the deleted person
+     */
+    private void removeFeedingSessionsForDeletedPerson(String deletedPersonName) {
+        ObservableList<Animal> animalList = addressBook.getAnimalList();
+
+        for (Animal animal : animalList) {
+            Set<FeedingSession> oldSessions = animal.getFeedingSessions();
+            Set<FeedingSession> newSessions = new HashSet<>();
+            boolean hasChanges = false;
+
+            for (FeedingSession session : oldSessions) {
+                if (session.getPersonName().equals(deletedPersonName)) {
+                    hasChanges = true;
+                } else {
+                    newSessions.add(session);
+                }
+            }
+
+            if (hasChanges) {
+                Animal updatedAnimal = new Animal(
+                        animal.getName(),
+                        animal.getDescription(),
+                        animal.getLocation(),
+                        animal.getTags(),
+                        newSessions
+                );
+                addressBook.setAnimal(animal, updatedAnimal);
+            }
+        }
+    }
+
+    /**
+     * Removes all feeding sessions involving a deleted animal from all persons.
+     * Creates new Person objects without the deleted animal's feeding sessions.
+     *
+     * @param deletedAnimalName The name of the deleted animal
+     */
+    private void removeFeedingSessionsForDeletedAnimal(String deletedAnimalName) {
+        ObservableList<Person> personList = addressBook.getPersonList();
+
+        for (Person person : personList) {
+            Set<FeedingSession> oldSessions = person.getFeedingSessions();
+            Set<FeedingSession> newSessions = new HashSet<>();
+            boolean hasChanges = false;
+
+            for (FeedingSession session : oldSessions) {
+                if (session.getAnimalName().equals(deletedAnimalName)) {
                     hasChanges = true;
                 } else {
                     newSessions.add(session);
