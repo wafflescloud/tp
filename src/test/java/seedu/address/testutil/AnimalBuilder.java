@@ -7,6 +7,7 @@ import seedu.address.model.animal.Animal;
 import seedu.address.model.animal.AnimalName;
 import seedu.address.model.animal.Description;
 import seedu.address.model.animal.Location;
+import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -23,6 +24,7 @@ public class AnimalBuilder {
     private Description description;
     private Location location;
     private Set<Tag> tags;
+    private Set<FeedingSession> feedingSessions;
 
     /**
      * Creates an {@code AnimalBuilder} with default details.
@@ -32,6 +34,7 @@ public class AnimalBuilder {
         description = new Description(DEFAULT_DESCRIPTION);
         location = new Location(DEFAULT_LOCATION);
         tags = new HashSet<>();
+        feedingSessions = new HashSet<>();
     }
 
     /**
@@ -44,6 +47,7 @@ public class AnimalBuilder {
         description = animalToCopy.getDescription();
         location = animalToCopy.getLocation();
         tags = new HashSet<>(animalToCopy.getTags());
+        feedingSessions = new HashSet<>(animalToCopy.getFeedingSessions());
     }
 
     /**
@@ -88,6 +92,6 @@ public class AnimalBuilder {
     }
 
     public Animal build() {
-        return new Animal(name, description, location, tags);
+        return new Animal(name, description, location, tags, feedingSessions);
     }
 }

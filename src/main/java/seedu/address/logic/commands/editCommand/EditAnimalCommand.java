@@ -82,7 +82,8 @@ public class EditAnimalCommand extends EditCommand {
         Location updatedLocation = editAnimalDescriptor.getLocation().orElse(animalToEdit.getLocation());
         Set<Tag> updatedTags = editAnimalDescriptor.getTags().orElse(animalToEdit.getTags());
 
-        return new Animal(updatedName, updatedDescription, updatedLocation, updatedTags);
+        return new Animal(updatedName, updatedDescription, updatedLocation, updatedTags,
+                animalToEdit.getFeedingSessions());
     }
 
 

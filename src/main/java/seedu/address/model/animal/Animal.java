@@ -6,8 +6,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,16 +25,20 @@ public class Animal {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<FeedingSession> feedingSessions = new TreeSet<>((a, b) ->
+            a.getFeedingTime().compareTo(b.getFeedingTime()));
 
     /**
      * Every field must be present and not null.
      */
-    public Animal(AnimalName name, Description description, Location location, Set<Tag> tags) {
+    public Animal(AnimalName name, Description description, Location location, Set<Tag> tags,
+                  Set<FeedingSession> feedingSessions) {
         requireAllNonNull(name, description, location);
         this.name = name;
         this.description = description;
         this.location = location;
         this.tags.addAll(tags);
+        this.feedingSessions.addAll(feedingSessions);
     }
 
     public AnimalName getName() {
@@ -53,6 +59,14 @@ public class Animal {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable feeding sessions set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<FeedingSession> getFeedingSessions() {
+        return Collections.unmodifiableSet(feedingSessions);
     }
 
     /**
@@ -86,12 +100,13 @@ public class Animal {
         return name.equals(otherAnimal.name)
                 && description.equals(otherAnimal.description)
                 && location.equals(otherAnimal.location)
-                && tags.equals(otherAnimal.tags);
+                && tags.equals(otherAnimal.tags)
+                && feedingSessions.equals(otherAnimal.feedingSessions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, location, tags);
+        return Objects.hash(name, description, location, tags, feedingSessions);
     }
 
     @Override
@@ -101,6 +116,7 @@ public class Animal {
                 .add("description", description)
                 .add("location", location)
                 .add("tags", tags)
+                .add("feeding sessions", feedingSessions)
                 .toString();
     }
 }

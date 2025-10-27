@@ -14,6 +14,7 @@ import seedu.address.model.animal.Animal;
 import seedu.address.model.animal.AnimalName;
 import seedu.address.model.animal.Description;
 import seedu.address.model.animal.Location;
+import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,6 +27,7 @@ class JsonAdaptedAnimal {
     private final String description;
     private final String location;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedFeedingSession> feedingSessions = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedAnimal} with the given animal details.
@@ -34,12 +36,16 @@ class JsonAdaptedAnimal {
     public JsonAdaptedAnimal(@JsonProperty("name") String name,
                              @JsonProperty("description") String description,
                              @JsonProperty("location") String location,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("feedingSessions") List<JsonAdaptedFeedingSession> feedingSessions) {
         this.name = name;
         this.description = description;
         this.location = location;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (feedingSessions != null) {
+            this.feedingSessions.addAll(feedingSessions);
         }
     }
 
@@ -53,6 +59,9 @@ class JsonAdaptedAnimal {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        feedingSessions.addAll(source.getFeedingSessions().stream()
+                .map(JsonAdaptedFeedingSession::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -62,6 +71,11 @@ class JsonAdaptedAnimal {
         final List<Tag> animalTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             animalTags.add(tag.toModelType());
+        }
+
+        final List<FeedingSession> animalFeedingSessions = new ArrayList<>();
+        for (JsonAdaptedFeedingSession feedingSession : feedingSessions) {
+            animalFeedingSessions.add(feedingSession.toModelType());
         }
 
         if (name == null) {
@@ -92,6 +106,7 @@ class JsonAdaptedAnimal {
         final Location modelLocation = new Location(location);
 
         final Set<Tag> modelTags = new HashSet<>(animalTags);
-        return new Animal(modelName, modelDescription, modelLocation, modelTags);
+        final Set<FeedingSession> modelFeedingSessions = new HashSet<>(animalFeedingSessions);
+        return new Animal(modelName, modelDescription, modelLocation, modelTags, modelFeedingSessions);
     }
 }
