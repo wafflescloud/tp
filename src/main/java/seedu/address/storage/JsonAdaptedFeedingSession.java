@@ -6,27 +6,26 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.animal.Animal;
 import seedu.address.model.feedingsession.FeedingSession;
-import seedu.address.model.person.Person;
 
 /**
  * Jackson-friendly version of {@link FeedingSession}.
+ * Stores only names and datetime to prevent infinite loops during serialization.
  */
 class JsonAdaptedFeedingSession {
-    private final JsonAdaptedPerson person;
-    private final JsonAdaptedAnimal animal;
+    private final String personName;
+    private final String animalName;
     private final String feedingTime;
 
     /**
      * Constructs a {@code JsonAdaptedFeedingSession} with the given details.
      */
     @JsonCreator
-    public JsonAdaptedFeedingSession(@JsonProperty("person") JsonAdaptedPerson person,
-            @JsonProperty("animal") JsonAdaptedAnimal animal,
+    public JsonAdaptedFeedingSession(@JsonProperty("personName") String personName,
+            @JsonProperty("animalName") String animalName,
             @JsonProperty("feedingTime") String feedingTime) {
-        this.person = person;
-        this.animal = animal;
+        this.personName = personName;
+        this.animalName = animalName;
         this.feedingTime = feedingTime;
     }
 
@@ -34,8 +33,8 @@ class JsonAdaptedFeedingSession {
      * Converts a given {@code FeedingSession} into this class for Jackson use.
      */
     public JsonAdaptedFeedingSession(FeedingSession source) {
-        this.person = new JsonAdaptedPerson(source.getPerson());
-        this.animal = new JsonAdaptedAnimal(source.getAnimal());
+        this.personName = source.getPersonName();
+        this.animalName = source.getAnimalName();
         this.feedingTime = source.getFeedingTime().toString();
     }
 
@@ -43,9 +42,16 @@ class JsonAdaptedFeedingSession {
      * Converts this Jackson-friendly adapted feeding session object into the model's {@code FeedingSession} object.
      */
     public FeedingSession toModelType() throws IllegalValueException {
-        Person modelPerson = person.toModelType();
-        Animal modelAnimal = animal.toModelType();
+        if (personName == null) {
+            throw new IllegalValueException("Person name is missing!");
+        }
+        if (animalName == null) {
+            throw new IllegalValueException("Animal name is missing!");
+        }
+        if (feedingTime == null) {
+            throw new IllegalValueException("Feeding time is missing!");
+        }
         LocalDateTime modelFeedingTime = LocalDateTime.parse(feedingTime);
-        return new FeedingSession(modelPerson, modelAnimal, modelFeedingTime);
+        return new FeedingSession(personName, animalName, modelFeedingTime);
     }
 }

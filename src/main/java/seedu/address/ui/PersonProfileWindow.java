@@ -59,7 +59,7 @@ public class PersonProfileWindow extends UiPart<Stage> {
         // Show most recent feeding session if available
         if (!person.getFeedingSessions().isEmpty()) {
             FeedingSession session = person.getFeedingSessions().iterator().next();
-            animalName.setText(session.getAnimal().getName().fullName);
+            animalName.setText(session.getAnimalName());
             feedingDate.setText(session.getFeedingTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             feedingTime.setText(session.getFeedingTime().format(DateTimeFormatter.ofPattern("HH:mm")));
         }

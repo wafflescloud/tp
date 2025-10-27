@@ -60,7 +60,7 @@ public class Messages {
             builder.append("; Feeding Sessions: ");
             person.getFeedingSessions().forEach(session ->
                 builder.append(String.format("[%s at %s]",
-                    session.getAnimal().getName(),
+                    session.getAnimalName(),
                     session.getFeedingTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))));
         }
 

@@ -67,7 +67,7 @@ public class PersonCard extends UiPart<Region> {
         // Set feeding session details if available
         if (!person.getFeedingSessions().isEmpty()) {
             FeedingSession firstSession = person.getFeedingSessions().iterator().next();
-            animalName.setText(firstSession.getAnimal().getName().fullName);
+            animalName.setText(firstSession.getAnimalName());
             feedingDate.setText(firstSession.getFeedingTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             feedingTime.setText(firstSession.getFeedingTime().format(DateTimeFormatter.ofPattern("HH:mm")));
             feedingBox.setVisible(true);
