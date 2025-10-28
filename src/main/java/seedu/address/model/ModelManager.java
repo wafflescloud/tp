@@ -261,6 +261,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteFeedingSession(FeedingSession feedingSession) {
+        requireNonNull(feedingSession);
+        saveState();
+        addressBook.removeFeedingSession(feedingSession);
+    }
+
+    @Override
     public boolean hasFeedingSession(FeedingSession feedingSession) {
         requireNonNull(feedingSession);
         return addressBook.hasFeedingSession(feedingSession);

@@ -23,6 +23,13 @@ public class Messages {
 
     public static final String MESSAGE_DELETED_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETED_ANIMAL_SUCCESS = "Deleted Animal: %1$s";
+    public static final String MESSAGE_DELETED_FEEDING_SESSION_SUCCESS =
+            "Deleted feeding session: %1$s fed %2$s at %3$s";
+
+    public static final String MESSAGE_PERSON_NOT_FOUND_FOR_FEED = "The person '%1$s' is not found in the address book";
+    public static final String MESSAGE_ANIMAL_NOT_FOUND_FOR_FEED = "The animal '%1$s' is not found in the address book";
+    public static final String MESSAGE_FEEDING_SESSION_NOT_FOUND =
+            "No feeding session found with the specified details";
 
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";

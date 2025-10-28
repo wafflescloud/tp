@@ -303,6 +303,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteFeedingSession(FeedingSession feedingSession) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasFeedingSession(FeedingSession feedingSession) {
             throw new AssertionError("This method should not be called.");
         }

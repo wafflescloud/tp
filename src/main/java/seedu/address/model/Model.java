@@ -170,6 +170,12 @@ public interface Model {
     void addFeedingSession(FeedingSession feedingSession);
 
     /**
+     * Deletes the given feeding session.
+     * {@code feedingSession} must exist in the address book.
+     */
+    void deleteFeedingSession(FeedingSession feedingSession);
+
+    /**
      * Returns true if a feeding session with the same identity exists in the address book.
      */
     boolean hasFeedingSession(FeedingSession feedingSession);
