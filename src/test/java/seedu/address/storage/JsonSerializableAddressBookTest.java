@@ -1,16 +1,20 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.AddressBook;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.TypicalPersons;
 
 public class JsonSerializableAddressBookTest {
@@ -26,7 +30,17 @@ public class JsonSerializableAddressBookTest {
                 JsonSerializableAddressBook.class).get();
         AddressBook addressBookFromFile = dataFromFile.toModelType();
         AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
-        assertEquals(addressBookFromFile, typicalPersonsAddressBook);
+
+        // Compare persons by content ignoring IDs
+        assertEquals(typicalPersonsAddressBook.getPersonList().size(), addressBookFromFile.getPersonList().size());
+        Set<String> expected = new HashSet<>();
+        for (Person p : typicalPersonsAddressBook.getPersonList()) {
+            expected.add(p.getName() + "|" + p.getPhone() + "|" + p.getEmail() + "|" + p.getTags());
+        }
+        for (Person p : addressBookFromFile.getPersonList()) {
+            String key = p.getName() + "|" + p.getPhone() + "|" + p.getEmail() + "|" + p.getTags();
+            assertTrue(expected.contains(key), "Unexpected person loaded: " + p);
+        }
     }
 
     @Test

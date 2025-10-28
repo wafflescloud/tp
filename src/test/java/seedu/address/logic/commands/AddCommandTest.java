@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.UUID;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.animal.Animal;
+import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.AnimalBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -272,6 +274,46 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredAnimalList(Predicate<Animal> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getPersonById(UUID id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Animal getAnimalById(UUID id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<FeedingSession> getFeedingSessionList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public FeedingSession getFeedingSessionById(UUID id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addFeedingSession(FeedingSession feedingSession) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasFeedingSession(FeedingSession feedingSession) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeFeedingSessionsForPerson(UUID personId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeFeedingSessionsForAnimal(UUID animalId) {
             throw new AssertionError("This method should not be called.");
         }
     }
