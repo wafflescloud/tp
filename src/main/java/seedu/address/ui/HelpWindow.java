@@ -71,10 +71,14 @@ public class HelpWindow extends UiPart<Stage> {
         }
 
         Map<String, HelpCommandLoader.CommandHelp> helpMap = HelpCommandLoader.loadCommandHelp();
+        assert helpMap != null : "Help map should not be null";
 
         for (Map.Entry<String, HelpCommandLoader.CommandHelp> entry : helpMap.entrySet()) {
             String commandName = entry.getKey();
             HelpCommandLoader.CommandHelp help = entry.getValue();
+
+            assert commandName != null : "Command name should not be null";
+            assert help != null : "Command help should not be null";
 
             ArrayList<String> commandDetails = new ArrayList<>();
             commandDetails.add(help.getDescription());
@@ -91,7 +95,10 @@ public class HelpWindow extends UiPart<Stage> {
 
             COMMAND_LIST.put(commandName, commandDetails);
         }
+
+        assert !COMMAND_LIST.isEmpty() : "Command list should not be empty after population";
     }
+
 
 
     /**
@@ -128,6 +135,7 @@ public class HelpWindow extends UiPart<Stage> {
      * @return Description, format(s), and example(s) for the command, or null if not found.
      */
     public static String getDescriptionForCommand(String command) {
+        assert command != null : "Command should not be null";
         ArrayList<String> list = COMMAND_LIST.get(command);
         if (list == null || list.isEmpty()) {
             return null;
@@ -155,6 +163,9 @@ public class HelpWindow extends UiPart<Stage> {
      * @param commandName The name of the command to show help for.
      */
     public static void openCommandHelp(String commandName) {
+        assert commandName != null : "Command name should not be null";
+        assert !commandName.trim().isEmpty() : "Command name should not be empty";
+
         HelpFunctionWindow functionWindow;
         if (commandBoxReference != null) {
             functionWindow = new HelpFunctionWindow(commandName, commandBoxReference::setCommandText);

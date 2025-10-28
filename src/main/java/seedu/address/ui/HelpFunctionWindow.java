@@ -35,6 +35,8 @@ public class HelpFunctionWindow extends UiPart<Stage> {
      */
     public HelpFunctionWindow(String commandName) {
         super(FXML, new Stage());
+        assert commandName != null : "Command name should not be null";
+        assert !commandName.trim().isEmpty() : "Command name should not be empty";
         this.commandName = commandName;
         populate();
     }
@@ -48,6 +50,9 @@ public class HelpFunctionWindow extends UiPart<Stage> {
      */
     public HelpFunctionWindow(String commandName, Consumer<String> commandTextSetter) {
         super(FXML, new Stage());
+        assert commandName != null : "Command name should not be null";
+        assert !commandName.trim().isEmpty() : "Command name should not be empty";
+        assert commandTextSetter != null : "Command text setter should not be null";
         this.commandName = commandName;
         this.commandTextSetter = commandTextSetter;
         populate();

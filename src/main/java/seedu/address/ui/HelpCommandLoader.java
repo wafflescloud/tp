@@ -40,6 +40,7 @@ public class HelpCommandLoader {
          * @param description the command description
          */
         public void setDescription(String description) {
+            assert description != null : "Description should not be null";
             this.description = description;
         }
 
@@ -56,6 +57,7 @@ public class HelpCommandLoader {
          * @param formats the list of command formats
          */
         public void setFormats(List<String> formats) {
+            assert formats != null : "Formats list should not be null";
             this.formats = formats;
         }
 
@@ -72,6 +74,7 @@ public class HelpCommandLoader {
          * @param examples the list of command examples
          */
         public void setExamples(List<String> examples) {
+            assert examples != null : "Examples list should not be null";
             this.examples = examples;
         }
     }
@@ -94,11 +97,14 @@ public class HelpCommandLoader {
                 commandHelpMap = mapper.readValue(is,
                         mapper.getTypeFactory().constructMapType(HashMap.class, String.class, CommandHelp.class));
                 logger.info("Successfully loaded command help information");
+                assert commandHelpMap != null : "Command help map should not be null after loading";
+                assert !commandHelpMap.isEmpty() : "Command help map should not be empty after successful load";
             } catch (IOException e) {
                 logger.warning("Failed to load command help: " + e.getMessage());
                 commandHelpMap = new HashMap<>();
             }
         }
+        assert commandHelpMap != null : "Command help map should never be null";
         return commandHelpMap;
     }
 
@@ -109,6 +115,8 @@ public class HelpCommandLoader {
      * @return CommandHelp object or null if not found
      */
     public static CommandHelp getCommandHelp(String commandName) {
+        assert commandName != null : "Command name should not be null";
+        assert !commandName.trim().isEmpty() : "Command name should not be empty";
         return loadCommandHelp().get(commandName);
     }
 }

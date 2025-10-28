@@ -34,6 +34,8 @@ public class HelpCommand extends Command {
      * @param commandName The name of the command to show help for.
      */
     public HelpCommand(String commandName) {
+        assert commandName != null : "Command name should not be null when using this constructor";
+        assert !commandName.trim().isEmpty() : "Command name should not be empty";
         this.commandName = commandName;
         this.isUnrecognizedCommand = false;
     }
@@ -52,6 +54,8 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        assert model != null : "Model should not be null";
+
         if (commandName == null || isUnrecognizedCommand) {
             String message = isUnrecognizedCommand ? UNRECOGNIZED_COMMAND_MESSAGE : SHOWING_HELP_MESSAGE;
             return new CommandResult(message, true, false);
