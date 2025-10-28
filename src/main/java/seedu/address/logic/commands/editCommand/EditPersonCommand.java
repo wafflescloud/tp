@@ -78,9 +78,8 @@ public class EditPersonCommand extends EditCommand {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        // Preserve existing feeding sessions
-        return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedTags, personToEdit.getFeedingSessions());
+        return new Person(personToEdit.getId(), updatedName, updatedPhone, updatedEmail,
+                updatedTags, personToEdit.getFeedingSessionIds());
     }
 
 

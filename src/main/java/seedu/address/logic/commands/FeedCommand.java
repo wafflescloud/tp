@@ -7,9 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -83,31 +81,13 @@ public class FeedCommand extends Command {
                 .orElseThrow(() -> new CommandException(
                         String.format(MESSAGE_ANIMAL_NOT_FOUND, animalName)));
 
-        FeedingSession newFeedingSession = new FeedingSession(person, animal, feedingTime);
+        FeedingSession newFeedingSession = new FeedingSession(animal.getId(), person.getId(), feedingTime, "");
 
-        // Update Person with new feeding session
-        Set<FeedingSession> updatedPersonFeedingSessions = new HashSet<>(person.getFeedingSessions());
-        updatedPersonFeedingSessions.add(newFeedingSession);
+        model.addFeedingSession(newFeedingSession);
 
-        Person updatedPerson = new Person(
-                person.getName(),
-                person.getPhone(),
-                person.getEmail(),
-                person.getTags(),
-                updatedPersonFeedingSessions
-        );
+        Person updatedPerson = person.addFeedingSessionId(newFeedingSession.getId());
 
-        // Update Animal with new feeding session
-        Set<FeedingSession> updatedAnimalFeedingSessions = new HashSet<>(animal.getFeedingSessions());
-        updatedAnimalFeedingSessions.add(newFeedingSession);
-
-        Animal updatedAnimal = new Animal(
-                animal.getName(),
-                animal.getDescription(),
-                animal.getLocation(),
-                animal.getTags(),
-                updatedAnimalFeedingSessions
-        );
+        Animal updatedAnimal = animal.addFeedingSessionId(newFeedingSession.getId());
 
         model.setPerson(person, updatedPerson);
         model.setAnimal(animal, updatedAnimal);

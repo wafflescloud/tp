@@ -1,6 +1,5 @@
 package seedu.address.logic;
 
-import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -55,14 +54,6 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
-
-        if (!person.getFeedingSessions().isEmpty()) {
-            builder.append("; Feeding Sessions: ");
-            person.getFeedingSessions().forEach(session ->
-                builder.append(String.format("[%s at %s]",
-                    session.getAnimalName(),
-                    session.getFeedingTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))));
-        }
 
         return builder.toString();
     }

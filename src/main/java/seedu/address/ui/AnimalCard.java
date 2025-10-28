@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -11,6 +12,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.model.animal.Animal;
 import seedu.address.model.feedingsession.FeedingSession;
+import seedu.address.model.person.Person;
 
 
 /**
@@ -29,6 +31,8 @@ public class AnimalCard extends UiPart<Region> {
      */
 
     public final Animal animal;
+    private final List<FeedingSession> feedingSessions;
+    private final List<Person> persons;
 
     @FXML
     private HBox cardPane;
@@ -54,9 +58,11 @@ public class AnimalCard extends UiPart<Region> {
     /**
      * Creates a {@code AnimalCode} with the given {@code Animal} and name to display.
      */
-    public AnimalCard(Animal animal, int displayedIndex) {
+    public AnimalCard(Animal animal, int displayedIndex, List<FeedingSession> feedingSessions, List<Person> persons) {
         super(FXML);
         this.animal = animal;
+        this.feedingSessions = feedingSessions;
+        this.persons = persons;
         id.setText(displayedIndex + ". ");
         name.setText(animal.getName().fullName);
         description.setText(animal.getDescription().value);
@@ -65,15 +71,38 @@ public class AnimalCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        // Set feeding session details if available
-        if (!animal.getFeedingSessions().isEmpty()) {
-            FeedingSession firstSession = animal.getFeedingSessions().iterator().next();
-            feederName.setText(firstSession.getPersonName());
-            feedingDate.setText(firstSession.getFeedingTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            feedingTime.setText(firstSession.getFeedingTime().format(DateTimeFormatter.ofPattern("HH:mm")));
+        displayEarliestFeedingSession(feedingSessions);
+    }
+
+    /**
+     * Displays the earliest feeding session in the feeding box.
+     */
+    private void displayEarliestFeedingSession(List<FeedingSession> feedingSessions) {
+        FeedingSession earliest = animal.getEarliestFeedingSession(feedingSessions);
+
+        if (earliest != null && feedingBox != null) {
             feedingBox.setVisible(true);
             feedingBox.setManaged(true);
-        } else {
+
+            if (feederName != null) {
+                String personNameText = persons.stream()
+                    .filter(person -> person.getId().equals(earliest.getPersonId()))
+                    .findFirst()
+                    .map(person -> person.getName().fullName)
+                    .orElse("Unknown Person");
+                feederName.setText(personNameText);
+            }
+
+            if (feedingDate != null) {
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+                feedingDate.setText(earliest.getDateTime().format(dateFormatter));
+            }
+
+            if (feedingTime != null) {
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+                feedingTime.setText(earliest.getDateTime().format(timeFormatter));
+            }
+        } else if (feedingBox != null) {
             feedingBox.setVisible(false);
             feedingBox.setManaged(false);
         }

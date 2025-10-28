@@ -3,6 +3,7 @@ package seedu.address.model.util;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
@@ -11,7 +12,6 @@ import seedu.address.model.animal.Animal;
 import seedu.address.model.animal.AnimalName;
 import seedu.address.model.animal.Description;
 import seedu.address.model.animal.Location;
-import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonName;
@@ -83,9 +83,9 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns an empty feeding session set.
+     * Returns an empty feeding session ID set.
      */
-    public static Set<FeedingSession> getFeedingSessionSet() {
+    public static Set<UUID> getFeedingSessionSet() {
         return new HashSet<>();
     }
 

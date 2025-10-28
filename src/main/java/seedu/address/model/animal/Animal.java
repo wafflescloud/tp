@@ -2,11 +2,14 @@ package seedu.address.model.animal;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.UUID;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.feedingsession.FeedingSession;
@@ -19,26 +22,46 @@ import seedu.address.model.tag.Tag;
 public class Animal {
 
     // Identity fields
+    private final UUID id;
     private final AnimalName name;
     private final Description description;
     private final Location location;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<FeedingSession> feedingSessions = new TreeSet<>((a, b) ->
-            a.getFeedingTime().compareTo(b.getFeedingTime()));
+    private final Set<UUID> feedingSessionIds = new HashSet<>();
 
     /**
      * Every field must be present and not null.
+     * Creates a new Animal with auto-generated ID.
      */
     public Animal(AnimalName name, Description description, Location location, Set<Tag> tags,
-                  Set<FeedingSession> feedingSessions) {
+                  Set<UUID> feedingSessionIds) {
         requireAllNonNull(name, description, location);
+        this.id = UUID.randomUUID();
         this.name = name;
         this.description = description;
         this.location = location;
         this.tags.addAll(tags);
-        this.feedingSessions.addAll(feedingSessions);
+        this.feedingSessionIds.addAll(feedingSessionIds);
+    }
+
+    /**
+     * Constructor with explicit ID (for deserialization).
+     */
+    public Animal(UUID id, AnimalName name, Description description, Location location, Set<Tag> tags,
+                  Set<UUID> feedingSessionIds) {
+        requireAllNonNull(id, name, description, location);
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.location = location;
+        this.tags.addAll(tags);
+        this.feedingSessionIds.addAll(feedingSessionIds);
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public AnimalName getName() {
@@ -62,11 +85,60 @@ public class Animal {
     }
 
     /**
-     * Returns an immutable feeding sessions set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable feeding session IDs set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<FeedingSession> getFeedingSessions() {
-        return Collections.unmodifiableSet(feedingSessions);
+    public Set<UUID> getFeedingSessionIds() {
+        return Collections.unmodifiableSet(feedingSessionIds);
+    }
+
+    /**
+     * Returns a new Animal with the given feeding session ID added.
+     */
+    public Animal addFeedingSessionId(UUID sessionId) {
+        Set<UUID> updatedSessions = new HashSet<>(feedingSessionIds);
+        updatedSessions.add(sessionId);
+        return new Animal(id, name, description, location, tags, updatedSessions);
+    }
+
+    /**
+     * Returns a new Animal with the given feeding session ID removed.
+     */
+    public Animal removeFeedingSessionId(UUID sessionId) {
+        Set<UUID> updatedSessions = new HashSet<>(feedingSessionIds);
+        updatedSessions.remove(sessionId);
+        return new Animal(id, name, description, location, tags, updatedSessions);
+    }
+
+    /**
+     * Returns the earliest feeding session this animal is involved in from the given list.
+     * @param allSessions List of all feeding sessions to search from
+     * @return The earliest feeding session, or null if none found
+     */
+    public FeedingSession getEarliestFeedingSession(List<FeedingSession> allSessions) {
+        if (allSessions == null || allSessions.isEmpty()) {
+            return null;
+        }
+
+        return allSessions.stream()
+                .filter(session -> session.involvesAnimal(this.id))
+                .min(Comparator.comparing(FeedingSession::getDateTime))
+                .orElse(null);
+    }
+
+    /**
+     * Returns a formatted string of the earliest feeding session, or empty string if none.
+     * @param allSessions List of all feeding sessions to search from
+     * @return Formatted string showing next feeding time, or empty string
+     */
+    public String getEarliestFeedingSessionDisplay(List<FeedingSession> allSessions) {
+        FeedingSession earliest = getEarliestFeedingSession(allSessions);
+        if (earliest == null) {
+            return "";
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm");
+        return String.format("Next feeding: %s", earliest.getDateTime().format(formatter));
     }
 
     /**
@@ -97,26 +169,28 @@ public class Animal {
         }
 
         Animal otherAnimal = (Animal) other;
-        return name.equals(otherAnimal.name)
+        return id.equals(otherAnimal.id)
+                && name.equals(otherAnimal.name)
                 && description.equals(otherAnimal.description)
                 && location.equals(otherAnimal.location)
                 && tags.equals(otherAnimal.tags)
-                && feedingSessions.equals(otherAnimal.feedingSessions);
+                && feedingSessionIds.equals(otherAnimal.feedingSessionIds);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, location, tags, feedingSessions);
+        return Objects.hash(id, name, description, location, tags, feedingSessionIds);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("id", id)
                 .add("name", name)
                 .add("description", description)
                 .add("location", location)
                 .add("tags", tags)
-                .add("feeding sessions", feedingSessions)
+                .add("feeding session IDs", feedingSessionIds)
                 .toString();
     }
 }

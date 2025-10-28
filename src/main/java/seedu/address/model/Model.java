@@ -1,11 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.UUID;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.animal.Animal;
+import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.person.Person;
 
 /**
@@ -158,4 +160,52 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredAnimalList(Predicate<Animal> predicate);
+
+    // =========== FeedingSession Operations ================================================================
+
+    /**
+     * Adds the given feeding session.
+     * {@code feedingSession} must not already exist in the address book.
+     */
+    void addFeedingSession(FeedingSession feedingSession);
+
+    /**
+     * Returns true if a feeding session with the same identity exists in the address book.
+     */
+    boolean hasFeedingSession(FeedingSession feedingSession);
+
+    /**
+     * Returns a feeding session by its ID.
+     * Returns null if not found.
+     */
+    FeedingSession getFeedingSessionById(UUID id);
+
+    /**
+     * Returns a person by their ID.
+     * Returns null if not found.
+     */
+    Person getPersonById(UUID id);
+
+    /**
+     * Returns an animal by their ID.
+     * Returns null if not found.
+     */
+    Animal getAnimalById(UUID id);
+
+    /**
+     * Removes all feeding sessions associated with the given animal.
+     */
+    void removeFeedingSessionsForAnimal(UUID animalId);
+
+    /**
+     * Removes all feeding sessions associated with the given person.
+     */
+    void removeFeedingSessionsForPerson(UUID personId);
+
+    // =========== Feeding Session List Accessors ===========================================================
+
+    /**
+     * Returns an unmodifiable view of the feeding session list.
+     */
+    ObservableList<FeedingSession> getFeedingSessionList();
 }

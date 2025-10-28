@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -12,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.animal.Animal;
+import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,24 +24,31 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_ANIMAL = "Animals list contains duplicate animal(s).";
+    public static final String MESSAGE_DUPLICATE_FEEDING_SESSION =
+            "Feeding sessions list contains duplicate session(s).";
+    public static final String MESSAGE_ORPHANED_FEEDING_SESSION =
+            "Feeding session references non-existent animal or person.";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedAnimal> animals = new ArrayList<>();
+    private final List<JsonAdaptedFeedingSession> feedingSessions = new ArrayList<>();
 
-
-    /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
-     */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                                       @JsonProperty("animals") List<JsonAdaptedAnimal> animals,
+                                       @JsonProperty("feedingSessions")
+                                       List<JsonAdaptedFeedingSession> feedingSessions) {
+        if (persons != null) {
+            this.persons.addAll(persons);
+        }
+        if (animals != null) {
+            this.animals.addAll(animals);
+        }
+        if (feedingSessions != null) {
+            this.feedingSessions.addAll(feedingSessions);
+        }
     }
 
-    /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
-     *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
-     */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream()
                 .map(JsonAdaptedPerson::new)
@@ -47,29 +56,54 @@ class JsonSerializableAddressBook {
         animals.addAll(source.getAnimalList().stream()
                 .map(JsonAdaptedAnimal::new)
                 .collect(Collectors.toList()));
+        feedingSessions.addAll(source.getFeedingSessionList().stream()
+                .map(JsonAdaptedFeedingSession::new)
+                .collect(Collectors.toList()));
     }
 
-    /**
-     * Converts this address book into the model's {@code AddressBook} object.
-     *
-     * @throws IllegalValueException if there were any data constraints violated.
-     */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+
+        for (JsonAdaptedFeedingSession jsonAdaptedSession : feedingSessions) {
+            FeedingSession session = jsonAdaptedSession.toModelType();
+            if (addressBook.hasFeedingSession(session)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_FEEDING_SESSION);
+            }
+            addressBook.addFeedingSession(session);
+        }
+
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
+
+            for (String sessionId : jsonAdaptedPerson.getFeedingSessionIds()) {
+                UUID uuid = UUID.fromString(sessionId);
+                if (!addressBook.hasFeedingSessionById(uuid)) {
+                    throw new IllegalValueException(MESSAGE_ORPHANED_FEEDING_SESSION);
+                }
+            }
+
             addressBook.addPerson(person);
         }
+
         for (JsonAdaptedAnimal jsonAdaptedAnimal : animals) {
             Animal animal = jsonAdaptedAnimal.toModelType();
             if (addressBook.hasAnimal(animal)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_ANIMAL);
             }
+
+            for (String sessionId : jsonAdaptedAnimal.getFeedingSessionIds()) {
+                UUID uuid = UUID.fromString(sessionId);
+                if (!addressBook.hasFeedingSessionById(uuid)) {
+                    throw new IllegalValueException(MESSAGE_ORPHANED_FEEDING_SESSION);
+                }
+            }
+
             addressBook.addAnimal(animal);
         }
+
         return addressBook;
     }
 
