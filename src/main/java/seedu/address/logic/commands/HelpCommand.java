@@ -60,8 +60,7 @@ public class HelpCommand extends Command {
             String message = isUnrecognizedCommand ? UNRECOGNIZED_COMMAND_MESSAGE : SHOWING_HELP_MESSAGE;
             return new CommandResult(message, true, false);
         } else {
-            HelpWindow.openCommandHelp(commandName);
-            return new CommandResult("Showing help for " + commandName, false, false);
+            return new CommandResult("Showing help for " + commandName, false, false, commandName);
         }
     }
 }

@@ -200,6 +200,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
+            if (commandResult.getCommandToShowHelpFor() != null) {
+                HelpWindow.openCommandHelp(commandResult.getCommandToShowHelpFor());
+            }
+
             if (commandResult.isExit()) {
                 handleExit();
             }
