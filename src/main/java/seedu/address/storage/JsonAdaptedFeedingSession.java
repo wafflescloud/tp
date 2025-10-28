@@ -45,10 +45,6 @@ class JsonAdaptedFeedingSession {
     }
 
     public FeedingSession toModelType() throws IllegalValueException {
-        if (id == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "id"));
-        }
-
         if (animalId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "animalId"));
         }
@@ -67,7 +63,7 @@ class JsonAdaptedFeedingSession {
         final LocalDateTime modelDateTime;
 
         try {
-            modelId = UUID.fromString(id);
+            modelId = (id == null) ? UUID.randomUUID() : UUID.fromString(id);
             modelAnimalId = UUID.fromString(animalId);
             modelPersonId = UUID.fromString(personId);
             modelDateTime = LocalDateTime.parse(dateTime, DATE_TIME_FORMATTER);

@@ -64,6 +64,8 @@ class JsonSerializableAddressBook {
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
 
+        boolean hasExplicitSessions = !feedingSessions.isEmpty();
+
         for (JsonAdaptedFeedingSession jsonAdaptedSession : feedingSessions) {
             FeedingSession session = jsonAdaptedSession.toModelType();
             if (addressBook.hasFeedingSession(session)) {
@@ -78,11 +80,16 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
 
-            for (String sessionId : jsonAdaptedPerson.getFeedingSessionIds()) {
-                UUID uuid = UUID.fromString(sessionId);
-                if (!addressBook.hasFeedingSessionById(uuid)) {
-                    throw new IllegalValueException(MESSAGE_ORPHANED_FEEDING_SESSION);
+            if (hasExplicitSessions) {
+                for (String sessionId : jsonAdaptedPerson.getFeedingSessionIds()) {
+                    UUID uuid = UUID.fromString(sessionId);
+                    if (!addressBook.hasFeedingSessionById(uuid)) {
+                        throw new IllegalValueException(MESSAGE_ORPHANED_FEEDING_SESSION);
+                    }
                 }
+            } else {
+                person = new seedu.address.model.person.Person(person.getId(), person.getName(), person.getPhone(),
+                        person.getEmail(), person.getTags(), new java.util.HashSet<>());
             }
 
             addressBook.addPerson(person);
@@ -94,11 +101,16 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_ANIMAL);
             }
 
-            for (String sessionId : jsonAdaptedAnimal.getFeedingSessionIds()) {
-                UUID uuid = UUID.fromString(sessionId);
-                if (!addressBook.hasFeedingSessionById(uuid)) {
-                    throw new IllegalValueException(MESSAGE_ORPHANED_FEEDING_SESSION);
+            if (hasExplicitSessions) {
+                for (String sessionId : jsonAdaptedAnimal.getFeedingSessionIds()) {
+                    UUID uuid = UUID.fromString(sessionId);
+                    if (!addressBook.hasFeedingSessionById(uuid)) {
+                        throw new IllegalValueException(MESSAGE_ORPHANED_FEEDING_SESSION);
+                    }
                 }
+            } else {
+                animal = new seedu.address.model.animal.Animal(animal.getId(), animal.getName(),
+                        animal.getDescription(), animal.getLocation(), animal.getTags(), new java.util.HashSet<>());
             }
 
             addressBook.addAnimal(animal);

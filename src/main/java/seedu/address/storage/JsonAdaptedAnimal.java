@@ -76,14 +76,15 @@ class JsonAdaptedAnimal {
             animalTags.add(tag.toModelType());
         }
 
-        if (id == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "id"));
-        }
         final UUID modelId;
-        try {
-            modelId = UUID.fromString(id);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalValueException("Invalid UUID format for id");
+        if (id == null) {
+            modelId = UUID.randomUUID();
+        } else {
+            try {
+                modelId = UUID.fromString(id);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalValueException("Invalid UUID format for id");
+            }
         }
 
         if (name == null) {
