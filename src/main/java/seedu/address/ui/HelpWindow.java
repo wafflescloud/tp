@@ -62,8 +62,8 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Populates the command list if empty. Each command maps to a list whose first element is a simple description
-     * placeholder (currently identical to the command name). Extend later with syntax/examples etc.
+     * Populates the command list if empty. Each command maps to a list whose first element is the command description,
+     * followed by format(s) and example(s) loaded from the external help JSON file.
      */
     private void populateCommandList() {
         if (!COMMAND_LIST.isEmpty()) {
@@ -77,14 +77,16 @@ public class HelpWindow extends UiPart<Stage> {
             HelpCommandLoader.CommandHelp help = entry.getValue();
 
             ArrayList<String> commandDetails = new ArrayList<>();
-            commandDetails.add(help.description);
+            commandDetails.add(help.getDescription());
 
-            if (!help.formats.isEmpty()) {
-                commandDetails.add("Command format: " + String.join(" OR ", help.formats));
+            if (help.getFormats() != null && !help.getFormats().isEmpty()) {
+                commandDetails.add("Command format: " + String.join(" OR ", help.getFormats()));
             }
 
-            for (String example : help.examples) {
-                commandDetails.add("Example: " + example);
+            if (help.getExamples() != null) {
+                for (String example : help.getExamples()) {
+                    commandDetails.add("Example: " + example);
+                }
             }
 
             COMMAND_LIST.put(commandName, commandDetails);
@@ -94,6 +96,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Creates individual clickable labels for each command and adds them to the commandLinksContainer.
+     * Each label opens a detailed help window for the command when clicked.
      */
     private void createCommandLinks() {
         commandLinksContainer.getChildren().clear();
@@ -110,6 +113,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Returns a string with all command keys separated by a newline in alphabetical order.
+     * @return String of all command names, one per line.
      */
     public String getCommands() {
         return COMMAND_LIST.keySet().stream()
@@ -120,6 +124,8 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Retrieves all description lines for a command joined by newlines, or null if absent.
+     * @param command The command name.
+     * @return Description, format(s), and example(s) for the command, or null if not found.
      */
     public static String getDescriptionForCommand(String command) {
         ArrayList<String> list = COMMAND_LIST.get(command);
@@ -160,7 +166,8 @@ public class HelpWindow extends UiPart<Stage> {
 
 
     /**
-     * Exposes the commandList (immutable view suggestion in future). Currently returns backing map.
+     * Exposes the commandList. Returns the backing map of command names to their details.
+     * @return Map of command names to their details.
      */
     public static Map<String, ArrayList<String>> getCommandList() {
         return COMMAND_LIST;
@@ -192,6 +199,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Returns true if the help window is currently being shown.
+     * @return true if showing, false otherwise.
      */
     public boolean isShowing() {
         return getRoot().isShowing();

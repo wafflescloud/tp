@@ -23,9 +23,57 @@ public class HelpCommandLoader {
      * Represents help information for a single command.
      */
     public static class CommandHelp {
-        public String description;
-        public List<String> formats;
-        public List<String> examples;
+        private String description;
+        private List<String> formats;
+        private List<String> examples;
+
+        /**
+         * Returns the description of the command.
+         * @return the command description
+         */
+        public String getDescription() {
+            return description;
+        }
+
+        /**
+         * Sets the description of the command.
+         * @param description the command description
+         */
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        /**
+         * Returns the list of formats for the command.
+         * @return the list of command formats
+         */
+        public List<String> getFormats() {
+            return formats;
+        }
+
+        /**
+         * Sets the list of formats for the command.
+         * @param formats the list of command formats
+         */
+        public void setFormats(List<String> formats) {
+            this.formats = formats;
+        }
+
+        /**
+         * Returns the list of examples for the command.
+         * @return the list of command examples
+         */
+        public List<String> getExamples() {
+            return examples;
+        }
+
+        /**
+         * Sets the list of examples for the command.
+         * @param examples the list of command examples
+         */
+        public void setExamples(List<String> examples) {
+            this.examples = examples;
+        }
     }
 
     /**
