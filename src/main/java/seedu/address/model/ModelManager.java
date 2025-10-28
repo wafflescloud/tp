@@ -140,10 +140,6 @@ public class ModelManager implements Model {
     public void deletePerson(Person target) {
         saveState();
 
-        // Remove all feeding sessions associated with this person
-        removeFeedingSessionsForPerson(target.getId());
-
-        // Update all animals who have feeding sessions with this person
         for (UUID sessionId : target.getFeedingSessionIds()) {
             FeedingSession session = addressBook.getFeedingSessionById(sessionId);
             if (session != null) {
@@ -152,8 +148,17 @@ public class ModelManager implements Model {
                     Animal updatedAnimal = animal.removeFeedingSessionId(sessionId);
                     addressBook.setAnimal(animal, updatedAnimal);
                 }
+            } else {
+                for (Animal animal : addressBook.getAnimalList()) {
+                    if (animal.getFeedingSessionIds().contains(sessionId)) {
+                        Animal updatedAnimal = animal.removeFeedingSessionId(sessionId);
+                        addressBook.setAnimal(animal, updatedAnimal);
+                    }
+                }
             }
         }
+
+        removeFeedingSessionsForPerson(target.getId());
 
         addressBook.removePerson(target);
     }
@@ -184,8 +189,6 @@ public class ModelManager implements Model {
     public void deleteAnimal(Animal target) {
         saveState();
 
-        removeFeedingSessionsForAnimal(target.getId());
-
         for (UUID sessionId : target.getFeedingSessionIds()) {
             FeedingSession session = addressBook.getFeedingSessionById(sessionId);
             if (session != null) {
@@ -194,8 +197,17 @@ public class ModelManager implements Model {
                     Person updatedPerson = person.removeFeedingSessionId(sessionId);
                     addressBook.setPerson(person, updatedPerson);
                 }
+            } else {
+                for (Person person : addressBook.getPersonList()) {
+                    if (person.getFeedingSessionIds().contains(sessionId)) {
+                        Person updatedPerson = person.removeFeedingSessionId(sessionId);
+                        addressBook.setPerson(person, updatedPerson);
+                    }
+                }
             }
         }
+
+        removeFeedingSessionsForAnimal(target.getId());
 
         addressBook.removeAnimal(target);
     }
