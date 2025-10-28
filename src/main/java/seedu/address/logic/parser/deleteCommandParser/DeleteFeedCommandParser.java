@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.deleteCommand.DeleteFeedCommand;
+import seedu.address.logic.commands.DeleteFeedCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.PersonName;
 

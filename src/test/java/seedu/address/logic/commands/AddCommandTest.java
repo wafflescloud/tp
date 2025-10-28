@@ -321,6 +321,18 @@ public class AddCommandTest {
         public void removeFeedingSessionsForAnimal(UUID animalId) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addFeedingSessionWithUpdates(FeedingSession feedingSession, Person person, Person updatedPerson,
+                                                 Animal animal, Animal updatedAnimal) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteFeedingSessionWithUpdates(FeedingSession feedingSession, Person person, Person updatedPerson,
+                                                    Animal animal, Animal updatedAnimal) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

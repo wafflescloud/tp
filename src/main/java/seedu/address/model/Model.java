@@ -208,6 +208,34 @@ public interface Model {
      */
     void removeFeedingSessionsForPerson(UUID personId);
 
+    // =========== Feeding Session Composite Operations =====================================================
+
+    /**
+     * Adds a feeding session and updates the associated person and animal atomically.
+     * This operation saves state once before all changes.
+     *
+     * @param feedingSession The feeding session to add
+     * @param person The person to update with the feeding session ID
+     * @param updatedPerson The updated person with the feeding session ID added
+     * @param animal The animal to update with the feeding session ID
+     * @param updatedAnimal The updated animal with the feeding session ID added
+     */
+    void addFeedingSessionWithUpdates(FeedingSession feedingSession, Person person, Person updatedPerson,
+                                      Animal animal, Animal updatedAnimal);
+
+    /**
+     * Deletes a feeding session and updates the associated person and animal atomically.
+     * This operation saves state once before all changes.
+     *
+     * @param feedingSession The feeding session to delete
+     * @param person The person to update by removing the feeding session ID
+     * @param updatedPerson The updated person with the feeding session ID removed
+     * @param animal The animal to update by removing the feeding session ID
+     * @param updatedAnimal The updated animal with the feeding session ID removed
+     */
+    void deleteFeedingSessionWithUpdates(FeedingSession feedingSession, Person person, Person updatedPerson,
+                                         Animal animal, Animal updatedAnimal);
+
     // =========== Feeding Session List Accessors ===========================================================
 
     /**

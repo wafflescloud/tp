@@ -83,14 +83,11 @@ public class FeedCommand extends Command {
 
         FeedingSession newFeedingSession = new FeedingSession(animal.getId(), person.getId(), feedingTime, "");
 
-        model.addFeedingSession(newFeedingSession);
-
         Person updatedPerson = person.addFeedingSessionId(newFeedingSession.getId());
 
         Animal updatedAnimal = animal.addFeedingSessionId(newFeedingSession.getId());
 
-        model.setPerson(person, updatedPerson);
-        model.setAnimal(animal, updatedAnimal);
+        model.addFeedingSessionWithUpdates(newFeedingSession, person, updatedPerson, animal, updatedAnimal);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy 'at' HH:mm");
         return new CommandResult(String.format(MESSAGE_SUCCESS,

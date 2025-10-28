@@ -303,6 +303,28 @@ public class ModelManager implements Model {
         addressBook.removeFeedingSessionsForPerson(personId);
     }
 
+    // =========== Feeding Session Composite Operations =====================================================
+
+    @Override
+    public void addFeedingSessionWithUpdates(FeedingSession feedingSession, Person person, Person updatedPerson,
+                                             Animal animal, Animal updatedAnimal) {
+        requireAllNonNull(feedingSession, person, updatedPerson, animal, updatedAnimal);
+        saveState();
+        addressBook.addFeedingSession(feedingSession);
+        addressBook.setPerson(person, updatedPerson);
+        addressBook.setAnimal(animal, updatedAnimal);
+    }
+
+    @Override
+    public void deleteFeedingSessionWithUpdates(FeedingSession feedingSession, Person person, Person updatedPerson,
+                                                Animal animal, Animal updatedAnimal) {
+        requireAllNonNull(feedingSession, person, updatedPerson, animal, updatedAnimal);
+        saveState();
+        addressBook.removeFeedingSession(feedingSession);
+        addressBook.setPerson(person, updatedPerson);
+        addressBook.setAnimal(animal, updatedAnimal);
+    }
+
     // =========== Feeding Session List Accessors ===========================================================
 
     @Override

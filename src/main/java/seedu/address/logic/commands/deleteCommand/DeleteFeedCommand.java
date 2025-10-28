@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.deleteCommand;
+package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
@@ -67,13 +67,10 @@ public class DeleteFeedCommand extends DeleteCommand {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_FEEDING_SESSION_NOT_FOUND));
 
-        model.deleteFeedingSession(sessionToDelete);
-
         Person updatedPerson = person.removeFeedingSessionId(sessionToDelete.getId());
         Animal updatedAnimal = animal.removeFeedingSessionId(sessionToDelete.getId());
 
-        model.setPerson(person, updatedPerson);
-        model.setAnimal(animal, updatedAnimal);
+        model.deleteFeedingSessionWithUpdates(sessionToDelete, person, updatedPerson, animal, updatedAnimal);
 
         return new CommandResult(String.format(Messages.MESSAGE_DELETED_FEEDING_SESSION_SUCCESS,
                 personName, animalName, feedingTime));
