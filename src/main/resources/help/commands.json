@@ -1,0 +1,77 @@
+{
+  "add": {
+    "description": "Adds a new person or animal record to the system.",
+    "formats": [
+      "add animal n/NAME d/DESCRIPTION l/LOCATION",
+      "add person n/NAME p/PHONE e/EMAIL [t/TAG]..."
+    ],
+    "examples": [
+      "add animal n/Bob d/Brown tabby with stripes l/Near Block 14 canteen",
+      "add person n/John Doe p/91234567 e/johndoe@gmail.com t/friend t/funny"
+    ]
+  },
+  "delete": {
+    "description": "Deletes an existing record from the system.",
+    "formats": [
+      "delete person n/NAME",
+      "delete animal n/NAME"
+    ],
+    "examples": [
+      "delete person n/John Tan",
+      "delete animal n/Fluffy"
+    ]
+  },
+  "edit": {
+    "description": "Edits an existing record from the system.",
+    "formats": [
+      "edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/tag...] [f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]",
+      "edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION]"
+    ],
+    "examples": [
+      "edit person John Doe p/98765432 a/321, Jane Street",
+      "edit animal Bob n/Bobby"
+    ]
+  },
+  "find": {
+    "description": "Searches a record from the system.",
+    "formats": [
+      "find person NAME",
+      "find animal NAME"
+    ],
+    "examples": [
+      "find person Sam",
+      "find animal Bella"
+    ]
+  },
+  "help": {
+    "description": "Opens the help window, or shows detailed help for a specified command.",
+    "formats": [
+      "help [COMMAND]"
+    ],
+    "examples": [
+      "help",
+      "help add person"
+    ]
+  },
+  "list": {
+    "description": "Lists all persons and animals in the system.",
+    "formats": [
+      "list"
+    ],
+    "examples": []
+  },
+  "clear": {
+    "description": "Clears all stored person and animal records.",
+    "formats": [
+      "clear"
+    ],
+    "examples": []
+  },
+  "exit": {
+    "description": "Exits the application.",
+    "formats": [
+      "exit"
+    ],
+    "examples": []
+  }
+}
