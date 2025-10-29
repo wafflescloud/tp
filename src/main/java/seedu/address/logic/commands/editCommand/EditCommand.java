@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FEEDING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -24,12 +22,10 @@ public abstract class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_FEEDING + "ANIMAL_NAME " + PREFIX_DATETIME + "YYYY-MM-DD HH:MM]...\n"
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " person John Doe "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com "
-            + PREFIX_FEEDING + "Max " + PREFIX_DATETIME + "2025-01-01 14:30\n"
+            + PREFIX_EMAIL + "johndoe@example.com\n"
             + "\n"
             + "2. To edit an animal: \n"
             + "Parameters: NAME "
@@ -39,6 +35,6 @@ public abstract class EditCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]... "
             + "Example: " + COMMAND_WORD + " animal Kitty "
             + PREFIX_DESCRIPTION + "Grey Cat "
-            + PREFIX_LOCATION + "UTOWN"
+            + PREFIX_LOCATION + "UTOWN "
             + PREFIX_TAG + "Alex";
 }

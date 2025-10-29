@@ -26,6 +26,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             return new DeletePersonCommandParser().parse(rest);
         } else if (type.equals(CliSyntax.TYPE_ANIMAL)) {
             return new DeleteAnimalCommandParser().parse(rest);
+        } else if (type.equals(CliSyntax.TYPE_FEEDING_SESSION)) {
+            return new DeleteFeedCommandParser().parse(rest);
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }

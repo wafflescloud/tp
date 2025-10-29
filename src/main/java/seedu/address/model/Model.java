@@ -1,11 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.UUID;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.animal.Animal;
+import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.person.Person;
 
 /**
@@ -158,4 +160,86 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredAnimalList(Predicate<Animal> predicate);
+
+    // =========== FeedingSession Operations ================================================================
+
+    /**
+     * Adds the given feeding session.
+     * {@code feedingSession} must not already exist in the address book.
+     */
+    void addFeedingSession(FeedingSession feedingSession);
+
+    /**
+     * Deletes the given feeding session.
+     * {@code feedingSession} must exist in the address book.
+     */
+    void deleteFeedingSession(FeedingSession feedingSession);
+
+    /**
+     * Returns true if a feeding session with the same identity exists in the address book.
+     */
+    boolean hasFeedingSession(FeedingSession feedingSession);
+
+    /**
+     * Returns a feeding session by its ID.
+     * Returns null if not found.
+     */
+    FeedingSession getFeedingSessionById(UUID id);
+
+    /**
+     * Returns a person by their ID.
+     * Returns null if not found.
+     */
+    Person getPersonById(UUID id);
+
+    /**
+     * Returns an animal by their ID.
+     * Returns null if not found.
+     */
+    Animal getAnimalById(UUID id);
+
+    /**
+     * Removes all feeding sessions associated with the given animal.
+     */
+    void removeFeedingSessionsForAnimal(UUID animalId);
+
+    /**
+     * Removes all feeding sessions associated with the given person.
+     */
+    void removeFeedingSessionsForPerson(UUID personId);
+
+    // =========== Feeding Session Composite Operations =====================================================
+
+    /**
+     * Adds a feeding session and updates the associated person and animal atomically.
+     * This operation saves state once before all changes.
+     *
+     * @param feedingSession The feeding session to add
+     * @param person The person to update with the feeding session ID
+     * @param updatedPerson The updated person with the feeding session ID added
+     * @param animal The animal to update with the feeding session ID
+     * @param updatedAnimal The updated animal with the feeding session ID added
+     */
+    void addFeedingSessionWithUpdates(FeedingSession feedingSession, Person person, Person updatedPerson,
+                                      Animal animal, Animal updatedAnimal);
+
+    /**
+     * Deletes a feeding session and updates the associated person and animal atomically.
+     * This operation saves state once before all changes.
+     *
+     * @param feedingSession The feeding session to delete
+     * @param person The person to update by removing the feeding session ID
+     * @param updatedPerson The updated person with the feeding session ID removed
+     * @param animal The animal to update by removing the feeding session ID
+     * @param updatedAnimal The updated animal with the feeding session ID removed
+     */
+    void deleteFeedingSessionWithUpdates(FeedingSession feedingSession, Person person, Person updatedPerson,
+                                         Animal animal, Animal updatedAnimal);
+
+    // =========== Feeding Session List Accessors ===========================================================
+
+    /**
+     * Returns an unmodifiable view of the feeding session list.
+     */
+    ObservableList<FeedingSession> getFeedingSessionList();
 }

@@ -72,9 +72,9 @@
                                     <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
                                 </padding>
                                 <children>
-                                    <Label fx:id="animalName" text="Animal Name" />
-                                    <Label fx:id="feedingDate" text="Feeding Date" />
-                                    <Label fx:id="feedingTime" text="Feeding Time" />
+                                    <Label fx:id="animalName" text="" />
+                                    <Label fx:id="feedingDate" text="" />
+                                    <Label fx:id="feedingTime" text="" />
                                 </children>
                             </VBox>
                         </content>

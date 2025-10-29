@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FEEDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 /**
@@ -20,5 +22,15 @@ public abstract class DeleteCommand extends Command {
             + COMMAND_WORD + " animal "
             + PREFIX_NAME + "NAME\n"
             + "Example: " + COMMAND_WORD + " animal "
-            + PREFIX_NAME + "Max";
+            + PREFIX_NAME + "Max\n"
+            + "\n"
+            + "3. To delete a feeding session:\n"
+            + COMMAND_WORD + " feed "
+            + PREFIX_NAME + "ANIMAL_NAME "
+            + PREFIX_FEEDER + "PERSON_NAME "
+            + PREFIX_DATETIME + "DATETIME\n"
+            + "Example: " + COMMAND_WORD + " feed "
+            + PREFIX_NAME + "Max "
+            + PREFIX_FEEDER + "Matt "
+            + PREFIX_DATETIME + "2025-12-25 09:00";
 }

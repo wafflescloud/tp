@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -9,6 +10,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.animal.Animal;
+import seedu.address.model.feedingsession.FeedingSession;
+import seedu.address.model.person.Person;
 
 /**
  * Panel containing the list of animals.
@@ -20,13 +23,28 @@ public class AnimalListPanel extends UiPart<Region> {
     @FXML
     private ListView<Animal> animalListView;
 
+    private final ObservableList<FeedingSession> feedingSessionList;
+    private final ObservableList<Person> personList;
+
     /**
      * Creates a {@code AnimalListPanel} with the given {@code ObservableList}.
      */
-    public AnimalListPanel(ObservableList<Animal> personList) {
+    public AnimalListPanel(ObservableList<Animal> animalList, ObservableList<FeedingSession> feedingSessionList,
+                          ObservableList<Person> personList) {
         super(FXML);
-        animalListView.setItems(personList);
+        this.feedingSessionList = feedingSessionList;
+        this.personList = personList;
+        animalListView.setItems(animalList);
         animalListView.setCellFactory(listView -> new AnimalListViewCell());
+
+        feedingSessionList.addListener((ListChangeListener<FeedingSession>) c -> {
+            animalListView.refresh();
+        });
+
+        personList.addListener((ListChangeListener<Person>) c -> {
+            animalListView.refresh();
+        });
+
         animalListView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 Animal selectedAnimal = animalListView.getSelectionModel().getSelectedItem();
@@ -49,7 +67,8 @@ public class AnimalListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new AnimalCard(animal, getIndex() + 1).getRoot());
+                setGraphic(new AnimalCard(animal, getIndex() + 1,
+                    feedingSessionList, personList).getRoot());
             }
         }
     }

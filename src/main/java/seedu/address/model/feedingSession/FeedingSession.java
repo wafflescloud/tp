@@ -3,49 +3,83 @@ package seedu.address.model.feedingsession;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
-
-import seedu.address.model.animal.Animal;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
- * Represents a feeding session in the address book.
- * Contains an animal and its feeding time.
+ * Represents a FeedingSession in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class FeedingSession {
-    private final Animal animal;
-    private final LocalDateTime feedingTime;
+    private final UUID id;
+    private final UUID animalId;
+    private final UUID personId;
+    private final LocalDateTime dateTime;
+    private final String notes;
 
     /**
      * Every field must be present and not null.
-     * Creates a new feeding session with the specified animal and feeding time.
-     *
-     * @param animal The animal to be fed
-     * @param feedingTime The date and time when the feeding should occur
-     * @throws NullPointerException if any of the fields are null
+     * Creates a new feeding session with auto-generated ID.
      */
-    public FeedingSession(Animal animal, LocalDateTime feedingTime) {
-        requireNonNull(animal);
-        requireNonNull(feedingTime);
-        this.animal = animal;
-        this.feedingTime = feedingTime;
+    public FeedingSession(UUID animalId, UUID personId, LocalDateTime dateTime, String notes) {
+        requireNonNull(animalId);
+        requireNonNull(personId);
+        requireNonNull(dateTime);
+        this.id = UUID.randomUUID();
+        this.animalId = animalId;
+        this.personId = personId;
+        this.dateTime = dateTime;
+        this.notes = notes != null ? notes : "";
     }
 
     /**
-     * Returns the animal to be fed.
-     *
-     * @return the animal
+     * Constructor with explicit ID (for deserialization).
      */
-    public Animal getAnimal() {
-        return animal;
+    public FeedingSession(UUID id, UUID animalId, UUID personId, LocalDateTime dateTime, String notes) {
+        requireNonNull(id);
+        requireNonNull(animalId);
+        requireNonNull(personId);
+        requireNonNull(dateTime);
+        this.id = id;
+        this.animalId = animalId;
+        this.personId = personId;
+        this.dateTime = dateTime;
+        this.notes = notes != null ? notes : "";
     }
 
-    /**
-     * Returns the scheduled feeding time.
-     *
-     * @return the date and time of the feeding session
-     */
+    public UUID getId() {
+        return id;
+    }
+
+    public UUID getAnimalId() {
+        return animalId;
+    }
+
+    public UUID getPersonId() {
+        return personId;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
     public LocalDateTime getFeedingTime() {
-        return feedingTime;
+        return dateTime;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    /**
+     * Returns true if both feeding sessions have the same identity (ID).
+     */
+    public boolean isSameFeedingSession(FeedingSession otherSession) {
+        if (otherSession == this) {
+            return true;
+        }
+
+        return otherSession != null && otherSession.getId().equals(getId());
     }
 
     @Override
@@ -59,13 +93,38 @@ public class FeedingSession {
         }
 
         FeedingSession otherSession = (FeedingSession) other;
-        return animal.equals(otherSession.animal)
-                && feedingTime.equals(otherSession.feedingTime);
+        return id.equals(otherSession.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    /**
+     * Returns true if this feeding session involves the given person.
+     */
+    public boolean involvesPerson(UUID personId) {
+        return this.personId.equals(personId);
+    }
+
+    /**
+     * Returns true if this feeding session involves the given animal.
+     */
+    public boolean involvesAnimal(UUID animalId) {
+        return this.animalId.equals(animalId);
+    }
+
+    /**
+     * Returns true if this feeding session is earlier than the other.
+     */
+    public boolean isEarlierThan(FeedingSession other) {
+        return this.dateTime.isBefore(other.dateTime);
     }
 
     @Override
     public String toString() {
-        return String.format("Feeding Session: %s at %s",
-                animal.getName(), feedingTime);
+        return String.format("FeedingSession[id=%s, animalId=%s, personId=%s, dateTime=%s, notes=%s]",
+                id, animalId, personId, dateTime, notes);
     }
 }
