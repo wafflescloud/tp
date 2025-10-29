@@ -9,7 +9,9 @@ import java.util.function.Function;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.exceptions.DuplicateEmailException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.DuplicatePhoneException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
@@ -74,6 +76,14 @@ public class UniquePersonList implements Iterable<Person> {
         requireNonNull(toAdd);
         if (containsPerson(toAdd)) {
             throw new DuplicatePersonException();
+        }
+
+        if (containsPhone(toAdd.getPhone())) {
+            throw new DuplicatePhoneException();
+        }
+
+        if (containsEmail(toAdd.getEmail())) {
+            throw new DuplicateEmailException();
         }
 
         internalList.add(toAdd);
