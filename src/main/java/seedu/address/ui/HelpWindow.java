@@ -131,6 +131,14 @@ public class HelpWindow extends UiPart<Stage> {
         exitDescription.add("Exits the application.");
         exitDescription.add("Command format: exit");
         COMMAND_LIST.put("exit", exitDescription);
+
+        // view command with detailed description
+        ArrayList<String> viewDescription = new ArrayList<>();
+        viewDescription.add("Opens a profile window for a person or animal.");
+        viewDescription.add("Command format: view person n/NAME OR view animal n/NAME");
+        viewDescription.add("Example: view person n/Alex Yo");
+        viewDescription.add("Example: view animal n/Fluffy");
+        COMMAND_LIST.put("view", viewDescription);
     }
 
     /**
