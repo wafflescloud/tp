@@ -13,6 +13,7 @@ import seedu.address.model.animal.Animal;
 import seedu.address.model.animal.UniqueAnimalList;
 import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.feedingsession.UniqueFeedingSessionList;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.UniquePersonList;
@@ -94,7 +95,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return persons.contains(person);
+        return persons.containsPerson(person);
     }
 
     /**
@@ -103,6 +104,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasPhone(Phone phone) {
         requireNonNull(phone);
         return persons.containsPhone(phone);
+    }
+
+    /**
+     * Returns true if a person with the same email as {@code email} exists in the address book.
+     */
+    public boolean hasEmail(Email email) {
+        requireNonNull(email);
+        return persons.containsEmail(email);
     }
 
     /**

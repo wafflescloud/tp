@@ -29,6 +29,7 @@ public class EditPersonCommand extends EditCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_PHONE_NUMBER = "This phone number already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "This email already exists in the address book";
     public static final String MESSAGE_INVALID_PERSON_NAME = "The person is not found in the address book";
 
     private final PersonName name;
@@ -64,6 +65,10 @@ public class EditPersonCommand extends EditCommand {
 
         if (!personToEdit.getPhone().equals(editedPerson.getPhone()) && model.hasPhone(editedPerson.getPhone())) {
             throw new CommandException(MESSAGE_DUPLICATE_PHONE_NUMBER);
+        }
+
+        if (!personToEdit.getEmail().equals(editedPerson.getEmail()) && model.hasEmail(editedPerson.getEmail())) {
+            throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
         }
 
         model.setPerson(personToEdit, editedPerson);

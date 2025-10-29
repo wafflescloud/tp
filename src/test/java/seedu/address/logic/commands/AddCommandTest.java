@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.animal.Animal;
 import seedu.address.model.feedingsession.FeedingSession;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.testutil.AnimalBuilder;
@@ -234,6 +236,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasEmail(Email email) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -377,12 +384,29 @@ public class AddCommandTest {
             personsAdded.add(person);
         }
 
+        /**
+         * Generic method to check if the list contains an equivalent field.
+         *
+         * @param <T> the type of field to check for
+         * @param getField function that extracts the specific field from a Person
+         * @param field the value to check for in the list
+         * @return true if the list contains an equivalent field as the given field argument
+         */
+        private <T> boolean hasField(Function<Person, T> getField, T field) {
+            requireNonNull(field);
+            return personsAdded.stream()
+                    .map(getField)
+                    .anyMatch(f -> f.equals(field));
+        }
+
         @Override
         public boolean hasPhone(Phone phone) {
-            requireNonNull(phone);
-            return personsAdded.stream()
-                    .map(person -> person.getPhone())
-                    .anyMatch(p -> p.equals(phone));
+            return hasField(p -> p.getPhone(), phone);
+        }
+
+        @Override
+        public boolean hasEmail(Email email) {
+            return hasField(p -> p.getEmail(), email);
         }
 
         @Override

@@ -15,6 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.animal.Animal;
 import seedu.address.model.feedingsession.FeedingSession;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 
@@ -141,6 +142,12 @@ public class ModelManager implements Model {
     public boolean hasPhone(Phone phone) {
         requireNonNull(phone);
         return addressBook.hasPhone(phone);
+    }
+
+    @Override
+    public boolean hasEmail(Email email) {
+        requireNonNull(email);
+        return addressBook.hasEmail(email);
     }
 
     @Override
