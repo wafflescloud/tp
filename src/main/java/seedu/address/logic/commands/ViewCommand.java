@@ -69,7 +69,7 @@ public class ViewCommand extends Command {
     private CommandResult viewPerson(Model model) throws CommandException {
         List<Person> personList = model.getFilteredPersonList();
         Person person = personList.stream()
-                .filter(p -> p.getName().fullName.equalsIgnoreCase(name))
+                .filter(p -> p.getName().toString().equalsIgnoreCase(name))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, name)));
 
@@ -78,7 +78,7 @@ public class ViewCommand extends Command {
         List<Animal> animals = new ArrayList<>(model.getFilteredAnimalList());
 
         PersonProfileWindow.openProfile(person, feedingSessions, animals);
-        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, person.getName().fullName));
+        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, person.getName().toString()));
     }
 
     /**
@@ -87,12 +87,12 @@ public class ViewCommand extends Command {
     private CommandResult viewAnimal(Model model) throws CommandException {
         List<Animal> animalList = model.getFilteredAnimalList();
         Animal animal = animalList.stream()
-                .filter(a -> a.getName().fullName.equalsIgnoreCase(name))
+                .filter(a -> a.getName().toString().equalsIgnoreCase(name))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(String.format(MESSAGE_ANIMAL_NOT_FOUND, name)));
 
         AnimalProfileWindow.openProfile(animal);
-        return new CommandResult(String.format(MESSAGE_VIEW_ANIMAL_SUCCESS, animal.getName().fullName));
+        return new CommandResult(String.format(MESSAGE_VIEW_ANIMAL_SUCCESS, animal.getName().toString()));
     }
 
     @Override
