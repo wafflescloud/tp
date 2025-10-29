@@ -31,8 +31,8 @@ public class Person extends Contact {
      */
     public Person(PersonName name, Phone phone, Email email, Set<Tag> tags,
             Set<FeedingSession> feedingSession) {
-        super(name, tags);  // Pass name to parent constructor
-        requireAllNonNull(phone, email);  // name is handled by parent
+        super(name, tags);
+        requireAllNonNull(phone, email);
         this.phone = phone;
         this.email = email;
         this.feedingSessions.addAll(feedingSession);
@@ -43,7 +43,8 @@ public class Person extends Contact {
      * This method provides access to PersonName-specific methods.
      */
     public PersonName getPersonName() {
-        return (PersonName) name;  // Safe cast since we passed PersonName to constructor
+        // Safe cast since we passed PersonName to constructor
+        return (PersonName) name;
     }
 
     public Phone getPhone() {

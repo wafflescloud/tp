@@ -34,7 +34,8 @@ public class Animal extends Contact {
      * This method provides access to AnimalName-specific methods.
      */
     public AnimalName getAnimalName() {
-        return (AnimalName) name;  // Safe cast since we passed AnimalName to constructor
+        // Safe cast since we passed AnimalName to constructor
+        return (AnimalName) name;
     }
 
     public Description getDescription() {
