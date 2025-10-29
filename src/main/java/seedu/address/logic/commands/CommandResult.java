@@ -102,5 +102,4 @@ public class CommandResult {
                 .add("exit", exit)
                 .toString();
     }
-
 }
