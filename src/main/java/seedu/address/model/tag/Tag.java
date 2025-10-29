@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Tags names should be alphanumeric and spaces, not be blank, "
+            "Tags names should be alphanumeric and spaces, "
             + "and be at most 30 characters long";
 
     public static final int MAX_LENGTH = 30;
