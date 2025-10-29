@@ -7,12 +7,10 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
-import java.util.HashSet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,11 +25,13 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonName;
+import seedu.address.model.person.Phone;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -170,14 +170,17 @@ public class LogicManagerTest {
                 + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY;
 
-        // Update PersonBuilder to include empty feeding sessions
-        Person expectedPerson = new PersonBuilder(AMY)
-                .withTags()
-                .withFeedingSessions(new HashSet<>())
-                .build();
+        // Execute and assert the expected CommandException is thrown
+        assertThrows(CommandException.class, expectedMessage, () -> logic.execute(addCommand));
 
-        ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
-        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+        // Verify model is updated with the new person (ignoring auto-generated IDs)
+        assertEquals(1, model.getFilteredPersonList().size());
+        Person added = model.getFilteredPersonList().get(0);
+        assertEquals(new PersonName("Amy Bee"), added.getName());
+        assertEquals(new Phone("11111111"), added.getPhone());
+        assertEquals(new Email("amy@example.com"), added.getEmail());
+        // No tags and no feeding sessions were provided
+        assertEquals(java.util.Collections.emptySet(), added.getTags());
+        assertEquals(java.util.Collections.emptySet(), added.getFeedingSessionIds());
     }
 }

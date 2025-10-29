@@ -15,7 +15,7 @@ Furiends is a **desktop app tailored towards animal lovers, specifically individ
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help--help)
   - [Adding a person: `add person`](#adding-a-person-add-person)
-  - [Adding an animal: `add-animal`](#adding-an-animal-add-animal)
+  - [Adding an animal: `add animal`](#adding-an-animal-add-animal)
   - [Listing all persons : `list`](#listing-all-persons--list)
   - [Editing a person : `edit person`](#editing-a-person--edit-person)
   - [Editing an animal : `edit animal`](#editing-an-animal--edit-animal)
@@ -44,8 +44,16 @@ Furiends is a **desktop app tailored towards animal lovers, specifically individ
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Furiends application.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar furiends.jar` command
-   to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in. 
+<box type="tip" seamless>
+The file is usually in downloads after downloading it.
+</box>
+
+![Terminal](images/terminal.png)
+
+5. Use the `java -jar furiends.jar` command
+   to run the application.
+
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
    For more details on the GUI, refer to the [Overview of GUI](#overview-of-gui) section.
@@ -85,7 +93,8 @@ The GUI is made up of the following components:
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add person n/NAME...`, `NAME` is a parameter which can be used as `add person n/John Doe...`.
-
+* `NAME` is sensitive <br>
+  e.g. `john` is different from as `John`
 * Items in square brackets are optional.<br>
   e.g `n/NAME ... [t/TAG]` can be used as `n/John Doe ... t/friend` (friend tag added)
   or as `n/John Doe ... `(no tag provided).
@@ -244,7 +253,10 @@ Format: `delete person n/NAME`
 * The name is case-sensitive.
 
 Examples:
-* `delete person n/John Doe` Deletes the person with name `John Doe` from the address book.
+* `delete person n/Alex Yeoh` Deletes the person with name `Alex Yeoh` from the address book.
+  * Feedback Box: 
+  ![img.png](images/deletePerson.png)
+
 
 ### Deleting an animal : `delete animal`
 
@@ -256,7 +268,9 @@ Format: `delete animal n/NAME`
 * The name is case-sensitive.
 
 Examples:
-* `delete animal n/Fluffy` Deletes the animal with name `Fluffy` from the address book.
+* `delete animal n/Max` Deletes the animal with name `Max` from the address book.
+  * Feedback Box: 
+  ![deleteAnimal.png](images/deleteAnimal.png)
 
 ### Clearing all entries : `clear`
 

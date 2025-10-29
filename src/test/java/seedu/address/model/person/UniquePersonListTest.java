@@ -44,7 +44,7 @@ public class UniquePersonListTest {
         uniquePersonList.add(ALICE);
         Person editedAlice = new PersonBuilder(ALICE)
                 .withTags(VALID_TAG_HUSBAND)
-                .withFeedingSessions(new HashSet<>())
+                .withFeedingSessionIds(new HashSet<>())
                 .build();
         assertTrue(uniquePersonList.contains(editedAlice));
     }
@@ -89,7 +89,7 @@ public class UniquePersonListTest {
         uniquePersonList.add(ALICE);
         Person editedAlice = new PersonBuilder(ALICE)
                 .withTags(VALID_TAG_HUSBAND)
-                .withFeedingSessions(new HashSet<>())
+                .withFeedingSessionIds(new HashSet<>())
                 .build();
         uniquePersonList.setPerson(ALICE, editedAlice);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();

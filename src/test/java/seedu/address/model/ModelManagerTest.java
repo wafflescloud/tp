@@ -129,4 +129,303 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
+
+    @Test
+    public void setPerson_nameChanged_feedingSessionsUpdatedInAnimals() {
+        modelManager = new ModelManager();
+
+        seedu.address.model.person.Person matt = new seedu.address.testutil.PersonBuilder()
+                .withName("Matt")
+                .withPhone("12345678")
+                .withEmail("matt@example.com")
+                .build();
+
+        seedu.address.model.animal.Animal max = new seedu.address.testutil.AnimalBuilder()
+                .withName("Max")
+                .withDescription("Dog")
+                .withLocation("Shelter A")
+                .build();
+
+        modelManager.addPerson(matt);
+        modelManager.addAnimal(max);
+
+        java.time.LocalDateTime feedingTime = java.time.LocalDateTime.of(2024, 10, 15, 10, 0);
+        seedu.address.model.feedingsession.FeedingSession session =
+                new seedu.address.model.feedingsession.FeedingSession(matt.getId(), max.getId(), feedingTime, "");
+
+        java.util.Set<java.util.UUID> sessionIds = new java.util.HashSet<>();
+        sessionIds.add(session.getId());
+
+        seedu.address.model.person.Person mattWithSession = new seedu.address.model.person.Person(
+                matt.getId(), matt.getPersonName(), matt.getPhone(), matt.getEmail(), matt.getTags(), sessionIds);
+        seedu.address.model.animal.Animal maxWithSession = new seedu.address.model.animal.Animal(
+                max.getId(), max.getAnimalName(), max.getDescription(), max.getLocation(), max.getTags(), sessionIds);
+
+        modelManager.setPerson(matt, mattWithSession);
+        modelManager.setAnimal(max, maxWithSession);
+
+        seedu.address.model.person.Person matthew = new seedu.address.testutil.PersonBuilder()
+                .withName("Matthew")
+                .withPhone("12345678")
+                .withEmail("matt@example.com")
+                .withFeedingSessionIds(sessionIds)
+                .build();
+
+        modelManager.setPerson(mattWithSession, matthew);
+
+        seedu.address.model.animal.Animal updatedAnimal = modelManager.getFilteredAnimalList().stream()
+                .filter(a -> a.getAnimalName().toString().equals("Max"))
+                .findFirst()
+                .orElseThrow();
+
+        // The feeding session should still exist in the model's feeding session list
+        // Note: The actual session objects don't store names, they store IDs
+        // This test should verify that the session still references the correct person and animal by ID
+        boolean hasSession = updatedAnimal.getFeedingSessionIds().contains(session.getId());
+
+        assertTrue(hasSession, "Animal should still have the feeding session ID");
+    }
+
+    @Test
+    public void setAnimal_nameChanged_feedingSessionsUpdatedInPersons() {
+        modelManager = new ModelManager();
+
+        seedu.address.model.person.Person john = new seedu.address.testutil.PersonBuilder()
+                .withName("John")
+                .withPhone("87654321")
+                .withEmail("john@example.com")
+                .build();
+
+        seedu.address.model.animal.Animal buddy = new seedu.address.testutil.AnimalBuilder()
+                .withName("Buddy")
+                .withDescription("Cat")
+                .withLocation("Shelter B")
+                .build();
+
+        modelManager.addPerson(john);
+        modelManager.addAnimal(buddy);
+
+        java.time.LocalDateTime feedingTime = java.time.LocalDateTime.of(2024, 10, 16, 14, 30);
+        seedu.address.model.feedingsession.FeedingSession session =
+                new seedu.address.model.feedingsession.FeedingSession(john.getId(), buddy.getId(), feedingTime, "");
+
+        java.util.Set<java.util.UUID> sessionIds = new java.util.HashSet<>();
+        sessionIds.add(session.getId());
+
+        seedu.address.model.person.Person johnWithSession = new seedu.address.model.person.Person(
+                john.getId(), john.getPersonName(), john.getPhone(), john.getEmail(), john.getTags(), sessionIds);
+        seedu.address.model.animal.Animal buddyWithSession = new seedu.address.model.animal.Animal(
+                buddy.getId(), buddy.getAnimalName(), buddy.getDescription(),
+                buddy.getLocation(), buddy.getTags(), sessionIds);
+
+        modelManager.setPerson(john, johnWithSession);
+        modelManager.setAnimal(buddy, buddyWithSession);
+
+        seedu.address.model.animal.Animal fluffy = new seedu.address.testutil.AnimalBuilder()
+                .withName("Fluffy")
+                .withDescription("Cat")
+                .withLocation("Shelter B")
+                .build();
+        // Create fluffy with the same ID as buddy and the session IDs
+        fluffy = new seedu.address.model.animal.Animal(
+                buddyWithSession.getId(), fluffy.getAnimalName(), fluffy.getDescription(),
+                fluffy.getLocation(), fluffy.getTags(), sessionIds);
+
+        modelManager.setAnimal(buddyWithSession, fluffy);
+
+        seedu.address.model.person.Person updatedPerson = modelManager.getFilteredPersonList().stream()
+                .filter(p -> p.getPersonName().toString().equals("John"))
+                .findFirst()
+                .orElseThrow();
+
+        // The feeding session should still exist in the person's feeding session IDs
+        boolean hasSession = updatedPerson.getFeedingSessionIds().contains(session.getId());
+
+        assertTrue(hasSession, "Person should still have the feeding session ID");
+    }
+
+    @Test
+    public void deletePerson_withFeedingSessions_feedingSessionsRemovedFromAnimals() {
+        // Setup: Create a person, animals, and feeding sessions
+        modelManager = new ModelManager();
+
+        // Create person "Max"
+        seedu.address.model.person.Person max = new seedu.address.testutil.PersonBuilder()
+                .withName("Max")
+                .withPhone("11111111")
+                .withEmail("max@example.com")
+                .build();
+
+        // Create animals "Matt" and "Luna"
+        seedu.address.model.animal.Animal matt = new seedu.address.testutil.AnimalBuilder()
+                .withName("Matt")
+                .withDescription("Dog")
+                .withLocation("Shelter A")
+                .build();
+
+        seedu.address.model.animal.Animal luna = new seedu.address.testutil.AnimalBuilder()
+                .withName("Luna")
+                .withDescription("Cat")
+                .withLocation("Shelter B")
+                .build();
+
+        // Add to model
+        modelManager.addPerson(max);
+        modelManager.addAnimal(matt);
+        modelManager.addAnimal(luna);
+
+        // Create feeding sessions
+        java.time.LocalDateTime feedingTime1 = java.time.LocalDateTime.of(2024, 10, 20, 9, 0);
+        java.time.LocalDateTime feedingTime2 = java.time.LocalDateTime.of(2024, 10, 20, 15, 0);
+
+        seedu.address.model.feedingsession.FeedingSession session1 =
+                new seedu.address.model.feedingsession.FeedingSession(max.getId(), matt.getId(), feedingTime1, "");
+        seedu.address.model.feedingsession.FeedingSession session2 =
+                new seedu.address.model.feedingsession.FeedingSession(max.getId(), luna.getId(), feedingTime2, "");
+
+        // Add sessions to person and animals
+        java.util.Set<java.util.UUID> maxSessionIds = new java.util.HashSet<>();
+        maxSessionIds.add(session1.getId());
+        maxSessionIds.add(session2.getId());
+
+        java.util.Set<java.util.UUID> mattSessionIds = new java.util.HashSet<>();
+        mattSessionIds.add(session1.getId());
+
+        java.util.Set<java.util.UUID> lunaSessionIds = new java.util.HashSet<>();
+        lunaSessionIds.add(session2.getId());
+
+        seedu.address.model.person.Person maxWithSessions = new seedu.address.model.person.Person(
+                max.getId(), max.getPersonName(), max.getPhone(), max.getEmail(), max.getTags(), maxSessionIds);
+        seedu.address.model.animal.Animal mattWithSessions = new seedu.address.model.animal.Animal(
+                matt.getId(), matt.getAnimalName(), matt.getDescription(),
+                matt.getLocation(), matt.getTags(), mattSessionIds);
+        seedu.address.model.animal.Animal lunaWithSessions = new seedu.address.model.animal.Animal(
+                luna.getId(), luna.getAnimalName(), luna.getDescription(),
+                luna.getLocation(), luna.getTags(), lunaSessionIds);
+
+        modelManager.setPerson(max, maxWithSessions);
+        modelManager.setAnimal(matt, mattWithSessions);
+        modelManager.setAnimal(luna, lunaWithSessions);
+
+        // Execute: Delete person Max
+        modelManager.deletePerson(maxWithSessions);
+
+        // Verify: Max should be deleted
+        assertFalse(modelManager.hasPerson(maxWithSessions), "Person Max should be deleted");
+
+        // Verify: Animals should still exist
+        assertTrue(modelManager.hasAnimal(mattWithSessions), "Animal Matt should still exist");
+        assertTrue(modelManager.hasAnimal(lunaWithSessions), "Animal Luna should still exist");
+
+        // Verify: Feeding sessions involving Max should be removed from Matt
+        seedu.address.model.animal.Animal updatedMatt = modelManager.getFilteredAnimalList().stream()
+                .filter(a -> a.getAnimalName().toString().equals("Matt"))
+                .findFirst()
+                .orElseThrow();
+
+        assertTrue(updatedMatt.getFeedingSessionIds().isEmpty(),
+                "Matt should have no feeding sessions after Max is deleted");
+
+        // Verify: Feeding sessions involving Max should be removed from Luna
+        seedu.address.model.animal.Animal updatedLuna = modelManager.getFilteredAnimalList().stream()
+                .filter(a -> a.getAnimalName().toString().equals("Luna"))
+                .findFirst()
+                .orElseThrow();
+
+        assertTrue(updatedLuna.getFeedingSessionIds().isEmpty(),
+                "Luna should have no feeding sessions after Max is deleted");
+    }
+
+    @Test
+    public void deleteAnimal_withFeedingSessions_feedingSessionsRemovedFromPersons() {
+        // Setup: Create persons, an animal, and feeding sessions
+        modelManager = new ModelManager();
+
+        // Create animal "Buddy"
+        seedu.address.model.animal.Animal buddy = new seedu.address.testutil.AnimalBuilder()
+                .withName("Buddy")
+                .withDescription("Hamster")
+                .withLocation("Shelter C")
+                .build();
+
+        // Create persons "Alice" and "Bob"
+        seedu.address.model.person.Person alice = new seedu.address.testutil.PersonBuilder()
+                .withName("Alice")
+                .withPhone("22222222")
+                .withEmail("alice@example.com")
+                .build();
+
+        seedu.address.model.person.Person bob = new seedu.address.testutil.PersonBuilder()
+                .withName("Bob")
+                .withPhone("33333333")
+                .withEmail("bob@example.com")
+                .build();
+
+        // Add to model
+        modelManager.addAnimal(buddy);
+        modelManager.addPerson(alice);
+        modelManager.addPerson(bob);
+
+        // Create feeding sessions
+        java.time.LocalDateTime feedingTime1 = java.time.LocalDateTime.of(2024, 10, 21, 10, 0);
+        java.time.LocalDateTime feedingTime2 = java.time.LocalDateTime.of(2024, 10, 21, 16, 0);
+
+        seedu.address.model.feedingsession.FeedingSession session1 =
+                new seedu.address.model.feedingsession.FeedingSession(alice.getId(), buddy.getId(), feedingTime1, "");
+        seedu.address.model.feedingsession.FeedingSession session2 =
+                new seedu.address.model.feedingsession.FeedingSession(bob.getId(), buddy.getId(), feedingTime2, "");
+
+        // Add sessions to animal and persons
+        java.util.Set<java.util.UUID> buddySessionIds = new java.util.HashSet<>();
+        buddySessionIds.add(session1.getId());
+        buddySessionIds.add(session2.getId());
+
+        java.util.Set<java.util.UUID> aliceSessionIds = new java.util.HashSet<>();
+        aliceSessionIds.add(session1.getId());
+
+        java.util.Set<java.util.UUID> bobSessionIds = new java.util.HashSet<>();
+        bobSessionIds.add(session2.getId());
+
+        seedu.address.model.animal.Animal buddyWithSessions = new seedu.address.model.animal.Animal(
+                buddy.getId(), buddy.getAnimalName(), buddy.getDescription(),
+                buddy.getLocation(), buddy.getTags(), buddySessionIds);
+        seedu.address.model.person.Person aliceWithSessions = new seedu.address.model.person.Person(
+                alice.getId(), alice.getPersonName(), alice.getPhone(),
+                alice.getEmail(), alice.getTags(), aliceSessionIds);
+        seedu.address.model.person.Person bobWithSessions = new seedu.address.model.person.Person(
+                bob.getId(), bob.getPersonName(), bob.getPhone(),
+                bob.getEmail(), bob.getTags(), bobSessionIds);
+
+        modelManager.setAnimal(buddy, buddyWithSessions);
+        modelManager.setPerson(alice, aliceWithSessions);
+        modelManager.setPerson(bob, bobWithSessions);
+
+        // Execute: Delete animal Buddy
+        modelManager.deleteAnimal(buddyWithSessions);
+
+        // Verify: Buddy should be deleted
+        assertFalse(modelManager.hasAnimal(buddyWithSessions), "Animal Buddy should be deleted");
+
+        // Verify: Persons should still exist
+        assertTrue(modelManager.hasPerson(aliceWithSessions), "Person Alice should still exist");
+        assertTrue(modelManager.hasPerson(bobWithSessions), "Person Bob should still exist");
+
+        // Verify: Feeding sessions involving Buddy should be removed from Alice
+        seedu.address.model.person.Person updatedAlice = modelManager.getFilteredPersonList().stream()
+                .filter(p -> p.getPersonName().toString().equals("Alice"))
+                .findFirst()
+                .orElseThrow();
+
+        assertTrue(updatedAlice.getFeedingSessionIds().isEmpty(),
+                "Alice should have no feeding sessions after Buddy is deleted");
+
+        // Verify: Feeding sessions involving Buddy should be removed from Bob
+        seedu.address.model.person.Person updatedBob = modelManager.getFilteredPersonList().stream()
+                .filter(p -> p.getPersonName().toString().equals("Bob"))
+                .findFirst()
+                .orElseThrow();
+
+        assertTrue(updatedBob.getFeedingSessionIds().isEmpty(),
+                "Bob should have no feeding sessions after Buddy is deleted");
+    }
 }

@@ -12,9 +12,6 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.animal.Animal;
-import seedu.address.model.feedingsession.FeedingSession;
-import seedu.address.model.feedingsession.IntermediateFeedingSession;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonName;
@@ -46,21 +43,7 @@ public class EditPersonCommand extends EditContactCommand<Person, EditPersonComm
     @Override
     protected Person createEditedContact(Person personToEdit, EditPersonDescriptor editDescriptor, Model model)
             throws CommandException {
-        // Convert intermediate feeding sessions to actual feeding sessions
-        Set<FeedingSession> feedingSessions = new HashSet<>();
-        if (editDescriptor.getIntermediateFeedingSessions().isPresent()) {
-            for (IntermediateFeedingSession ifs : editDescriptor.getIntermediateFeedingSessions().get()) {
-                // Find the animal in the model
-                Animal animal = model.getFilteredAnimalList().stream()
-                        .filter(a -> a.getName().fullName.equals(ifs.getAnimalName()))
-                        .findFirst()
-                        .orElseThrow(() -> new CommandException("Animal not found: " + ifs.getAnimalName()));
-
-                feedingSessions.add(new FeedingSession(animal, ifs.getDateTime()));
-            }
-        }
-
-        return createEditedPerson(personToEdit, editDescriptor, feedingSessions);
+        return createEditedPerson(personToEdit, editDescriptor);
     }
 
     @Override
@@ -105,11 +88,9 @@ public class EditPersonCommand extends EditContactCommand<Person, EditPersonComm
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor} and {@code feedingSessions}.
+     * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit,
-            EditPersonDescriptor editPersonDescriptor,
-            Set<FeedingSession> feedingSessions) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         PersonName updatedName = editPersonDescriptor.getName().orElse(personToEdit.getPersonName());
@@ -117,13 +98,8 @@ public class EditPersonCommand extends EditContactCommand<Person, EditPersonComm
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        // Merge existing feeding sessions with new ones if no new sessions provided
-        Set<FeedingSession> updatedFeedingSessions = feedingSessions.isEmpty()
-                ? personToEdit.getFeedingSessions()
-                : feedingSessions;
-
-        return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedTags, updatedFeedingSessions);
+        return new Person(personToEdit.getId(), updatedName, updatedPhone, updatedEmail,
+                updatedTags, personToEdit.getFeedingSessionIds());
     }
 
     /**
@@ -135,27 +111,25 @@ public class EditPersonCommand extends EditContactCommand<Person, EditPersonComm
         private Phone phone;
         private Email email;
         private Set<Tag> tags;
-        private Set<IntermediateFeedingSession> intermediateFeedingSessions;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} and {@code intermediateFeedingSessions} is used internally.
+         * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setTags(toCopy.tags);
-            setIntermediateFeedingSessions(toCopy.intermediateFeedingSessions);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, tags, intermediateFeedingSessions);
+            return CollectionUtil.isAnyNonNull(name, phone, email, tags);
         }
 
         public void setName(PersonName name) {
@@ -199,25 +173,6 @@ public class EditPersonCommand extends EditContactCommand<Person, EditPersonComm
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        /**
-         * Sets {@code intermediateFeedingSessions} to this object's {@code intermediateFeedingSessions}.
-         * A defensive copy of {@code intermediateFeedingSessions} is used internally.
-         */
-        public void setIntermediateFeedingSessions(Set<IntermediateFeedingSession> intermediateFeedingSessions) {
-            this.intermediateFeedingSessions = (intermediateFeedingSessions != null)
-                    ? new HashSet<>(intermediateFeedingSessions)
-                    : null;
-        }
-
-        /**
-         * Returns an unmodifiable intermediate feeding sessions set.
-         */
-        public Optional<Set<IntermediateFeedingSession>> getIntermediateFeedingSessions() {
-            return (intermediateFeedingSessions != null)
-                    ? Optional.of(Collections.unmodifiableSet(intermediateFeedingSessions))
-                    : Optional.empty();
-        }
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -232,8 +187,7 @@ public class EditPersonCommand extends EditContactCommand<Person, EditPersonComm
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getTags().equals(e.getTags())
-                    && getIntermediateFeedingSessions().equals(e.getIntermediateFeedingSessions());
+                    && getTags().equals(e.getTags());
         }
 
         @Override
@@ -244,7 +198,6 @@ public class EditPersonCommand extends EditContactCommand<Person, EditPersonComm
                     .append(", phone=").append(getPhone().orElse(null))
                     .append(", email=").append(getEmail().orElse(null))
                     .append(", tags=").append(getTags().orElse(null))
-                    .append(", intermediateFeedingSessions=").append(getIntermediateFeedingSessions().orElse(null))
                     .append("}");
             return sb.toString();
         }

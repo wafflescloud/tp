@@ -41,17 +41,28 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
+
         Person editedPerson = new PersonBuilder().build();
         PersonName personName = NameUtil.getPersonName(
                 model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditPersonCommand editCommand = new EditPersonCommand(personName, descriptor);
 
+        // Preserve the original person's ID when constructing the expected Person
+        Person original = model.getFilteredPersonList().get(0);
+        Person expectedEdited = new Person(
+                original.getId(),
+                editedPerson.getPersonName(),
+                editedPerson.getPhone(),
+                editedPerson.getEmail(),
+                editedPerson.getTags(),
+                original.getFeedingSessionIds());
+
         String expectedMessage = String.format(EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-                Messages.format(editedPerson));
+                Messages.format(expectedEdited));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(original, expectedEdited);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
