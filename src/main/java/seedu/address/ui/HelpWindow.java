@@ -74,7 +74,7 @@ public class HelpWindow extends UiPart<Stage> {
         // addAnimal command with detailed description
         ArrayList<String> addDescription = new ArrayList<>();
         addDescription.add("Adds a new person or animal record to the system.");
-        addDescription.add("Command format: add animal n/NAME d/DESCRIPTION l/LOCATION [t/TAGS...]"
+        addDescription.add("Command format: add animal n/NAME d/DESCRIPTION l/LOCATION [t/TAG]..."
                           + " OR add person n/NAME p/PHONE e/EMAIL [t/TAG]...");
         addDescription.add("Example: add animal n/Bob d/Brown tabby with stripes l/Near Block 14 canteen t/Furry");
         addDescription.add("Example: add person n/John Doe p/91234567 e/johndoe@gmail.com t/friend t/funny");
