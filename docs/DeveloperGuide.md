@@ -13,7 +13,13 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* This project is based on the [AddressBook-Level3](https://se-education.org/addressbook-level3/) project created by the [SE-EDU initiative](https://se-education.org).
+
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+
+* The undo/redo implementation was inspired by the proposed undo/redo feature in [AddressBook-Level3](https://se-education.org/addressbook-level3/), adapted to use a stack-based approach with `State` snapshots instead of the `VersionedAddressBook` pattern
+
+* The UUID-based entity relationship design for managing Person-Animal-FeedingSession relationships was inspired by database design principles to avoid circular dependencies
 
 --------------------------------------------------------------------------------------------------------------------
 
