@@ -34,7 +34,18 @@ public class AnimalName implements Name {
     public AnimalName(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        fullName = standardiseName(name);
+    }
+
+    /**
+     * Standardizes a name by trimming leading/trailing spaces
+     * and replacing multiple spaces between words with a single space.
+     *
+     * @param name The input string to standardize.
+     * @return A standardized string with normalized spaces.
+     */
+    private static String standardiseName(String name) {
+        return name.trim().replaceAll("\\s+", " ");
     }
 
     /**
@@ -62,7 +73,7 @@ public class AnimalName implements Name {
         }
 
         AnimalName otherName = (AnimalName) other;
-        return fullName.equals(otherName.fullName);
+        return fullName.toLowerCase().equals(otherName.fullName.toLowerCase());
     }
 
     @Override
