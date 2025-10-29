@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
@@ -15,23 +16,27 @@ import seedu.address.model.tag.Tag;
  */
 public abstract class Contact {
 
-    // Common data field
+    // Common data fields
+    protected final Name name;
     protected final Set<Tag> tags = new HashSet<>();
 
     /**
      * Constructor for Contact.
+     * @param name The name of this contact
      * @param tags Set of tags for this contact
      */
-    public Contact(Set<Tag> tags) {
-        requireAllNonNull(tags);
+    public Contact(Name name, Set<Tag> tags) {
+        requireAllNonNull(name, tags);
+        this.name = name;
         this.tags.addAll(tags);
     }
 
     /**
      * Returns the name of this contact.
-     * Must be implemented by subclasses.
      */
-    public abstract Name getName();
+    public Name getName() {
+        return name;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

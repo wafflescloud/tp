@@ -9,7 +9,6 @@ import java.util.TreeSet;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Contact;
-import seedu.address.model.Name;
 import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.tag.Tag;
 
@@ -19,8 +18,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Person extends Contact {
 
-    // Identity fields specific to Person
-    private final PersonName name;
+    // Identity fields specific to Person (name is now in parent class)
     private final Phone phone;
     private final Email email;
 
@@ -33,24 +31,19 @@ public class Person extends Contact {
      */
     public Person(PersonName name, Phone phone, Email email, Set<Tag> tags,
             Set<FeedingSession> feedingSession) {
-        super(tags);
-        requireAllNonNull(name, phone, email);
-        this.name = name;
+        super(name, tags);  // Pass name to parent constructor
+        requireAllNonNull(phone, email);  // name is handled by parent
         this.phone = phone;
         this.email = email;
         this.feedingSessions.addAll(feedingSession);
     }
 
-    @Override
-    public Name getName() {
-        return name;
-    }
-
     /**
      * Returns the specific PersonName for type-specific operations.
+     * This method provides access to PersonName-specific methods.
      */
     public PersonName getPersonName() {
-        return name;
+        return (PersonName) name;  // Safe cast since we passed PersonName to constructor
     }
 
     public Phone getPhone() {
@@ -102,8 +95,7 @@ public class Person extends Contact {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, tags);
+        return Objects.hash(name, phone, email, tags, feedingSessions);
     }
 
     @Override

@@ -7,7 +7,6 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Contact;
-import seedu.address.model.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -16,8 +15,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Animal extends Contact {
 
-    // Identity fields specific to Animal
-    private final AnimalName name;
+    // Identity fields specific to Animal (name is now in parent class)
     private final Description description;
     private final Location location;
 
@@ -25,23 +23,18 @@ public class Animal extends Contact {
      * Every field must be present and not null.
      */
     public Animal(AnimalName name, Description description, Location location, Set<Tag> tags) {
-        super(tags);
-        requireAllNonNull(name, description, location);
-        this.name = name;
+        super(name, tags);
+        requireAllNonNull(description, location);
         this.description = description;
         this.location = location;
     }
 
-    @Override
-    public Name getName() {
-        return name;
-    }
-
     /**
      * Returns the specific AnimalName for type-specific operations.
+     * This method provides access to AnimalName-specific methods.
      */
     public AnimalName getAnimalName() {
-        return name;
+        return (AnimalName) name;  // Safe cast since we passed AnimalName to constructor
     }
 
     public Description getDescription() {
