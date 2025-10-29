@@ -7,11 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CHOCO;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_KITTY;
-// import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CHOCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_KITTY;
-// import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-// import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -33,10 +30,11 @@ import seedu.address.model.animal.AnimalName;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonName;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.NameUtil;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * * Contains integration tests (interaction with the Model) and unit tests for EditPersonCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for EditPersonCommand.
  */
 public class EditCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -44,7 +42,8 @@ public class EditCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Person editedPerson = new PersonBuilder().build();
-        PersonName personName = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName();
+        PersonName personName = NameUtil.getPersonName(
+                model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditPersonCommand editCommand = new EditPersonCommand(personName, descriptor);
 
@@ -82,7 +81,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        PersonName personName = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName();
+        PersonName personName = NameUtil.getPersonName(
+                model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
 
         EditPersonCommand editCommand = new EditPersonCommand(personName, new EditPersonDescriptor());
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -121,7 +121,7 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
 
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        PersonName secondPersonName = secondPerson.getName();
+        PersonName secondPersonName = NameUtil.getPersonName(secondPerson);
         EditPersonCommand editCommand = new EditPersonCommand(secondPersonName, descriptor);
 
         assertCommandFailure(editCommand, model, EditPersonCommand.MESSAGE_DUPLICATE_PERSON);
@@ -134,7 +134,7 @@ public class EditCommandTest {
         // edit person in filtered list into a duplicate in address book
         Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        PersonName personName = person.getName();
+        PersonName personName = NameUtil.getPersonName(person);
         EditPersonCommand editCommand = new EditPersonCommand(personName,
                 new EditPersonDescriptorBuilder(personInList).build());
 
@@ -143,9 +143,10 @@ public class EditCommandTest {
 
     @Test
     public void equals_person() {
-        PersonName firstPersonName = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName();
-        PersonName secondPersonName = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased())
-                .getName();
+        PersonName firstPersonName = NameUtil.getPersonName(
+                model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
+        PersonName secondPersonName = NameUtil.getPersonName(
+                model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()));
         final EditPersonCommand standardCommand = new EditPersonCommand(firstPersonName, DESC_AMY);
 
         // same values -> returns true
@@ -200,11 +201,12 @@ public class EditCommandTest {
     @Test
     public void toStringMethod_person() {
         Index index = Index.fromOneBased(1);
-        PersonName personName = model.getFilteredPersonList().get(index.getZeroBased()).getName();
+        PersonName personName = NameUtil.getPersonName(
+                model.getFilteredPersonList().get(index.getZeroBased()));
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditPersonCommand editCommand = new EditPersonCommand(personName, editPersonDescriptor);
         String expected = EditPersonCommand.class.getCanonicalName() + "{name=" + personName
-                + ", editPersonDescriptor=" + editPersonDescriptor + "}";
+                + ", editDescriptor=" + editPersonDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
 
@@ -214,7 +216,7 @@ public class EditCommandTest {
         EditAnimalDescriptor editAnimalDescriptor = new EditAnimalDescriptor();
         EditAnimalCommand editCommand = new EditAnimalCommand(animalName, editAnimalDescriptor);
         String expected = EditAnimalCommand.class.getCanonicalName() + "{name=" + animalName
-                + ", editAnimalDescriptor=" + editAnimalDescriptor + "}";
+                + ", editDescriptor=" + editAnimalDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
 
