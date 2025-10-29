@@ -20,6 +20,7 @@ public class AnimalBuilder {
     public static final String DEFAULT_DESCRIPTION = "A playful tabby cat.";
     public static final String DEFAULT_LOCATION = "Shelter Room 2";
 
+    private UUID id;
     private AnimalName name;
     private Description description;
     private Location location;
@@ -30,6 +31,7 @@ public class AnimalBuilder {
      * Creates an {@code AnimalBuilder} with default details.
      */
     public AnimalBuilder() {
+        id = null;
         name = new AnimalName(DEFAULT_NAME);
         description = new Description(DEFAULT_DESCRIPTION);
         location = new Location(DEFAULT_LOCATION);
@@ -43,6 +45,7 @@ public class AnimalBuilder {
      * @param animalToCopy The animal object whose data will be copied into the builder.
      */
     public AnimalBuilder(Animal animalToCopy) {
+        id = animalToCopy.getId();
         name = animalToCopy.getName();
         description = animalToCopy.getDescription();
         location = animalToCopy.getLocation();
@@ -109,6 +112,9 @@ public class AnimalBuilder {
      * @return a new {@link Animal} instance based on the current builder state
      */
     public Animal build() {
+        if (id != null) {
+            return new Animal(id, name, description, location, tags, feedingSessionIds);
+        }
         return new Animal(name, description, location, tags, feedingSessionIds);
     }
 }

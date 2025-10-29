@@ -17,6 +17,10 @@ public class NameContainsKeywordsPredicateAnimal implements Predicate<Animal> {
 
     @Override
     public boolean test(Animal animal) {
+        if (keywords.isEmpty()) {
+            return false;
+        }
+
         return keywords.stream()
                 .anyMatch(keyword -> animal.getName().fullName.toLowerCase().contains(keyword.toLowerCase()));
     }

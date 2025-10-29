@@ -20,6 +20,8 @@ import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.animal.Animal;
+import seedu.address.model.animal.NameContainsKeywordsPredicateAnimal;
 import seedu.address.model.person.NameContainsKeywordsPredicatePerson;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditAnimalDescriptorBuilder;
@@ -143,6 +145,20 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicatePerson(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the animal at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showAnimalAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredAnimalList().size());
+
+        Animal animal = model.getFilteredAnimalList().get(targetIndex.getZeroBased());
+        final String[] splitName = animal.getName().fullName.split("\\s+");
+        model.updateFilteredAnimalList(new NameContainsKeywordsPredicateAnimal(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredAnimalList().size());
     }
 
 }
