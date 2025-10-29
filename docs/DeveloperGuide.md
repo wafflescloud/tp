@@ -117,34 +117,140 @@ How the parsing works:
 * All `XYZTypeCommand` inherit from their respective `XYZCommand` so that they can be treated similarly where possible
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2526S1-CS2103T-W14-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-To model Person,
+<puml src="diagrams/ModelOverallClassDiagram.puml" width="500" />
 
-<puml src="diagrams/ModelPersonClassDiagram.puml" width="450" />
+The `Model` component manages three main entity types: Person, Animal, and FeedingSession.
 
-To model Animal,
+* `AddressBook` contains three unique lists: `UniquePersonList`, `UniqueAnimalList`, and `UniqueFeedingSessionList`
+* `ModelManager` maintains the `AddressBook` and manages undo/redo functionality with `undoStack` and `redoStack`
 
-<puml src="diagrams/ModelAnimalClassDiagram.puml" width="450" />
+#### Person Model
 
-The `Model` component,
+<puml src="diagrams/ModelPersonClassDiagram.puml" />
 
-* For Person,
-  * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object)
-  * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* For Animal,
-  * stores the address book data i.e., all `Animal` objects (which are contained in a `UniqueAnimalList` object)
-  * stores the currently 'selected' `Animal` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Animal>` that can be 'observed'e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+The Person model stores:
+* `UUID id` - Unique identifier for each person
+* `PersonName name` - The person's name
+* `Phone phone` - Contact phone number
+* `Email email` - Email address
+* `Set<Tag> tags` - Tags for categorization
+* `Set<UUID> feedingSessionIds` - References to feeding sessions by UUID
+
+#### Animal Model
+
+<puml src="diagrams/ModelAnimalClassDiagram.puml" />
+
+The Animal model stores:
+* `UUID id` - Unique identifier for each animal
+* `AnimalName name` - The animal's name
+* `Description description` - Details about the animal
+* `Location location` - Where the animal is located
+* `Set<Tag> tags` - Tags for categorization
+* `Set<UUID> feedingSessionIds` - References to feeding sessions by UUID
+
+#### FeedingSession Model
+
+<puml src="diagrams/ModelFeedingSessionClassDiagram.puml" />
+
+The FeedingSession model links Person and Animal entities:
+* `UUID id` - Unique identifier for each feeding session
+* `UUID animalId` - Reference to the Animal being fed
+* `UUID personId` - Reference to the Person feeding
+* `LocalDateTime dateTime` - When the feeding occurred
+* `String notes` - Optional notes about the feeding
+
+#### Undo/Redo Implementation
+
+The `Model` component implements undo/redo functionality using two stacks that store snapshots of the address book state.
+
+**The undo/redo mechanism stores:**
+* `Stack<State> undoStack` - Stores previous address book states for undo operations
+* `Stack<State> redoStack` - Stores undone states for redo operations
+* Each `State` object contains a complete snapshot of the `AddressBook` at a particular point in time
+
+<br>
+
+**How Undo/Redo Works:**
+
+1. **State Management**: Before any modifying command executes, it calls `Model#saveState()` which:
+   * Pushes the current `AddressBook` state onto the `undoStack`
+   * Clears the `redoStack` (executing a new command invalidates redo history)
+
+<puml src="diagrams/ExecuteCommandActivityDiagram.puml" alt="ExecuteCommandActivityDiagram" width="400" />
+
+2. **Undo Operation**: When the user executes `undo`, the system:
+   * Pushes the current state to `redoStack`
+   * Pops the previous state from `undoStack`
+   * Restores the address book to that previous state
+
+<puml src="diagrams/UndoActivityDiagram.puml" alt="UndoActivityDiagram" width="400" />
+
+3. **Redo Operation**: When the user executes `redo`, the system:
+   * Pushes the current state to `undoStack`
+   * Pops the next state from `redoStack`
+   * Restores the address book to that next state
+
+<puml src="diagrams/RedoActivityDiagram.puml" alt="RedoActivityDiagram" width="400" />
+
+<br>
+
+The following sequence diagram shows how an undo operation goes through the `Logic` component:
+
+<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+
+Similarly, how an undo operation goes through the `Model` component is shown below:
+
+<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+
+Commands that modify the address book and thus support undo/redo:
+* `add person` / `add animal` / `feed` - Add entities
+* `edit person` / `edit animal` - Edit entities
+* `delete person` / `delete animal` / `delete feed` - Delete entities
+* `clear` - Clear all entries
+
+Commands that do not modify the address book and thus do not support undo/redo:
+* `list` - Lists all persons/animals
+* `find` - Finds persons/animals
+* `help` - Shows help information
+* `exit` - Exits the application
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="620" />
+**Note:** If a command fails its execution (e.g., deleting a non-existent person), it will not call `Model#saveState()`, so the address book state will not be saved into the `undoStack`.
 
 </box>
+
+#### How the Model Works
+
+The `Model` component:
+
+* **Stores address book data** in three unique lists:
+  * `UniquePersonList` - Contains all Person objects
+  * `UniqueAnimalList` - Contains all Animal objects
+  * `UniqueFeedingSessionList` - Contains all FeedingSession objects
+
+<br>
+
+* **Maintains filtered views** of persons and animals:
+  * Stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+  * Stores the currently 'selected' `Animal` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Animal>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+
+<br>
+
+* **Uses UUID-based references** to link entities:
+  * Person and Animal objects store `Set<UUID> feedingSessionIds` containing feeding session IDs
+  * FeedingSession objects store `UUID animalId` and `UUID personId` referencing Person and Animal
+  * This loose coupling allows for flexible relationships without circular dependencies
+
+<br>
+
+* **Stores user preferences** in a `UserPref` object that represents the user's preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
+
+<br>
+
+* **Does not depend on other components** as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components.
 
 
 ### Storage component
@@ -161,110 +267,6 @@ The `Storage` component,
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Implementation**
-
-This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -608,7 +610,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `delete person n/Alex Yeoh`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated
-   
+
    2. Test case: `delete hi` <br>
       Expected: No person deleted. Error details shown in the status message. Status bar remains the same.
 
