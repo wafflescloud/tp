@@ -4,18 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
-
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Arrays;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 
 public class HelpCommandTest {
     private Model model = new ModelManager();
