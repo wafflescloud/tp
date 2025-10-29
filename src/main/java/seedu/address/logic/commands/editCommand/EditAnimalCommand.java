@@ -77,7 +77,7 @@ public class EditAnimalCommand extends EditCommand {
     private static Animal createEditedAnimal(Animal animalToEdit, EditAnimalDescriptor editAnimalDescriptor) {
         assert animalToEdit != null;
 
-        AnimalName updatedName = editAnimalDescriptor.getName().orElse(animalToEdit.getName());
+        AnimalName updatedName = editAnimalDescriptor.getName().orElse(animalToEdit.getAnimalName());
         Description updatedDescription = editAnimalDescriptor.getDescription().orElse(animalToEdit.getDescription());
         Location updatedLocation = editAnimalDescriptor.getLocation().orElse(animalToEdit.getLocation());
         Set<Tag> updatedTags = editAnimalDescriptor.getTags().orElse(animalToEdit.getTags());
@@ -212,5 +212,3 @@ public class EditAnimalCommand extends EditCommand {
         }
     }
 }
-
-

@@ -32,7 +32,15 @@ public class Animal extends Contact {
         this.location = location;
     }
 
-    public AnimalName getName() {
+    @Override
+    public Name getName() {
+        return name;
+    }
+
+    /**
+     * Returns the specific AnimalName for type-specific operations.
+     */
+    public AnimalName getAnimalName() {
         return name;
     }
 

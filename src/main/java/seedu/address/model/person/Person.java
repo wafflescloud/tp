@@ -41,7 +41,15 @@ public class Person extends Contact {
         this.feedingSessions.addAll(feedingSession);
     }
 
-    public PersonName getName() {
+    @Override
+    public Name getName() {
+        return name;
+    }
+
+    /**
+     * Returns the specific PersonName for type-specific operations.
+     */
+    public PersonName getPersonName() {
         return name;
     }
 
