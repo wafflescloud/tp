@@ -136,7 +136,7 @@ public class ModelManagerTest {
 
         seedu.address.model.person.Person matt = new seedu.address.testutil.PersonBuilder()
                 .withName("Matt")
-                .withPhone("12345678")
+                .withPhone("82345678")
                 .withEmail("matt@example.com")
                 .build();
 
@@ -166,7 +166,7 @@ public class ModelManagerTest {
 
         seedu.address.model.person.Person matthew = new seedu.address.testutil.PersonBuilder()
                 .withName("Matthew")
-                .withPhone("12345678")
+                .withPhone("82345678")
                 .withEmail("matt@example.com")
                 .withFeedingSessionIds(sessionIds)
                 .build();
@@ -252,7 +252,7 @@ public class ModelManagerTest {
         // Create person "Max"
         seedu.address.model.person.Person max = new seedu.address.testutil.PersonBuilder()
                 .withName("Max")
-                .withPhone("11111111")
+                .withPhone("81111111")
                 .withEmail("max@example.com")
                 .build();
 
@@ -351,13 +351,13 @@ public class ModelManagerTest {
         // Create persons "Alice" and "Bob"
         seedu.address.model.person.Person alice = new seedu.address.testutil.PersonBuilder()
                 .withName("Alice")
-                .withPhone("22222222")
+                .withPhone("82222222")
                 .withEmail("alice@example.com")
                 .build();
 
         seedu.address.model.person.Person bob = new seedu.address.testutil.PersonBuilder()
                 .withName("Bob")
-                .withPhone("33333333")
+                .withPhone("83333333")
                 .withEmail("bob@example.com")
                 .build();
 

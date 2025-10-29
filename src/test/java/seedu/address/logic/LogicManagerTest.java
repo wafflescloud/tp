@@ -177,7 +177,7 @@ public class LogicManagerTest {
         assertEquals(1, model.getFilteredPersonList().size());
         Person added = model.getFilteredPersonList().get(0);
         assertEquals(new PersonName("Amy Bee"), added.getName());
-        assertEquals(new Phone("11111111"), added.getPhone());
+        assertEquals(new Phone("91111111"), added.getPhone());
         assertEquals(new Email("amy@example.com"), added.getEmail());
         // No tags and no feeding sessions were provided
         assertEquals(java.util.Collections.emptySet(), added.getTags());
