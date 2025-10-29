@@ -3,6 +3,7 @@ package seedu.address.model.util;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
@@ -11,7 +12,6 @@ import seedu.address.model.animal.Animal;
 import seedu.address.model.animal.AnimalName;
 import seedu.address.model.animal.Description;
 import seedu.address.model.animal.Location;
-import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonName;
@@ -49,16 +49,16 @@ public class SampleDataUtil {
         return new Animal[] {
             new Animal(new AnimalName("Max"),
                 new Description("Golden Retriever, friendly and well-trained"),
-                new Location("Block A, Kennel 1"), getTagSet("Shy")),
+                new Location("Block A, Kennel 1"), getTagSet("Shy"), new HashSet<>()),
             new Animal(new AnimalName("Luna"),
                 new Description("Persian cat, white fur, blue eyes"),
-                new Location("Block B, Cat Room 3"), getTagSet("Rowdy")),
+                new Location("Block B, Cat Room 3"), getTagSet("Rowdy"), new HashSet<>()),
             new Animal(new AnimalName("Charlie"),
                 new Description("German Shepherd, good guard dog"),
-                new Location("Block A, Kennel 5"), getTagSet("Playful")),
+                new Location("Block A, Kennel 5"), getTagSet("Playful"), new HashSet<>()),
             new Animal(new AnimalName("Bella"),
                 new Description("Siamese cat, very playful"),
-                new Location("Block B, Cat Room 2"), getTagSet("Fierce"))
+                new Location("Block B, Cat Room 2"), getTagSet("Fierce"), new HashSet<>())
         };
     }
 
@@ -83,9 +83,9 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns an empty feeding session set.
+     * Returns an empty feeding session ID set.
      */
-    public static Set<FeedingSession> getFeedingSessionSet() {
+    public static Set<UUID> getFeedingSessionSet() {
         return new HashSet<>();
     }
 

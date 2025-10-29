@@ -77,17 +77,27 @@ public class MainApp extends Application {
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
+        boolean missingDataFile = false;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
+                missingDataFile = true;
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
+        }
+
+        if (missingDataFile) {
+            try {
+                storage.saveAddressBook(initialData);
+            } catch (IOException ioe) {
+                logger.warning("Failed to create initial data file: " + StringUtil.getDetails(ioe));
+            }
         }
 
         return new ModelManager(initialData, userPrefs);

@@ -48,7 +48,7 @@ public class AddressBookTest {
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
         Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
-                .withFeedingSessions(new HashSet<>())
+                .withFeedingSessionIds(new HashSet<>())
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
@@ -76,7 +76,7 @@ public class AddressBookTest {
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
-                .withFeedingSessions(new HashSet<>())
+                .withFeedingSessionIds(new HashSet<>())
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
@@ -90,7 +90,8 @@ public class AddressBookTest {
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName()
                 + "{persons=" + addressBook.getPersonList()
-                + ", animals=" + addressBook.getAnimalList() + "}";
+                + ", animals=" + addressBook.getAnimalList()
+                + ", feedingSessions=" + addressBook.getFeedingSessionList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
@@ -100,6 +101,8 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Animal> animals = FXCollections.observableArrayList();
+        private final ObservableList<seedu.address.model.feedingsession.FeedingSession> feedingSessions =
+                FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -113,6 +116,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Animal> getAnimalList() {
             return animals;
+        }
+
+        @Override
+        public ObservableList<seedu.address.model.feedingsession.FeedingSession> getFeedingSessionList() {
+            return feedingSessions;
         }
     }
 

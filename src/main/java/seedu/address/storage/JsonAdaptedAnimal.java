@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -22,46 +23,68 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedAnimal {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Animal's %s field is missing!";
 
+    private final String id;
     private final String name;
     private final String description;
     private final String location;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<String> feedingSessionIds = new ArrayList<>();
 
-    /**
-     * Constructs a {@code JsonAdaptedAnimal} with the given animal details.
-     */
     @JsonCreator
-    public JsonAdaptedAnimal(@JsonProperty("name") String name,
+    public JsonAdaptedAnimal(@JsonProperty("id") String id,
+                             @JsonProperty("name") String name,
                              @JsonProperty("description") String description,
                              @JsonProperty("location") String location,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("feedingSessionIds") List<String> feedingSessionIds) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.location = location;
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        if (feedingSessionIds != null) {
+            this.feedingSessionIds.addAll(feedingSessionIds);
+        }
     }
 
-    /**
-     * Converts a given {@code Animal} into this class for Jackson use.
-     */
     public JsonAdaptedAnimal(Animal source) {
+        id = source.getId().toString();
         name = source.getName().fullName;
         description = source.getDescription().value;
         location = source.getLocation().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        feedingSessionIds.addAll(source.getFeedingSessionIds().stream()
+                .map(UUID::toString)
+                .collect(Collectors.toList()));
     }
 
-    /**
-     * Converts this Jackson-friendly adapted animal object into the model's {@code Animal} object.
-     */
+    public String getId() {
+        return id;
+    }
+
+    public List<String> getFeedingSessionIds() {
+        return feedingSessionIds;
+    }
+
     public Animal toModelType() throws IllegalValueException {
         final List<Tag> animalTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             animalTags.add(tag.toModelType());
+        }
+
+        final UUID modelId;
+        if (id == null) {
+            modelId = UUID.randomUUID();
+        } else {
+            try {
+                modelId = UUID.fromString(id);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalValueException("Invalid UUID format for id");
+            }
         }
 
         if (name == null) {
@@ -92,6 +115,11 @@ class JsonAdaptedAnimal {
         final Location modelLocation = new Location(location);
 
         final Set<Tag> modelTags = new HashSet<>(animalTags);
-        return new Animal(modelName, modelDescription, modelLocation, modelTags);
+
+        final Set<UUID> modelFeedingSessionIds = feedingSessionIds.stream()
+                .map(UUID::fromString)
+                .collect(Collectors.toSet());
+
+        return new Animal(modelId, modelName, modelDescription, modelLocation, modelTags, modelFeedingSessionIds);
     }
 }

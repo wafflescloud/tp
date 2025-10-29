@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import seedu.address.model.animal.Animal;
 import seedu.address.model.animal.AnimalName;
@@ -23,6 +24,7 @@ public class AnimalBuilder {
     private Description description;
     private Location location;
     private Set<Tag> tags;
+    private Set<UUID> feedingSessionIds;
 
     /**
      * Creates an {@code AnimalBuilder} with default details.
@@ -32,6 +34,7 @@ public class AnimalBuilder {
         description = new Description(DEFAULT_DESCRIPTION);
         location = new Location(DEFAULT_LOCATION);
         tags = new HashSet<>();
+        feedingSessionIds = new HashSet<>();
     }
 
     /**
@@ -44,6 +47,7 @@ public class AnimalBuilder {
         description = animalToCopy.getDescription();
         location = animalToCopy.getLocation();
         tags = new HashSet<>(animalToCopy.getTags());
+        feedingSessionIds = new HashSet<>(animalToCopy.getFeedingSessionIds());
     }
 
     /**
@@ -87,7 +91,24 @@ public class AnimalBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Set<UUID>} of the {@code Animal} that we are building.
+     */
+    public AnimalBuilder withFeedingSessionIds(Set<UUID> feedingSessionIds) {
+        this.feedingSessionIds = new HashSet<>(feedingSessionIds);
+        return this;
+    }
+
+    /**
+     * Builds and returns an {@link Animal} using the values configured in this builder.
+     * <p>
+     * The returned animal will have an auto-generated identifier (as determined by the model)
+     * and will include the configured {@code name}, {@code description}, {@code location}, {@code tags},
+     * and {@code feedingSessionIds}.
+     *
+     * @return a new {@link Animal} instance based on the current builder state
+     */
     public Animal build() {
-        return new Animal(name, description, location, tags);
+        return new Animal(name, description, location, tags, feedingSessionIds);
     }
 }
