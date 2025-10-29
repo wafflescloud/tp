@@ -24,6 +24,17 @@ public class AnimalName extends Name {
     }
 
     /**
+     * Standardizes a name by trimming leading/trailing spaces
+     * and replacing multiple spaces between words with a single space.
+     *
+     * @param name The input string to standardize.
+     * @return A standardized string with normalized spaces.
+     */
+    private static String standardiseName(String name) {
+        return name.trim().replaceAll("\\s+", " ");
+    }
+
+    /**
      * Returns true if a given string is a valid animal name.
      */
     public static boolean isValidAnimalName(String test) {

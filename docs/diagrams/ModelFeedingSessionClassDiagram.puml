@@ -12,13 +12,11 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
-Class UniqueAnimalList
-Class Animal
-Class AnimalName
-Class Description
-Class Location
-Class Tag
+Class UniqueFeedingSessionList
+Class FeedingSession
 Class UUID
+Class LocalDateTime
+Class String
 
 Class I #FFFFFF
 }
@@ -35,22 +33,21 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniqueAnimalList
-UniqueAnimalList  --> "~*all" Animal
+AddressBook *--> "1" UniqueFeedingSessionList
+UniqueFeedingSessionList --> "~* all" FeedingSession
 
-Animal *--> "1" UUID : id
-Animal *--> "1" AnimalName : name
-Animal *--> "1" Description : description
-Animal *--> "1" Location : location
-Animal *--> "*" Tag : tags
-Animal *--> "*" UUID : feedingSessionIds
+FeedingSession *--> "1" UUID : id
+FeedingSession *--> "1" UUID : animalId
+FeedingSession *--> "1" UUID : personId
+FeedingSession *--> "1" LocalDateTime : dateTime
+FeedingSession *--> "1" String : notes
 
-Animal -[hidden]up--> I
-UniqueAnimalList -[hidden]right-> I
+FeedingSession -[hidden]up--> I
+UniqueFeedingSessionList -[hidden]right-> I
 
-AnimalName -[hidden]right-> Description
-Description -[hidden]right-> Location
+UUID -[hidden]right-> LocalDateTime
+LocalDateTime -[hidden]right-> String
 
-ModelManager --> "~* filtered" Animal
+ModelManager --> "~* all" FeedingSession
 
 @enduml
