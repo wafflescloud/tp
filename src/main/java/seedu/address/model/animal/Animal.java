@@ -2,37 +2,34 @@ package seedu.address.model.animal;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.Contact;
+import seedu.address.model.Name;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents an Animal in the pet store.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Animal {
+public class Animal extends Contact {
 
-    // Identity fields
+    // Identity fields specific to Animal
     private final AnimalName name;
     private final Description description;
     private final Location location;
-
-    // Data fields
-    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Animal(AnimalName name, Description description, Location location, Set<Tag> tags) {
+        super(tags);
         requireAllNonNull(name, description, location);
         this.name = name;
         this.description = description;
         this.location = location;
-        this.tags.addAll(tags);
     }
 
     public AnimalName getName() {
@@ -48,24 +45,11 @@ public class Animal {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
-    /**
      * Returns true if both animals have the same name.
      * This defines a weaker notion of equality between two animals.
      */
     public boolean isSameAnimal(Animal otherAnimal) {
-        if (otherAnimal == this) {
-            return true;
-        }
-
-        return otherAnimal != null
-                && otherAnimal.getName().equals(getName());
+        return isSameContact(otherAnimal);
     }
 
     /**
