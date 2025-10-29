@@ -172,7 +172,10 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        HelpFunctionWindow.hideAllWindows();
         helpWindow.hide();
+        AnimalProfileWindow.hideAllProfiles();
+        PersonProfileWindow.hideAllProfiles();
         primaryStage.hide();
     }
 

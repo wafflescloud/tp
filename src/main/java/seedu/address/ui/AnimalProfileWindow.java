@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
@@ -15,6 +18,7 @@ import seedu.address.model.animal.Animal;
 public class AnimalProfileWindow extends UiPart<Stage> {
 
     private static final String FXML = "AnimalProfileWindow.fxml";
+    private static final List<Stage> openWindows = new ArrayList<>();
 
     private final Animal animal;
 
@@ -37,6 +41,8 @@ public class AnimalProfileWindow extends UiPart<Stage> {
         name.setText(animal.getName().fullName);
         description.setText(animal.getDescription().value);
         locationLabel.setText(animal.getLocation().value);
+
+        openWindows.add(getRoot());
     }
 
     /**
@@ -53,6 +59,17 @@ public class AnimalProfileWindow extends UiPart<Stage> {
     public static void openProfile(Animal animal) {
         AnimalProfileWindow window = new AnimalProfileWindow(animal);
         window.show();
+    }
+
+    /**
+     * Hides all open AnimalProfileWindows.
+     */
+    public static void hideAllProfiles() {
+        for (Stage window : openWindows) {
+            if (window.isShowing()) {
+                window.hide();
+            }
+        }
     }
 
     /**
