@@ -25,6 +25,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.animal.Animal;
 import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.testutil.AnimalBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -228,6 +229,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasPhone(Phone phone) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -369,6 +375,14 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public boolean hasPhone(Phone phone) {
+            requireNonNull(phone);
+            return personsAdded.stream()
+                    .map(person -> person.getPhone())
+                    .anyMatch(p -> p.equals(phone));
         }
 
         @Override

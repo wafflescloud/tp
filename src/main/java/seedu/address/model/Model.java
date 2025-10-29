@@ -9,6 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.animal.Animal;
 import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 
 /**
  * The API of the Model component.
@@ -93,6 +94,11 @@ public interface Model {
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
+
+    /**
+     * Returns true if a person with the same phone number as {@code phone} exists in the address book.
+     */
+    boolean hasPhone(Phone phone);
 
     /**
      * Deletes the given person.
