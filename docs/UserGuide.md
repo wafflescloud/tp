@@ -26,6 +26,8 @@ Furiends is a **desktop app tailored towards animal lovers, specifically individ
   - [Deleting a person : `delete person`](#deleting-a-person--delete-person)
   - [Deleting an animal : `delete animal`](#deleting-an-animal--delete-animal)
   - [Deleting a feeding session : `delete feed`](#deleting-a-feeding-session--delete-feed)
+  - [Viewing a person contact: `view person`](#viewing-a-person-contact-view-person)
+  - [Viewing an animal contact: `view animal`](#viewing-an-animal-contact-view-animal)
   - [Clearing all entries : `clear`](#clearing-all-entries--clear)
   - [Undoing the last change: `undo`](#undoing-the-last-change-undo)
   - [Redoing an undone change: `redo`](#redoing-an-undone-change-redo)
@@ -41,24 +43,35 @@ Furiends is a **desktop app tailored towards animal lovers, specifically individ
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html). <br>
+   **Windows users:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-W14-3/tp/releases).
+   - To check the Java version in your device, open the terminal and type `java --version`.
+
+![versionCommand](images/versionCommand.png){style="width:900px; height:auto;"}
+
+2. Download the latest `furiends.jar` file from [here](https://github.com/AY2526S1-CS2103T-W14-3/tp/releases).
+
+![GitHubReleases](images/furiendsGitHub.png){style="width:900px; height:auto;"}
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Furiends application.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in. 
-
-   ![Terminal](images/terminal.png){style="width:750px; height:auto;"}
+4. Open a command terminal, `cd` into the folder you put the `furiends.jar` file in. 
 <box type="tip" seamless>
+The file is usually in downloads after downloading it.
+</box>
+
+![Terminal](images/terminal.png){style="width:900px; height:auto;"}
 
 The file is usually in `downloads` after downloading it.
 </box>
 
-5. Use the `java -jar furiends.jar` command to run the application. <br>
+![jarCommand](images/jarCommand.jpg){style="width:900px; height:auto;"}
+
+
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png){style="width:650px; height:auto;"} <br>
-   For more details on the GUI, refer to the [Overview of GUI](#overview-of-gui) section. <br>
+   ![Ui](images/Ui.png){style="width:900px; height:auto;"}
+   For more details on the GUI, refer to the [Overview of GUI](#overview-of-gui) section.
 
 5. Type the command in the command box (displaying "Enter command here...") and press Enter to execute it.<br>
    Some simple commands you can try:
@@ -76,7 +89,7 @@ The file is usually in `downloads` after downloading it.
 ------------------------------------------------------------------------------------------------
 
 ## Overview of GUI
-![Ui](images/Ui_explanation.png){style="width:500px; height:auto;"}
+![Ui](images/Ui_explanation.png){style="width:900px; height:auto;"}
 
 The GUI is made up of the following components:
 1. **Options Panel**: Contains menu bars to exit (File > Exit) and open the help panel (Help > Help).
@@ -381,7 +394,7 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `delete animal n/Max` Deletes the animal with name `Max` from Furiends.
   * Feedback Box: <br>
   ![deleteAnimal.png](images/deleteAnimal.png){style="width:900px; height:auto;"}<br>
-
+  
 ### Deleting a feeding session : `delete feed`
 Deletes a specified feeding session from Furiends.
 
@@ -396,6 +409,36 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `delete feed n/Max f/Alex Yeoh dt/2025-01-24 09:00` Deletes the feeding session between `Max` and `Alex Yeoh` at `24 Jan 2025 09:00` from Furiends.
   * Feedback Box: <br>
     ![deleteFeedingSession.png](images/deleteFeedingSession.png){style="width:700px; height:auto;"}<br>
+    
+### Viewing a person contact: `view person`
+
+Displays detailed information about a specific person from the address book.
+
+Format: `view person n/NAME`
+
+* Views the person's contact information with the specified `NAME`.
+* The name is case-insensitive, but must be the full name.
+* Shows the person's complete contact information in a detailed view.
+
+Examples:
+* `view person n/Alex Yeoh` Displays detailed information for the person named `Alex Yeoh`.
+* `view person n/alex yeoh` Also displays information for `Alex Yeoh` (case-insensitive).
+![viewPerson.png](images/viewPerson.png)
+
+### Viewing an animal contact: `view animal`
+
+Displays detailed information about a specific animal from the address book.
+
+Format: `view animal n/NAME`
+
+* Views the animal's contact information with the specified `NAME`.
+* The name is case-insensitive, but must be the full name.
+* Shows the animal's complete information in a detailed view.
+
+Examples:
+* `view animal n/Max` Displays detailed information for the animal named `Max`.
+* `view animal n/max` Also displays information for `Max` (case-insensitive).
+![viewAnimal.png](images/viewAnimal.png)
 
 ### Clearing all entries : `clear`
 
@@ -496,3 +539,5 @@ Action (in alphabetical order) | Format, Examples
 **List**                       | `list`
 **Redo**                       | `redo`
 **Undo**                       | `undo`
+**View Person**                | `view person n/NAME`<br> e.g., `view person n/Alex Yeoh`
+**View Animal**                | `view animal n/NAME`<br> e.g., `view animal n/Max`

@@ -28,14 +28,15 @@ public class EditPersonCommand extends EditCommand {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_DUPLICATE_PHONE_NUMBER = "This phone number already exists in the address book";
-    public static final String MESSAGE_DUPLICATE_EMAIL = "This email already exists in the address book";
-    public static final String MESSAGE_INVALID_PERSON_NAME = "The person is not found in the address book";
+    public static final String MESSAGE_DUPLICATE_PHONE_NUMBER = "This phone number already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "This email already exists in the address book.";
 
     private final PersonName name;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
+     * Creates an EditPersonCommand to edit the person with the specified name.
+     *
      * @param name name of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
@@ -59,15 +60,20 @@ public class EditPersonCommand extends EditCommand {
 
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+        // Check for duplicate person first
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (!personToEdit.getPhone().equals(editedPerson.getPhone()) && model.hasPhone(editedPerson.getPhone())) {
+        // Check for duplicate phone number
+        if (!personToEdit.getPhone().equals(editedPerson.getPhone())
+                && model.hasPhone(editedPerson.getPhone())) {
             throw new CommandException(MESSAGE_DUPLICATE_PHONE_NUMBER);
         }
 
-        if (!personToEdit.getEmail().equals(editedPerson.getEmail()) && model.hasEmail(editedPerson.getEmail())) {
+        // Check for duplicate email
+        if (!personToEdit.getEmail().equals(editedPerson.getEmail())
+                && model.hasEmail(editedPerson.getEmail())) {
             throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
         }
 
@@ -83,7 +89,7 @@ public class EditPersonCommand extends EditCommand {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        PersonName updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        PersonName updatedName = editPersonDescriptor.getName().orElse(personToEdit.getPersonName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
@@ -92,14 +98,12 @@ public class EditPersonCommand extends EditCommand {
                 updatedTags, personToEdit.getFeedingSessionIds());
     }
 
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof EditPersonCommand)) {
             return false;
         }
@@ -113,7 +117,7 @@ public class EditPersonCommand extends EditCommand {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("editPersonDescriptor", editPersonDescriptor)
+                .add("editDescriptor", editPersonDescriptor)
                 .toString();
     }
 
@@ -194,7 +198,6 @@ public class EditPersonCommand extends EditCommand {
                 return true;
             }
 
-            // instanceof handles nulls
             if (!(other instanceof EditPersonDescriptor)) {
                 return false;
             }
