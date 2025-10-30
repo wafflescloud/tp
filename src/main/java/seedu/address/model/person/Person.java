@@ -26,9 +26,6 @@ public class Person extends Contact {
     private final Phone phone;
     private final Email email;
 
-    // // Data fields specific to Person
-    // private final Set<FeedingSession> feedingSessions = new TreeSet<>((a, b) ->
-    //         a.getFeedingTime().compareTo(b.getFeedingTime()));
     // Identity fields
     private final UUID id;
 
