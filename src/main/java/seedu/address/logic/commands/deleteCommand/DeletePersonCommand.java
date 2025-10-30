@@ -8,17 +8,17 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonName;
 
 /**
  * Deletes a person identified using contact's name from the address book.
  */
 public class DeletePersonCommand extends DeleteCommand {
 
-    private final PersonName name;
+    private final Name name;
 
-    public DeletePersonCommand(PersonName name) {
+    public DeletePersonCommand(Name name) {
         this.name = name;
     }
 

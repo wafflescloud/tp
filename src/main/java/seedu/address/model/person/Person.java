@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.Name;
 import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.tag.Tag;
 
@@ -23,7 +24,7 @@ public class Person {
 
     // Identity fields
     private final UUID id;
-    private final PersonName name;
+    private final Name name;
     private final Phone phone;
     private final Email email;
 
@@ -35,7 +36,7 @@ public class Person {
      * Every field must be present and not null.
      * Creates a new Person with auto-generated ID.
      */
-    public Person(PersonName name, Phone phone, Email email, Set<Tag> tags,
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags,
             Set<UUID> feedingSessionIds) {
         requireAllNonNull(name, phone, email, tags);
         this.id = UUID.randomUUID();
@@ -49,7 +50,7 @@ public class Person {
     /**
      * Constructor with explicit ID (for deserialization).
      */
-    public Person(UUID id, PersonName name, Phone phone, Email email, Set<Tag> tags,
+    public Person(UUID id, Name name, Phone phone, Email email, Set<Tag> tags,
             Set<UUID> feedingSessionIds) {
         requireAllNonNull(id, name, phone, email, tags);
         this.id = id;
@@ -64,7 +65,7 @@ public class Person {
         return id;
     }
 
-    public PersonName getName() {
+    public Name getName() {
         return name;
     }
 

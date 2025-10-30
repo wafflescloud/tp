@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import seedu.address.model.Name;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonName;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -21,7 +21,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
 
     private UUID id;
-    private PersonName name;
+    private Name name;
     private Phone phone;
     private Email email;
     private Set<Tag> tags;
@@ -32,7 +32,7 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         id = null; // Will auto-generate when build() is called
-        name = new PersonName(DEFAULT_NAME);
+        name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         tags = new HashSet<>();
@@ -55,7 +55,7 @@ public class PersonBuilder {
      * Sets the {@code PersonName} of the {@code Person} that we are building.
      */
     public PersonBuilder withName(String name) {
-        this.name = new PersonName(name);
+        this.name = new Name(name);
         return this;
     }
 

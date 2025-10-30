@@ -8,20 +8,20 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.Name;
 import seedu.address.model.animal.Animal;
-import seedu.address.model.animal.AnimalName;
 
 /**
  * Deletes an animal identified using its name from the address book.
  */
 public class DeleteAnimalCommand extends DeleteCommand {
 
-    private final AnimalName name;
+    private final Name name;
 
     /**
      * Creates a DeleteAnimalCommand to delete the animal with the specified {@code name}
      */
-    public DeleteAnimalCommand(AnimalName name) {
+    public DeleteAnimalCommand(Name name) {
         requireNonNull(name);
         this.name = name;
     }

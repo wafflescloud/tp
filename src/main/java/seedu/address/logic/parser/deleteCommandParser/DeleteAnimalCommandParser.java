@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import seedu.address.logic.commands.DeleteAnimalCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.animal.AnimalName;
+import seedu.address.model.Name;
 
 /**
  * Parses input arguments and creates a new DeleteAnimalCommand object.
@@ -28,7 +28,7 @@ public class DeleteAnimalCommandParser implements Parser<DeleteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-        AnimalName name = ParserUtil.parseAnimalName(argMultimap.getValue(PREFIX_NAME).get());
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         return new DeleteAnimalCommand(name);
     }
 }

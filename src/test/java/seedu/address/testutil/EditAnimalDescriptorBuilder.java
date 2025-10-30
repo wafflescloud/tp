@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditAnimalCommand.EditAnimalDescriptor;
+import seedu.address.model.Name;
 import seedu.address.model.animal.Animal;
-import seedu.address.model.animal.AnimalName;
 import seedu.address.model.animal.Description;
 import seedu.address.model.animal.Location;
 import seedu.address.model.tag.Tag;
@@ -40,7 +40,7 @@ public class EditAnimalDescriptorBuilder {
      * Sets the {@code AnimalName} of the {@code EditAnimalDescriptor} that we are building.
      */
     public EditAnimalDescriptorBuilder withName(String name) {
-        descriptor.setName(new AnimalName(name));
+        descriptor.setName(new Name(name));
         return this;
     }
 

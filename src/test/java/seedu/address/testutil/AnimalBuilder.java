@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import seedu.address.model.Name;
 import seedu.address.model.animal.Animal;
-import seedu.address.model.animal.AnimalName;
 import seedu.address.model.animal.Description;
 import seedu.address.model.animal.Location;
 import seedu.address.model.tag.Tag;
@@ -20,7 +20,7 @@ public class AnimalBuilder {
     public static final String DEFAULT_DESCRIPTION = "A playful tabby cat.";
     public static final String DEFAULT_LOCATION = "Shelter Room 2";
 
-    private AnimalName name;
+    private Name name;
     private Description description;
     private Location location;
     private Set<Tag> tags;
@@ -30,7 +30,7 @@ public class AnimalBuilder {
      * Creates an {@code AnimalBuilder} with default details.
      */
     public AnimalBuilder() {
-        name = new AnimalName(DEFAULT_NAME);
+        name = new Name(DEFAULT_NAME);
         description = new Description(DEFAULT_DESCRIPTION);
         location = new Location(DEFAULT_LOCATION);
         tags = new HashSet<>();
@@ -57,7 +57,7 @@ public class AnimalBuilder {
      * @return This {@code AnimalBuilder} instance for chaining.
      */
     public AnimalBuilder withName(String name) {
-        this.name = new AnimalName(name);
+        this.name = new Name(name);
         return this;
     }
 

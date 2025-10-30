@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.Name;
 import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.tag.Tag;
 
@@ -23,7 +24,7 @@ public class Animal {
 
     // Identity fields
     private final UUID id;
-    private final AnimalName name;
+    private final Name name;
     private final Description description;
     private final Location location;
 
@@ -35,7 +36,7 @@ public class Animal {
      * Every field must be present and not null.
      * Creates a new Animal with auto-generated ID.
      */
-    public Animal(AnimalName name, Description description, Location location, Set<Tag> tags,
+    public Animal(Name name, Description description, Location location, Set<Tag> tags,
                   Set<UUID> feedingSessionIds) {
         requireAllNonNull(name, description, location);
         this.id = UUID.randomUUID();
@@ -49,7 +50,7 @@ public class Animal {
     /**
      * Constructor with explicit ID (for deserialization).
      */
-    public Animal(UUID id, AnimalName name, Description description, Location location, Set<Tag> tags,
+    public Animal(UUID id, Name name, Description description, Location location, Set<Tag> tags,
                   Set<UUID> feedingSessionIds) {
         requireAllNonNull(id, name, description, location);
         this.id = id;
@@ -64,7 +65,7 @@ public class Animal {
         return id;
     }
 
-    public AnimalName getName() {
+    public Name getName() {
         return name;
     }
 

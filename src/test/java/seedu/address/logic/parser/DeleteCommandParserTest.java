@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeletePersonCommand;
-import seedu.address.model.person.PersonName;
+import seedu.address.model.Name;
 
 public class DeleteCommandParserTest {
 
@@ -19,7 +19,7 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_validPersonName_returnsDeleteCommand() {
         String input = VALID_TYPE_PERSON + " " + NAME_DESC_AMY;
-        DeletePersonCommand expectedCommand = new DeletePersonCommand(new PersonName(VALID_NAME_AMY));
+        DeletePersonCommand expectedCommand = new DeletePersonCommand(new Name(VALID_NAME_AMY));
         assertParseSuccess(parser, input, expectedCommand);
     }
 

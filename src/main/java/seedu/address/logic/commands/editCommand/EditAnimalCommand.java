@@ -14,8 +14,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.Name;
 import seedu.address.model.animal.Animal;
-import seedu.address.model.animal.AnimalName;
 import seedu.address.model.animal.Description;
 import seedu.address.model.animal.Location;
 import seedu.address.model.tag.Tag;
@@ -32,14 +32,14 @@ public class EditAnimalCommand extends EditCommand {
     public static final String MESSAGE_DUPLICATE_ANIMAL = "This animal already exists in the address book";
     public static final String MESSAGE_INVALID_ANIMAL_NAME = "The animal is not found in the address book";
 
-    private final AnimalName name;
+    private final Name name;
     private final EditAnimalDescriptor editAnimalDescriptor;
 
     /**
      * @param name of the person in the filtered animal list to edit
      * @param editAnimalDescriptor details to edit the animal with
      */
-    public EditAnimalCommand(AnimalName name, EditAnimalDescriptor editAnimalDescriptor) {
+    public EditAnimalCommand(Name name, EditAnimalDescriptor editAnimalDescriptor) {
         requireNonNull(name);
         requireNonNull(editAnimalDescriptor);
 
@@ -77,7 +77,7 @@ public class EditAnimalCommand extends EditCommand {
     private static Animal createEditedAnimal(Animal animalToEdit, EditAnimalDescriptor editAnimalDescriptor) {
         assert animalToEdit != null;
 
-        AnimalName updatedName = editAnimalDescriptor.getName().orElse(animalToEdit.getName());
+        Name updatedName = editAnimalDescriptor.getName().orElse(animalToEdit.getName());
         Description updatedDescription = editAnimalDescriptor.getDescription().orElse(animalToEdit.getDescription());
         Location updatedLocation = editAnimalDescriptor.getLocation().orElse(animalToEdit.getLocation());
         Set<Tag> updatedTags = editAnimalDescriptor.getTags().orElse(animalToEdit.getTags());
@@ -117,7 +117,7 @@ public class EditAnimalCommand extends EditCommand {
      * corresponding field value of the animal.
      */
     public static class EditAnimalDescriptor {
-        private AnimalName name;
+        private Name name;
         private Description description;
         private Location location;
         private Set<Tag> tags;
@@ -141,11 +141,11 @@ public class EditAnimalCommand extends EditCommand {
             return CollectionUtil.isAnyNonNull(name, description, location, tags);
         }
 
-        public void setName(AnimalName name) {
+        public void setName(Name name) {
             this.name = name;
         }
 
-        public Optional<AnimalName> getName() {
+        public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 
@@ -213,5 +213,3 @@ public class EditAnimalCommand extends EditCommand {
         }
     }
 }
-
-

@@ -138,7 +138,7 @@ The `Model` component manages three main entity types: Person, Animal, and Feedi
 
 The Person model stores:
 * `UUID id` - Unique identifier for each person
-* `PersonName name` - The person's name
+* `Name name` - The person's name
 * `Phone phone` - Contact phone number
 * `Email email` - Email address
 * `Set<Tag> tags` - Tags for categorization
@@ -150,7 +150,7 @@ The Person model stores:
 
 The Animal model stores:
 * `UUID id` - Unique identifier for each animal
-* `AnimalName name` - The animal's name
+* `Name name` - The animal's name
 * `Description description` - Details about the animal
 * `Location location` - Where the animal is located
 * `Set<Tag> tags` - Tags for categorization

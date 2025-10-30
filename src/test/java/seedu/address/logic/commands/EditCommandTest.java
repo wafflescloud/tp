@@ -28,10 +28,9 @@ import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Name;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.animal.AnimalName;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonName;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -45,7 +44,7 @@ public class EditCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         // Build a descriptor with new values using a fresh Person
         Person descriptorSource = new PersonBuilder().build();
-        PersonName personName = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName();
+        Name personName = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(descriptorSource).build();
         EditPersonCommand editCommand = new EditPersonCommand(personName, descriptor);
 
@@ -93,7 +92,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        PersonName personName = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName();
+        Name personName = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName();
 
         EditPersonCommand editCommand = new EditPersonCommand(personName, new EditPersonDescriptor());
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -132,7 +131,7 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
 
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        PersonName secondPersonName = secondPerson.getName();
+        Name secondPersonName = secondPerson.getName();
         EditPersonCommand editCommand = new EditPersonCommand(secondPersonName, descriptor);
 
         assertCommandFailure(editCommand, model, EditPersonCommand.MESSAGE_DUPLICATE_PERSON);
@@ -145,7 +144,7 @@ public class EditCommandTest {
         // edit person in filtered list into a duplicate in address book
         Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        PersonName personName = person.getName();
+        Name personName = person.getName();
         EditPersonCommand editCommand = new EditPersonCommand(personName,
                 new EditPersonDescriptorBuilder(personInList).build());
 
@@ -154,8 +153,8 @@ public class EditCommandTest {
 
     @Test
     public void equals_person() {
-        PersonName firstPersonName = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName();
-        PersonName secondPersonName = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased())
+        Name firstPersonName = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName();
+        Name secondPersonName = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased())
                 .getName();
         final EditPersonCommand standardCommand = new EditPersonCommand(firstPersonName, DESC_AMY);
 
@@ -182,8 +181,8 @@ public class EditCommandTest {
 
     @Test
     public void equals_animal() {
-        AnimalName firstAnimalName = new AnimalName(VALID_NAME_CHOCO);
-        AnimalName secondAnimalName = new AnimalName(VALID_NAME_KITTY);
+        Name firstAnimalName = new Name(VALID_NAME_CHOCO);
+        Name secondAnimalName = new Name(VALID_NAME_KITTY);
 
         final EditAnimalCommand standardCommand = new EditAnimalCommand(firstAnimalName, DESC_CHOCO);
 
@@ -211,7 +210,7 @@ public class EditCommandTest {
     @Test
     public void toStringMethod_person() {
         Index index = Index.fromOneBased(1);
-        PersonName personName = model.getFilteredPersonList().get(index.getZeroBased()).getName();
+        Name personName = model.getFilteredPersonList().get(index.getZeroBased()).getName();
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditPersonCommand editCommand = new EditPersonCommand(personName, editPersonDescriptor);
         String expected = EditPersonCommand.class.getCanonicalName() + "{name=" + personName
@@ -221,7 +220,7 @@ public class EditCommandTest {
 
     @Test
     public void toStringMethod_animal() {
-        AnimalName animalName = new AnimalName(VALID_NAME_CHOCO);
+        Name animalName = new Name(VALID_NAME_CHOCO);
         EditAnimalDescriptor editAnimalDescriptor = new EditAnimalDescriptor();
         EditAnimalCommand editCommand = new EditAnimalCommand(animalName, editAnimalDescriptor);
         String expected = EditAnimalCommand.class.getCanonicalName() + "{name=" + animalName

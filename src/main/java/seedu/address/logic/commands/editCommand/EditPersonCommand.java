@@ -14,9 +14,9 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.Name;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonName;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -32,14 +32,14 @@ public class EditPersonCommand extends EditCommand {
     public static final String MESSAGE_DUPLICATE_EMAIL = "This email already exists in the address book";
     public static final String MESSAGE_INVALID_PERSON_NAME = "The person is not found in the address book";
 
-    private final PersonName name;
+    private final Name name;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
      * @param name name of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditPersonCommand(PersonName name, EditPersonDescriptor editPersonDescriptor) {
+    public EditPersonCommand(Name name, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(name);
         requireNonNull(editPersonDescriptor);
 
@@ -83,7 +83,7 @@ public class EditPersonCommand extends EditCommand {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        PersonName updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
@@ -122,7 +122,7 @@ public class EditPersonCommand extends EditCommand {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
-        private PersonName name;
+        private Name name;
         private Phone phone;
         private Email email;
         private Set<Tag> tags;
@@ -147,11 +147,11 @@ public class EditPersonCommand extends EditCommand {
             return CollectionUtil.isAnyNonNull(name, phone, email, tags);
         }
 
-        public void setName(PersonName name) {
+        public void setName(Name name) {
             this.name = name;
         }
 
-        public Optional<PersonName> getName() {
+        public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 

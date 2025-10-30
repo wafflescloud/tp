@@ -14,9 +14,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Name;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonName;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code DeletePersonCommand}.
@@ -28,7 +28,7 @@ public class DeletePersonCommandTest {
     @Test
     public void execute_validPersonName_success() {
         Person personToDelete = model.getFilteredPersonList().get(0);
-        PersonName name = personToDelete.getName();
+        Name name = personToDelete.getName();
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(name);
 
         String expectedMessage = String.format(Messages.MESSAGE_DELETED_PERSON_SUCCESS,
@@ -42,7 +42,7 @@ public class DeletePersonCommandTest {
 
     @Test
     public void execute_invalidPersonName_throwsCommandException() {
-        PersonName nonExistentName = new PersonName("Non Existent Name");
+        Name nonExistentName = new Name("Non Existent Name");
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(nonExistentName);
 
         assertCommandFailure(deletePersonCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
