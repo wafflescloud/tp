@@ -84,7 +84,7 @@ The file is usually in downloads after downloading it.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Overview of GUI
-![Ui](images/Ui_explanations.JPEG){style="width:900px; height:auto;"}
+![Ui](images/Ui_explanation.png){style="width:900px; height:auto;"}
 
 The GUI is made up of the following components:
 1. **Options Panel**: Contains menu bars to exit (File > Exit) and open the help panel (Help > Help).
