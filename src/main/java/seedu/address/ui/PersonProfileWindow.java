@@ -12,6 +12,8 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.model.animal.Animal;
@@ -72,13 +74,11 @@ public class PersonProfileWindow extends UiPart<Stage> {
      */
     private void displayAllFeedingSessions() {
         if (feedingSessionsContainer == null || feedingSessionScrollPane == null) {
-            return; // FXML not wired yet; defensive
+            return;
         }
 
-        // Clear previous entries
         feedingSessionsContainer.getChildren().clear();
 
-        // Filter sessions involving this person and sort by date/time ascending
         List<FeedingSession> sessionsForPerson = feedingSessions.stream()
                 .filter(session -> session.involvesPerson(person.getId()))
                 .sorted(Comparator.comparing(FeedingSession::getDateTime))
@@ -93,7 +93,6 @@ public class PersonProfileWindow extends UiPart<Stage> {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        // Populate entries
         for (FeedingSession session : sessionsForPerson) {
             String animalNameText = animals.stream()
                     .filter(animal -> animal.getId().equals(session.getAnimalId()))
@@ -103,35 +102,50 @@ public class PersonProfileWindow extends UiPart<Stage> {
 
             Label dateLabel = new Label(session.getDateTime().format(dateFormatter));
             dateLabel.getStyleClass().add("session-date");
+            // Keep date fully visible: size to content and do not shrink
+            dateLabel.setMinWidth(Region.USE_PREF_SIZE);
+            dateLabel.setPrefWidth(Region.USE_COMPUTED_SIZE);
+            dateLabel.setMaxWidth(Region.USE_PREF_SIZE);
+            HBox.setHgrow(dateLabel, Priority.NEVER);
 
             Label timeLabel = new Label(session.getDateTime().format(timeFormatter));
             timeLabel.getStyleClass().add("session-time");
+            // Keep time fully visible: size to content and do not shrink
+            timeLabel.setMinWidth(Region.USE_PREF_SIZE);
+            timeLabel.setPrefWidth(Region.USE_COMPUTED_SIZE);
+            timeLabel.setMaxWidth(Region.USE_PREF_SIZE);
+            HBox.setHgrow(timeLabel, Priority.NEVER);
 
             Label animalLabel = new Label(animalNameText);
             animalLabel.getStyleClass().add("session-animal");
+            animalLabel.setWrapText(true);
+            HBox.setHgrow(animalLabel, javafx.scene.layout.Priority.ALWAYS);
+            animalLabel.setMaxWidth(Double.MAX_VALUE);
 
-            HBox row = new HBox(10.0); // spacing between labels
+            HBox row = new HBox(5.0);
             row.getStyleClass().add("feeding-session-box");
             row.getChildren().addAll(dateLabel, timeLabel, animalLabel);
 
-            // Ensure each row fills available width to avoid abrupt width changes
             row.setFillHeight(true);
             row.setMaxWidth(Double.MAX_VALUE);
 
             feedingSessionsContainer.getChildren().add(row);
         }
 
-        // Ensure the ScrollPane is visible
         feedingSessionScrollPane.setVisible(true);
         feedingSessionScrollPane.setManaged(true);
     }
+
 
     /**
      * Displays the profile window and centers it on screen.
      */
     public void show() {
-        getRoot().show();
-        getRoot().centerOnScreen();
+        Stage stage = getRoot();
+        stage.setWidth(400);
+        stage.setHeight(300);
+        stage.show();
+        stage.centerOnScreen();
     }
 
     /**

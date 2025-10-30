@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -54,18 +53,14 @@ public class AnimalProfileWindow extends UiPart<Stage> {
         description.setText(animal.getDescription().value);
         locationLabel.setText(animal.getLocation().value);
 
-        // Ensure description behaves like person details: single-line ellipsis, no extra vertical growth
-        description.setWrapText(false);
-        description.setTextOverrun(OverrunStyle.ELLIPSIS);
-        description.setMaxWidth(Double.MAX_VALUE);
+        // Ensure description behaves like person details: allow wrapping and no vertical oversize
+        description.setWrapText(true);
         HBox.setHgrow(description, Priority.ALWAYS);
-        description.setMinHeight(Region.USE_PREF_SIZE);
-        description.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        description.setMaxHeight(Region.USE_PREF_SIZE);
-        // Ensure parent row does not expand vertically
-        if (description.getParent() instanceof HBox) {
-            ((HBox) description.getParent()).setFillHeight(true);
-        }
+        description.setMaxWidth(Double.MAX_VALUE);
+
+        locationLabel.setWrapText(true);
+        HBox.setHgrow(locationLabel, Priority.ALWAYS);
+        locationLabel.setMaxWidth(Double.MAX_VALUE);
 
         // Populate tags sorted alphabetically
         animal.getTags().stream()
@@ -109,14 +104,27 @@ public class AnimalProfileWindow extends UiPart<Stage> {
 
             Label dateLabel = new Label(session.getDateTime().format(dateFormatter));
             dateLabel.getStyleClass().add("session-date");
+            // Keep date fully visible: size to content and do not shrink
+            dateLabel.setMinWidth(Region.USE_PREF_SIZE);
+            dateLabel.setPrefWidth(Region.USE_COMPUTED_SIZE);
+            dateLabel.setMaxWidth(Region.USE_PREF_SIZE);
+            HBox.setHgrow(dateLabel, Priority.NEVER);
 
             Label timeLabel = new Label(session.getDateTime().format(timeFormatter));
             timeLabel.getStyleClass().add("session-time");
+            // Keep time fully visible: size to content and do not shrink
+            timeLabel.setMinWidth(Region.USE_PREF_SIZE);
+            timeLabel.setPrefWidth(Region.USE_COMPUTED_SIZE);
+            timeLabel.setMaxWidth(Region.USE_PREF_SIZE);
+            HBox.setHgrow(timeLabel, Priority.NEVER);
 
             Label personLabel = new Label(personNameText);
             personLabel.getStyleClass().add("session-animal");
+            personLabel.setWrapText(true);
+            HBox.setHgrow(personLabel, javafx.scene.layout.Priority.ALWAYS);
+            personLabel.setMaxWidth(Double.MAX_VALUE);
 
-            HBox row = new HBox(10.0);
+            HBox row = new HBox(5.0);
             row.getStyleClass().add("feeding-session-box");
             row.getChildren().addAll(dateLabel, timeLabel, personLabel);
 
@@ -134,8 +142,11 @@ public class AnimalProfileWindow extends UiPart<Stage> {
      * Shows the animal profile window and centers it on screen.
      */
     public void show() {
-        getRoot().show();
-        getRoot().centerOnScreen();
+        Stage stage = getRoot();
+        stage.setWidth(400);
+        stage.setHeight(300);
+        stage.show();
+        stage.centerOnScreen();
     }
 
     /**
@@ -152,8 +163,11 @@ public class AnimalProfileWindow extends UiPart<Stage> {
      */
     @FXML
     private void copyLocation() {
-        Clipboard.getSystemClipboard().setContent(new ClipboardContent() {{
-            putString(animal.getLocation().value);
-        }});
+        Clipboard.getSystemClipboard().setContent(
+                new ClipboardContent() {
+                    {
+                        putString(animal.getLocation().value);
+                    }
+                });
     }
 }

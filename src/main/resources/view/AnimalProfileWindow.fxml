@@ -14,7 +14,7 @@
 
 <fx:root type="javafx.stage.Stage" title="Animal Profile"
          xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         minWidth="300.0" minHeight="300.0">
+         minWidth="400.0" minHeight="300.0" maxWidth="1920.0" maxHeight="1080.0">
     <scene>
         <Scene>
             <stylesheets>
@@ -24,7 +24,7 @@
             <VBox fx:id="profileContainer" spacing="10.0" alignment="TOP_LEFT">
                 <VBox fx:id="infoContainer" spacing="10.0" alignment="TOP_LEFT">
                     <!-- Animal Name -->
-                    <Label fx:id="name" text="Animal Name" />
+                    <Label fx:id="name" text="Animal Name" wrapText="true" maxWidth="Infinity"/>
 
                     <!-- Tags -->
                     <FlowPane fx:id="tags" hgap="5" vgap="5" />
@@ -32,15 +32,14 @@
                     <!-- Description -->
                     <HBox spacing="5.0" alignment="CENTER_LEFT">
                         <Label fx:id="description" text="Description"
-                               wrapText="false"
-                               textOverrun="ELLIPSIS"
+                               wrapText="true"
                                maxWidth="Infinity"
                                HBox.hgrow="ALWAYS" />
                     </HBox>
 
                     <!-- Location + Copy Button -->
                     <HBox spacing="5.0" alignment="CENTER_LEFT">
-                        <Label fx:id="locationLabel" text="Location" />
+                        <Label fx:id="locationLabel" text="Location" wrapText="true" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
                         <Button fx:id="copy" onAction="#copyLocation">
                             <graphic>
                                 <ImageView fitWidth="16" fitHeight="16" preserveRatio="true">

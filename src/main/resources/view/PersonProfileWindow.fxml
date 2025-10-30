@@ -15,7 +15,7 @@
 
 <fx:root type="javafx.stage.Stage" title="Person Profile"
          xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         minWidth="300.0" minHeight="300.0">
+         minWidth="400.0" minHeight="300.0" maxWidth="1920.0" maxHeight="1080.0">
     <scene>
         <Scene>
             <stylesheets>
@@ -25,14 +25,14 @@
             <VBox fx:id="profileContainer" spacing="10.0" alignment="TOP_LEFT">
                 <VBox fx:id="infoContainer" spacing="10.0" alignment="TOP_LEFT">
                     <!-- Person Name -->
-                    <Label fx:id="name" text="Name" />
+                    <Label fx:id="name" text="Name" wrapText="true" maxWidth="Infinity"/>
 
                     <!-- Tags -->
                     <FlowPane fx:id="tags" hgap="5" vgap="5" />
 
                     <!-- Phone + Copy Button -->
                     <HBox spacing="5.0" alignment="CENTER_LEFT">
-                        <Label fx:id="phone" text="Phone" />
+                        <Label fx:id="phone" text="Phone" wrapText="true" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
                         <Button fx:id="copy" onAction="#copyPhone">
                             <graphic>
                                 <ImageView fitWidth="16" fitHeight="16" preserveRatio="true">
@@ -46,7 +46,7 @@
 
                     <!-- Email + Copy Button -->
                     <HBox spacing="5.0" alignment="CENTER_LEFT">
-                        <Label fx:id="email" text="Email" />
+                        <Label fx:id="email" text="Email" wrapText="true" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
                         <Button fx:id="copyEmail" onAction="#copyEmail">
                             <graphic>
                                 <ImageView fitWidth="16" fitHeight="16" preserveRatio="true">

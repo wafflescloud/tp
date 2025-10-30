@@ -110,6 +110,8 @@
 .session-date, .session-time {
     -fx-font-weight: bold;
     -fx-background-color: transparent;
+    /* Avoid ellipsis even under tight space; controller also prevents shrinking */
+    -fx-text-overrun: clip;
 }
 
 /* Animal name remains normal weight; optional spacing adjust */
