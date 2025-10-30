@@ -9,6 +9,8 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.model.animal.Animal;
+import seedu.address.model.feedingsession.FeedingSession;
+import seedu.address.model.person.Person;
 
 /**
  * A window that shows detailed information of an {@link Animal}.
@@ -34,7 +36,7 @@ public class AnimalProfileWindow extends UiPart<Stage> {
     /**
      * Creates a new AnimalProfileWindow for the specified {@code animal}.
      */
-    public AnimalProfileWindow(Animal animal) {
+    public AnimalProfileWindow(Animal animal, List<FeedingSession> feedingSessions, List<Person> persons) {
         super(FXML, new Stage());
         this.animal = animal;
 
@@ -56,8 +58,8 @@ public class AnimalProfileWindow extends UiPart<Stage> {
     /**
      * Opens an animal profile window for the specified {@code animal}.
      */
-    public static void openProfile(Animal animal) {
-        AnimalProfileWindow window = new AnimalProfileWindow(animal);
+    public static void openProfile(Animal animal, List<FeedingSession> feedingSessions, List<Person> persons) {
+        AnimalProfileWindow window = new AnimalProfileWindow(animal, feedingSessions, persons);
         window.show();
     }
 

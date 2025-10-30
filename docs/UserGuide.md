@@ -48,29 +48,29 @@ Furiends is a **desktop app tailored towards animal lovers, specifically individ
 
    - To check the Java version in your device, open the terminal and type `java --version`.
 
-![versionCommand](images/versionCommand.png){style="width:900px; height:auto;"}
+![versionCommand](images/versionCommand.png){style="width:900px; height:auto;"}<br>
 
 2. Download the latest `furiends.jar` file from [here](https://github.com/AY2526S1-CS2103T-W14-3/tp/releases).
 
-![GitHubReleases](images/furiendsGitHub.png){style="width:900px; height:auto;"}
+![GitHubReleases](images/furiendsGitHub.png){style="width:900px; height:auto;"}<br>
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Furiends application.
 
 4. Open a command terminal, `cd` into the folder you put the `furiends.jar` file in. 
 <box type="tip" seamless>
-The file is usually in downloads after downloading it.
-</box>
-
-![Terminal](images/terminal.png){style="width:900px; height:auto;"}
 
 The file is usually in `downloads` after downloading it.
 </box>
 
-![jarCommand](images/jarCommand.jpg){style="width:900px; height:auto;"}
+![Terminal](images/terminal.png){style="width:900px; height:auto;"}<br>
+
+5. Use the `java -jar furiends.jar` command to run the application.
+
+![jarCommand](images/jarCommand.jpg){style="width:900px; height:auto;"}<br>
 
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png){style="width:900px; height:auto;"}
+   ![Ui](images/Ui.png){style="width:900px; height:auto;"}<br>
    For more details on the GUI, refer to the [Overview of GUI](#overview-of-gui) section.
 
 5. Type the command in the command box (displaying "Enter command here...") and press Enter to execute it.<br>
@@ -122,6 +122,7 @@ The GUI is made up of the following components:
   (such as `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 </box>
+
 <box type="warning" seamless>
 
 If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -190,7 +191,7 @@ If you are using a PDF version of this document, be careful when copying and pas
 
 Displays a window, which links to the user guide, as well as a list of commands. <br>
 
-Format: `help [command]` <br>
+Format: `help [COMMAND]` <br>
 
 The general help window (in the image below) can be opened by entering `help` in the command box.
 
@@ -198,7 +199,7 @@ The general help window (in the image below) can be opened by entering `help` in
 
 Each command is clickable to open another window, which shows additional details regarding the command's usage. <br>
 
-This window can also be opened by entering `help <command>` in the command box. <br>
+This window can also be opened by entering `help [COMMAND]` in the command box. <br>
 
 In the example below, when clicking the `help` command (as shown in the image above), a new window will pop up to show
 the details of the `help` command and its usage.
@@ -207,7 +208,7 @@ the details of the `help` command and its usage.
 ![help window](images/helpWindowExample.png){style="width:700px; height:auto;"}
 
 Clicking on the command format template will copy the command format to the command box in the main application window
-and close this window. For example, clicking on the command format template `help <command name>` will copy
+and close this window. For example, clicking on the command format template `help [COMMAND]` will copy
 the corresponding command format to the command box as shown below.
 
 ![automatic copying](images/helpAutomaticInput.png){style="width:700px; height:auto;"} <br>
@@ -420,7 +421,7 @@ Format: `view person n/NAME`
 * The name is case-insensitive, but must be the full name.
 * Shows the person's complete contact information in a detailed view.
 
-Examples:
+Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `view person n/Alex Yeoh` Displays detailed information for the person named `Alex Yeoh`.
 * `view person n/alex yeoh` Also displays information for `Alex Yeoh` (case-insensitive).
 ![viewPerson.png](images/viewPerson.png)
@@ -435,7 +436,7 @@ Format: `view animal n/NAME`
 * The name is case-insensitive, but must be the full name.
 * Shows the animal's complete information in a detailed view.
 
-Examples:
+Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `view animal n/Max` Displays detailed information for the animal named `Max`.
 * `view animal n/max` Also displays information for `Max` (case-insensitive).
 ![viewAnimal.png](images/viewAnimal.png)
