@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,7 @@ import seedu.address.model.person.Person;
 public class AnimalProfileWindow extends UiPart<Stage> {
 
     private static final String FXML = "AnimalProfileWindow.fxml";
+    private static final List<Stage> openWindows = new ArrayList<>();
 
     private final Animal animal;
     private final List<FeedingSession> feedingSessions;
@@ -68,6 +70,7 @@ public class AnimalProfileWindow extends UiPart<Stage> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
         displayAllFeedingSessions();
+        openWindows.add(getRoot());
     }
 
     /**
@@ -155,6 +158,17 @@ public class AnimalProfileWindow extends UiPart<Stage> {
     public static void openProfile(Animal animal, List<FeedingSession> feedingSessions, List<Person> persons) {
         AnimalProfileWindow window = new AnimalProfileWindow(animal, feedingSessions, persons);
         window.show();
+    }
+
+    /**
+     * Hides all open AnimalProfileWindows.
+     */
+    public static void hideAllProfiles() {
+        for (Stage window : openWindows) {
+            if (window.isShowing()) {
+                window.hide();
+            }
+        }
     }
 
     /**
