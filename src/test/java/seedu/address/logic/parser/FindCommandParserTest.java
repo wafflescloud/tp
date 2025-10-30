@@ -9,7 +9,6 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindContactCommand;
 import seedu.address.model.animal.Animal;
 import seedu.address.model.animal.AnimalMatchesKeywordsPredicate;
@@ -30,19 +29,19 @@ public class FindCommandParserTest {
     @Test
     public void parse_emptyArgPerson_throwsParseException() {
         assertParseFailure(parser, "person     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyStringAfterTrimPerson_throwsParseException() {
         assertParseFailure(parser, "person",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_onlyWhitespacesPerson_throwsParseException() {
         assertParseFailure(parser, "person   \t   \n   ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -109,19 +108,19 @@ public class FindCommandParserTest {
     @Test
     public void parse_emptyArgAnimal_throwsParseException() {
         assertParseFailure(parser, "animal     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyStringAfterTrimAnimal_throwsParseException() {
         assertParseFailure(parser, "animal",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_onlyWhitespacesAnimal_throwsParseException() {
         assertParseFailure(parser, "animal   \t   \n   ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -188,25 +187,25 @@ public class FindCommandParserTest {
     @Test
     public void parse_invalidType_throwsParseException() {
         assertParseFailure(parser, "invalidtype n/Alice",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_noType_throwsParseException() {
         assertParseFailure(parser, "n/Alice",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyInput_throwsParseException() {
         assertParseFailure(parser, "",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_onlyWhitespaces_throwsParseException() {
         assertParseFailure(parser, "   \t   \n   ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
     }
 
     // Edge Case Tests
