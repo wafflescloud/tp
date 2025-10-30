@@ -648,16 +648,40 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a person or animal
+
+*   Prerequisites: 
+    * Furiends is running.
+    * Use the list command first to show current entries.
+
+1. Valid test case - Adding a person
+   Command: `add person n/John Doe p/98765432 e/JohnDoe@example.com t/friend`
+   Expected: Person `John Doe` is added to the list. Details of the added contact are shown in `John Doe`'s entry. The tag `friend` is shown in the entry as well.
+2. Valid test case - Adding an animal 
+   Command: `add animal n/Whiskers d/Gray tabby cat l/NUS Library t/shy`
+   Expected: Animal `Whiskers` is added to the list. Details of the added contact are shown in `Whiskers`'s entry. The tag `shy` is shown in the entry as well.
+3. Invalid test case - Adding a person with missing details
+   Command: `add person n/John Doe p/98765432`
+   Expected: No person added. Error details shown in the status message: `Invalid command format! ...`
+4. Invalid test case - Adding an animal with missing details
+   Command: `add animal n/Whiskers l/NUS Library`
+   Expected: No animal added. Error details shown in the status message: `Invalid command format! ...`
+5. Invalid test case - Adding a duplicate person 
+   Command: `add person n/Alex Yeoh p/87438807 e/alexyeoh@example.com t/friend`
+   Expected: No person added. Error details shown in the status message: `This person already exists in the address book.`
+6. Invalid test case - Adding a duplicate animal
+   Command: `add animal n/Max d/Golden Retriever, friendly and well-trained l/Block A, Kennel 1 t/Shy`
+   Expected: No person added. Error details shown in the status message: `This animal already exists in the address book.`
+
 
 ### Deleting a person
 
@@ -665,13 +689,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete person n/Alex Yeoh`<br>
+   2. Test case: `delete person n/Alex Yeoh`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated
 
-   2. Test case: `delete hi` <br>
+   3. Test case: `delete hi` <br>
       Expected: No person deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete people n/NAME`, `delete ani n/NAME`, `delete WORD` (where `WORD` is any word that is not `person` or `animal`)<br>
+   4. Other incorrect delete commands to try: `delete people n/NAME`, `delete ani n/NAME`, `delete WORD` (where `WORD` is any word that is not `person` or `animal`)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
