@@ -105,7 +105,7 @@ The GUI is made up of the following components:
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters
+* Extra parameters for commands that do not take in parameters
   (such as `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 </box>
@@ -411,6 +411,7 @@ Format: `undo`
 
 * Only works for commands that change Furiends (e.g., add, edit, delete).
 * If there are no changes to undo, an error message will be shown.
+![undoErrorMessage.png](images/undoError.png){style="width:900px; height:auto;"}<br>
 
 Example:
 * `undo` Reverts the last add, edit, or delete command.
@@ -423,6 +424,7 @@ Format: `redo`
 
 * Only works immediately after an `undo` command.
 * If there are no changes to redo, an error message will be shown.
+![redoError.png](images/redoError.png){style="width:900px; height:auto;"}<br>
 
 Example:
 * `redo` Re-applies the last change that was undone.
@@ -461,6 +463,8 @@ Furthermore, certain edits can cause Furiends to behave in unexpected ways (e.g.
 the data of your previous Furiends home folder.<br>
 **Q**: How do I restore all the contacts after using `find` to filter?<br>
 **A**: In the command input, enter `list` to view all contacts.<br>
+**Q**: What should I do if an error message is shown in feedback box?<br>
+**A**: You can try again by correcting to the correct input following the feedback box. Or you can delete the wrong input and type `help` to get more help.<br>
 
 ------------------------------------------------------------------------------------------------
 
