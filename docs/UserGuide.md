@@ -116,7 +116,7 @@ The GUI is made up of the following components:
   For example, `[t/TAG]…` can be omitted, used once as `t/friend`, or used multiple times as `t/friend t/family`.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * Extra parameters for commands that do not take in parameters
   (such as `list`, `exit` and `clear`) will be ignored.<br>
@@ -180,7 +180,7 @@ If you are using a PDF version of this document, be careful when copying and pas
   * Character limit of 100 (including internal white spaces).
   * e.g. `AMK Street 3497`, `blk A7!`<br><br>
 * `KEYWORD`
-  * Comes in 2 different forms `n/NAME` and `t/TAG` only.
+  * Comes in 2 different forms, `n/NAME` and `t/TAG` only.
   * Characters length of 1-30 allowed after removal of extra white spaces.
   * Only alphabets `A–Z`, `a–z`, digits `0-9`, hyphens `-`, and spaces allowed.
   * e.g. `n/bobby`, `n/Je`, `t/fluffy`, `t/fluf`
@@ -215,8 +215,9 @@ the corresponding command format to the command box as shown below.
 
 ### Adding a person: `add person`
 
-Adds a person to Furiends.
-Format: `add person n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
+Adds a person to Furiends.<br>
+
+Format: `add person n/NAME p/PHONE e/EMAIL [t/TAG]…​`
 
 * You may assign any number of tags (including none) to a person.
 
@@ -334,7 +335,7 @@ Format: `find animal KEYWORD [MORE_KEYWORDS]...`
   e.g. `n/Cutie` will return `Cutie Pie`, `Cutie Patootie` (if both animals are stored in the application).
 * Searching using tags must have the **exact case-insensitive spelling**.<br>
   e.g. `t/fur` will return the same result as `t/FUR`.
-  * Only aniamls with the tag `fur` will be shown. 
+  * Only animals with the tag `fur` will be shown. 
 
 Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `find animal n/max n/luna` returns `Max`, `Luna`. Note that the 'person' portion is still shown.<br>
@@ -353,7 +354,7 @@ Records a feeding session between an animal and a person (feeder) in Furiends.
 Format: `feed f/PERSON_NAME n/ANIMAL_NAME dt/DATETIME`
 
 * **1 feeding session** can only involve **1 animal** and **1 person**.
-* An animal can have **more than 1 feeding sessions**. <br>
+* 1 animal can have **more than 1 feeding sessions**. <br>
   E.g. `Max` can have 2 different feeding sessions, 1 with `Alex Yeoh` and 1 with `Bernice Yu`.
   * `Max` is being fed by 2 different people.
 * 1 person can feed **more than 1 animal**. <br>
@@ -413,32 +414,32 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
     
 ### Viewing a person contact: `view person`
 
-Displays detailed information about a specific person from the address book.
+Displays detailed information about a specific person from Furiends.
 
 Format: `view person n/NAME`
 
 * Views the person's contact information with the specified `NAME`.
-* The name is case-insensitive, but must be the full name.
+* The name is **case-insensitive**, but must be the full name.
 * Shows the person's complete contact information in a detailed view.
 
 Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `view person n/Alex Yeoh` Displays detailed information for the person named `Alex Yeoh`.
-* `view person n/alex yeoh` Also displays information for `Alex Yeoh` (case-insensitive).
+* `view person n/alex yeoh` Also displays information for `Alex Yeoh`.
 ![viewPerson.png](images/viewPerson.png)
 
 ### Viewing an animal contact: `view animal`
 
-Displays detailed information about a specific animal from the address book.
+Displays detailed information about a specific animal from Furiends.
 
 Format: `view animal n/NAME`
 
 * Views the animal's contact information with the specified `NAME`.
-* The name is case-insensitive, but must be the full name.
+* The name is **case-insensitive**, but must be the full name.
 * Shows the animal's complete information in a detailed view.
 
 Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `view animal n/Max` Displays detailed information for the animal named `Max`.
-* `view animal n/max` Also displays information for `Max` (case-insensitive).
+* `view animal n/max` Also displays information for `Max`.
 ![viewAnimal.png](images/viewAnimal.png)
 
 ### Clearing all entries : `clear`
@@ -505,8 +506,10 @@ Furthermore, certain edits can cause Furiends to behave in unexpected ways (e.g.
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains 
 the data of your previous Furiends home folder.<br>
+
 **Q**: How do I restore all the contacts after using `find` to filter?<br>
 **A**: In the command input, enter `list` to view all contacts.<br>
+
 **Q**: What should I do if an error message is shown in feedback box?<br>
 **A**: You can try again by correcting to the correct input following the feedback box. Or you can delete the wrong input and type `help` to get more help.<br>
 
@@ -525,7 +528,7 @@ the data of your previous Furiends home folder.<br>
 Action (in alphabetical order) | Format, Examples
 ----------------------|------------------------------------------------------------------------------------------------
 **Add Animal**                 | `add animal n/NAME d/DESCRIPTION l/LOCATION [t/TAG]…​` <br> e.g., `add animal n/Fluffy d/White cat l/Ang Mo Kio`
-**Add Person**                 | `add person n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`<br>e.g.,`add person n/James Ho p/92224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Person**                 | `add person n/NAME p/PHONE e/EMAIL [t/TAG]…​`<br>e.g.,`add person n/James Ho p/92224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**                      | `clear`
 **Delete Animal**              | `delete animal n/NAME`<br> e.g., `delete animal n/Fluffy`
 **Delete Feed**                | `delete feed n/ANIMAL_NAME f/PERSON_NAME dt/DATETIME`<br> e.g., `delete feed n/Fluffy f/John Doe dt/2005-04-09 10:00`
@@ -534,8 +537,8 @@ Action (in alphabetical order) | Format, Examples
 **Edit Person**                | `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… [f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]…​`<br> e.g.,`edit person John Doe n/James Lee e/jameslee@example.com`
 **Exit**                       | `exit`
 **Feed**                       | `feed f/PERSON_NAME n/ANIMAL_NAME dt/DATETIME`<br> e.g., `feed n/Fluffy f/John Doe dt/2005-04-09 10:00`
-**Find Animal**                | `find animal KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Fluffy n/Max 
-**Find Person**                | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James t/family`t/cute`
+**Find Animal**                | `find animal KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Fluffy n/Max` 
+**Find Person**                | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James t/family t/cute`
 **Help**                       | `help [COMMAND]`<br> e.g. `help` <br> e.g. `help add person`
 **List**                       | `list`
 **Redo**                       | `redo`
