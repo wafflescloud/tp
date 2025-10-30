@@ -38,24 +38,34 @@ Furiends is a **desktop app tailored towards animal lovers, specifically individ
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html). <br>
+   **Windows users:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-W14-3/tp/releases).
+   - To check the Java version in your device, open the terminal and type `java --version`.
+
+![versionCommand](images/versionCommand.png){style="width:900px; height:auto;"}
+
+2. Download the latest `furiends.jar` file from [here](https://github.com/AY2526S1-CS2103T-W14-3/tp/releases).
+
+![GitHubReleases](images/furiendsGitHub.png){style="width:900px; height:auto;"}
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Furiends application.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in. 
+4. Open a command terminal, `cd` into the folder you put the `furiends.jar` file in. 
 <box type="tip" seamless>
 The file is usually in downloads after downloading it.
 </box>
 
-![Terminal](images/terminal.png)
+![Terminal](images/terminal.png){style="width:900px; height:auto;"}
 
 5. Use the `java -jar furiends.jar` command
    to run the application.
 
+![jarCommand](images/jarCommand.jpg){style="width:900px; height:auto;"}
+
+
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/Ui.png){style="width:900px; height:auto;"}
    For more details on the GUI, refer to the [Overview of GUI](#overview-of-gui) section.
 
 5. Type the command in the command box (displaying "Enter command here...") and press Enter to execute it.<br>
@@ -74,7 +84,7 @@ The file is usually in downloads after downloading it.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Overview of GUI
-![Ui](images/Ui_explanation.png)
+![Ui](images/Ui_explanations.JPEG){style="width:900px; height:auto;"}
 
 The GUI is made up of the following components:
 1. **Options Panel**: Contains menu bars to exit (File > Exit) and open the help panel (Help > Help).
