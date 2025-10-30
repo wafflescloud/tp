@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteContactCommand;
-import seedu.address.logic.parser.deleteCommandParser.DeleteContactCommandParser;
 import seedu.address.model.Name;
 import seedu.address.model.person.Person;
 
