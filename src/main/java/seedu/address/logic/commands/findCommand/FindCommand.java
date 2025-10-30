@@ -20,7 +20,7 @@ import seedu.address.model.person.Person;
  * Generic command for finding contacts (Person or Animal) in the address book.
  * Uses method references to handle type-specific behavior without requiring subclasses.
  */
-public class FindContactCommand<T extends Contact> extends Command {
+public class FindCommand<T extends Contact> extends Command {
 
     public static final String COMMAND_WORD = "find";
 
@@ -64,9 +64,9 @@ public class FindContactCommand<T extends Contact> extends Command {
     private final String successMessageFormat;
 
     /**
-     * Creates a FindContactCommand with the specified predicate and model operations.
+     * Creates a FindCommand with the specified predicate and model operations.
      */
-    public FindContactCommand(Predicate<T> predicate,
+    public FindCommand(Predicate<T> predicate,
                              Function<Model, List<T>> listGetter,
                              BiConsumer<Model, Predicate<T>> listUpdater,
                              String successMessageFormat) {
@@ -77,10 +77,10 @@ public class FindContactCommand<T extends Contact> extends Command {
     }
 
     /**
-     * Factory method to create a FindContactCommand for Person entities.
+     * Factory method to create a FindCommand for Person entities.
      */
-    public static FindContactCommand<Person> forPerson(Predicate<Person> predicate) {
-        return new FindContactCommand<>(
+    public static FindCommand<Person> forPerson(Predicate<Person> predicate) {
+        return new FindCommand<>(
             predicate,
             Model::getFilteredPersonList,
             Model::updateFilteredPersonList,
@@ -89,10 +89,10 @@ public class FindContactCommand<T extends Contact> extends Command {
     }
 
     /**
-     * Factory method to create a FindContactCommand for Animal entities.
+     * Factory method to create a FindCommand for Animal entities.
      */
-    public static FindContactCommand<Animal> forAnimal(Predicate<Animal> predicate) {
-        return new FindContactCommand<>(
+    public static FindCommand<Animal> forAnimal(Predicate<Animal> predicate) {
+        return new FindCommand<>(
             predicate,
             Model::getFilteredAnimalList,
             Model::updateFilteredAnimalList,
@@ -119,7 +119,7 @@ public class FindContactCommand<T extends Contact> extends Command {
         }
 
         @SuppressWarnings("unchecked")
-        FindContactCommand<T> otherCommand = (FindContactCommand<T>) other;
+        FindCommand<T> otherCommand = (FindCommand<T>) other;
         return predicate.equals(otherCommand.predicate)
                 && listGetter.equals(otherCommand.listGetter)
                 && listUpdater.equals(otherCommand.listUpdater)

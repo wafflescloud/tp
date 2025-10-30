@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.TYPE_PERSON;
 
 import java.util.List;
 
-import seedu.address.logic.commands.FindContactCommand;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.animal.AnimalMatchesKeywordsPredicate;
 import seedu.address.model.animal.NameContainsKeywordsPredicateAnimal;
@@ -19,14 +19,14 @@ import seedu.address.model.person.PersonMatchesKeywordsPredicate;
  * Unified parser for find commands that handles both Person and Animal types.
  * Automatically detects the contact type from the input arguments.
  */
-public class FindCommandParser implements Parser<FindContactCommand> {
+public class FindCommandParser implements Parser<FindCommand> {
 
     private enum ContactType {
         PERSON, ANIMAL
     }
 
     @Override
-    public FindContactCommand parse(String args) throws ParseException {
+    public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
         // Determine contact type from the first argument
@@ -49,7 +49,7 @@ public class FindCommandParser implements Parser<FindContactCommand> {
         boolean hasTags = tagValues != null && !tagValues.isEmpty();
 
         if (!hasNames && !hasTags) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         if (hasNames && !hasTags) {
@@ -69,7 +69,7 @@ public class FindCommandParser implements Parser<FindContactCommand> {
         } else if (args.startsWith(TYPE_ANIMAL.toString())) {
             return ContactType.ANIMAL;
         } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
     }
 
@@ -87,24 +87,24 @@ public class FindCommandParser implements Parser<FindContactCommand> {
         }
     }
 
-    private FindContactCommand createNameOnlyCommand(List<String> nameValues, ContactType contactType) {
+    private FindCommand createNameOnlyCommand(List<String> nameValues, ContactType contactType) {
         switch (contactType) {
         case PERSON:
-            return FindContactCommand.forPerson(new NameContainsKeywordsPredicatePerson(nameValues));
+            return FindCommand.forPerson(new NameContainsKeywordsPredicatePerson(nameValues));
         case ANIMAL:
-            return FindContactCommand.forAnimal(new NameContainsKeywordsPredicateAnimal(nameValues));
+            return FindCommand.forAnimal(new NameContainsKeywordsPredicateAnimal(nameValues));
         default:
             throw new IllegalStateException("Unknown contact type: " + contactType);
         }
     }
 
-    private FindContactCommand createCombinedCommand(List<String> nameValues, List<String> tagValues,
+    private FindCommand createCombinedCommand(List<String> nameValues, List<String> tagValues,
             ContactType contactType) {
         switch (contactType) {
         case PERSON:
-            return FindContactCommand.forPerson(new PersonMatchesKeywordsPredicate(nameValues, tagValues));
+            return FindCommand.forPerson(new PersonMatchesKeywordsPredicate(nameValues, tagValues));
         case ANIMAL:
-            return FindContactCommand.forAnimal(new AnimalMatchesKeywordsPredicate(nameValues, tagValues));
+            return FindCommand.forAnimal(new AnimalMatchesKeywordsPredicate(nameValues, tagValues));
         default:
             throw new IllegalStateException("Unknown contact type: " + contactType);
         }

@@ -35,14 +35,14 @@ public class FindAnimalCommandTest {
         NameContainsKeywordsPredicateAnimal secondPredicate =
                 new NameContainsKeywordsPredicateAnimal(Collections.singletonList("second"));
 
-        FindContactCommand<Animal> findFirstCommand = FindContactCommand.forAnimal(firstPredicate);
-        FindContactCommand<Animal> findSecondCommand = FindContactCommand.forAnimal(secondPredicate);
+        FindCommand<Animal> findFirstCommand = FindCommand.forAnimal(firstPredicate);
+        FindCommand<Animal> findSecondCommand = FindCommand.forAnimal(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindContactCommand<Animal> findFirstCommandCopy = FindContactCommand.forAnimal(firstPredicate);
+        FindCommand<Animal> findFirstCommandCopy = FindCommand.forAnimal(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -59,7 +59,7 @@ public class FindAnimalCommandTest {
     public void execute_zeroKeywords_noAnimalFound() {
         String expectedMessage = String.format(Messages.MESSAGE_FIND_ANIMAL_SUCCESS, 0);
         NameContainsKeywordsPredicateAnimal predicate = preparePredicate(" ");
-        FindContactCommand<Animal> command = FindContactCommand.forAnimal(predicate);
+        FindCommand<Animal> command = FindCommand.forAnimal(predicate);
         expectedModel.updateFilteredAnimalList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredAnimalList());
@@ -80,8 +80,8 @@ public class FindAnimalCommandTest {
     public void toStringMethod() {
         NameContainsKeywordsPredicateAnimal predicate =
             new NameContainsKeywordsPredicateAnimal(Arrays.asList("keyword"));
-        FindContactCommand<Animal> findCommand = FindContactCommand.forAnimal(predicate);
-        String expected = FindContactCommand.class.getCanonicalName() + "{predicate=" + predicate
+        FindCommand<Animal> findCommand = FindCommand.forAnimal(predicate);
+        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate
                 + ", successMessageFormat=" + Messages.MESSAGE_FIND_ANIMAL_SUCCESS + "}";
         assertEquals(expected, findCommand.toString());
     }
