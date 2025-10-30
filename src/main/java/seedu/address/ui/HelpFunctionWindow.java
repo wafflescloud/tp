@@ -67,12 +67,12 @@ public class HelpFunctionWindow extends UiPart<Stage> {
 
         String desc = HelpWindow.getDescriptionForCommand(commandName);
         if (desc == null) {
-            commandDescriptionLabel.setText("Description: (no description found)");
+            commandDescriptionLabel.setText("No description found.");
         } else {
             // Only show the first line (description) in the description label
             String[] lines = desc.split("\n");
             if (lines.length > 0) {
-                commandDescriptionLabel.setText("Description: " + lines[0]);
+                commandDescriptionLabel.setText(lines[0]);
             }
         }
         commandDescriptionLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: black;");
