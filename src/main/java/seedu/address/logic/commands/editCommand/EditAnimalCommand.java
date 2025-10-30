@@ -12,7 +12,6 @@ import java.util.Set;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.animal.Animal;
@@ -28,7 +27,7 @@ public class EditAnimalCommand extends EditCommand {
 
     public static final String MESSAGE_EDIT_ANIMAL_SUCCESS = "Edited Animal: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_ANIMAL = "This animal already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_ANIMAL = "This animal already exists in the address book.";
 
     private final AnimalName name;
     private final EditAnimalDescriptor editAnimalDescriptor;
