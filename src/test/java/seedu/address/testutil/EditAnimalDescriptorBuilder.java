@@ -31,25 +31,14 @@ public class EditAnimalDescriptorBuilder {
      */
     public EditAnimalDescriptorBuilder(Animal animal) {
         descriptor = new EditAnimalDescriptor();
-        descriptor.setName(getAnimalNameSafely(animal));
+        descriptor.setName(animal.getName());
         descriptor.setDescription(animal.getDescription());
         descriptor.setLocation(animal.getLocation());
         descriptor.setTags(animal.getTags());
     }
 
     /**
-     * Safely extracts AnimalName from an Animal object.
-     * This method handles the type conversion from Name to AnimalName.
-     */
-    private AnimalName getAnimalNameSafely(Animal animal) {
-        if (animal.getName() instanceof AnimalName) {
-            return (AnimalName) animal.getName();
-        }
-        throw new IllegalStateException("Animal should have AnimalName, but got: " + animal.getName().getClass());
-    }
-
-    /**
-     * Sets the {@code AnimalName} of the {@code EditAnimalDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code EditAnimalDescriptor} that we are building.
      */
     public EditAnimalDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));

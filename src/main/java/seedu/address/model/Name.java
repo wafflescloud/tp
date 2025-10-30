@@ -32,7 +32,7 @@ public class Name {
         requireNonNull(name);
         String trimmedName = name.trim();
         checkArgument(isValidName(trimmedName), MESSAGE_CONSTRAINTS);
-        fullName = trimmedName;  // Store with original casing
+        fullName = trimmedName;
     }
 
     /**
@@ -75,7 +75,7 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.equalsIgnoreCase(otherName.fullName);  // Case-insensitive comparison
+        return fullName.equalsIgnoreCase(otherName.fullName);
     }
 
     /**
@@ -87,6 +87,6 @@ public class Name {
      */
     @Override
     public int hashCode() {
-        return fullName.toLowerCase().hashCode();  // Case-insensitive hash
+        return fullName.toLowerCase().hashCode();
     }
 }

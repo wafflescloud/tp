@@ -31,7 +31,7 @@ public class EditPersonCommand extends EditCommand {
     public static final String MESSAGE_DUPLICATE_PHONE_NUMBER = "This phone number already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_EMAIL = "This email already exists in the address book.";
 
-    private final PersonName name;
+    private final Name name;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
@@ -40,9 +40,13 @@ public class EditPersonCommand extends EditCommand {
      * @param name name of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditPersonCommand(PersonName name, EditPersonDescriptor editPersonDescriptor) {
+    public EditPersonCommand(Name name, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(name);
         requireNonNull(editPersonDescriptor);
+
+        this.name = name;
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -85,7 +89,7 @@ public class EditPersonCommand extends EditCommand {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        PersonName updatedName = editPersonDescriptor.getName().orElse(personToEdit.getPersonName());
+        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());

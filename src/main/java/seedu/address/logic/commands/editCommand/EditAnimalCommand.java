@@ -29,7 +29,7 @@ public class EditAnimalCommand extends EditCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ANIMAL = "This animal already exists in the address book.";
 
-    private final AnimalName name;
+    private final Name name;
     private final EditAnimalDescriptor editAnimalDescriptor;
 
     /**
@@ -38,7 +38,7 @@ public class EditAnimalCommand extends EditCommand {
      * @param name name of the animal in the filtered animal list to edit
      * @param editAnimalDescriptor details to edit the animal with
      */
-    public EditAnimalCommand(AnimalName name, EditAnimalDescriptor editAnimalDescriptor) {
+    public EditAnimalCommand(Name name, EditAnimalDescriptor editAnimalDescriptor) {
         requireNonNull(name);
         requireNonNull(editAnimalDescriptor);
 
@@ -74,7 +74,7 @@ public class EditAnimalCommand extends EditCommand {
     private static Animal createEditedAnimal(Animal animalToEdit, EditAnimalDescriptor editAnimalDescriptor) {
         assert animalToEdit != null;
 
-        AnimalName updatedName = editAnimalDescriptor.getName().orElse(animalToEdit.getAnimalName());
+        Name updatedName = editAnimalDescriptor.getName().orElse(animalToEdit.getName());
         Description updatedDescription = editAnimalDescriptor.getDescription().orElse(animalToEdit.getDescription());
         Location updatedLocation = editAnimalDescriptor.getLocation().orElse(animalToEdit.getLocation());
         Set<Tag> updatedTags = editAnimalDescriptor.getTags().orElse(animalToEdit.getTags());

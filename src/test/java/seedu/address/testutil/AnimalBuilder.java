@@ -20,6 +20,7 @@ public class AnimalBuilder {
     public static final String DEFAULT_DESCRIPTION = "A playful tabby cat.";
     public static final String DEFAULT_LOCATION = "Shelter Room 2";
 
+    private UUID id;
     private Name name;
     private Description description;
     private Location location;
@@ -30,6 +31,7 @@ public class AnimalBuilder {
      * Creates an {@code AnimalBuilder} with default details.
      */
     public AnimalBuilder() {
+        id = null; // Will auto-generate when build() is called
         name = new Name(DEFAULT_NAME);
         description = new Description(DEFAULT_DESCRIPTION);
         location = new Location(DEFAULT_LOCATION);
@@ -43,7 +45,8 @@ public class AnimalBuilder {
      * @param animalToCopy The animal object whose data will be copied into the builder.
      */
     public AnimalBuilder(Animal animalToCopy) {
-        name = getAnimalNameSafely(animalToCopy);
+        id = animalToCopy.getId();
+        name = animalToCopy.getName();
         description = animalToCopy.getDescription();
         location = animalToCopy.getLocation();
         tags = new HashSet<>(animalToCopy.getTags());
@@ -51,18 +54,7 @@ public class AnimalBuilder {
     }
 
     /**
-     * Safely extracts AnimalName from an Animal object.
-     * This method handles the type conversion from Name to AnimalName.
-     */
-    private AnimalName getAnimalNameSafely(Animal animal) {
-        if (animal.getName() instanceof AnimalName) {
-            return (AnimalName) animal.getName();
-        }
-        throw new IllegalStateException("Animal should have AnimalName, but got: " + animal.getName().getClass());
-    }
-
-    /**
-     * Sets the {@code AnimalName} of the {@code Animal} that we are building.
+     * Sets the {@code Name} of the {@code Animal} that we are building.
      *
      * @param name The name to set.
      * @return This {@code AnimalBuilder} instance for chaining.
@@ -113,13 +105,19 @@ public class AnimalBuilder {
     /**
      * Builds and returns an {@link Animal} using the values configured in this builder.
      * <p>
-     * The returned animal will have an auto-generated identifier (as determined by the model)
-     * and will include the configured {@code name}, {@code description}, {@code location}, {@code tags},
-     * and {@code feedingSessionIds}.
+     * If this builder was initialized from an existing animal (or explicitly provided an ID),
+     * the same identifier will be used. Otherwise, the constructed animal will have an
+     * auto-generated identifier.
+     * <p>
+     * The returned animal will include the configured {@code name}, {@code description},
+     * {@code location}, {@code tags}, and {@code feedingSessionIds}.
      *
      * @return a new {@link Animal} instance based on the current builder state
      */
     public Animal build() {
+        if (id != null) {
+            return new Animal(id, name, description, location, tags, feedingSessionIds);
+        }
         return new Animal(name, description, location, tags, feedingSessionIds);
     }
 }
