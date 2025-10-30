@@ -217,7 +217,6 @@ public class ParserUtilTest {
         assertEquals(expected, ParserUtil.parseDateTime("2025-01-31 23:59"));
     }
 
-
     // EP: 31st of a month with 30 days (invalid)
     @Test
     public void parseDateTime_thirtyFirstOnThirtyDayMonth_throwsParseException() {
