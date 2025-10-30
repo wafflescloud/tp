@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ANIMALS;
 
 import java.util.Collections;
@@ -10,7 +9,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -21,53 +19,71 @@ import seedu.address.model.animal.Location;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing animal in the address book.
  */
-public class EditAnimalCommand extends EditCommand {
-
-    public static final String COMMAND_WORD = "edit";
+public class EditAnimalCommand extends EditContactCommand<Animal, EditAnimalCommand.EditAnimalDescriptor> {
 
     public static final String MESSAGE_EDIT_ANIMAL_SUCCESS = "Edited Animal: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ANIMAL = "This animal already exists in the address book";
-    public static final String MESSAGE_INVALID_ANIMAL_NAME = "The animal is not found in the address book";
-
-    private final Name name;
-    private final EditAnimalDescriptor editAnimalDescriptor;
 
     /**
-     * @param name of the person in the filtered animal list to edit
+     * @param name of the animal in the filtered animal list to edit
      * @param editAnimalDescriptor details to edit the animal with
      */
-    public EditAnimalCommand(Name name, EditAnimalDescriptor editAnimalDescriptor) {
-        requireNonNull(name);
-        requireNonNull(editAnimalDescriptor);
-
-        this.name = name;
-        this.editAnimalDescriptor = editAnimalDescriptor;
+    public EditAnimalCommand(AnimalName name, EditAnimalDescriptor editAnimalDescriptor) {
+        super(name, editAnimalDescriptor);
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+    protected List<Animal> getFilteredList(Model model) {
+        return model.getFilteredAnimalList();
+    }
 
-        List<Animal> list = model.getFilteredAnimalList();
+    @Override
+    protected Animal createEditedContact(Animal animalToEdit, EditAnimalDescriptor editDescriptor, Model model)
+            throws CommandException {
+        return createEditedAnimal(animalToEdit, editDescriptor);
+    }
 
-        Animal animalToEdit = list.stream()
-                .filter(animal -> animal.getName().equals(name))
-                .findFirst()
-                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_ANIMAL_DISPLAYED_NAME));
+    @Override
+    protected boolean isSameContact(Animal contact1, Animal contact2) {
+        return contact1.isSameAnimal(contact2);
+    }
 
+    @Override
+    protected boolean hasContact(Model model, Animal contact) {
+        return model.hasAnimal(contact);
+    }
 
-        Animal editedAnimal = createEditedAnimal(animalToEdit, editAnimalDescriptor);
+    @Override
+    protected void setContact(Model model, Animal oldContact, Animal newContact) {
+        model.setAnimal(oldContact, newContact);
+    }
 
-        if (!animalToEdit.isSameAnimal(editedAnimal) && model.hasAnimal(editedAnimal)) {
-            throw new CommandException(MESSAGE_DUPLICATE_ANIMAL);
-        }
-
-        model.setAnimal(animalToEdit, editedAnimal);
+    @Override
+    protected void updateFilteredList(Model model) {
         model.updateFilteredAnimalList(PREDICATE_SHOW_ALL_ANIMALS);
-        return new CommandResult(String.format(MESSAGE_EDIT_ANIMAL_SUCCESS, Messages.format(editedAnimal)));
+    }
+
+    @Override
+    protected String getSuccessMessage() {
+        return MESSAGE_EDIT_ANIMAL_SUCCESS;
+    }
+
+    @Override
+    protected String getInvalidNameMessage() {
+        return Messages.MESSAGE_INVALID_ANIMAL_DISPLAYED_NAME;
+    }
+
+    @Override
+    protected String getDuplicateMessage() {
+        return MESSAGE_DUPLICATE_ANIMAL;
+    }
+
+    @Override
+    protected String formatContact(Animal contact) {
+        return Messages.format(contact);
     }
 
     /**
@@ -77,7 +93,7 @@ public class EditAnimalCommand extends EditCommand {
     private static Animal createEditedAnimal(Animal animalToEdit, EditAnimalDescriptor editAnimalDescriptor) {
         assert animalToEdit != null;
 
-        Name updatedName = editAnimalDescriptor.getName().orElse(animalToEdit.getName());
+        AnimalName updatedName = editAnimalDescriptor.getName().orElse(animalToEdit.getAnimalName());
         Description updatedDescription = editAnimalDescriptor.getDescription().orElse(animalToEdit.getDescription());
         Location updatedLocation = editAnimalDescriptor.getLocation().orElse(animalToEdit.getLocation());
         Set<Tag> updatedTags = editAnimalDescriptor.getTags().orElse(animalToEdit.getTags());
@@ -85,32 +101,6 @@ public class EditAnimalCommand extends EditCommand {
         return new Animal(animalToEdit.getId(), updatedName, updatedDescription, updatedLocation, updatedTags,
                 animalToEdit.getFeedingSessionIds());
     }
-
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof EditAnimalCommand)) {
-            return false;
-        }
-
-        EditAnimalCommand otherEditAnimalCommand = (EditAnimalCommand) other;
-        return name.equals(otherEditAnimalCommand.name)
-                && editAnimalDescriptor.equals(otherEditAnimalCommand.editAnimalDescriptor);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("editAnimalDescriptor", editAnimalDescriptor)
-                .toString();
-    }
-
 
     /**
      * Stores the details to edit the animal with. Each non-empty field value will replace the
@@ -188,7 +178,6 @@ public class EditAnimalCommand extends EditCommand {
                 return true;
             }
 
-            // instanceof handles nulls
             if (!(other instanceof EditAnimalDescriptor)) {
                 return false;
             }

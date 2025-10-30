@@ -72,8 +72,9 @@ public class DeletePersonCommandTest {
 
     @Test
     public void toStringMethod() {
-        DeletePersonCommand deleteCommand = new DeletePersonCommand(ALICE.getName());
-        String expected = DeletePersonCommand.class.getCanonicalName() + "{name=" + ALICE.getName() + "}";
+        Name aliceName = ALICE.getName();
+        DeletePersonCommand deleteCommand = new DeletePersonCommand(aliceName);
+        String expected = DeletePersonCommand.class.getCanonicalName() + "{name=" + aliceName + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 }

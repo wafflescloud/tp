@@ -3,15 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CHOCO;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_KITTY;
-// import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CHOCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_KITTY;
-// import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-// import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -25,6 +23,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditAnimalCommand.EditAnimalDescriptor;
 import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.editCommand.EditAnimalCommand.EditAnimalDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -35,7 +34,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * * Contains integration tests (interaction with the Model) and unit tests for EditPersonCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for EditPersonCommand.
  */
 public class EditCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -71,7 +70,7 @@ public class EditCommandTest {
     // public void execute_someFieldsSpecifiedUnfilteredList_success() {
     //     Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
     //     Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
-    //     PersonName lastPersonName = lastPerson.getName();
+    //     Name lastPersonName = lastPerson.getName();
 
     //     PersonBuilder personInList = new PersonBuilder(lastPerson);
     //     Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
@@ -111,7 +110,7 @@ public class EditCommandTest {
 
     //     Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
     //     Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
-    //     PersonName personName = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName();
+    //     Name personName = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName();
 
     //     EditPersonCommand editCommand = new EditPersonCommand(personName,
     //             new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -154,8 +153,7 @@ public class EditCommandTest {
     @Test
     public void equals_person() {
         Name firstPersonName = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName();
-        Name secondPersonName = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased())
-                .getName();
+        Name secondPersonName = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()).getName();
         final EditPersonCommand standardCommand = new EditPersonCommand(firstPersonName, DESC_AMY);
 
         // same values -> returns true
@@ -214,7 +212,7 @@ public class EditCommandTest {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditPersonCommand editCommand = new EditPersonCommand(personName, editPersonDescriptor);
         String expected = EditPersonCommand.class.getCanonicalName() + "{name=" + personName
-                + ", editPersonDescriptor=" + editPersonDescriptor + "}";
+                + ", editDescriptor=" + editPersonDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
 
@@ -224,8 +222,7 @@ public class EditCommandTest {
         EditAnimalDescriptor editAnimalDescriptor = new EditAnimalDescriptor();
         EditAnimalCommand editCommand = new EditAnimalCommand(animalName, editAnimalDescriptor);
         String expected = EditAnimalCommand.class.getCanonicalName() + "{name=" + animalName
-                + ", editAnimalDescriptor=" + editAnimalDescriptor + "}";
+                + ", editDescriptor=" + editAnimalDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
-
 }

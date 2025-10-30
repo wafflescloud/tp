@@ -31,10 +31,21 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
-        descriptor.setName(person.getName());
+        descriptor.setName(getPersonNameSafely(person));
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setTags(person.getTags());
+    }
+
+    /**
+     * Safely extracts PersonName from a Person object.
+     * This method handles the type conversion from Name to PersonName.
+     */
+    private PersonName getPersonNameSafely(Person person) {
+        if (person.getName() instanceof PersonName) {
+            return (PersonName) person.getName();
+        }
+        throw new IllegalStateException("Person should have PersonName, but got: " + person.getName().getClass());
     }
 
     /**

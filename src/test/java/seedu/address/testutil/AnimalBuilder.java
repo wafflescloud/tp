@@ -43,11 +43,22 @@ public class AnimalBuilder {
      * @param animalToCopy The animal object whose data will be copied into the builder.
      */
     public AnimalBuilder(Animal animalToCopy) {
-        name = animalToCopy.getName();
+        name = getAnimalNameSafely(animalToCopy);
         description = animalToCopy.getDescription();
         location = animalToCopy.getLocation();
         tags = new HashSet<>(animalToCopy.getTags());
         feedingSessionIds = new HashSet<>(animalToCopy.getFeedingSessionIds());
+    }
+
+    /**
+     * Safely extracts AnimalName from an Animal object.
+     * This method handles the type conversion from Name to AnimalName.
+     */
+    private AnimalName getAnimalNameSafely(Animal animal) {
+        if (animal.getName() instanceof AnimalName) {
+            return (AnimalName) animal.getName();
+        }
+        throw new IllegalStateException("Animal should have AnimalName, but got: " + animal.getName().getClass());
     }
 
     /**

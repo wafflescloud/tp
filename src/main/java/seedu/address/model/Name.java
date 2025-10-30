@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Names are case-insensitive for comparison but stored with original casing.
  */
 public class Name {
 
@@ -29,9 +30,9 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
-        String trimmedValue = name.trim();
-        checkArgument(isValidName(trimmedValue), MESSAGE_CONSTRAINTS);
-        fullName = trimmedValue;
+        String trimmedName = name.trim();
+        checkArgument(isValidName(trimmedName), MESSAGE_CONSTRAINTS);
+        fullName = trimmedName;  // Store with original casing
     }
 
     /**
@@ -55,11 +56,12 @@ public class Name {
     }
 
     /**
-     * Returns true if both names have the same value.
+     * Returns true if both names have the same value (case-insensitive comparison).
      * This defines a stronger notion of equality between two names.
+     * Note: Names are compared case-insensitively, so "Bob" equals "bob".
      *
      * @param other The other object to compare with.
-     * @return True if both objects are Names with the same value.
+     * @return True if both objects are Names with the same value (ignoring case).
      */
     @Override
     public boolean equals(Object other) {
@@ -67,21 +69,24 @@ public class Name {
             return true;
         }
 
+        // instanceof handles nulls
         if (!(other instanceof Name)) {
             return false;
         }
 
         Name otherName = (Name) other;
-        return fullName.equalsIgnoreCase(otherName.fullName);
+        return fullName.equalsIgnoreCase(otherName.fullName);  // Case-insensitive comparison
     }
 
     /**
      * Returns the hash code of this name.
+     * Uses lowercase to ensure case-insensitive equality is reflected in hash code.
+     * This maintains the contract that if two objects are equal, they must have the same hash code.
      *
-     * @return The hash code based on the full name.
+     * @return The hash code based on the lowercase full name.
      */
     @Override
     public int hashCode() {
-        return fullName.hashCode();
+        return fullName.toLowerCase().hashCode();  // Case-insensitive hash
     }
 }

@@ -23,6 +23,9 @@ public class NameTest {
 
     @Test
     public void isValidName() {
+        // Create a PersonName instance to call non-static method
+        Name testName = new Name("test");
+
         // null name
         assertThrows(NullPointerException.class, () -> Name.isValidName(null));
 

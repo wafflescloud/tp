@@ -48,10 +48,32 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+<<<<<<< HEAD
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+=======
+        if (!PersonName.isValidPersonName(trimmedName)) {
+            throw new ParseException(PersonName.MESSAGE_CONSTRAINTS);
+        }
+        return new PersonName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code AnimalName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static AnimalName parseAnimalName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!AnimalName.isValidAnimalName(trimmedName)) {
+            throw new ParseException(AnimalName.MESSAGE_CONSTRAINTS);
+        }
+        return new AnimalName(trimmedName);
+>>>>>>> origin/master
     }
 
     /**
