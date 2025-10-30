@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 public class HelpFunctionWindow extends UiPart<Stage> {
 
     private static final String FXML = "HelpFunctionWindow.fxml";
+    private static final List<Stage> openWindows = new ArrayList<>();
 
     private final String commandName;
     private Consumer<String> commandTextSetter;
@@ -39,6 +41,8 @@ public class HelpFunctionWindow extends UiPart<Stage> {
         assert !commandName.trim().isEmpty() : "Command name should not be empty";
         this.commandName = commandName;
         populate();
+
+        openWindows.add(getRoot());
     }
 
     /**
@@ -56,6 +60,8 @@ public class HelpFunctionWindow extends UiPart<Stage> {
         this.commandName = commandName;
         this.commandTextSetter = commandTextSetter;
         populate();
+
+        openWindows.add(getRoot());
     }
 
     /**
@@ -147,5 +153,16 @@ public class HelpFunctionWindow extends UiPart<Stage> {
     public void show() {
         getRoot().show();
         getRoot().centerOnScreen();
+    }
+
+    /**
+     * Hides all open HelpFunctionWindows.
+     */
+    public static void hideAllWindows() {
+        for (Stage window : openWindows) {
+            if (window.isShowing()) {
+                window.hide();
+            }
+        }
     }
 }

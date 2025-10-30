@@ -18,7 +18,7 @@ Class Email
 Class PersonName
 Class Phone
 Class Tag
-Class FeedingSession
+Class UUID
 
 Class I #FFFFFF
 }
@@ -37,11 +37,13 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> PersonName
-Person *--> Phone
-Person *--> Email
-Person *--> "*" Tag
-Person *--> "*" FeedingSession
+
+Person *--> "1" UUID : id
+Person *--> "1" PersonName : name
+Person *--> "1" Phone : phone
+Person *--> "1" Email : email
+Person *--> "*" Tag : tags
+Person *--> "*" UUID : feedingSessionIds
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -50,4 +52,5 @@ PersonName -[hidden]right-> Phone
 Phone -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+
 @enduml

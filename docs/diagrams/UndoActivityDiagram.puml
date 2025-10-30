@@ -1,0 +1,20 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:User executes 'undo' command;
+
+if (undoStack empty?) then ([yes])
+  :Throw CommandException\n"No more commands to undo!";
+  stop
+else ([no])
+  :Push current state to redoStack;
+  :Pop previous state from undoStack;
+  :Restore address book\nto previous state;
+  :Display success message;
+  stop
+endif
+
+@enduml

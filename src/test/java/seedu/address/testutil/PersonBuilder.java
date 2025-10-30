@@ -43,12 +43,23 @@ public class PersonBuilder {
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
     public PersonBuilder(Person personToCopy) {
-        id = personToCopy.getId();
-        name = personToCopy.getName();
+        name = getPersonNameSafely(personToCopy);
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         tags = new HashSet<>(personToCopy.getTags());
+        id = personToCopy.getId();
         feedingSessionIds = new HashSet<>(personToCopy.getFeedingSessionIds());
+    }
+
+    /**
+     * Safely extracts PersonName from a Person object.
+     * This method handles the type conversion from Name to PersonName.
+     */
+    private PersonName getPersonNameSafely(Person person) {
+        if (person.getName() instanceof PersonName) {
+            return (PersonName) person.getName();
+        }
+        throw new IllegalStateException("Person should have PersonName, but got: " + person.getName().getClass());
     }
 
     /**
@@ -109,5 +120,4 @@ public class PersonBuilder {
         }
         return new Person(name, phone, email, tags, feedingSessionIds);
     }
-
 }

@@ -1,8 +1,8 @@
 @startuml
 !include style.puml
 skinparam arrowThickness 1.1
-skinparam arrowColor MODEL_COLOR_T2
-skinparam classBackgroundColor MODEL_COLOR_T2
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
@@ -18,6 +18,7 @@ Class AnimalName
 Class Description
 Class Location
 Class Tag
+Class UUID
 
 Class I #FFFFFF
 }
@@ -35,11 +36,14 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniqueAnimalList
-UniqueAnimalList --> "~* all" Animal
-Animal *--> AnimalName
-Animal *--> Description
-Animal *--> Location
-Animal *--> "*" Tag
+UniqueAnimalList  --> "~*all" Animal
+
+Animal *--> "1" UUID : id
+Animal *--> "1" AnimalName : name
+Animal *--> "1" Description : description
+Animal *--> "1" Location : location
+Animal *--> "*" Tag : tags
+Animal *--> "*" UUID : feedingSessionIds
 
 Animal -[hidden]up--> I
 UniqueAnimalList -[hidden]right-> I
@@ -48,4 +52,5 @@ AnimalName -[hidden]right-> Description
 Description -[hidden]right-> Location
 
 ModelManager --> "~* filtered" Animal
+
 @enduml

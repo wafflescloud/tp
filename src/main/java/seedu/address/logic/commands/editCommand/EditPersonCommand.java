@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -10,7 +9,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -23,47 +21,71 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditPersonCommand extends EditCommand {
+public class EditPersonCommand extends EditContactCommand<Person, EditPersonCommand.EditPersonDescriptor> {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_INVALID_PERSON_NAME = "The person is not found in the address book";
-
-    private final PersonName name;
-    private final EditPersonDescriptor editPersonDescriptor;
 
     /**
+     * Creates an EditPersonCommand to edit the person with the specified name.
+     *
      * @param name name of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditPersonCommand(PersonName name, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(name);
-        requireNonNull(editPersonDescriptor);
-
-        this.name = name;
-        this.editPersonDescriptor = editPersonDescriptor;
+        super(name, editPersonDescriptor);
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+    protected List<Person> getFilteredList(Model model) {
+        return model.getFilteredPersonList();
+    }
 
-        List<Person> list = model.getFilteredPersonList();
-        Person personToEdit = list.stream()
-                .filter(p -> p.getName().equals(name))
-                .findFirst()
-                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME));
+    @Override
+    protected Person createEditedContact(Person personToEdit, EditPersonDescriptor editDescriptor, Model model)
+            throws CommandException {
+        return createEditedPerson(personToEdit, editDescriptor);
+    }
 
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+    @Override
+    protected boolean isSameContact(Person contact1, Person contact2) {
+        return contact1.isSamePerson(contact2);
+    }
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
+    @Override
+    protected boolean hasContact(Model model, Person contact) {
+        return model.hasPerson(contact);
+    }
 
-        model.setPerson(personToEdit, editedPerson);
+    @Override
+    protected void setContact(Model model, Person oldContact, Person newContact) {
+        model.setPerson(oldContact, newContact);
+    }
+
+    @Override
+    protected void updateFilteredList(Model model) {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    @Override
+    protected String getSuccessMessage() {
+        return MESSAGE_EDIT_PERSON_SUCCESS;
+    }
+
+    @Override
+    protected String getInvalidNameMessage() {
+        return Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME;
+    }
+
+    @Override
+    protected String getDuplicateMessage() {
+        return MESSAGE_DUPLICATE_PERSON;
+    }
+
+    @Override
+    protected String formatContact(Person contact) {
+        return Messages.format(contact);
     }
 
     /**
@@ -73,38 +95,13 @@ public class EditPersonCommand extends EditCommand {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        PersonName updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        PersonName updatedName = editPersonDescriptor.getName().orElse(personToEdit.getPersonName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(personToEdit.getId(), updatedName, updatedPhone, updatedEmail,
                 updatedTags, personToEdit.getFeedingSessionIds());
-    }
-
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof EditPersonCommand)) {
-            return false;
-        }
-
-        EditPersonCommand otherEditCommand = (EditPersonCommand) other;
-        return name.equals(otherEditCommand.name)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("editPersonDescriptor", editPersonDescriptor)
-                .toString();
     }
 
     /**
@@ -184,7 +181,6 @@ public class EditPersonCommand extends EditCommand {
                 return true;
             }
 
-            // instanceof handles nulls
             if (!(other instanceof EditPersonDescriptor)) {
                 return false;
             }
