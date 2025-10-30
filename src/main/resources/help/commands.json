@@ -11,20 +11,22 @@
     ]
   },
   "delete": {
-    "description": "Deletes an existing record from the system by name. The name given should be exact.",
+    "description": "Deletes an existing animal, person or feeding session from the system. All fields should be exact.",
     "formats": [
       "delete person n/NAME",
-      "delete animal n/NAME"
+      "delete animal n/NAME",
+      "delete feed n/ANIMAL_NAME f/PERSON_NAME dt/YYYY-MM-DD HH:MM"
     ],
     "examples": [
       "delete person n/John Tan",
-      "delete animal n/Fluffy"
+      "delete animal n/Fluffy",
+      "delete feed n/Max f/John Doe dt/2023-10-15 14:30"
     ]
   },
   "edit": {
     "description": "Edits an existing record from the system. The name given should be exact.",
     "formats": [
-      "edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [T/TAG]... [f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]",
+      "edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [T/TAG]...",
       "edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION]"
     ],
     "examples": [
@@ -87,5 +89,25 @@
       "redo"
     ],
     "examples": []
+  },
+  "feed": {
+    "description": "Adds a feeding session, involving an animal (being fed), a person (feeder), and a date and time.",
+    "formats": [
+      "feed n/ANIMAL_NAME f/PERSON_NAME dt/YYYY-MM-DD HH:MM"
+    ],
+    "examples": [
+      "feed n/Max f/John Doe dt/2023-10-15 14:30"
+    ]
+  },
+  "view": {
+    "description": "Opens a window displaying the details of a specified person or animal. (This window can also be opened by double-clicking on the respective entry in the main app window.)",
+    "formats": [
+      "view person n/NAME",
+      "view animal n/NAME"
+    ],
+    "examples": [
+      "view person n/John Doe",
+      "view animal n/Max"
+    ]
   }
 }
