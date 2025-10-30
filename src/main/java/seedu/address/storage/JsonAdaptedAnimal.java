@@ -91,7 +91,7 @@ class JsonAdaptedAnimal {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     AnimalName.class.getSimpleName()));
         }
-        if (!AnimalName.isValidName(name)) {
+        if (!AnimalName.isValidAnimalName(name)) {
             throw new IllegalValueException(AnimalName.MESSAGE_CONSTRAINTS);
         }
         final AnimalName modelName = new AnimalName(name);

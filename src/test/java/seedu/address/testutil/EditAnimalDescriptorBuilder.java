@@ -12,7 +12,7 @@ import seedu.address.model.animal.Location;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class to help with building EditPersonDescriptor objects.
+ * A utility class to help with building EditAnimalDescriptor objects.
  */
 public class EditAnimalDescriptorBuilder {
 
@@ -31,9 +31,21 @@ public class EditAnimalDescriptorBuilder {
      */
     public EditAnimalDescriptorBuilder(Animal animal) {
         descriptor = new EditAnimalDescriptor();
-        descriptor.setName(animal.getName());
+        descriptor.setName(getAnimalNameSafely(animal));
         descriptor.setDescription(animal.getDescription());
         descriptor.setLocation(animal.getLocation());
+        descriptor.setTags(animal.getTags());
+    }
+
+    /**
+     * Safely extracts AnimalName from an Animal object.
+     * This method handles the type conversion from Name to AnimalName.
+     */
+    private AnimalName getAnimalNameSafely(Animal animal) {
+        if (animal.getName() instanceof AnimalName) {
+            return (AnimalName) animal.getName();
+        }
+        throw new IllegalStateException("Animal should have AnimalName, but got: " + animal.getName().getClass());
     }
 
     /**
@@ -69,7 +81,6 @@ public class EditAnimalDescriptorBuilder {
         descriptor.setTags(tagSet);
         return this;
     }
-
 
     public EditAnimalDescriptor build() {
         return descriptor;
