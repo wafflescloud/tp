@@ -155,7 +155,7 @@ public class ParserUtil {
                     .withResolverStyle(ResolverStyle.STRICT);
             return LocalDateTime.parse(trimmedDateTime, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("DateTime must be in format: yyyy-MM-dd HH:mm");
+            throw new ParseException("Date and Time should exist and must be in format: yyyy-MM-dd HH:mm");
         }
     }
 }
