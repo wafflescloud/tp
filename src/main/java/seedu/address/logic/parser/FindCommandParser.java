@@ -8,9 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.TYPE_PERSON;
 
 import java.util.List;
 
-import seedu.address.logic.commands.FindAnimalCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ContactContainsKeywordsPredicate;
 import seedu.address.model.animal.Animal;
@@ -20,14 +18,14 @@ import seedu.address.model.person.Person;
  * Unified parser for find commands that handles both Person and Animal types.
  * Automatically detects the contact type from the input arguments.
  */
-public class FindCommandParser implements Parser<FindCommand> {
+public class FindCommandParser implements Parser<FindCommand<?>> {
 
     private enum ContactType {
         PERSON, ANIMAL
     }
 
     @Override
-    public FindCommand parse(String args) throws ParseException {
+    public FindCommand<?> parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
         // Determine contact type from the first argument
@@ -87,13 +85,13 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Creates a FindCommand with the unified ContactContainsKeywordsPredicate.
      */
-    private FindCommand createFindCommand(List<String> nameValues, List<String> tagValues,
+    private FindCommand<?> createFindCommand(List<String> nameValues, List<String> tagValues,
             ContactType contactType) {
         switch (contactType) {
         case PERSON:
-            return new FindPersonCommand(new ContactContainsKeywordsPredicate<Person>(nameValues, tagValues));
+            return FindCommand.forPerson(new ContactContainsKeywordsPredicate<Person>(nameValues, tagValues));
         case ANIMAL:
-            return new FindAnimalCommand(new ContactContainsKeywordsPredicate<Animal>(nameValues, tagValues));
+            return FindCommand.forAnimal(new ContactContainsKeywordsPredicate<Animal>(nameValues, tagValues));
         default:
             throw new IllegalStateException("Unknown contact type: " + contactType);
         }

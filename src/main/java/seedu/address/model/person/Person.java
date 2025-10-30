@@ -28,7 +28,6 @@ public class Person extends Contact {
     private final Phone phone;
     private final Email email;
 
-    // Data fields
     private final Set<UUID> feedingSessionIds = new HashSet<>();
 
     /**

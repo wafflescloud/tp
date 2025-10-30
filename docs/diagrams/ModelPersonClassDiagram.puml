@@ -13,8 +13,10 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
+Class "<<abstract>>\nContact" as Contact
 Class Person
 Class Email
+Class "<<abstract>>\nName" as Name
 Class PersonName
 Class Phone
 Class Tag
@@ -38,19 +40,29 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 
+Person -up-|> Contact
+Contact *--> "1" Name : name
+Contact *--> "*" Tag : tags
+
+PersonName -up-|> Name
+PersonName .[hidden].> Person
+
 Person *--> "1" UUID : id
-Person *--> "1" PersonName : name
 Person *--> "1" Phone : phone
 Person *--> "1" Email : email
-Person *--> "*" Tag : tags
 Person *--> "*" UUID : feedingSessionIds
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
-PersonName -[hidden]right-> Phone
 Phone -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+
+note left of PersonName
+  Runtime type of
+  Contact.name for
+  Person objects
+end note
 
 @enduml
