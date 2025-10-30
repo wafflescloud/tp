@@ -56,7 +56,7 @@ Furiends is a **desktop app tailored towards animal lovers, specifically individ
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Furiends application.
 
-4. Open a command terminal, `cd` into the folder you put the `furiends.jar` file in. 
+4. Open a command terminal, `cd` into the folder you put the `furiends.jar` file in.
 <box type="tip" seamless>
 
 The file is usually in `downloads` after downloading it.
@@ -132,10 +132,10 @@ If you are using a PDF version of this document, be careful when copying and pas
 * `NAME`/`PERSON_NAME`/`ANIMAL_NAME`
   * Can only contain letters (`A-Z` and `a-z` only).
   * Character limit of 1-30 (after removal of additional white spaces).
-  * Person/animal names are unique, no duplicate names accepted. 
-  * Case-insensitive. 
+  * Person/animal names are unique, no duplicate names accepted.
+  * Case-insensitive.
   <box type="tip" seamless>
-  
+
     Input `john` is the same as `JOHN`.
   </box>
 
@@ -149,15 +149,21 @@ If you are using a PDF version of this document, be careful when copying and pas
 * `EMAIL`
   * Must adhere to the **RFC5322** email format:
   * `local-part@domain`
-    * `local-part`: can have up to **64** letters, digits or special characters
+    * `local-part`: can contain letters, digits or special characters
     <box type="info" seamless>
 
     Periods `.` are allowed, but it **cannot** be at the start or the end of the `local-part`.
     </box>
-  
+    <box type="warning" seamless>
+
+    **Special characters not supported:** Parentheses `()`, angle brackets `<>`, square brackets `[]`,
+    semicolons `;`, colons `:`, at symbols `@` (except as the separator), backslashes `\`,
+    commas `,`, and quotes `"` are **not allowed** in the `local-part`.
+    </box>
+
     * `@`: must have separator symbol between `local-part` and `domain`
-    * `domain`: maximum of **255 characters**, must follow domain naming conventions and 
-    have a hierarchical structure of `example.com`
+    * `domain`: must follow domain naming conventions and have a hierarchical structure of `example.com`
+  * **Character limit: 988** (including `@` and all characters).
   * e.g. `johndoe@email.com`, `he.he_123@gotmail.com`
 * `TAG`
   * Can only contain letters and digits.
@@ -166,7 +172,7 @@ If you are using a PDF version of this document, be careful when copying and pas
 <br>
 * `DATETIME`
   * Format: `YYYY-MM-DD HH:MM`
-  * Must be a valid date and time. 
+  * Must be a valid date and time.
     * `YYYY`: 4 digits year (e.g. `2025`).
     * `MM`: 2 digits month (e.g. `March` is `03`) .
     * `DD`: 2 digits day (e.g. `28`).
@@ -254,9 +260,9 @@ Format: `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… [f/ANIMAL_NAME
 * Edits the person with the specified `NAME`. The name is **case-insensitive**.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* **Only when editing tags**, the existing tags of the person will be removed. 
+* **Only when editing tags**, the existing tags of the person will be removed.
   * i.e adding of tags is not cumulative.
-  
+
 <box type="tip" seamless>
 
 You can remove all the person’s tags by typing `t/` without
@@ -268,7 +274,7 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
    Edits the phone number and email address of the person with name `Bernice Yu` to be `61234567`
    and `johndoe@example.com` respectively. <br>
    `Bernice Yu` will now only have the new added tag, `lover`, instead of the original tags.
-  * Before: ![beforeEditPerson.png](images/beforeEditPerson.png){style="width:50%; height:auto;"} 
+  * Before: ![beforeEditPerson.png](images/beforeEditPerson.png){style="width:50%; height:auto;"}
   * After :![afterEditPerson.png](images/afterEditPerson.png){style="width:50%; height:auto;"}
 *  `edit person Betty Crower n/Betsy Crower t/` <br>
    Edits the name of `Betty Crower` to be `Betsy Crower` and clears all existing tags.
@@ -303,7 +309,7 @@ Format: `find person KEYWORD [MORE_KEYWORDS]...`
   e.g. `t/friends` will return the same result as `t/FRIENDS`.
   * Only people with the tag `friends` will be shown.
   <box type="info" seamless>
-  
+
   People with the tag `friend` will not be shown as the spelling is not exactly the same.
   </box>
 
@@ -334,7 +340,7 @@ Format: `find animal KEYWORD [MORE_KEYWORDS]...`
   e.g. `n/Cutie` will return `Cutie Pie`, `Cutie Patootie` (if both animals are stored in the application).
 * Searching using tags must have the **exact case-insensitive spelling**.<br>
   e.g. `t/fur` will return the same result as `t/FUR`.
-  * Only aniamls with the tag `fur` will be shown. 
+  * Only aniamls with the tag `fur` will be shown.
 
 Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `find animal n/max n/luna` returns `Max`, `Luna`. Note that the 'person' portion is still shown.<br>
@@ -343,7 +349,7 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 
 <box type="info" seamless>
 
-After using `find` to filter out the contacts you want, you can use `list` to return 
+After using `find` to filter out the contacts you want, you can use `list` to return
 to full display of all contacts. [Find out how!](#listing-all-people--list)
 </box>
 
@@ -395,7 +401,7 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `delete animal n/Max` Deletes the animal with name `Max` from Furiends.
   * Feedback Box: <br>
   ![deleteAnimal.png](images/deleteAnimal.png){style="width:900px; height:auto;"}<br>
-  
+
 ### Deleting a feeding session : `delete feed`
 Deletes a specified feeding session from Furiends.
 
@@ -410,7 +416,7 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `delete feed n/Max f/Alex Yeoh dt/2025-01-24 09:00` Deletes the feeding session between `Max` and `Alex Yeoh` at `24 Jan 2025 09:00` from Furiends.
   * Feedback Box: <br>
     ![deleteFeedingSession.png](images/deleteFeedingSession.png){style="width:700px; height:auto;"}<br>
-    
+
 ### Viewing a person contact: `view person`
 
 Displays detailed information about a specific person from the address book.
@@ -503,7 +509,7 @@ Furthermore, certain edits can cause Furiends to behave in unexpected ways (e.g.
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains 
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous Furiends home folder.<br>
 **Q**: How do I restore all the contacts after using `find` to filter?<br>
 **A**: In the command input, enter `list` to view all contacts.<br>
@@ -534,7 +540,7 @@ Action (in alphabetical order) | Format, Examples
 **Edit Person**                | `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… [f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]…​`<br> e.g.,`edit person John Doe n/James Lee e/jameslee@example.com`
 **Exit**                       | `exit`
 **Feed**                       | `feed f/PERSON_NAME n/ANIMAL_NAME dt/DATETIME`<br> e.g., `feed n/Fluffy f/John Doe dt/2005-04-09 10:00`
-**Find Animal**                | `find animal KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Fluffy n/Max 
+**Find Animal**                | `find animal KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Fluffy n/Max
 **Find Person**                | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James t/family`t/cute`
 **Help**                       | `help [COMMAND]`<br> e.g. `help` <br> e.g. `help add person`
 **List**                       | `list`
