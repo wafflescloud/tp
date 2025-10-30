@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.Contact;
 import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.tag.Tag;
 
@@ -19,16 +20,16 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Person extends Contact {
 
-    // Identity fields
-    private final UUID id;
-    private final PersonName name;
+    // Identity fields specific to Person (name is now in parent class)
     private final Phone phone;
     private final Email email;
 
+    // Identity fields
+    private final UUID id;
+
     // Data fields
-    private final Set<Tag> tags = new HashSet<>();
     private final Set<UUID> feedingSessionIds = new HashSet<>();
 
     /**
@@ -36,13 +37,12 @@ public class Person {
      * Creates a new Person with auto-generated ID.
      */
     public Person(PersonName name, Phone phone, Email email, Set<Tag> tags,
-            Set<UUID> feedingSessionIds) {
-        requireAllNonNull(name, phone, email, tags);
-        this.id = UUID.randomUUID();
-        this.name = name;
+        Set<UUID> feedingSessionIds) {
+        super(name, tags);
+        requireAllNonNull(phone, email);
         this.phone = phone;
         this.email = email;
-        this.tags.addAll(tags);
+        this.id = UUID.randomUUID();
         this.feedingSessionIds.addAll(feedingSessionIds);
     }
 
@@ -51,12 +51,11 @@ public class Person {
      */
     public Person(UUID id, PersonName name, Phone phone, Email email, Set<Tag> tags,
             Set<UUID> feedingSessionIds) {
-        requireAllNonNull(id, name, phone, email, tags);
+        super(name, tags);
+        requireAllNonNull(id, phone, email);
         this.id = id;
-        this.name = name;
         this.phone = phone;
         this.email = email;
-        this.tags.addAll(tags);
         this.feedingSessionIds.addAll(feedingSessionIds);
     }
 
@@ -64,8 +63,13 @@ public class Person {
         return id;
     }
 
-    public PersonName getName() {
-        return name;
+    /**
+     * Returns the specific PersonName for type-specific operations.
+     * This method provides access to PersonName-specific methods.
+     */
+    public PersonName getPersonName() {
+        // Safe cast since we passed PersonName to constructor
+        return (PersonName) name;
     }
 
     public Phone getPhone() {
@@ -74,14 +78,6 @@ public class Person {
 
     public Email getEmail() {
         return email;
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
     }
 
     /**
@@ -98,7 +94,7 @@ public class Person {
     public Person addFeedingSessionId(UUID sessionId) {
         Set<UUID> updatedSessions = new HashSet<>(feedingSessionIds);
         updatedSessions.add(sessionId);
-        return new Person(id, name, phone, email, tags, updatedSessions);
+        return new Person(id, getPersonName(), phone, email, tags, updatedSessions);
     }
 
     /**
@@ -107,7 +103,7 @@ public class Person {
     public Person removeFeedingSessionId(UUID sessionId) {
         Set<UUID> updatedSessions = new HashSet<>(feedingSessionIds);
         updatedSessions.remove(sessionId);
-        return new Person(id, name, phone, email, tags, updatedSessions);
+        return new Person(id, getPersonName(), phone, email, tags, updatedSessions);
     }
 
     /**
@@ -142,16 +138,11 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same name (case-insensitive and whitespace-normalized).
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return isSameContact(otherPerson);
     }
 
     /**
@@ -180,7 +171,6 @@ public class Person {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(id, name, phone, email, tags, feedingSessionIds);
     }
 
@@ -195,5 +185,4 @@ public class Person {
                 .add("feeding session IDs", feedingSessionIds)
                 .toString();
     }
-
 }

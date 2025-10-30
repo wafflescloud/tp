@@ -1,0 +1,20 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:User executes 'redo' command;
+
+if (redoStack empty?) then ([yes])
+  :Throw CommandException\n"No more commands to redo!";
+  stop
+else ([no])
+  :Push current state to undoStack;
+  :Pop next state from redoStack;
+  :Restore address book\nto next state;
+  :Display success message;
+  stop
+endif
+
+@enduml

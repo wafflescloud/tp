@@ -136,7 +136,7 @@ public class ModelManagerTest {
 
         seedu.address.model.person.Person matt = new seedu.address.testutil.PersonBuilder()
                 .withName("Matt")
-                .withPhone("12345678")
+                .withPhone("82345678")
                 .withEmail("matt@example.com")
                 .build();
 
@@ -157,16 +157,16 @@ public class ModelManagerTest {
         sessionIds.add(session.getId());
 
         seedu.address.model.person.Person mattWithSession = new seedu.address.model.person.Person(
-                matt.getId(), matt.getName(), matt.getPhone(), matt.getEmail(), matt.getTags(), sessionIds);
+                matt.getId(), matt.getPersonName(), matt.getPhone(), matt.getEmail(), matt.getTags(), sessionIds);
         seedu.address.model.animal.Animal maxWithSession = new seedu.address.model.animal.Animal(
-                max.getId(), max.getName(), max.getDescription(), max.getLocation(), max.getTags(), sessionIds);
+                max.getId(), max.getAnimalName(), max.getDescription(), max.getLocation(), max.getTags(), sessionIds);
 
         modelManager.setPerson(matt, mattWithSession);
         modelManager.setAnimal(max, maxWithSession);
 
         seedu.address.model.person.Person matthew = new seedu.address.testutil.PersonBuilder()
                 .withName("Matthew")
-                .withPhone("12345678")
+                .withPhone("82345678")
                 .withEmail("matt@example.com")
                 .withFeedingSessionIds(sessionIds)
                 .build();
@@ -174,7 +174,7 @@ public class ModelManagerTest {
         modelManager.setPerson(mattWithSession, matthew);
 
         seedu.address.model.animal.Animal updatedAnimal = modelManager.getFilteredAnimalList().stream()
-                .filter(a -> a.getName().toString().equals("Max"))
+                .filter(a -> a.getAnimalName().toString().equals("Max"))
                 .findFirst()
                 .orElseThrow();
 
@@ -213,9 +213,9 @@ public class ModelManagerTest {
         sessionIds.add(session.getId());
 
         seedu.address.model.person.Person johnWithSession = new seedu.address.model.person.Person(
-                john.getId(), john.getName(), john.getPhone(), john.getEmail(), john.getTags(), sessionIds);
+                john.getId(), john.getPersonName(), john.getPhone(), john.getEmail(), john.getTags(), sessionIds);
         seedu.address.model.animal.Animal buddyWithSession = new seedu.address.model.animal.Animal(
-                buddy.getId(), buddy.getName(), buddy.getDescription(),
+                buddy.getId(), buddy.getAnimalName(), buddy.getDescription(),
                 buddy.getLocation(), buddy.getTags(), sessionIds);
 
         modelManager.setPerson(john, johnWithSession);
@@ -228,13 +228,13 @@ public class ModelManagerTest {
                 .build();
         // Create fluffy with the same ID as buddy and the session IDs
         fluffy = new seedu.address.model.animal.Animal(
-                buddyWithSession.getId(), fluffy.getName(), fluffy.getDescription(),
+                buddyWithSession.getId(), fluffy.getAnimalName(), fluffy.getDescription(),
                 fluffy.getLocation(), fluffy.getTags(), sessionIds);
 
         modelManager.setAnimal(buddyWithSession, fluffy);
 
         seedu.address.model.person.Person updatedPerson = modelManager.getFilteredPersonList().stream()
-                .filter(p -> p.getName().toString().equals("John"))
+                .filter(p -> p.getPersonName().toString().equals("John"))
                 .findFirst()
                 .orElseThrow();
 
@@ -252,7 +252,7 @@ public class ModelManagerTest {
         // Create person "Max"
         seedu.address.model.person.Person max = new seedu.address.testutil.PersonBuilder()
                 .withName("Max")
-                .withPhone("11111111")
+                .withPhone("81111111")
                 .withEmail("max@example.com")
                 .build();
 
@@ -295,12 +295,12 @@ public class ModelManagerTest {
         lunaSessionIds.add(session2.getId());
 
         seedu.address.model.person.Person maxWithSessions = new seedu.address.model.person.Person(
-                max.getId(), max.getName(), max.getPhone(), max.getEmail(), max.getTags(), maxSessionIds);
+                max.getId(), max.getPersonName(), max.getPhone(), max.getEmail(), max.getTags(), maxSessionIds);
         seedu.address.model.animal.Animal mattWithSessions = new seedu.address.model.animal.Animal(
-                matt.getId(), matt.getName(), matt.getDescription(),
+                matt.getId(), matt.getAnimalName(), matt.getDescription(),
                 matt.getLocation(), matt.getTags(), mattSessionIds);
         seedu.address.model.animal.Animal lunaWithSessions = new seedu.address.model.animal.Animal(
-                luna.getId(), luna.getName(), luna.getDescription(),
+                luna.getId(), luna.getAnimalName(), luna.getDescription(),
                 luna.getLocation(), luna.getTags(), lunaSessionIds);
 
         modelManager.setPerson(max, maxWithSessions);
@@ -319,7 +319,7 @@ public class ModelManagerTest {
 
         // Verify: Feeding sessions involving Max should be removed from Matt
         seedu.address.model.animal.Animal updatedMatt = modelManager.getFilteredAnimalList().stream()
-                .filter(a -> a.getName().toString().equals("Matt"))
+                .filter(a -> a.getAnimalName().toString().equals("Matt"))
                 .findFirst()
                 .orElseThrow();
 
@@ -328,7 +328,7 @@ public class ModelManagerTest {
 
         // Verify: Feeding sessions involving Max should be removed from Luna
         seedu.address.model.animal.Animal updatedLuna = modelManager.getFilteredAnimalList().stream()
-                .filter(a -> a.getName().toString().equals("Luna"))
+                .filter(a -> a.getAnimalName().toString().equals("Luna"))
                 .findFirst()
                 .orElseThrow();
 
@@ -351,13 +351,13 @@ public class ModelManagerTest {
         // Create persons "Alice" and "Bob"
         seedu.address.model.person.Person alice = new seedu.address.testutil.PersonBuilder()
                 .withName("Alice")
-                .withPhone("22222222")
+                .withPhone("82222222")
                 .withEmail("alice@example.com")
                 .build();
 
         seedu.address.model.person.Person bob = new seedu.address.testutil.PersonBuilder()
                 .withName("Bob")
-                .withPhone("33333333")
+                .withPhone("83333333")
                 .withEmail("bob@example.com")
                 .build();
 
@@ -387,12 +387,14 @@ public class ModelManagerTest {
         bobSessionIds.add(session2.getId());
 
         seedu.address.model.animal.Animal buddyWithSessions = new seedu.address.model.animal.Animal(
-                buddy.getId(), buddy.getName(), buddy.getDescription(),
+                buddy.getId(), buddy.getAnimalName(), buddy.getDescription(),
                 buddy.getLocation(), buddy.getTags(), buddySessionIds);
         seedu.address.model.person.Person aliceWithSessions = new seedu.address.model.person.Person(
-                alice.getId(), alice.getName(), alice.getPhone(), alice.getEmail(), alice.getTags(), aliceSessionIds);
+                alice.getId(), alice.getPersonName(), alice.getPhone(),
+                alice.getEmail(), alice.getTags(), aliceSessionIds);
         seedu.address.model.person.Person bobWithSessions = new seedu.address.model.person.Person(
-                bob.getId(), bob.getName(), bob.getPhone(), bob.getEmail(), bob.getTags(), bobSessionIds);
+                bob.getId(), bob.getPersonName(), bob.getPhone(),
+                bob.getEmail(), bob.getTags(), bobSessionIds);
 
         modelManager.setAnimal(buddy, buddyWithSessions);
         modelManager.setPerson(alice, aliceWithSessions);
@@ -410,7 +412,7 @@ public class ModelManagerTest {
 
         // Verify: Feeding sessions involving Buddy should be removed from Alice
         seedu.address.model.person.Person updatedAlice = modelManager.getFilteredPersonList().stream()
-                .filter(p -> p.getName().toString().equals("Alice"))
+                .filter(p -> p.getPersonName().toString().equals("Alice"))
                 .findFirst()
                 .orElseThrow();
 
@@ -419,7 +421,7 @@ public class ModelManagerTest {
 
         // Verify: Feeding sessions involving Buddy should be removed from Bob
         seedu.address.model.person.Person updatedBob = modelManager.getFilteredPersonList().stream()
-                .filter(p -> p.getName().toString().equals("Bob"))
+                .filter(p -> p.getPersonName().toString().equals("Bob"))
                 .findFirst()
                 .orElseThrow();
 

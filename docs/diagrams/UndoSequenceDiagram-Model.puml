@@ -3,21 +3,41 @@
 skinparam ArrowFontStyle plain
 
 box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
-participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant "undoStack:Stack<State>" as UndoStack MODEL_COLOR
+participant "redoStack:Stack<State>" as RedoStack MODEL_COLOR
+participant "currentState:State" as CurrentState MODEL_COLOR
 end box
 
-[-> Model : undoAddressBook()
-activate Model
+[-> ModelManager : undo()
+activate ModelManager
 
-Model -> VersionedAddressBook : undo()
-activate VersionedAddressBook
+create CurrentState
+ModelManager -> CurrentState : new State(addressBook)
+activate CurrentState
 
-VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyAddressBook)
-VersionedAddressBook --> Model :
-deactivate VersionedAddressBook
+CurrentState --> ModelManager
+deactivate CurrentState
 
-[<-- Model
-deactivate Model
+ModelManager -> RedoStack : push(currentState)
+activate RedoStack
 
+RedoStack --> ModelManager
+deactivate RedoStack
+
+ModelManager -> UndoStack : pop()
+activate UndoStack
+
+UndoStack --> ModelManager : previousState
+deactivate UndoStack
+
+ModelManager -> AddressBook : resetData(previousState.getAddressBook())
+activate AddressBook
+
+AddressBook --> ModelManager
+deactivate AddressBook
+
+[<-- ModelManager
+deactivate ModelManager
 @enduml

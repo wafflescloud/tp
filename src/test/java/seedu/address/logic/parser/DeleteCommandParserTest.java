@@ -9,7 +9,9 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.DeletePersonCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteContactCommand;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonName;
 
 public class DeleteCommandParserTest {
@@ -19,7 +21,7 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_validPersonName_returnsDeleteCommand() {
         String input = VALID_TYPE_PERSON + " " + NAME_DESC_AMY;
-        DeletePersonCommand expectedCommand = new DeletePersonCommand(new PersonName(VALID_NAME_AMY));
+        DeleteContactCommand<Person> expectedCommand = DeleteContactCommand.forPerson(new PersonName(VALID_NAME_AMY));
         assertParseSuccess(parser, input, expectedCommand);
     }
 
@@ -28,14 +30,14 @@ public class DeleteCommandParserTest {
         String input = ""; // empty string is invalid
         String type = "person";
         assertParseFailure(parser, input,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidType_throwsParseException() {
         String input = "invalidType n/SomeName";
         assertParseFailure(parser, input,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
 }

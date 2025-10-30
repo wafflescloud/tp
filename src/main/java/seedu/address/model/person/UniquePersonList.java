@@ -5,10 +5,13 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.exceptions.DuplicateEmailException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.DuplicatePhoneException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
@@ -31,9 +34,38 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
-    public boolean contains(Person toCheck) {
+    public boolean containsPerson(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Generic method to check if the list contains an equivalent field.
+     *
+     * @param <T> the type of field to check for
+     * @param getField function that extracts the specific field from a Person
+     * @param toCheck the value to check for in the list
+     * @return true if the list contains an equivalent field as the given toCheck
+     */
+    private <T> boolean containsField(Function<Person, T> getField, T toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream()
+                .map(getField)
+                .anyMatch(field -> field.equals(toCheck));
+    }
+
+    /**
+     * Returns true if the list contains an equivalent phone number as the given argument.
+     */
+    public boolean containsPhone(Phone toCheck) {
+        return containsField(person -> person.getPhone(), toCheck);
+    }
+
+    /**
+     * Returns true if the list contains an equivalent email as the given argument.
+     */
+    public boolean containsEmail(Email toCheck) {
+        return containsField(person -> person.getEmail(), toCheck);
     }
 
     /**
@@ -42,9 +74,18 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void add(Person toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
+        if (containsPerson(toAdd)) {
             throw new DuplicatePersonException();
         }
+
+        if (containsPhone(toAdd.getPhone())) {
+            throw new DuplicatePhoneException();
+        }
+
+        if (containsEmail(toAdd.getEmail())) {
+            throw new DuplicateEmailException();
+        }
+
         internalList.add(toAdd);
     }
 
@@ -61,7 +102,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+        if (!target.isSamePerson(editedPerson) && containsPerson(editedPerson)) {
             throw new DuplicatePersonException();
         }
 

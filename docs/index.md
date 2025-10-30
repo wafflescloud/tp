@@ -5,8 +5,8 @@
 
 # Furiends Address Book
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![Java CI](https://github.com/AY2526S1-CS2103T-W14-3/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2526S1-CS2103T-W14-3/tp/actions/workflows/gradle.yml)
+[![codecov](https://codecov.io/github/AY2526S1-CS2103T-W14-3/tp/graph/badge.svg?token=C1BS3MZXE8)](https://codecov.io/github/AY2526S1-CS2103T-W14-3/tp)
 
 ![Ui](images/Ui.png)
 
