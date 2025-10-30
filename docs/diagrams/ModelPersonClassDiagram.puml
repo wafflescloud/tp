@@ -16,8 +16,7 @@ Class UniquePersonList
 Class "<<abstract>>\nContact" as Contact
 Class Person
 Class Email
-Class "<<abstract>>\nName" as Name
-Class PersonName
+Class Name
 Class Phone
 Class Tag
 Class UUID
@@ -44,9 +43,6 @@ Person -up-|> Contact
 Contact *--> "1" Name : name
 Contact *--> "*" Tag : tags
 
-PersonName -up-|> Name
-PersonName .[hidden].> Person
-
 Person *--> "1" UUID : id
 Person *--> "1" Phone : phone
 Person *--> "1" Email : email
@@ -58,11 +54,5 @@ UniquePersonList -[hidden]right-> I
 Phone -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
-
-note left of PersonName
-  Runtime type of
-  Contact.name for
-  Person objects
-end note
 
 @enduml

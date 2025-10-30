@@ -26,9 +26,9 @@ import seedu.address.logic.commands.DeleteContactCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Name;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.animal.Animal;
-import seedu.address.model.animal.AnimalName;
 //import seedu.address.model.person.NameContainsKeywordsPredicate;
 // import seedu.address.model.person.Person;
 // import seedu.address.model.person.PersonName;
@@ -66,7 +66,7 @@ public class AddressBookParserTest {
     public void parseCommand_delete_animal() throws Exception {
         String input = "delete animal n/Whiskers";
         DeleteContactCommand<Animal> command = (DeleteContactCommand<Animal>) parser.parseCommand(input);
-        assertEquals(DeleteContactCommand.forAnimal(new AnimalName("Whiskers")), command);
+        assertEquals(DeleteContactCommand.forAnimal(new Name("Whiskers")), command);
     }
 
     @Test

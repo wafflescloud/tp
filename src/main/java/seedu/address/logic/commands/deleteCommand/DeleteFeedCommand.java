@@ -9,18 +9,18 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.Name;
 import seedu.address.model.animal.Animal;
 import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonName;
 
 /**
  * Deletes a feeding session identified by person name, animal name, and datetime.
  */
 public class DeleteFeedCommand extends DeleteCommand {
 
-    private final PersonName personName;
-    private final String animalName;
+    private final Name personName;
+    private final Name animalName;
     private final LocalDateTime feedingTime;
 
     /**
@@ -30,7 +30,7 @@ public class DeleteFeedCommand extends DeleteCommand {
      * @param animalName Name of the animal involved in the feeding session
      * @param feedingTime Time when the feeding occurred
      */
-    public DeleteFeedCommand(PersonName personName, String animalName, LocalDateTime feedingTime) {
+    public DeleteFeedCommand(Name personName, Name animalName, LocalDateTime feedingTime) {
         requireNonNull(personName);
         requireNonNull(animalName);
         requireNonNull(feedingTime);
@@ -53,7 +53,7 @@ public class DeleteFeedCommand extends DeleteCommand {
 
         List<Animal> animalList = model.getFilteredAnimalList();
         Animal animal = animalList.stream()
-                .filter(a -> a.getName().fullName.equals(animalName))
+                .filter(a -> a.getName().equals(animalName))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(
                         String.format(Messages.MESSAGE_ANIMAL_NOT_FOUND_FOR_FEED, animalName)));
@@ -99,6 +99,3 @@ public class DeleteFeedCommand extends DeleteCommand {
                 .toString();
     }
 }
-
-
-

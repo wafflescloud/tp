@@ -12,10 +12,10 @@ import java.util.List;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.Name;
 import seedu.address.model.animal.Animal;
 import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonName;
 
 /**
  * Records a feeding session for an animal by a person.
@@ -42,7 +42,7 @@ public class FeedCommand extends Command {
     public static final String MESSAGE_PERSON_NOT_FOUND = "The person '%1$s' is not found in the address book";
     public static final String MESSAGE_ANIMAL_NOT_FOUND = "The animal '%1$s' is not found in the address book";
 
-    private final PersonName personName;
+    private final Name personName;
     private final String animalName;
     private final LocalDateTime feedingTime;
 
@@ -53,7 +53,7 @@ public class FeedCommand extends Command {
      * @param animalName Name of the animal being fed
      * @param feedingTime Time when the feeding occurs
      */
-    public FeedCommand(PersonName personName, String animalName, LocalDateTime feedingTime) {
+    public FeedCommand(Name personName, String animalName, LocalDateTime feedingTime) {
         requireNonNull(personName);
         requireNonNull(animalName);
         requireNonNull(feedingTime);

@@ -73,8 +73,8 @@ public class AddCommandTest {
         AddPersonCommand addCommand = new AddPersonCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddPersonCommand.MESSAGE_DUPLICATE_PERSON, (
-                ) -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddPersonCommand.MESSAGE_DUPLICATE_PERSON, () ->
+                addCommand.execute(modelStub));
     }
 
     @Test
@@ -83,8 +83,8 @@ public class AddCommandTest {
         AddAnimalCommand addCommand = new AddAnimalCommand(validAnimal);
         ModelStub modelStub = new ModelStubWithAnimal(validAnimal);
 
-        assertThrows(CommandException.class, AddAnimalCommand.MESSAGE_DUPLICATE_ANIMAL, (
-                ) -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddAnimalCommand.MESSAGE_DUPLICATE_ANIMAL, () ->
+                addCommand.execute(modelStub));
     }
 
     @Test
@@ -401,12 +401,12 @@ public class AddCommandTest {
 
         @Override
         public boolean hasPhone(Phone phone) {
-            return hasField(p -> p.getPhone(), phone);
+            return hasField(Person::getPhone, phone);
         }
 
         @Override
         public boolean hasEmail(Email email) {
-            return hasField(p -> p.getEmail(), email);
+            return hasField(Person::getEmail, email);
         }
 
         @Override

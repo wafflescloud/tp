@@ -13,8 +13,8 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddAnimalCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Name;
 import seedu.address.model.animal.Animal;
-import seedu.address.model.animal.AnimalName;
 import seedu.address.model.animal.Description;
 import seedu.address.model.animal.Location;
 import seedu.address.model.tag.Tag;
@@ -39,7 +39,7 @@ public class AddAnimalCommandParser implements Parser<AddCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_LOCATION);
-        AnimalName name = ParserUtil.parseAnimalName(argMultimap.getValue(PREFIX_NAME).get());
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));

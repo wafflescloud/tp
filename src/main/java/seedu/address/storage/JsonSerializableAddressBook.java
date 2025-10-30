@@ -88,7 +88,7 @@ class JsonSerializableAddressBook {
                     }
                 }
             } else {
-                person = new seedu.address.model.person.Person(person.getId(), person.getPersonName(),
+                person = new Person(person.getId(), person.getName(),
                         person.getPhone(), person.getEmail(), person.getTags(), new java.util.HashSet<>());
             }
 
@@ -109,7 +109,7 @@ class JsonSerializableAddressBook {
                     }
                 }
             } else {
-                animal = new seedu.address.model.animal.Animal(animal.getId(), animal.getAnimalName(),
+                animal = new Animal(animal.getId(), animal.getName(),
                         animal.getDescription(), animal.getLocation(), animal.getTags(), new java.util.HashSet<>());
             }
 

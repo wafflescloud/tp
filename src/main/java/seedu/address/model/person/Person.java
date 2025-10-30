@@ -13,6 +13,7 @@ import java.util.UUID;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Contact;
+import seedu.address.model.Name;
 import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.tag.Tag;
 
@@ -22,34 +23,31 @@ import seedu.address.model.tag.Tag;
  */
 public class Person extends Contact {
 
-    // Identity fields specific to Person (name is now in parent class)
+    // Identity fields specific to Person
+    private final UUID id;
     private final Phone phone;
     private final Email email;
 
-    // Identity fields
-    private final UUID id;
-
-    // Data fields
     private final Set<UUID> feedingSessionIds = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      * Creates a new Person with auto-generated ID.
      */
-    public Person(PersonName name, Phone phone, Email email, Set<Tag> tags,
-        Set<UUID> feedingSessionIds) {
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags,
+            Set<UUID> feedingSessionIds) {
         super(name, tags);
         requireAllNonNull(phone, email);
+        this.id = UUID.randomUUID();
         this.phone = phone;
         this.email = email;
-        this.id = UUID.randomUUID();
         this.feedingSessionIds.addAll(feedingSessionIds);
     }
 
     /**
      * Constructor with explicit ID (for deserialization).
      */
-    public Person(UUID id, PersonName name, Phone phone, Email email, Set<Tag> tags,
+    public Person(UUID id, Name name, Phone phone, Email email, Set<Tag> tags,
             Set<UUID> feedingSessionIds) {
         super(name, tags);
         requireAllNonNull(id, phone, email);
@@ -61,15 +59,6 @@ public class Person extends Contact {
 
     public UUID getId() {
         return id;
-    }
-
-    /**
-     * Returns the specific PersonName for type-specific operations.
-     * This method provides access to PersonName-specific methods.
-     */
-    public PersonName getPersonName() {
-        // Safe cast since we passed PersonName to constructor
-        return (PersonName) name;
     }
 
     public Phone getPhone() {
@@ -94,7 +83,7 @@ public class Person extends Contact {
     public Person addFeedingSessionId(UUID sessionId) {
         Set<UUID> updatedSessions = new HashSet<>(feedingSessionIds);
         updatedSessions.add(sessionId);
-        return new Person(id, getPersonName(), phone, email, tags, updatedSessions);
+        return new Person(id, getName(), phone, email, getTags(), updatedSessions);
     }
 
     /**
@@ -103,7 +92,7 @@ public class Person extends Contact {
     public Person removeFeedingSessionId(UUID sessionId) {
         Set<UUID> updatedSessions = new HashSet<>(feedingSessionIds);
         updatedSessions.remove(sessionId);
-        return new Person(id, getPersonName(), phone, email, tags, updatedSessions);
+        return new Person(id, getName(), phone, email, getTags(), updatedSessions);
     }
 
     /**
@@ -162,26 +151,26 @@ public class Person extends Contact {
 
         Person otherPerson = (Person) other;
         return id.equals(otherPerson.id)
-                && name.equals(otherPerson.name)
+                && getName().equals(otherPerson.getName())
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && tags.equals(otherPerson.tags)
+                && getTags().equals(otherPerson.getTags())
                 && feedingSessionIds.equals(otherPerson.feedingSessionIds);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, phone, email, tags, feedingSessionIds);
+        return Objects.hash(id, getName(), phone, email, getTags(), feedingSessionIds);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("id", id)
-                .add("name", name)
+                .add("name", getName())
                 .add("phone", phone)
                 .add("email", email)
-                .add("tags", tags)
+                .add("tags", getTags())
                 .add("feeding session IDs", feedingSessionIds)
                 .toString();
     }
