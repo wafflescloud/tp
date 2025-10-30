@@ -23,6 +23,8 @@ Furiends is a **desktop app tailored towards animal lovers, specifically individ
   - [Locating animals by name: `find animal`](#locating-animals-by-name-find-animal)
   - [Deleting a person : `delete person`](#deleting-a-person--delete-person)
   - [Deleting an animal : `delete animal`](#deleting-an-animal--delete-animal)
+  - [Viewing a person contact: `view person`](#viewing-a-person-contact-view-person)
+  - [Viewing an animal contact: `view animal`](#viewing-an-animal-contact-view-animal)
   - [Clearing all entries : `clear`](#clearing-all-entries--clear)
   - [Undoing the last change: `undo`](#undoing-the-last-change-undo)
   - [Redoing an undone change: `redo`](#redoing-an-undone-change-redo)
@@ -264,7 +266,7 @@ Format: `delete person n/NAME`
 
 Examples:
 * `delete person n/Alex Yeoh` Deletes the person with name `Alex Yeoh` from the address book.
-  * Feedback Box: 
+  * Feedback Box:
   ![img.png](images/deletePerson.png)
 
 
@@ -279,8 +281,38 @@ Format: `delete animal n/NAME`
 
 Examples:
 * `delete animal n/Max` Deletes the animal with name `Max` from the address book.
-  * Feedback Box: 
+  * Feedback Box:
   ![deleteAnimal.png](images/deleteAnimal.png)
+
+### Viewing a person contact: `view person`
+
+Displays detailed information about a specific person from the address book.
+
+Format: `view person n/NAME`
+
+* Views the person's contact information with the specified `NAME`.
+* The name is case-insensitive, but must be the full name.
+* Shows the person's complete contact information in a detailed view.
+
+Examples:
+* `view person n/Alex Yeoh` Displays detailed information for the person named `Alex Yeoh`.
+* `view person n/alex yeoh` Also displays information for `Alex Yeoh` (case-insensitive).
+![viewPerson.png](images/viewPerson.png)
+
+### Viewing an animal contact: `view animal`
+
+Displays detailed information about a specific animal from the address book.
+
+Format: `view animal n/NAME`
+
+* Views the animal's contact information with the specified `NAME`.
+* The name is case-insensitive, but must be the full name.
+* Shows the animal's complete information in a detailed view.
+
+Examples:
+* `view animal n/Max` Displays detailed information for the animal named `Max`.
+* `view animal n/max` Also displays information for `Max` (case-insensitive).
+![viewAnimal.png](images/viewAnimal.png)
 
 ### Clearing all entries : `clear`
 
@@ -358,6 +390,8 @@ Action                | Format, Examples
 **Clear**             | `clear`
 **Delete Person**     | `delete person n/NAME`<br> e.g., `delete person n/John Doe`
 **Delete Animal**     | `delete animal n/NAME`<br> e.g., `delete animal n/Fluffy`
+**View Person**       | `view person n/NAME`<br> e.g., `view person n/Alex Yeoh`
+**View Animal**       | `view animal n/NAME`<br> e.g., `view animal n/Max`
 **Edit Person**       | `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… [f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]…​`<br> e.g.,`edit person John Doe n/James Lee e/jameslee@example.com`
 **Edit Animal**       | `edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION] [t/TAG]…`<br> e.g., `edit animal Fluffy l/Void Deck`
 **Undo**              | `undo`

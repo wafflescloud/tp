@@ -21,22 +21,21 @@ import seedu.address.model.animal.Location;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing animal in the address book.
  */
 public class EditAnimalCommand extends EditCommand {
 
-    public static final String COMMAND_WORD = "edit";
-
     public static final String MESSAGE_EDIT_ANIMAL_SUCCESS = "Edited Animal: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_ANIMAL = "This animal already exists in the address book";
-    public static final String MESSAGE_INVALID_ANIMAL_NAME = "The animal is not found in the address book";
+    public static final String MESSAGE_DUPLICATE_ANIMAL = "This animal already exists in the address book.";
 
     private final AnimalName name;
     private final EditAnimalDescriptor editAnimalDescriptor;
 
     /**
-     * @param name of the person in the filtered animal list to edit
+     * Creates an EditAnimalCommand to edit the animal with the specified name.
+     *
+     * @param name name of the animal in the filtered animal list to edit
      * @param editAnimalDescriptor details to edit the animal with
      */
     public EditAnimalCommand(AnimalName name, EditAnimalDescriptor editAnimalDescriptor) {
@@ -52,12 +51,10 @@ public class EditAnimalCommand extends EditCommand {
         requireNonNull(model);
 
         List<Animal> list = model.getFilteredAnimalList();
-
         Animal animalToEdit = list.stream()
-                .filter(animal -> animal.getName().equals(name))
+                .filter(a -> a.getName().equals(name))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_ANIMAL_DISPLAYED_NAME));
-
 
         Animal editedAnimal = createEditedAnimal(animalToEdit, editAnimalDescriptor);
 
@@ -77,7 +74,7 @@ public class EditAnimalCommand extends EditCommand {
     private static Animal createEditedAnimal(Animal animalToEdit, EditAnimalDescriptor editAnimalDescriptor) {
         assert animalToEdit != null;
 
-        AnimalName updatedName = editAnimalDescriptor.getName().orElse(animalToEdit.getName());
+        AnimalName updatedName = editAnimalDescriptor.getName().orElse(animalToEdit.getAnimalName());
         Description updatedDescription = editAnimalDescriptor.getDescription().orElse(animalToEdit.getDescription());
         Location updatedLocation = editAnimalDescriptor.getLocation().orElse(animalToEdit.getLocation());
         Set<Tag> updatedTags = editAnimalDescriptor.getTags().orElse(animalToEdit.getTags());
@@ -86,31 +83,28 @@ public class EditAnimalCommand extends EditCommand {
                 animalToEdit.getFeedingSessionIds());
     }
 
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof EditAnimalCommand)) {
             return false;
         }
 
-        EditAnimalCommand otherEditAnimalCommand = (EditAnimalCommand) other;
-        return name.equals(otherEditAnimalCommand.name)
-                && editAnimalDescriptor.equals(otherEditAnimalCommand.editAnimalDescriptor);
+        EditAnimalCommand otherEditCommand = (EditAnimalCommand) other;
+        return name.equals(otherEditCommand.name)
+                && editAnimalDescriptor.equals(otherEditCommand.editAnimalDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("editAnimalDescriptor", editAnimalDescriptor)
+                .add("editDescriptor", editAnimalDescriptor)
                 .toString();
     }
-
 
     /**
      * Stores the details to edit the animal with. Each non-empty field value will replace the
@@ -126,6 +120,7 @@ public class EditAnimalCommand extends EditCommand {
 
         /**
          * Copy constructor.
+         * A defensive copy of {@code tags} is used internally.
          */
         public EditAnimalDescriptor(EditAnimalDescriptor toCopy) {
             setName(toCopy.name);
@@ -188,7 +183,6 @@ public class EditAnimalCommand extends EditCommand {
                 return true;
             }
 
-            // instanceof handles nulls
             if (!(other instanceof EditAnimalDescriptor)) {
                 return false;
             }
@@ -213,5 +207,3 @@ public class EditAnimalCommand extends EditCommand {
         }
     }
 }
-
-

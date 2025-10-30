@@ -17,6 +17,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonName;
+import seedu.address.testutil.NameUtil;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code DeletePersonCommand}.
@@ -28,7 +29,7 @@ public class DeletePersonCommandTest {
     @Test
     public void execute_validPersonName_success() {
         Person personToDelete = model.getFilteredPersonList().get(0);
-        PersonName name = personToDelete.getName();
+        PersonName name = NameUtil.getPersonName(personToDelete);
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(name);
 
         String expectedMessage = String.format(Messages.MESSAGE_DELETED_PERSON_SUCCESS,
@@ -50,14 +51,14 @@ public class DeletePersonCommandTest {
 
     @Test
     public void equals() {
-        DeletePersonCommand deleteAliceCommand = new DeletePersonCommand(ALICE.getName());
-        DeletePersonCommand deleteBensonCommand = new DeletePersonCommand(BENSON.getName());
+        DeletePersonCommand deleteAliceCommand = new DeletePersonCommand(NameUtil.getPersonName(ALICE));
+        DeletePersonCommand deleteBensonCommand = new DeletePersonCommand(NameUtil.getPersonName(BENSON));
 
         // same object -> returns true
         assertTrue(deleteAliceCommand.equals(deleteAliceCommand));
 
         // same values -> returns true
-        DeletePersonCommand deleteAliceCommandCopy = new DeletePersonCommand(ALICE.getName());
+        DeletePersonCommand deleteAliceCommandCopy = new DeletePersonCommand(NameUtil.getPersonName(ALICE));
         assertTrue(deleteAliceCommand.equals(deleteAliceCommandCopy));
 
         // different types -> returns false
@@ -72,8 +73,9 @@ public class DeletePersonCommandTest {
 
     @Test
     public void toStringMethod() {
-        DeletePersonCommand deleteCommand = new DeletePersonCommand(ALICE.getName());
-        String expected = DeletePersonCommand.class.getCanonicalName() + "{name=" + ALICE.getName() + "}";
+        PersonName aliceName = NameUtil.getPersonName(ALICE);
+        DeletePersonCommand deleteCommand = new DeletePersonCommand(aliceName);
+        String expected = DeletePersonCommand.class.getCanonicalName() + "{name=" + aliceName + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 }
