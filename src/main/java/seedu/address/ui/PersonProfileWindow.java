@@ -3,14 +3,16 @@ package seedu.address.ui;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.model.animal.Animal;
 import seedu.address.model.feedingsession.FeedingSession;
@@ -19,7 +21,7 @@ import seedu.address.model.person.Person;
 /**
  * A window that shows detailed contact and feeding session information of a {@link Person}.
  * This window is displayed as a pop-up window containing the person's name, phone, email,
- * tags, and their earliest upcoming feeding session (if any).
+ * tags, and all their feeding sessions (if any).
  */
 public class PersonProfileWindow extends UiPart<Stage> {
 
@@ -36,13 +38,8 @@ public class PersonProfileWindow extends UiPart<Stage> {
     @FXML private Label email;
     @FXML private FlowPane tags;
 
-    @FXML private Label animalName;
-    @FXML private Label feedingDate;
-    @FXML private Label feedingTime;
     @FXML private ScrollPane feedingSessionScrollPane;
-
-    @FXML private Button copyEmailButton;
-    @FXML private Button copyPhoneButton;
+    @FXML private VBox feedingSessionsContainer;
 
     /**
      * Creates a new PersonProfileWindow instance for the specified {@code person}.
@@ -66,45 +63,67 @@ public class PersonProfileWindow extends UiPart<Stage> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        displayEarliestFeedingSession();
+        displayAllFeedingSessions();
     }
 
     /**
-     * Displays the earliest feeding session in the feeding box.
+     * Displays all feeding sessions for this person in the scrollable container.
+     * Hides the ScrollPane if there are none.
      */
-    private void displayEarliestFeedingSession() {
-        FeedingSession earliest = person.getEarliestFeedingSession(feedingSessions);
-
-        if (earliest != null) {
-            if (feedingSessionScrollPane != null) {
-                feedingSessionScrollPane.setVisible(true);
-                feedingSessionScrollPane.setManaged(true);
-            }
-
-            if (animalName != null) {
-                String animalNameText = animals.stream()
-                        .filter(animal -> animal.getId().equals(earliest.getAnimalId()))
-                        .findFirst()
-                        .map(animal -> animal.getName().fullName)
-                        .orElse("Unknown Animal");
-                animalName.setText(animalNameText);
-            }
-
-            if (feedingDate != null) {
-                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
-                feedingDate.setText(earliest.getDateTime().format(dateFormatter));
-            }
-
-            if (feedingTime != null) {
-                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-                feedingTime.setText(earliest.getDateTime().format(timeFormatter));
-            }
-        } else {
-            if (feedingSessionScrollPane != null) {
-                feedingSessionScrollPane.setVisible(false);
-                feedingSessionScrollPane.setManaged(false);
-            }
+    private void displayAllFeedingSessions() {
+        if (feedingSessionsContainer == null || feedingSessionScrollPane == null) {
+            return; // FXML not wired yet; defensive
         }
+
+        // Clear previous entries
+        feedingSessionsContainer.getChildren().clear();
+
+        // Filter sessions involving this person and sort by date/time ascending
+        List<FeedingSession> sessionsForPerson = feedingSessions.stream()
+                .filter(session -> session.involvesPerson(person.getId()))
+                .sorted(Comparator.comparing(FeedingSession::getDateTime))
+                .collect(Collectors.toList());
+
+        if (sessionsForPerson.isEmpty()) {
+            feedingSessionScrollPane.setVisible(false);
+            feedingSessionScrollPane.setManaged(false);
+            return;
+        }
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        // Populate entries
+        for (FeedingSession session : sessionsForPerson) {
+            String animalNameText = animals.stream()
+                    .filter(animal -> animal.getId().equals(session.getAnimalId()))
+                    .findFirst()
+                    .map(animal -> animal.getName().fullName)
+                    .orElse("Unknown Animal");
+
+            Label dateLabel = new Label(session.getDateTime().format(dateFormatter));
+            dateLabel.getStyleClass().add("session-date");
+
+            Label timeLabel = new Label(session.getDateTime().format(timeFormatter));
+            timeLabel.getStyleClass().add("session-time");
+
+            Label animalLabel = new Label(animalNameText);
+            animalLabel.getStyleClass().add("session-animal");
+
+            HBox row = new HBox(10.0); // spacing between labels
+            row.getStyleClass().add("feeding-session-box");
+            row.getChildren().addAll(dateLabel, timeLabel, animalLabel);
+
+            // Ensure each row fills available width to avoid abrupt width changes
+            row.setFillHeight(true);
+            row.setMaxWidth(Double.MAX_VALUE);
+
+            feedingSessionsContainer.getChildren().add(row);
+        }
+
+        // Ensure the ScrollPane is visible
+        feedingSessionScrollPane.setVisible(true);
+        feedingSessionScrollPane.setManaged(true);
     }
 
     /**
