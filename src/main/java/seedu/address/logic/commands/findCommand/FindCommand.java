@@ -21,5 +21,8 @@ public abstract class FindCommand extends Command {
             + "2. To find an animal:\n"
             + "Example: " + COMMAND_WORD + " "
             + TYPE_ANIMAL + " n/ma n/lu\n"
-            + "Example (tags): " + COMMAND_WORD + " " + TYPE_ANIMAL + " t/friendly t/small";
+            + "Example (tags): " + COMMAND_WORD + " " + TYPE_ANIMAL + " t/friendly t/small\n\n"
+            + "Alternatively, use:\n"
+            + FindContactCommand.PERSON_MESSAGE_USAGE + "\n\n"
+            + FindContactCommand.ANIMAL_MESSAGE_USAGE;
 }

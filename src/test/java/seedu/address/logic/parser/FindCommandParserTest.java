@@ -9,12 +9,13 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.FindAnimalCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindPersonCommand;
+import seedu.address.logic.commands.FindContactCommand;
+import seedu.address.model.animal.Animal;
 import seedu.address.model.animal.AnimalMatchesKeywordsPredicate;
 import seedu.address.model.animal.NameContainsKeywordsPredicateAnimal;
 import seedu.address.model.person.NameContainsKeywordsPredicatePerson;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonMatchesKeywordsPredicate;
 
 /**
@@ -47,8 +48,8 @@ public class FindCommandParserTest {
     @Test
     public void parse_validPersonNameArgs_returnsFindPersonCommand() {
         // no leading and trailing whitespaces
-        FindPersonCommand expectedFindPersonCommand =
-                new FindPersonCommand(new NameContainsKeywordsPredicatePerson(Arrays.asList("Alice", "Bob")));
+        FindContactCommand<Person> expectedFindPersonCommand =
+                FindContactCommand.forPerson(new NameContainsKeywordsPredicatePerson(Arrays.asList("Alice", "Bob")));
         assertParseSuccess(parser, "person n/Alice n/Bob", expectedFindPersonCommand);
 
         // multiple whitespaces between keywords
@@ -57,15 +58,15 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_singlePersonKeyword_returnsFindPersonCommand() {
-        FindPersonCommand expectedFindPersonCommand =
-                new FindPersonCommand(new NameContainsKeywordsPredicatePerson(Arrays.asList("Alice")));
+        FindContactCommand<Person> expectedFindPersonCommand =
+                FindContactCommand.forPerson(new NameContainsKeywordsPredicatePerson(Arrays.asList("Alice")));
         assertParseSuccess(parser, "person n/Alice", expectedFindPersonCommand);
     }
 
     @Test
     public void parse_multiplePersonKeywords_returnsFindPersonCommand() {
-        FindPersonCommand expectedFindPersonCommand =
-                new FindPersonCommand(new NameContainsKeywordsPredicatePerson(
+        FindContactCommand<Person> expectedFindPersonCommand =
+                FindContactCommand.forPerson(new NameContainsKeywordsPredicatePerson(
                         Arrays.asList("Alice", "Bob", "Charlie", "Dave")));
         assertParseSuccess(parser, "person n/Alice n/Bob n/Charlie n/Dave", expectedFindPersonCommand);
     }
@@ -73,32 +74,32 @@ public class FindCommandParserTest {
     @Test
     public void parse_personTagsOnly_returnsFindPersonCommand() {
         // Fix: Pass empty list instead of null for names when no names provided
-        FindPersonCommand expectedFindPersonCommand =
-                new FindPersonCommand(new PersonMatchesKeywordsPredicate(
+        FindContactCommand<Person> expectedFindPersonCommand =
+                FindContactCommand.forPerson(new PersonMatchesKeywordsPredicate(
                         Collections.emptyList(), Arrays.asList("friend", "colleague")));
         assertParseSuccess(parser, "person t/friend t/colleague", expectedFindPersonCommand);
     }
 
     @Test
     public void parse_personNameAndTags_returnsFindPersonCommand() {
-        FindPersonCommand expectedFindPersonCommand =
-                new FindPersonCommand(new PersonMatchesKeywordsPredicate(
+        FindContactCommand<Person> expectedFindPersonCommand =
+                FindContactCommand.forPerson(new PersonMatchesKeywordsPredicate(
                         Arrays.asList("Alice", "Bob"), Arrays.asList("friend", "colleague")));
         assertParseSuccess(parser, "person n/Alice n/Bob t/friend t/colleague", expectedFindPersonCommand);
     }
 
     @Test
     public void parse_mixedCasePersonKeywords_returnsFindPersonCommand() {
-        FindPersonCommand expectedFindPersonCommand =
-                new FindPersonCommand(new NameContainsKeywordsPredicatePerson(
+        FindContactCommand<Person> expectedFindPersonCommand =
+                FindContactCommand.forPerson(new NameContainsKeywordsPredicatePerson(
                         Arrays.asList("aLICe", "bOB", "cHARlie")));
         assertParseSuccess(parser, "person n/aLICe n/bOB n/cHARlie", expectedFindPersonCommand);
     }
 
     @Test
     public void parse_specialCharactersInPersonKeywords_returnsFindPersonCommand() {
-        FindPersonCommand expectedFindPersonCommand =
-                new FindPersonCommand(new NameContainsKeywordsPredicatePerson(
+        FindContactCommand<Person> expectedFindPersonCommand =
+                FindContactCommand.forPerson(new NameContainsKeywordsPredicatePerson(
                         Arrays.asList("O'Connor", "Smith-Jones")));
         assertParseSuccess(parser, "person n/O'Connor n/Smith-Jones", expectedFindPersonCommand);
     }
@@ -126,8 +127,9 @@ public class FindCommandParserTest {
     @Test
     public void parse_validAnimalNameArgs_returnsFindAnimalCommand() {
         // no leading and trailing whitespaces
-        FindAnimalCommand expectedFindAnimalCommand =
-                new FindAnimalCommand(new NameContainsKeywordsPredicateAnimal(Arrays.asList("Whiskers", "Luna")));
+        FindContactCommand<Animal> expectedFindAnimalCommand =
+                FindContactCommand.forAnimal(
+                    new NameContainsKeywordsPredicateAnimal(Arrays.asList("Whiskers", "Luna")));
         assertParseSuccess(parser, "animal n/Whiskers n/Luna", expectedFindAnimalCommand);
 
         // multiple whitespaces between keywords
@@ -136,47 +138,47 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_singleAnimalKeyword_returnsFindAnimalCommand() {
-        FindAnimalCommand expectedFindAnimalCommand =
-                new FindAnimalCommand(new NameContainsKeywordsPredicateAnimal(Arrays.asList("Simba")));
+        FindContactCommand<Animal> expectedFindAnimalCommand =
+                FindContactCommand.forAnimal(new NameContainsKeywordsPredicateAnimal(Arrays.asList("Simba")));
         assertParseSuccess(parser, "animal n/Simba", expectedFindAnimalCommand);
     }
 
     @Test
     public void parse_multipleAnimalKeywords_returnsFindAnimalCommand() {
-        FindAnimalCommand expectedFindAnimalCommand =
-                new FindAnimalCommand(new NameContainsKeywordsPredicateAnimal(
+        FindContactCommand<Animal> expectedFindAnimalCommand =
+                FindContactCommand.forAnimal(new NameContainsKeywordsPredicateAnimal(
                         Arrays.asList("Whiskers", "Luna", "Simba", "Bella")));
         assertParseSuccess(parser, "animal n/Whiskers n/Luna n/Simba n/Bella", expectedFindAnimalCommand);
     }
 
     @Test
     public void parse_animalTagsOnly_returnsFindAnimalCommand() {
-        FindAnimalCommand expectedFindAnimalCommand =
-                new FindAnimalCommand(new AnimalMatchesKeywordsPredicate(
+        FindContactCommand<Animal> expectedFindAnimalCommand =
+                FindContactCommand.forAnimal(new AnimalMatchesKeywordsPredicate(
                         Collections.emptyList(), Arrays.asList("friendly", "small")));
         assertParseSuccess(parser, "animal t/friendly t/small", expectedFindAnimalCommand);
     }
 
     @Test
     public void parse_animalNameAndTags_returnsFindAnimalCommand() {
-        FindAnimalCommand expectedFindAnimalCommand =
-                new FindAnimalCommand(new AnimalMatchesKeywordsPredicate(
+        FindContactCommand<Animal> expectedFindAnimalCommand =
+                FindContactCommand.forAnimal(new AnimalMatchesKeywordsPredicate(
                         Arrays.asList("Whiskers", "Luna"), Arrays.asList("friendly", "small")));
         assertParseSuccess(parser, "animal n/Whiskers n/Luna t/friendly t/small", expectedFindAnimalCommand);
     }
 
     @Test
     public void parse_mixedCaseAnimalKeywords_returnsFindAnimalCommand() {
-        FindAnimalCommand expectedFindAnimalCommand =
-                new FindAnimalCommand(new NameContainsKeywordsPredicateAnimal(
+        FindContactCommand<Animal> expectedFindAnimalCommand =
+                FindContactCommand.forAnimal(new NameContainsKeywordsPredicateAnimal(
                         Arrays.asList("wHISkers", "lUNA", "sIMba")));
         assertParseSuccess(parser, "animal n/wHISkers n/lUNA n/sIMba", expectedFindAnimalCommand);
     }
 
     @Test
     public void parse_specialCharactersInAnimalKeywords_returnsFindAnimalCommand() {
-        FindAnimalCommand expectedFindAnimalCommand =
-                new FindAnimalCommand(new NameContainsKeywordsPredicateAnimal(
+        FindContactCommand<Animal> expectedFindAnimalCommand =
+                FindContactCommand.forAnimal(new NameContainsKeywordsPredicateAnimal(
                         Arrays.asList("Mr.Whiskers", "Luna-Belle")));
         assertParseSuccess(parser, "animal n/Mr.Whiskers n/Luna-Belle", expectedFindAnimalCommand);
     }
@@ -211,30 +213,31 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_personWithExtraWhitespace_returnsFindPersonCommand() {
-        FindPersonCommand expectedFindPersonCommand =
-                new FindPersonCommand(new NameContainsKeywordsPredicatePerson(Arrays.asList("Alice", "Bob")));
+        FindContactCommand<Person> expectedFindPersonCommand =
+                FindContactCommand.forPerson(new NameContainsKeywordsPredicatePerson(Arrays.asList("Alice", "Bob")));
         assertParseSuccess(parser, "\t  person   \n  n/Alice \t n/Bob ", expectedFindPersonCommand);
     }
 
     @Test
     public void parse_animalWithExtraWhitespace_returnsFindAnimalCommand() {
-        FindAnimalCommand expectedFindAnimalCommand =
-                new FindAnimalCommand(new NameContainsKeywordsPredicateAnimal(Arrays.asList("Whiskers", "Luna")));
+        FindContactCommand<Animal> expectedFindAnimalCommand =
+                FindContactCommand.forAnimal(
+                    new NameContainsKeywordsPredicateAnimal(Arrays.asList("Whiskers", "Luna")));
         assertParseSuccess(parser, "\t  animal   \n  n/Whiskers \t n/Luna ", expectedFindAnimalCommand);
     }
 
     @Test
     public void parse_singlePersonTag_returnsFindPersonCommand() {
-        FindPersonCommand expectedFindPersonCommand =
-                new FindPersonCommand(new PersonMatchesKeywordsPredicate(
+        FindContactCommand<Person> expectedFindPersonCommand =
+                FindContactCommand.forPerson(new PersonMatchesKeywordsPredicate(
                         Collections.emptyList(), Arrays.asList("friend")));
         assertParseSuccess(parser, "person t/friend", expectedFindPersonCommand);
     }
 
     @Test
     public void parse_singleAnimalTag_returnsFindAnimalCommand() {
-        FindAnimalCommand expectedFindAnimalCommand =
-                new FindAnimalCommand(new AnimalMatchesKeywordsPredicate(
+        FindContactCommand<Animal> expectedFindAnimalCommand =
+                FindContactCommand.forAnimal(new AnimalMatchesKeywordsPredicate(
                         Collections.emptyList(), Arrays.asList("friendly")));
         assertParseSuccess(parser, "animal t/friendly", expectedFindAnimalCommand);
     }
@@ -242,8 +245,8 @@ public class FindCommandParserTest {
     @Test
     public void parse_emptyNameValuePerson_returnsFindPersonCommand() {
         // Test when there's an empty name value but tags are present
-        FindPersonCommand expectedFindPersonCommand =
-                new FindPersonCommand(new PersonMatchesKeywordsPredicate(
+        FindContactCommand<Person> expectedFindPersonCommand =
+                FindContactCommand.forPerson(new PersonMatchesKeywordsPredicate(
                         Arrays.asList(""), Arrays.asList("friend")));
         assertParseSuccess(parser, "person n/ t/friend", expectedFindPersonCommand);
     }
@@ -251,8 +254,8 @@ public class FindCommandParserTest {
     @Test
     public void parse_emptyNameValueAnimal_returnsFindAnimalCommand() {
         // Test when there's an empty name value but tags are present
-        FindAnimalCommand expectedFindAnimalCommand =
-                new FindAnimalCommand(new AnimalMatchesKeywordsPredicate(
+        FindContactCommand<Animal> expectedFindAnimalCommand =
+                FindContactCommand.forAnimal(new AnimalMatchesKeywordsPredicate(
                         Arrays.asList(""), Arrays.asList("friendly")));
         assertParseSuccess(parser, "animal n/ t/friendly", expectedFindAnimalCommand);
     }
