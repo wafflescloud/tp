@@ -91,7 +91,11 @@ public class ViewCommand extends Command {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(String.format(MESSAGE_ANIMAL_NOT_FOUND, name)));
 
-        AnimalProfileWindow.openProfile(animal);
+        List<seedu.address.model.feedingsession.FeedingSession> feedingSessions =
+                new ArrayList<>(model.getFeedingSessionList());
+        List<Person> persons = new ArrayList<>(model.getFilteredPersonList());
+
+        AnimalProfileWindow.openProfile(animal, feedingSessions, persons);
         return new CommandResult(String.format(MESSAGE_VIEW_ANIMAL_SUCCESS, animal.getName().toString()));
     }
 

@@ -12,9 +12,7 @@ import seedu.address.model.Contact;
 import seedu.address.model.Model;
 import seedu.address.model.Name;
 import seedu.address.model.animal.Animal;
-import seedu.address.model.animal.AnimalName;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonName;
 
 /**
  * Generic command for deleting contacts (Person or Animal) from the address book.
@@ -47,11 +45,11 @@ public class DeleteContactCommand<T extends Contact> extends DeleteCommand {
     /**
      * Factory method to create a DeleteContactCommand for Person entities.
      */
-    public static DeleteContactCommand<Person> forPerson(PersonName name) {
+    public static DeleteContactCommand<Person> forPerson(Name name) {
         return new DeleteContactCommand<>(
             name,
             Model::getFilteredPersonList,
-            null, // Will be set in execute method
+            null,
             Messages.MESSAGE_DELETED_PERSON_SUCCESS,
             Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME
         );
@@ -60,11 +58,11 @@ public class DeleteContactCommand<T extends Contact> extends DeleteCommand {
     /**
      * Factory method to create a DeleteContactCommand for Animal entities.
      */
-    public static DeleteContactCommand<Animal> forAnimal(AnimalName name) {
+    public static DeleteContactCommand<Animal> forAnimal(Name name) {
         return new DeleteContactCommand<>(
             name,
             Model::getFilteredAnimalList,
-            null, // Will be set in execute method
+            null,
             Messages.MESSAGE_DELETED_ANIMAL_SUCCESS,
             Messages.MESSAGE_INVALID_ANIMAL_DISPLAYED_NAME
         );

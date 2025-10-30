@@ -23,11 +23,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Name;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonName;
 import seedu.address.model.person.Phone;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -176,7 +176,7 @@ public class LogicManagerTest {
         // Verify model is updated with the new person (ignoring auto-generated IDs)
         assertEquals(1, model.getFilteredPersonList().size());
         Person added = model.getFilteredPersonList().get(0);
-        assertEquals(new PersonName("Amy Bee"), added.getName());
+        assertEquals(new Name("Amy Bee"), added.getName());
         assertEquals(new Phone("91111111"), added.getPhone());
         assertEquals(new Email("amy@example.com"), added.getEmail());
         // No tags and no feeding sessions were provided

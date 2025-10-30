@@ -14,10 +14,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Name;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonName;
-import seedu.address.testutil.NameUtil;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code DeleteContactCommand} when deleting persons.
@@ -29,7 +28,7 @@ public class DeletePersonCommandTest {
     @Test
     public void execute_validPersonName_success() {
         Person personToDelete = model.getFilteredPersonList().get(0);
-        PersonName name = NameUtil.getPersonName(personToDelete);
+        Name name = personToDelete.getName();
         DeleteContactCommand<Person> deletePersonCommand = DeleteContactCommand.forPerson(name);
 
         String expectedMessage = String.format(Messages.MESSAGE_DELETED_PERSON_SUCCESS,
@@ -43,7 +42,7 @@ public class DeletePersonCommandTest {
 
     @Test
     public void execute_invalidPersonName_throwsCommandException() {
-        PersonName nonExistentName = new PersonName("Non Existent Name");
+        Name nonExistentName = new Name("Non Existent Name");
         DeleteContactCommand<Person> deletePersonCommand = DeleteContactCommand.forPerson(nonExistentName);
 
         assertCommandFailure(deletePersonCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
@@ -51,17 +50,14 @@ public class DeletePersonCommandTest {
 
     @Test
     public void equals() {
-        DeleteContactCommand<Person> deleteAliceCommand =
-                DeleteContactCommand.forPerson(NameUtil.getPersonName(ALICE));
-        DeleteContactCommand<Person> deleteBensonCommand =
-                DeleteContactCommand.forPerson(NameUtil.getPersonName(BENSON));
+        DeleteContactCommand<Person> deleteAliceCommand = DeleteContactCommand.forPerson(ALICE.getName());
+        DeleteContactCommand<Person> deleteBensonCommand = DeleteContactCommand.forPerson(BENSON.getName());
 
         // same object -> returns true
         assertTrue(deleteAliceCommand.equals(deleteAliceCommand));
 
         // same values -> returns true
-        DeleteContactCommand<Person> deleteAliceCommandCopy =
-                DeleteContactCommand.forPerson(NameUtil.getPersonName(ALICE));
+        DeleteContactCommand<Person> deleteAliceCommandCopy = DeleteContactCommand.forPerson(ALICE.getName());
         assertTrue(deleteAliceCommand.equals(deleteAliceCommandCopy));
 
         // different types -> returns false
@@ -76,7 +72,7 @@ public class DeletePersonCommandTest {
 
     @Test
     public void toStringMethod() {
-        PersonName aliceName = NameUtil.getPersonName(ALICE);
+        Name aliceName = ALICE.getName();
         DeleteContactCommand<Person> deleteCommand = DeleteContactCommand.forPerson(aliceName);
         String expected = DeleteContactCommand.class.getCanonicalName() + "{name=" + aliceName + "}";
         assertEquals(expected, deleteCommand.toString());

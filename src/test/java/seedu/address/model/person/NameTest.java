@@ -6,47 +6,49 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.Name;
+
 public class NameTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new PersonName(null));
+        assertThrows(NullPointerException.class, () -> new Name(null));
     }
 
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
         String invalidName = "";
-        assertThrows(IllegalArgumentException.class, () -> new PersonName(invalidName));
+        assertThrows(IllegalArgumentException.class, () -> new Name(invalidName));
     }
 
     @Test
     public void isValidName() {
         // Create a PersonName instance to call non-static method
-        PersonName testName = new PersonName("test");
+        Name testName = new Name("test");
 
         // null name
-        assertThrows(NullPointerException.class, () -> testName.isValidName(null));
+        assertThrows(NullPointerException.class, () -> Name.isValidName(null));
 
         // invalid name
-        assertFalse(testName.isValidName("")); // empty string
-        assertFalse(testName.isValidName(" ")); // spaces only
-        assertFalse(testName.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(testName.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("")); // empty string
+        assertFalse(Name.isValidName(" ")); // spaces only
+        assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
+        assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(testName.isValidName("peter jack")); // alphabets only
-        assertTrue(testName.isValidName("12345")); // numbers only
-        assertTrue(testName.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(testName.isValidName("Capital Tan")); // with capital letters
-        assertTrue(testName.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName("peter jack")); // alphabets only
+        assertTrue(Name.isValidName("12345")); // numbers only
+        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
+        assertTrue(Name.isValidName("Capital Tan")); // with capital letters
+        assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
     }
 
     @Test
     public void equals() {
-        PersonName name = new PersonName("Valid PersonName");
+        Name name = new Name("Valid PersonName");
 
         // same values -> returns true
-        assertTrue(name.equals(new PersonName("Valid PersonName")));
+        assertTrue(name.equals(new Name("Valid PersonName")));
 
         // same object -> returns true
         assertTrue(name.equals(name));
@@ -58,6 +60,6 @@ public class NameTest {
         assertFalse(name.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(name.equals(new PersonName("Other Valid PersonName")));
+        assertFalse(name.equals(new Name("Other Valid PersonName")));
     }
 }

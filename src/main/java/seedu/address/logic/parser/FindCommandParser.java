@@ -10,23 +10,22 @@ import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.animal.AnimalMatchesKeywordsPredicate;
-import seedu.address.model.animal.NameContainsKeywordsPredicateAnimal;
-import seedu.address.model.person.NameContainsKeywordsPredicatePerson;
-import seedu.address.model.person.PersonMatchesKeywordsPredicate;
+import seedu.address.model.ContactContainsKeywordsPredicate;
+import seedu.address.model.animal.Animal;
+import seedu.address.model.person.Person;
 
 /**
  * Unified parser for find commands that handles both Person and Animal types.
  * Automatically detects the contact type from the input arguments.
  */
-public class FindCommandParser implements Parser<FindCommand> {
+public class FindCommandParser implements Parser<FindCommand<?>> {
 
     private enum ContactType {
         PERSON, ANIMAL
     }
 
     @Override
-    public FindCommand parse(String args) throws ParseException {
+    public FindCommand<?> parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
         // Determine contact type from the first argument
@@ -52,12 +51,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        if (hasNames && !hasTags) {
-            return createNameOnlyCommand(nameValues, contactType);
-        }
-
-        // Use combined predicate when tags are present (with or without names)
-        return createCombinedCommand(nameValues, tagValues, contactType);
+        // Use unified predicate for all cases
+        return createFindCommand(nameValues, tagValues, contactType);
     }
 
     /**
@@ -87,24 +82,16 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
     }
 
-    private FindCommand createNameOnlyCommand(List<String> nameValues, ContactType contactType) {
-        switch (contactType) {
-        case PERSON:
-            return FindCommand.forPerson(new NameContainsKeywordsPredicatePerson(nameValues));
-        case ANIMAL:
-            return FindCommand.forAnimal(new NameContainsKeywordsPredicateAnimal(nameValues));
-        default:
-            throw new IllegalStateException("Unknown contact type: " + contactType);
-        }
-    }
-
-    private FindCommand createCombinedCommand(List<String> nameValues, List<String> tagValues,
+    /**
+     * Creates a FindCommand with the unified ContactContainsKeywordsPredicate.
+     */
+    private FindCommand<?> createFindCommand(List<String> nameValues, List<String> tagValues,
             ContactType contactType) {
         switch (contactType) {
         case PERSON:
-            return FindCommand.forPerson(new PersonMatchesKeywordsPredicate(nameValues, tagValues));
+            return FindCommand.forPerson(new ContactContainsKeywordsPredicate<Person>(nameValues, tagValues));
         case ANIMAL:
-            return FindCommand.forAnimal(new AnimalMatchesKeywordsPredicate(nameValues, tagValues));
+            return FindCommand.forAnimal(new ContactContainsKeywordsPredicate<Animal>(nameValues, tagValues));
         default:
             throw new IllegalStateException("Unknown contact type: " + contactType);
         }

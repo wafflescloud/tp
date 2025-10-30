@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Name;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.animal.Animal;
-import seedu.address.model.animal.AnimalName;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code DeleteContactCommand} when deleting animals.
@@ -27,7 +27,7 @@ public class DeleteAnimalCommandTest {
     @Test
     public void execute_validAnimalName_success() {
         Animal animalToDelete = WHISKERS;
-        AnimalName name = (AnimalName) animalToDelete.getName();
+        Name name = animalToDelete.getName();
         DeleteContactCommand<Animal> deleteAnimalCommand = DeleteContactCommand.forAnimal(name);
 
         String expectedMessage = String.format(Messages.MESSAGE_DELETED_ANIMAL_SUCCESS,
@@ -41,7 +41,7 @@ public class DeleteAnimalCommandTest {
 
     @Test
     public void execute_invalidAnimalName_throwsCommandException() {
-        AnimalName nonExistentName = new AnimalName("Non Existent Animal");
+        Name nonExistentName = new Name("Non Existent Animal");
         DeleteContactCommand<Animal> deleteAnimalCommand = DeleteContactCommand.forAnimal(nonExistentName);
 
         assertCommandFailure(deleteAnimalCommand, model, Messages.MESSAGE_INVALID_ANIMAL_DISPLAYED_NAME);
@@ -49,8 +49,8 @@ public class DeleteAnimalCommandTest {
 
     @Test
     public void equals() {
-        AnimalName firstAnimalName = new AnimalName("First Animal");
-        AnimalName secondAnimalName = new AnimalName("Second Animal");
+        Name firstAnimalName = new Name("First Animal");
+        Name secondAnimalName = new Name("Second Animal");
 
         DeleteContactCommand<Animal> deleteFirstCommand = DeleteContactCommand.forAnimal(firstAnimalName);
         DeleteContactCommand<Animal> deleteSecondCommand = DeleteContactCommand.forAnimal(secondAnimalName);
@@ -74,7 +74,7 @@ public class DeleteAnimalCommandTest {
 
     @Test
     public void toStringMethod() {
-        AnimalName animalName = new AnimalName("Test Animal");
+        Name animalName = new Name("Test Animal");
         DeleteContactCommand<Animal> deleteCommand = DeleteContactCommand.forAnimal(animalName);
         String expected = DeleteContactCommand.class.getCanonicalName() + "{name=" + animalName + "}";
         assertEquals(expected, deleteCommand.toString());

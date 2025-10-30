@@ -49,7 +49,7 @@ public class AnimalListPanel extends UiPart<Region> {
             if (event.getClickCount() == 2) {
                 Animal selectedAnimal = animalListView.getSelectionModel().getSelectedItem();
                 if (selectedAnimal != null) {
-                    AnimalProfileWindow.openProfile(selectedAnimal);
+                    AnimalProfileWindow.openProfile(selectedAnimal, feedingSessionList, personList);
                 }
             }
         });

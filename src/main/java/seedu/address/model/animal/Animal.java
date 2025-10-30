@@ -13,6 +13,7 @@ import java.util.UUID;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Contact;
+import seedu.address.model.Name;
 import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.tag.Tag;
 
@@ -33,7 +34,7 @@ public class Animal extends Contact {
      * Every field must be present and not null.
      * Creates a new Animal with auto-generated ID.
      */
-    public Animal(AnimalName name, Description description, Location location, Set<Tag> tags,
+    public Animal(Name name, Description description, Location location, Set<Tag> tags,
                   Set<UUID> feedingSessionIds) {
         super(name, tags);
         requireAllNonNull(description, location);
@@ -46,7 +47,7 @@ public class Animal extends Contact {
     /**
      * Constructor with explicit ID (for deserialization).
      */
-    public Animal(UUID id, AnimalName name, Description description, Location location, Set<Tag> tags,
+    public Animal(UUID id, Name name, Description description, Location location, Set<Tag> tags,
                   Set<UUID> feedingSessionIds) {
         super(name, tags);
         requireAllNonNull(id, description, location);
@@ -58,15 +59,6 @@ public class Animal extends Contact {
 
     public UUID getId() {
         return id;
-    }
-
-    /**
-     * Returns the specific AnimalName for type-specific operations.
-     * This method provides access to AnimalName-specific methods.
-     */
-    public AnimalName getAnimalName() {
-        // Safe cast since we passed AnimalName to constructor
-        return (AnimalName) name;
     }
 
     public Description getDescription() {
@@ -99,7 +91,7 @@ public class Animal extends Contact {
     public Animal addFeedingSessionId(UUID sessionId) {
         Set<UUID> updatedSessions = new HashSet<>(feedingSessionIds);
         updatedSessions.add(sessionId);
-        return new Animal(id, getAnimalName(), description, location, tags, updatedSessions);
+        return new Animal(id, getName(), description, location, tags, updatedSessions);
     }
 
     /**
@@ -108,7 +100,7 @@ public class Animal extends Contact {
     public Animal removeFeedingSessionId(UUID sessionId) {
         Set<UUID> updatedSessions = new HashSet<>(feedingSessionIds);
         updatedSessions.remove(sessionId);
-        return new Animal(id, getAnimalName(), description, location, tags, updatedSessions);
+        return new Animal(id, getName(), description, location, tags, updatedSessions);
     }
 
     /**
