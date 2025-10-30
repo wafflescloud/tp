@@ -734,18 +734,26 @@ testers are expected to do more *exploratory* testing.
     Prerequisite: Only persons `Alex Yeoh` and `Bernice Yu` exist in the list with tag `friend`. (Should be present from pre-loaded data) <br>
     Command: `find person t/friend` <br>
     Expected: Persons `Alex Yeoh` and `Bernice Yu` are shown in the list. <br>
-4. Valid test case - Finding an animal by full name <br>
+4. Valid test case - Finding a person by name and tag <br>
+    Prerequisite: Person `Bernice Yu` exists in the list with tag `friends`. (Should be present from pre-loaded data) <br>
+    Command: `find person n/Bernice t/friends` <br>
+    Expected: Out of all persons tagged as `friends`, only person `Bernice Yu` is shown in the list. <br>
+5. Valid test case - Finding an animal by full name <br>
    Prerequisite: Animal `Max` exists in the list. (Should be present from pre-loaded data), and there are no other animals with names containing the substring "max" <br>
    Command: `find animal n/Max` <br>
    Expected: Only animal `Max` is shown in the list. <br>
-5. Valid test case - Finding an animal by substring of name <br>
+6. Valid test case - Finding an animal by substring of name <br>
    Prerequisite: Animal `Max` exists in the list (Should be present from pre-loaded data), and there are no other animals with names containing the substring "ma" <br>
    Command: `find animal n/Ma` <br>
    Expected: Only animal `Max` is shown in the list <br>
-6. Valid test case - Finding an animal by tag <br>
+7. Valid test case - Finding an animal by tag <br>
    Prerequisite: Only animal `Max` exist in the list with tag `Shy`. (Should be present from pre-loaded data) <br>
    Command: `find animal t/shy` <br>
    Expected: Only animal `Max` is shown in the list <br>
+8. Valid test case - Finding an animal by name and tag <br>
+   Prerequisite: Animal `Max` exists in the list with tag `Shy`. (Should be present from pre-loaded data) <br>
+   Command: `find animal n/Max t/shy` <br>
+   Expected: Out of all animals tagged as `shy`, only animal `Max` is shown in the list. <br>
 
 ### Deleting a person or animal
 
