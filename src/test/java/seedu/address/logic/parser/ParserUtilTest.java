@@ -173,40 +173,40 @@ public class ParserUtilTest {
 
     // EP: Valid date, 00:00 (valid)
     @Test
-    public void parseDateTime_validDate_midnight_valid() throws Exception {
+    public void parseDateTime_validDateMidnight_success() throws Exception {
         LocalDateTime expected = LocalDateTime.of(2025, 1, 1, 0, 0);
         assertEquals(expected, ParserUtil.parseDateTime("2025-01-01 00:00"));
     }
 
     // EP: Valid date, 12:30 (valid)
     @Test
-    public void parseDateTime_validDate_noonThirty_valid() throws Exception {
+    public void parseDateTime_validDateNoonThirty_success() throws Exception {
         LocalDateTime expected = LocalDateTime.of(2025, 1, 1, 12, 30);
         assertEquals(expected, ParserUtil.parseDateTime("2025-01-01 12:30"));
     }
 
     // EP: Valid date, 23:59 (valid)
     @Test
-    public void parseDateTime_validDate_lastMinute_valid() throws Exception {
+    public void parseDateTime_validDateLastMinute_success() throws Exception {
         LocalDateTime expected = LocalDateTime.of(2025, 1, 1, 23, 59);
         assertEquals(expected, ParserUtil.parseDateTime("2025-01-01 23:59"));
     }
 
     // EP: Valid date, 24:00 (invalid)
     @Test
-    public void parseDateTime_validDate_twentyFourZeroZero_invalid() {
+    public void parseDateTime_validDateTwentyFourZeroZero_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseDateTime("2025-01-01 24:00"));
     }
 
     // EP: Valid date, time not present (invalid)
     @Test
-    public void parseDateTime_validDate_timeMissing_invalid() {
+    public void parseDateTime_validDateTimeMissing_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseDateTime("2025-01-01"));
     }
 
     // EP: Valid time, date not present (invalid)
     @Test
-    public void parseDateTime_validTime_dateMissing_invalid() {
+    public void parseDateTime_validTimeDateMissing_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseDateTime("12:00"));
     }
 
