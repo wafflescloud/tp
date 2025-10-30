@@ -62,92 +62,52 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Populates the command list if empty. Each command maps to a list whose first element is a simple description
-     * placeholder (currently identical to the command name). Extend later with syntax/examples etc.
+     * Populates the command list if empty. Each command maps to a list whose first element is the command description,
+     * followed by format(s) and example(s) loaded from the external help JSON file.
      */
     private void populateCommandList() {
         if (!COMMAND_LIST.isEmpty()) {
             return;
         }
 
-        // TODO: Make this info editable outside of the program (e.g. store these descriptions in a JSON or text file)
-        // addAnimal command with detailed description
-        ArrayList<String> addDescription = new ArrayList<>();
-        addDescription.add("Adds a new person or animal record to the system.");
-        addDescription.add("Command format: add animal n/NAME d/DESCRIPTION l/LOCATION [t/TAG]..."
-                          + " OR add person n/NAME p/PHONE e/EMAIL [t/TAG]...");
-        addDescription.add("Example: add animal n/Bob d/Brown tabby with stripes l/Near Block 14 canteen t/Furry");
-        addDescription.add("Example: add person n/John Doe p/91234567 e/johndoe@gmail.com t/friend t/funny");
-        COMMAND_LIST.put("add", addDescription);
+        Map<String, HelpCommandLoader.CommandHelp> helpMap = HelpCommandLoader.loadCommandHelp();
+        assert helpMap != null : "Help map should not be null";
 
-        // delete command with detailed description
-        ArrayList<String> deleteDescription = new ArrayList<>();
-        deleteDescription.add("Deletes an existing record from the system.");
-        deleteDescription.add("Command format: delete person n/NAME OR delete animal n/NAME");
-        deleteDescription.add("Example: delete person n/John Tan");
-        deleteDescription.add("Example: delete animal n/Fluffy");
-        COMMAND_LIST.put("delete", deleteDescription);
+        for (Map.Entry<String, HelpCommandLoader.CommandHelp> entry : helpMap.entrySet()) {
+            String commandName = entry.getKey();
+            HelpCommandLoader.CommandHelp help = entry.getValue();
 
-        // edit command with detailed description
-        ArrayList<String> editDescription = new ArrayList<>();
-        editDescription.add("Edits an existing record from the system.");
-        editDescription.add("Command format: edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/tag...] "
-                              + "[f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]"
-                              + " OR edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION]");
-        editDescription.add("Example: edit person John Doe p/98765432 a/321, Jane Street");
-        editDescription.add("Example: edit animal Bob n/Bobby");
-        COMMAND_LIST.put("edit", editDescription);
+            assert commandName != null : "Command name should not be null";
+            assert help != null : "Command help should not be null";
 
-        // find command with detailed description
-        ArrayList<String> findDescription = new ArrayList<>();
-        findDescription.add("Searches a record from the system.");
-        findDescription.add("Command format: find person NAME OR find animal NAME");
-        findDescription.add("Example: find person Sam");
-        findDescription.add("Example: find animal Bella");
-        COMMAND_LIST.put("find", findDescription);
+            ArrayList<String> commandDetails = new ArrayList<>();
+            commandDetails.add(help.getDescription());
 
-        // help command with detailed description
-        ArrayList<String> helpDescription = new ArrayList<>();
-        helpDescription.add("Opens the help window, or shows detailed help for a specified command.");
-        helpDescription.add("Command format: help [COMMAND]");
-        helpDescription.add("Example: help");
-        helpDescription.add("Example: help add person");
-        COMMAND_LIST.put("help", helpDescription);
+            if (help.getFormats() != null && !help.getFormats().isEmpty()) {
+                commandDetails.add("Command format: " + String.join(" OR ", help.getFormats()));
+            }
 
-        // list command with detailed description
-        ArrayList<String> listDescription = new ArrayList<>();
-        listDescription.add("Lists all persons and animals in the system.");
-        listDescription.add("Command format: list");
-        COMMAND_LIST.put("list", listDescription);
+            if (help.getExamples() != null) {
+                for (String example : help.getExamples()) {
+                    commandDetails.add("Example: " + example);
+                }
+            }
 
-        // clear command with detailed description
-        ArrayList<String> clearDescription = new ArrayList<>();
-        clearDescription.add("Clears all stored person and animal records.");
-        clearDescription.add("Command format: clear");
-        COMMAND_LIST.put("clear", clearDescription);
+            COMMAND_LIST.put(commandName, commandDetails);
+        }
 
-        // exit command with detailed description
-        ArrayList<String> exitDescription = new ArrayList<>();
-        exitDescription.add("Exits the application.");
-        exitDescription.add("Command format: exit");
-        COMMAND_LIST.put("exit", exitDescription);
-
-        // view command with detailed description
-        ArrayList<String> viewDescription = new ArrayList<>();
-        viewDescription.add("Opens a profile window for a person or animal.");
-        viewDescription.add("Command format: view person n/NAME OR view animal n/NAME");
-        viewDescription.add("Example: view person n/Alex Yo");
-        viewDescription.add("Example: view animal n/Fluffy");
-        COMMAND_LIST.put("view", viewDescription);
+        assert !COMMAND_LIST.isEmpty() : "Command list should not be empty after population";
     }
+
+
 
     /**
      * Creates individual clickable labels for each command and adds them to the commandLinksContainer.
+     * Each label opens a detailed help window for the command when clicked.
      */
     private void createCommandLinks() {
         commandLinksContainer.getChildren().clear();
 
-        // Sort commands alphabetically
         COMMAND_LIST.keySet().stream()
                 .sorted()
                 .forEach(command -> {
@@ -160,6 +120,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Returns a string with all command keys separated by a newline in alphabetical order.
+     * @return String of all command names, one per line.
      */
     public String getCommands() {
         return COMMAND_LIST.keySet().stream()
@@ -170,8 +131,11 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Retrieves all description lines for a command joined by newlines, or null if absent.
+     * @param command The command name.
+     * @return Description, format(s), and example(s) for the command, or null if not found.
      */
     public static String getDescriptionForCommand(String command) {
+        assert command != null : "Command should not be null";
         ArrayList<String> list = COMMAND_LIST.get(command);
         if (list == null || list.isEmpty()) {
             return null;
@@ -199,6 +163,9 @@ public class HelpWindow extends UiPart<Stage> {
      * @param commandName The name of the command to show help for.
      */
     public static void openCommandHelp(String commandName) {
+        assert commandName != null : "Command name should not be null";
+        assert !commandName.trim().isEmpty() : "Command name should not be empty";
+
         HelpFunctionWindow functionWindow;
         if (commandBoxReference != null) {
             functionWindow = new HelpFunctionWindow(commandName, commandBoxReference::setCommandText);
@@ -210,7 +177,8 @@ public class HelpWindow extends UiPart<Stage> {
 
 
     /**
-     * Exposes the commandList (immutable view suggestion in future). Currently returns backing map.
+     * Exposes the commandList. Returns the backing map of command names to their details.
+     * @return Map of command names to their details.
      */
     public static Map<String, ArrayList<String>> getCommandList() {
         return COMMAND_LIST;
@@ -242,6 +210,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Returns true if the help window is currently being shown.
+     * @return true if showing, false otherwise.
      */
     public boolean isShowing() {
         return getRoot().isShowing();

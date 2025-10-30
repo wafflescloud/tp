@@ -31,11 +31,14 @@ public class HelpFunctionWindow extends UiPart<Stage> {
 
     /**
      * Constructs a HelpFunctionWindow for the given command name.
+     * Displays help for the specified command.
      *
      * @param commandName Name of the command.
      */
     public HelpFunctionWindow(String commandName) {
         super(FXML, new Stage());
+        assert commandName != null : "Command name should not be null";
+        assert !commandName.trim().isEmpty() : "Command name should not be empty";
         this.commandName = commandName;
         populate();
 
@@ -44,12 +47,16 @@ public class HelpFunctionWindow extends UiPart<Stage> {
 
     /**
      * Constructs a HelpFunctionWindow for the given command name with a command text setter.
+     * Displays help for the specified command and allows setting text in the command box.
      *
      * @param commandName Name of the command.
      * @param commandTextSetter Function to set text in the command box.
      */
     public HelpFunctionWindow(String commandName, Consumer<String> commandTextSetter) {
         super(FXML, new Stage());
+        assert commandName != null : "Command name should not be null";
+        assert !commandName.trim().isEmpty() : "Command name should not be empty";
+        assert commandTextSetter != null : "Command text setter should not be null";
         this.commandName = commandName;
         this.commandTextSetter = commandTextSetter;
         populate();
@@ -57,18 +64,21 @@ public class HelpFunctionWindow extends UiPart<Stage> {
         openWindows.add(getRoot());
     }
 
+    /**
+     * Populates the window with command title, description, formats, and examples.
+     */
     private void populate() {
         commandTitleLabel.setText(commandName);
         commandTitleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: black;");
 
         String desc = HelpWindow.getDescriptionForCommand(commandName);
         if (desc == null) {
-            commandDescriptionLabel.setText("Description: (no description found)");
+            commandDescriptionLabel.setText("No description found.");
         } else {
             // Only show the first line (description) in the description label
             String[] lines = desc.split("\n");
             if (lines.length > 0) {
-                commandDescriptionLabel.setText("Description: " + lines[0]);
+                commandDescriptionLabel.setText(lines[0]);
             }
         }
         commandDescriptionLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: black;");
@@ -104,7 +114,10 @@ public class HelpFunctionWindow extends UiPart<Stage> {
     }
 
     /**
-     * Creates a command format section with inline buttons.
+     * Creates a command format section with inline buttons for each format.
+     * Clicking a format sets the command text in the command box and closes the window.
+     *
+     * @param formatLine The format line string.
      */
     private void createCommandFormatSection(String formatLine) {
         // Extract the format part after "Command format: "
@@ -134,7 +147,9 @@ public class HelpFunctionWindow extends UiPart<Stage> {
         }
     }
 
-    /** Shows the function help window. */
+    /**
+     * Shows the function help window.
+     */
     public void show() {
         getRoot().show();
         getRoot().centerOnScreen();
