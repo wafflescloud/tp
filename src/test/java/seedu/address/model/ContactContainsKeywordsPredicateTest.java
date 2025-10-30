@@ -148,18 +148,18 @@ public class ContactContainsKeywordsPredicateTest {
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
-        // Zero keywords
+        // Non-matching keyword
         ContactContainsKeywordsPredicate<Person> predicate =
-                new ContactContainsKeywordsPredicate<>(Collections.emptyList());
+                new ContactContainsKeywordsPredicate<>(Arrays.asList("NonExistentName12345"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
 
-        // Non-matching keyword
+        // Different non-matching keyword
         predicate = new ContactContainsKeywordsPredicate<>(Arrays.asList("Carol"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Keywords match phone and email, but does not match name
-        predicate = new ContactContainsKeywordsPredicate<>(Arrays.asList("12345", "alice@email.com"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345678")
+        predicate = new ContactContainsKeywordsPredicate<>(Arrays.asList("87654321", "alice@email.com"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("91234567")
                 .withEmail("alice@email.com").build()));
     }
 

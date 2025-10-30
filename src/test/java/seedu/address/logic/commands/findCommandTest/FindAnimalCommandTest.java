@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-// import static seedu.address.testutil.TypicalAnimals.LUNA;
-// import static seedu.address.testutil.TypicalAnimals.SIMBA;
-// import static seedu.address.testutil.TypicalAnimals.WHISKERS;
+import static seedu.address.testutil.TypicalAnimals.LUNA;
+import static seedu.address.testutil.TypicalAnimals.SIMBA;
+import static seedu.address.testutil.TypicalAnimals.WHISKERS;
 import static seedu.address.testutil.TypicalAnimals.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -15,10 +15,11 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.model.ContactContainsKeywordsPredicate;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.animal.NameContainsKeywordsPredicateAnimal;
+import seedu.address.model.animal.Animal;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindAnimalCommand}.
@@ -29,10 +30,10 @@ public class FindAnimalCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicateAnimal firstPredicate =
-                new NameContainsKeywordsPredicateAnimal(Collections.singletonList("first"));
-        NameContainsKeywordsPredicateAnimal secondPredicate =
-                new NameContainsKeywordsPredicateAnimal(Collections.singletonList("second"));
+        ContactContainsKeywordsPredicate<Animal> firstPredicate =
+                new ContactContainsKeywordsPredicate<>(Collections.singletonList("first"));
+        ContactContainsKeywordsPredicate<Animal> secondPredicate =
+                new ContactContainsKeywordsPredicate<>(Collections.singletonList("second"));
 
         FindAnimalCommand findFirstCommand = new FindAnimalCommand(firstPredicate);
         FindAnimalCommand findSecondCommand = new FindAnimalCommand(secondPredicate);
@@ -57,37 +58,36 @@ public class FindAnimalCommandTest {
     @Test
     public void execute_zeroKeywords_noAnimalFound() {
         String expectedMessage = String.format(Messages.MESSAGE_FIND_ANIMAL_SUCCESS, 0);
-        NameContainsKeywordsPredicateAnimal predicate = preparePredicate(" ");
+        ContactContainsKeywordsPredicate<Animal> predicate = preparePredicate("NonExistentAnimalName12345");
         FindAnimalCommand command = new FindAnimalCommand(predicate);
         expectedModel.updateFilteredAnimalList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredAnimalList());
     }
 
-    /*
     @Test
     public void execute_multipleKeywords_multipleAnimalsFound() {
         String expectedMessage = String.format(Messages.MESSAGE_FIND_ANIMAL_SUCCESS, 3);
-        NameContainsKeywordsPredicateAnimal predicate = preparePredicate("n/Whiskers n/Luna n/Simba");
+        ContactContainsKeywordsPredicate<Animal> predicate = preparePredicate("Whiskers Luna Simba");
         FindAnimalCommand command = new FindAnimalCommand(predicate);
         expectedModel.updateFilteredAnimalList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(WHISKERS, LUNA, SIMBA), model.getFilteredAnimalList());
-    }*/
+    }
 
     @Test
     public void toStringMethod() {
-        NameContainsKeywordsPredicateAnimal predicate =
-            new NameContainsKeywordsPredicateAnimal(Arrays.asList("keyword"));
+        ContactContainsKeywordsPredicate<Animal> predicate =
+            new ContactContainsKeywordsPredicate<>(Arrays.asList("keyword"));
         FindAnimalCommand findCommand = new FindAnimalCommand(predicate);
         String expected = FindAnimalCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicateAnimal}.
+     * Parses {@code userInput} into a {@code ContactContainsKeywordsPredicate}.
      */
-    private NameContainsKeywordsPredicateAnimal preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicateAnimal(Arrays.asList(userInput.split("\\s+")));
+    private ContactContainsKeywordsPredicate<Animal> preparePredicate(String userInput) {
+        return new ContactContainsKeywordsPredicate<>(Arrays.asList(userInput.split("\\s+")));
     }
 }
