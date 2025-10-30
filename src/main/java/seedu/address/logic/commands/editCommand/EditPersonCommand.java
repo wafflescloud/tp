@@ -26,14 +26,10 @@ public class EditPersonCommand extends EditContactCommand<Person, EditPersonComm
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_DUPLICATE_PHONE_NUMBER = "This phone number already exists in the address book";
-    public static final String MESSAGE_DUPLICATE_EMAIL = "This email already exists in the address book";
-    public static final String MESSAGE_INVALID_PERSON_NAME = "The person is not found in the address book";
-
-    private final PersonName name;
-    private final EditPersonDescriptor editPersonDescriptor;
 
     /**
+     * Creates an EditPersonCommand to edit the person with the specified name.
+     *
      * @param name name of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
@@ -69,15 +65,6 @@ public class EditPersonCommand extends EditContactCommand<Person, EditPersonComm
 
     @Override
     protected void updateFilteredList(Model model) {
-        if (!personToEdit.getPhone().equals(editedPerson.getPhone()) && model.hasPhone(editedPerson.getPhone())) {
-            throw new CommandException(MESSAGE_DUPLICATE_PHONE_NUMBER);
-        }
-
-        if (!personToEdit.getEmail().equals(editedPerson.getEmail()) && model.hasEmail(editedPerson.getEmail())) {
-            throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
-        }
-
-        model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 

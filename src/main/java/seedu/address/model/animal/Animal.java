@@ -143,7 +143,7 @@ public class Animal extends Contact {
     }
 
     /**
-     * Returns true if both animals have the same name.
+     * Returns true if both animals have the same name (case-insensitive and whitespace-normalized).
      * This defines a weaker notion of equality between two animals.
      */
     public boolean isSameAnimal(Animal otherAnimal) {

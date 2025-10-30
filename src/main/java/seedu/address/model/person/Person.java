@@ -141,7 +141,7 @@ public class Person extends Contact {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same name (case-insensitive and whitespace-normalized).
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {

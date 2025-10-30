@@ -46,7 +46,17 @@ public abstract class Contact {
     }
 
     /**
-     * Returns true if both contacts have the same name.
+     * Normalizes a name by trimming whitespace, converting to lowercase,
+     * and replacing multiple spaces with single spaces.
+     * @param name The name to normalize
+     * @return The normalized name
+     */
+    protected String normalizedName(String name) {
+        return name.trim().toLowerCase().replaceAll("\\s+", " ");
+    }
+
+    /**
+     * Returns true if both contacts have the same name (case-insensitive and whitespace-normalized).
      * This defines a weaker notion of equality between two contacts.
      */
     public boolean isSameContact(Contact otherContact) {
@@ -54,9 +64,18 @@ public abstract class Contact {
             return true;
         }
 
-        return otherContact != null
-                && otherContact.getClass().equals(this.getClass())
-                && otherContact.getName().equals(getName());
+        if (otherContact == null) {
+            return false;
+        }
+
+        if (!otherContact.getClass().equals(this.getClass())) {
+            return false;
+        }
+
+        String thisNormalizedName = normalizedName(this.name.fullName);
+        String otherNormalizedName = normalizedName(otherContact.name.fullName);
+
+        return thisNormalizedName.equals(otherNormalizedName);
     }
 
     /**
