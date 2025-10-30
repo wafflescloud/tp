@@ -4,22 +4,12 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-//import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-//import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-//import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-// import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-// import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-// import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-// import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-// import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-// import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-// import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -27,8 +17,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-// import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-// import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -40,10 +28,10 @@ import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Name;
 import seedu.address.model.UserPrefs;
 // import seedu.address.model.person.Email;
 // import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonName;
 // import seedu.address.model.person.Phone;
 // import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -105,7 +93,7 @@ public class EditPersonCommandParserTest {
     public void parse_oneFieldSpecified_success() {
         // name
         Index targetIndex = INDEX_FIRST_PERSON;
-        PersonName personName = model.getFilteredPersonList().get(targetIndex.getZeroBased()).getName();
+        Name personName = model.getFilteredPersonList().get(targetIndex.getZeroBased()).getName();
         String userInput = "person " + personName + " " + PREFIX_NAME + personName.fullName;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(personName.fullName).build();
         EditPersonCommand expectedCommand = new EditPersonCommand(personName, descriptor);
@@ -137,7 +125,7 @@ public class EditPersonCommandParserTest {
 
         // valid followed by invalid
         Index targetIndex = INDEX_FIRST_PERSON;
-        PersonName personName = model.getFilteredPersonList().get(targetIndex.getZeroBased()).getName();
+        Name personName = model.getFilteredPersonList().get(targetIndex.getZeroBased()).getName();
         String userInput = "person " + personName
                 + INVALID_PHONE_DESC + PHONE_DESC_BOB;
 

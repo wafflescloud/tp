@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.Clipboard;
@@ -42,6 +43,9 @@ public class PersonProfileWindow extends UiPart<Stage> {
     @FXML private Label email;
     @FXML private FlowPane tags;
 
+    @FXML private Label animalName;
+    @FXML private Label feedingDate;
+    @FXML private Label feedingTime;
     @FXML private ScrollPane feedingSessionScrollPane;
     @FXML private VBox feedingSessionsContainer;
 

@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FeedCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.PersonName;
+import seedu.address.model.Name;
 
 /**
  * Parses input arguments and creates a new FeedCommand object.
@@ -37,7 +37,7 @@ public class FeedCommandParser implements Parser<FeedCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FEEDER, PREFIX_NAME, PREFIX_DATETIME);
 
-        PersonName personName = ParserUtil.parsePersonName(argMultimap.getValue(PREFIX_FEEDER).get());
+        Name personName = ParserUtil.parseName(argMultimap.getValue(PREFIX_FEEDER).get());
         String animalName = argMultimap.getValue(PREFIX_NAME).get().trim();
         LocalDateTime feedingTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
 

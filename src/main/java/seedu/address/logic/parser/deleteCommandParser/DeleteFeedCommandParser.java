@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteFeedCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.PersonName;
+import seedu.address.model.Name;
 
 /**
  * Parses input arguments and creates a new DeleteFeedCommand object.
@@ -36,8 +36,8 @@ public class DeleteFeedCommandParser implements Parser<DeleteCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FEEDER, PREFIX_NAME, PREFIX_DATETIME);
 
-        PersonName personName = ParserUtil.parsePersonName(argMultimap.getValue(PREFIX_FEEDER).get());
-        String animalName = argMultimap.getValue(PREFIX_NAME).get().trim();
+        Name personName = ParserUtil.parseName(argMultimap.getValue(PREFIX_FEEDER).get());
+        Name animalName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         LocalDateTime feedingTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
 
         return new DeleteFeedCommand(personName, animalName, feedingTime);
@@ -51,5 +51,3 @@ public class DeleteFeedCommandParser implements Parser<DeleteCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
-
-

@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 //import seedu.address.logic.commands.AddCommand;
 //import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteAnimalCommand;
+import seedu.address.logic.commands.DeleteContactCommand;
 // import seedu.address.logic.commands.DeletePersonCommand;
 // import seedu.address.logic.commands.editCommand.EditPersonCommand;
 // import seedu.address.logic.commands.editCommand.EditPersonCommand.EditPersonDescriptor;
@@ -26,8 +26,9 @@ import seedu.address.logic.commands.DeleteAnimalCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Name;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.animal.AnimalName;
+import seedu.address.model.animal.Animal;
 //import seedu.address.model.person.NameContainsKeywordsPredicate;
 // import seedu.address.model.person.Person;
 // import seedu.address.model.person.PersonName;
@@ -64,8 +65,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete_animal() throws Exception {
         String input = "delete animal n/Whiskers";
-        DeleteAnimalCommand command = (DeleteAnimalCommand) parser.parseCommand(input);
-        assertEquals(new DeleteAnimalCommand(new AnimalName("Whiskers")), command);
+        DeleteContactCommand<Animal> command = (DeleteContactCommand<Animal>) parser.parseCommand(input);
+        assertEquals(DeleteContactCommand.forAnimal(new Name("Whiskers")), command);
     }
 
     @Test
