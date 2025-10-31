@@ -351,16 +351,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, where `user` refers to a cat caretaker using the Furiends app to manage contacts, unless specified otherwise)
+(For all use cases below, the **System** is `Furiends` and the **Actor** is the `user`, where `user` refers to a cat caretaker using the Furiends app to manage contacts, unless specified otherwise)
 
 **Use case: UC01 - Add a person**
 
 **MSS**
 
 1. User requests to add a new person by providing the person’s name, phone number, and email together
-2. AddressBook validates the details
-3. AddressBook adds the person to the list
-4. AddressBook shows a confirmation message and the updated list
+2. Furiends validates the details
+3. Furiends adds the person to the list
+4. Furiends shows a confirmation message and the updated list
 
     Use case ends
 
@@ -368,12 +368,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. One or more details are missing or invalid.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. Furiends shows an error message.
 
         Use case ends
 * 3a. A person with the same name already exists in the list.
 
-    * 3a1. AddressBook shows a duplicate warning.
+    * 3a1. Furiends shows a duplicate warning.
 
         Use case ends
 
@@ -383,9 +383,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to delete a person by specifying the person’s name
-2. AddressBook checks if the person exists
-3. AddressBook deletes the person
-4. AddressBook shows a confirmation message and the updated list
+2. Furiends checks if the person exists
+3. Furiends deletes the person
+4. Furiends shows a confirmation message and the updated list
 
     Use case ends
 
@@ -396,7 +396,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends
 * 2b. The given name does not match any person.
 
-    * 2b1. AddressBook shows an error message.
+    * 2b1. Furiends shows an error message.
 
         Use case ends
 
@@ -406,10 +406,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to edit a person by providing the person’s name together with the updated details (phone number, email, animal being fed, and/or date and time of feeding)
-2. AddressBook checks if the person exists
-3. AddressBook validates the new details
-4. AddressBook updates the person’s information
-5. AddressBook shows a confirmation message and the updated list
+2. Furiends checks if the person exists
+3. Furiends validates the new details
+4. Furiends updates the person’s information
+5. Furiends shows a confirmation message and the updated list
 
     Use case ends
 
@@ -420,17 +420,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends
 * 2b. The given name does not match any person.
 
-    * 2b1. AddressBook shows an error message.
+    * 2b1. Furiends shows an error message.
 
         Use case ends
 * 3a. One or more new details are invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Furiends shows an error message.
 
         Use case ends
 * 4a. The updated details duplicate another person’s name.
 
-    * 4a1. AddressBook shows a duplicate warning.
+    * 4a1. Furiends shows a duplicate warning.
 
         Use case ends
 
@@ -439,17 +439,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to find a person by specifying the person’s name or substring of their name
-2. AddressBook searches the contact list for a matching person
-3. AddressBook shows the person’s details
+1. User requests to find a person by specifying the person’s name or substring of their name, or a tag name
+2. Furiends searches the contact list for a matching persons 
+3. Furiends shows the list of persons that match the search criteria
 
     Use case ends
 
 **Extensions**
 
-* 2a. No person matches the given name.
+* 2a. No person matches the given name or substring of name.
 
-    * 2a1. AddressBook shows an empty result message.
+    * 2a1. Furiends shows an empty result message.
+
+        Use case ends
+* 2b. No person matches the tag provided.
+
+    * 2b1. Furiends shows an empty result message.
 
         Use case ends
 
@@ -459,9 +464,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to add a new animal by providing the animal’s name, description, and location together
-2. AddressBook validates the details
-3. AddressBook adds the animal to the list
-4. AddressBook shows a confirmation message and the updated list
+2. Furiends validates the details
+3. Furiends adds the animal to the list
+4. Furiends shows a confirmation message and the updated list
 
     Use case ends
 
@@ -469,12 +474,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. One or more details are missing or invalid.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. Furiends shows an error message.
 
         Use case ends
 * 3a. An animal with the same name already exists in the list.
 
-    * 3a1. AddressBook shows a duplicate warning.
+    * 3a1. Furiends shows a duplicate warning.
 
         Use case ends
 
@@ -484,9 +489,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to delete an animal by specifying the animal’s name
-2. AddressBook checks if the animal exists
-3. AddressBook deletes the animal
-4. AddressBook shows a confirmation message and the updated list
+2. Furiends checks if the animal exists
+3. Furiends deletes the animal
+4. Furiends shows a confirmation message and the updated list
 
     Use case ends
 
@@ -497,7 +502,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends
 * 2b. The given name does not match any animal.
 
-    * 2b1. AddressBook shows an error message.
+    * 2b1. Furiends shows an error message.
 
         Use case ends
 
@@ -507,10 +512,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to edit an animal by providing the animal’s name together with the updated description and/or location
-2. AddressBook checks if the animal exists
-3. AddressBook validates the new details
-4. AddressBook updates the animal’s information
-5. AddressBook shows a confirmation message and the updated list
+2. Furiends checks if the animal exists
+3. Furiends validates the new details
+4. Furiends updates the animal’s information
+5. Furiends shows a confirmation message and the updated list
 
     Use case ends
 
@@ -521,17 +526,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends
 * 2b. The given name does not match any animal.
 
-    * 2b1. AddressBook shows an error message.
+    * 2b1. Furiends shows an error message.
 
         Use case ends
 * 3a. One or more new details are invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Furiends shows an error message.
 
         Use case ends
 * 4a. The updated details duplicate another animal’s name.
 
-    * 4a1. AddressBook shows a duplicate warning.
+    * 4a1. Furiends shows a duplicate warning.
 
         Use case ends
 
@@ -540,17 +545,65 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to find an animal by specifying the animal’s name or substring of their name
-2. AddressBook searches the animal list for a matching entry
-3. AddressBook shows the animal’s details
+1. User requests to find an animal by specifying the animal’s name or substring of their name, or a tag name
+2. Furiends searches the animal list for a matching entry
+3. Furiends shows a list of animals that match the search criteria
 
     Use case ends
 
 **Extensions**
 
-* 2a. No animal matches the given name.
+* 2a. No animal matches the given name or substring of name.
 
-    * 2a1. AddressBook shows an empty result message.
+    * 2a1. Furiends shows an empty result message.
+
+        Use case ends
+* 2b. No animal matches the tag provided.
+
+    * 2b1. Furiends shows an empty result message.
+
+        Use case ends
+
+**Use case: UC09 - Add a feeding session** 
+
+**MSS**
+
+1. User requests to add a new feeding session by providing the person’s name, animal’s name, date and time of feeding together
+2. Furiends checks whether the person and animal exists, and that the date and time provided is valid
+3. Furiends adds the feeding session to the list
+4. Furiends shows a confirmation message and shows a feeding session at the involved person and animal's record
+
+    Use case ends
+
+**Extensions**
+
+* 2a. The person or animal does not exist.
+
+    * 2a1. Furiends shows an error message.
+
+        Use case ends
+  
+* 2b. The date and time provided is invalid.
+
+    * 2b1. Furiends shows an error message.
+
+        Use case ends
+
+**Use case: UC10 - Delete a feeding session** 
+
+**MSS**
+1. User requests to delete a feeding session by specifying the person’s name, animal’s name, date and time of feeding together
+2. Furiends checks whether the details provided are valid
+3. Furiends deletes the feeding session with the provided details from the list
+4. Furiends shows a confirmation message and removes the feeding session from the involved person and animal's record
+
+    Use case ends
+
+**Extensions**
+
+* 2a. The feeding session with the provided details does not exist.
+
+    * 2a1. Furiends shows an error message.
 
         Use case ends
 
@@ -585,7 +638,7 @@ Given below are instructions to test the app manually.
 <box type="info" seamless>
 
 **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+testers are expected to do more *exploratory* testing. 
 
 </box>
 
@@ -595,38 +648,156 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a person or animal
 
-### Deleting a person
+1. Valid test case - Adding a person <br>
+   Command: `add person n/John Doe p/98765432 e/JohnDoe@example.com t/friend` <br>
+   Expected: Person `John Doe` is added to the list. Details of the added contact are shown in `John Doe`'s entry. The tag `friend` is shown in the entry as well. <br>
+2. Valid test case - Adding an animal <br>
+   Command: `add animal n/Whiskers d/Gray tabby cat l/NUS Library t/shy` <br>
+   Expected: Animal `Whiskers` is added to the list. Details of the added contact are shown in `Whiskers`'s entry. The tag `shy` is shown in the entry as well. <br>
+3. Invalid test case - Adding a person with missing details <br>
+   Command: `add person n/John Doe p/98765432` <br>
+   Expected: No person added. Error details shown in the status message: `Invalid command format! ...` <br>
+4. Invalid test case - Adding an animal with missing details <br>
+   Command: `add animal n/Whiskers l/NUS Library` <br>
+   Expected: No animal added. Error details shown in the status message: `Invalid command format! ...` <br>
+5. Invalid test case - Adding a duplicate person <br>
+   Prerequisite: Person `Alex Yeoh` already exists in the list. (Should be present from pre-loaded data) <br>
+   Command: `add person n/Alex Yeoh p/87438807 e/alexyeoh@example.com t/friend` <br>
+   Expected: No person added. Error details shown in the status message: `This person already exists in the address book.` <br>
+6. Invalid test case - Adding a duplicate animal <br>
+   Prerequisite: Animal `Max` already exists in the list. (Should be present from pre-loaded data) <br>
+   Command: `add animal n/Max d/Golden Retriever, friendly and well-trained l/Block A, Kennel 1 t/Shy` <br>
+   Expected: No person added. Error details shown in the status message: `This animal already exists in the address book.` <br>
 
-1. Deleting a person while all persons are being shown
+### Adding a feeding session
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. Valid test case - Adding a feeding session <br>
+2. Prerequisite: Person `Alex Yeoh` and animal `Max` exist in the list (Should be present from pre-loaded data) <br>
+   Command: `feed n/Max f/Alex Yeoh dt/2025-12-25 09:00` <br>
+   Expected: Person `Alex Yeoh` is linked to animal `Max` with a feeding session on `2025-12-25 09:00`. Details of the feeding session are shown in both `Max` and `Alex Yeoh`'s entries. <br>
+2. Invalid test case - Adding a feeding session with missing details <br>
+   Command: `feed n/Max f/Alex Yeoh` <br>
+   Expected: No feeding session added. Error details shown in the status message: `Invalid command format! ...` <br>
 
-   1. Test case: `delete person n/Alex Yeoh`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated
+### Editing a person or animal
 
-   2. Test case: `delete hi` <br>
-      Expected: No person deleted. Error details shown in the status message. Status bar remains the same.
+1. Valid test case - Editing a person's details <br>
+   Prerequisite: Person `Alex Yeoh` exists in the list (Should be present from pre-loaded data) <br>
+   Command: `edit person Alex Yeoh n/John Doe` <br>
+   Expected: Person `Alex Yeoh` is updated to `John Doe`. Details of the updated contact are shown in `John Doe`'s entry. <br>
+   Extension: If a feeding session with `Alex Yeoh` exists (before `edit` was used), the feeding session is updated to reflect the new name. <br>
+2. Valid test case - Editing an animal's details <br>
+   Prerequisites: Animal `Max` exists in the list (Should be present from pre-loaded data) <br>
+   Command: `edit animal Max d/Golden Retriever, extremely friendly and well-trained` <br>
+   Expected: Animal `Max`'s description is updated. Details of the updated contact are shown in `Max`'s entry. <br>
+3. Invalid test case - Editing a person that does not exist in the list <br>
+   Prerequisite: Person `Jane Doe` does not exist in the list. <br>
+   Command: `edit person Jane Doe n/Jane Smith` <br>
+   Expected: No person updated. Error details shown in the status message: `The person's name provided is invalid` <br>
+4. Invalid test case - Editing an animal that does not exist in the list <br>
+   Prerequisite: Animal `Fluffy` does not exist in the list. <br>
+   Command: `edit animal Fluffy d/White Persian cat` <br>
+   Expected: No animal updated. Error details shown in the status message: `The animal's name provided is invalid` <br>
+5. Invalid test case - Editing a person's name to another person's name who already exists in the address book <br>
+   Prerequisite: Person `Bernice Yu` already exists in the list. (Should be present from pre-loaded data) <br>
+   Command: `edit person John Doe n/Bernice Yu` <br>
+   Expected: No person updated. Error details shown in the status message: `This person already exists in the address book.` <br>
 
-   1. Other incorrect delete commands to try: `delete people n/NAME`, `delete ani n/NAME`, `delete WORD` (where `WORD` is any word that is not `person` or `animal`)<br>
-      Expected: Similar to previous.
+### Finding a person or animal
 
-1. _{ more test cases …​ }_
+<box type="info" seamless>
+
+**Note:** After performing a `find` command, the filtered list of persons/animals is updated to show only the found entries. To show all entries again, use the `list` command.
+
+</box>
+
+1. Valid test case - Finding a person by full name <br>
+    Prerequisite: Person `Bernice Yu` exists in the list. (Should be present from pre-loaded data) and there no other persons with names containing the substring "bernice yu" <br>
+    Command: `find person n/Bernice Yu` <br>
+    Expected: Only person `Bernice Yu` is shown in the list. <br>
+2. Valid test case - Finding a person by substring of name <br>
+    Prerequisite: Persons `Charlotte Oliveiro` and `David Li` exist in the list. (Should be present from pre-loaded data) and there are no other persons with names containing the substring "li" <br>
+    Command: `find person n/li` <br>
+    Expected: Persons `Charlotte Oliveiro` and `David Li` are shown in the list. <br>
+3. Valid test case - Finding a person by tag <br>
+    Prerequisite: Only persons `Alex Yeoh` and `Bernice Yu` exist in the list with tag `friend`. (Should be present from pre-loaded data) <br>
+    Command: `find person t/friend` <br>
+    Expected: Persons `Alex Yeoh` and `Bernice Yu` are shown in the list. <br>
+4. Valid test case - Finding a person by name and tag <br>
+    Prerequisite: Person `Bernice Yu` exists in the list with tag `friends`. (Should be present from pre-loaded data) <br>
+    Command: `find person n/Bernice t/friends` <br>
+    Expected: Out of all persons tagged as `friends`, only person `Bernice Yu` is shown in the list. <br>
+5. Valid test case - Finding an animal by full name <br>
+   Prerequisite: Animal `Max` exists in the list. (Should be present from pre-loaded data), and there are no other animals with names containing the substring "max" <br>
+   Command: `find animal n/Max` <br>
+   Expected: Only animal `Max` is shown in the list. <br>
+6. Valid test case - Finding an animal by substring of name <br>
+   Prerequisite: Animal `Max` exists in the list (Should be present from pre-loaded data), and there are no other animals with names containing the substring "ma" <br>
+   Command: `find animal n/Ma` <br>
+   Expected: Only animal `Max` is shown in the list <br>
+7. Valid test case - Finding an animal by tag <br>
+   Prerequisite: Only animal `Max` exist in the list with tag `Shy`. (Should be present from pre-loaded data) <br>
+   Command: `find animal t/shy` <br>
+   Expected: Only animal `Max` is shown in the list <br>
+8. Valid test case - Finding an animal by name and tag <br>
+   Prerequisite: Animal `Max` exists in the list with tag `Shy`. (Should be present from pre-loaded data) <br>
+   Command: `find animal n/Max t/shy` <br>
+   Expected: Out of all animals tagged as `shy`, only animal `Max` is shown in the list. <br>
+
+### Deleting a person or animal
+
+1. Valid test case - Deleting a person <br>
+   Prerequisite: Person `David Li` exists in the list. (Should be present from pre-loaded data) <br>
+   Command: `delete person n/David Li` <br>
+   Expected: Person `David Li` is removed from the list. <br>
+   Extension: If a feeding session with `David Li` exists, the feeding session is also removed from the list. <br>
+2. Valid test case - Deleting an animal <br>
+   Prerequisite: Animal `Luna` exists in the list. (Should be present from pre-loaded data) <br>
+   Command: `delete animal n/Luna` <br>
+   Expected: Animal `Luna` is removed from the list. <br>
+   Extension: If a feeding session with `Luna` exists, the feeding session is also removed from the list. <br>
+3. Invalid test case - Deleting a person that does not exist in the list <br>
+   Prerequisite: Person `Jane Doe` does not exist in the list. <br>
+   Command: `delete person n/Jane Doe` <br>
+   Expected: No person deleted. Error details shown in the status message: `The person's name provided is invalid` <br>
+4. Invalid test case - Deleting an animal that does not exist in the list <br>
+   Prerequisite: Animal `Fluffy` does not exist in the list. <br>
+   Command: `delete animal n/Fluffy` <br>
+   Expected: No animal deleted. Error details shown in the status message: `The animal's name provided is invalid` <br>
+
+### Deleting a feeding session
+
+1. Valid test case - Deleting a feeding session <br>
+   Prerequisite: Feeding session with person `Alex Yeoh` and animal `Max` on `2025-12-25 09:00` exists in the list. <br>
+   Command: `delete feed n/Max f/Alex Yeoh dt/2025-12-25 09:00` <br>
+   Expected: Feeding session with person `Alex Yeoh` and animal `Max` on `2025-12-25 09:00` is removed from the list. <br>
+2. Invalid test case - Deleting a feeding session that does not exist in the list <br>
+   Prerequisite: Feeding session with person `Bernice Yu` and animal `Luna` on `2025-11-20 10:00` does not exist in the list. <br>
+   Command: `delete feed n/Luna f/Bernice Yu dt/2025-11-20 10:00` <br>
+   Expected: No feeding session deleted. Error details shown in the status message: `No feeding session found with the specified details` <br>
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. To simulate a corrupted data file, remove the `id` field from one of the person entries in `addressbook.json` file located in the `data` folder where the `furiends.jar` file is located.
+   2. The application will still launch, but no entries will be loaded.
+   3. To solve this, delete the corrupted `addressbook.json` file and relaunch the application. 
+   4. A new `addressbook.json` file is created with sample data.
 
-1. _{ more test cases …​ }_
+2. Dealing with missing data files
+
+   1. To simulate a missing data file, delete the `addressbook.json` file located in the `data` folder where the `furiends.jar` file is located.  
+   2. To solve this, relaunch the application.  
+   3. A new `addressbook.json` file is created with sample data.
