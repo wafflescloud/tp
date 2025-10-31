@@ -164,7 +164,8 @@ If you are using a PDF version of this document, be careful when copying and pas
     * `@`: must have separator symbol between `local-part` and `domain`
     * `domain`: must follow domain naming conventions and have a hierarchical structure of `example.com`
   * **Character limit: 988** (including `@` and all characters).
-  * e.g. `johndoe@email.com`, `he.he_123@gotmail.com`
+  * e.g. `johndoe@email.com`, `he.he_123@gotmail.com` <br>
+<br>
 * `TAG`
   * Can only contain letters and digits.
   * Character limit of 30 (including all white spaces).
