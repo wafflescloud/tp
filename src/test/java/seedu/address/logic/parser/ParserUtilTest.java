@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -166,5 +167,105 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    // Tests for ParseDateTime
+
+    // EP: Valid date, 00:00 (valid)
+    @Test
+    public void parseDateTime_validDateMidnight_success() throws Exception {
+        LocalDateTime expected = LocalDateTime.of(2025, 1, 1, 0, 0);
+        assertEquals(expected, ParserUtil.parseDateTime("2025-01-01 00:00"));
+    }
+
+    // EP: Valid date, 12:30 (valid)
+    @Test
+    public void parseDateTime_validDateNoonThirty_success() throws Exception {
+        LocalDateTime expected = LocalDateTime.of(2025, 1, 1, 12, 30);
+        assertEquals(expected, ParserUtil.parseDateTime("2025-01-01 12:30"));
+    }
+
+    // EP: Valid date, 23:59 (valid)
+    @Test
+    public void parseDateTime_validDateLastMinute_success() throws Exception {
+        LocalDateTime expected = LocalDateTime.of(2025, 1, 1, 23, 59);
+        assertEquals(expected, ParserUtil.parseDateTime("2025-01-01 23:59"));
+    }
+
+    // EP: Valid date, 24:00 (invalid)
+    @Test
+    public void parseDateTime_validDateTwentyFourZeroZero_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime("2025-01-01 24:00"));
+    }
+
+    // EP: Valid date, time not present (invalid)
+    @Test
+    public void parseDateTime_validDateTimeMissing_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime("2025-01-01"));
+    }
+
+    // EP: Valid time, date not present (invalid)
+    @Test
+    public void parseDateTime_validTimeDateMissing_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime("12:00"));
+    }
+
+    // EP: 0th of a month (invalid)
+    @Test
+    public void parseDateTime_dayZero_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime("2025-01-00 12:00"));
+    }
+
+    // EP: 28th of a month (valid)
+    @Test
+    public void parseDateTime_dayTwentyEight_valid() throws Exception {
+        LocalDateTime expected = LocalDateTime.of(2025, 1, 28, 12, 0);
+        assertEquals(expected, ParserUtil.parseDateTime("2025-01-28 12:00"));
+    }
+
+    // EP: 29th of February in 2024 (valid - leap year)
+    @Test
+    public void parseDateTime_febTwentyNineLeapYear_valid() throws Exception {
+        LocalDateTime expected = LocalDateTime.of(2024, 2, 29, 9, 30);
+        assertEquals(expected, ParserUtil.parseDateTime("2024-02-29 09:30"));
+    }
+
+    // EP: 29th of February in 2025 (invalid)
+    @Test
+    public void parseDateTime_febTwentyNineNonLeapYear_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime("2025-02-29 09:30"));
+    }
+
+    // EP: 30th of a month with 30 days (valid)
+    @Test
+    public void parseDateTime_thirtiethOnThirtyDayMonth_valid() throws Exception {
+        LocalDateTime expected = LocalDateTime.of(2025, 4, 30, 0, 0); // April has 30 days
+        assertEquals(expected, ParserUtil.parseDateTime("2025-04-30 00:00"));
+    }
+
+    // EP: 30th of February (invalid)
+    @Test
+    public void parseDateTime_febThirtieth_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime("2025-02-30 10:00"));
+    }
+
+    // EP: 31st of a month with 31 days (valid)
+    @Test
+    public void parseDateTime_thirtyFirstOnThirtyOneDayMonth_valid() throws Exception {
+        LocalDateTime expected = LocalDateTime.of(2025, 1, 31, 23, 59); // January has 31 days
+        assertEquals(expected, ParserUtil.parseDateTime("2025-01-31 23:59"));
+    }
+
+    // EP: 31st of a month with 30 days (invalid)
+    @Test
+    public void parseDateTime_thirtyFirstOnThirtyDayMonth_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime("2025-04-31 08:00")); // April has 30 days
+    }
+
+
+    // EP: 32nd of a month (invalid)
+    @Test
+    public void parseDateTime_dayThirtyTwo_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime("2025-01-32 10:00"));
     }
 }
