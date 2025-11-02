@@ -150,7 +150,7 @@ public class ModelManagerTest {
 
         java.time.LocalDateTime feedingTime = java.time.LocalDateTime.of(2024, 10, 15, 10, 0);
         seedu.address.model.feedingsession.FeedingSession session =
-                new seedu.address.model.feedingsession.FeedingSession(matt.getId(), max.getId(), feedingTime, "");
+                new seedu.address.model.feedingsession.FeedingSession(max.getId(), matt.getId(), feedingTime);
 
         java.util.Set<java.util.UUID> sessionIds = new java.util.HashSet<>();
         sessionIds.add(session.getId());
@@ -203,7 +203,7 @@ public class ModelManagerTest {
 
         java.time.LocalDateTime feedingTime = java.time.LocalDateTime.of(2024, 10, 16, 14, 30);
         seedu.address.model.feedingsession.FeedingSession session =
-                new seedu.address.model.feedingsession.FeedingSession(john.getId(), buddy.getId(), feedingTime, "");
+                new seedu.address.model.feedingsession.FeedingSession(buddy.getId(), john.getId(), feedingTime);
 
         java.util.Set<java.util.UUID> sessionIds = new java.util.HashSet<>();
         sessionIds.add(session.getId());
@@ -268,9 +268,9 @@ public class ModelManagerTest {
         java.time.LocalDateTime feedingTime2 = java.time.LocalDateTime.of(2024, 10, 20, 15, 0);
 
         seedu.address.model.feedingsession.FeedingSession session1 =
-                new seedu.address.model.feedingsession.FeedingSession(max.getId(), matt.getId(), feedingTime1, "");
+                new seedu.address.model.feedingsession.FeedingSession(matt.getId(), max.getId(), feedingTime1);
         seedu.address.model.feedingsession.FeedingSession session2 =
-                new seedu.address.model.feedingsession.FeedingSession(max.getId(), luna.getId(), feedingTime2, "");
+                new seedu.address.model.feedingsession.FeedingSession(luna.getId(), max.getId(), feedingTime2);
 
         java.util.Set<java.util.UUID> maxSessionIds = new java.util.HashSet<>();
         maxSessionIds.add(session1.getId());
@@ -348,9 +348,9 @@ public class ModelManagerTest {
         java.time.LocalDateTime feedingTime2 = java.time.LocalDateTime.of(2024, 10, 21, 16, 0);
 
         seedu.address.model.feedingsession.FeedingSession session1 =
-                new seedu.address.model.feedingsession.FeedingSession(alice.getId(), buddy.getId(), feedingTime1, "");
+                new seedu.address.model.feedingsession.FeedingSession(buddy.getId(), alice.getId(), feedingTime1);
         seedu.address.model.feedingsession.FeedingSession session2 =
-                new seedu.address.model.feedingsession.FeedingSession(bob.getId(), buddy.getId(), feedingTime2, "");
+                new seedu.address.model.feedingsession.FeedingSession(buddy.getId(), bob.getId(), feedingTime2);
 
         java.util.Set<java.util.UUID> buddySessionIds = new java.util.HashSet<>();
         buddySessionIds.add(session1.getId());
