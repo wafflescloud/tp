@@ -3,6 +3,7 @@ package seedu.address.model.feedingsession;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -51,6 +52,22 @@ public class UniqueFeedingSessionList implements Iterable<FeedingSession> {
     public boolean contains(UUID id) {
         requireNonNull(id);
         return internalList.stream().anyMatch(session -> session.getId().equals(id));
+    }
+
+    /**
+     * Returns true if the list contains a feeding session with the same animal, person, and datetime.
+     *
+     * @param animalId The UUID of the animal.
+     * @param personId The UUID of the person.
+     * @param dateTime The date and time of the feeding.
+     * @return True if a feeding session with the same details exists in the list.
+     */
+    public boolean containsByDetails(UUID animalId, UUID personId, LocalDateTime dateTime) {
+        requireAllNonNull(animalId, personId, dateTime);
+        return internalList.stream().anyMatch(session ->
+                session.getAnimalId().equals(animalId)
+                        && session.getPersonId().equals(personId)
+                        && session.getDateTime().equals(dateTime));
     }
 
     /**

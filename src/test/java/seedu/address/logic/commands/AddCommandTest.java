@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
@@ -322,6 +323,11 @@ public class AddCommandTest {
 
         @Override
         public boolean hasFeedingSession(FeedingSession feedingSession) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasFeedingSessionByDetails(UUID animalId, UUID personId, LocalDateTime dateTime) {
             throw new AssertionError("This method should not be called.");
         }
 

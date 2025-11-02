@@ -41,6 +41,8 @@ public class FeedCommand extends Command {
             Time: %3$s""";
     public static final String MESSAGE_PERSON_NOT_FOUND = "The person '%1$s' is not found in the address book";
     public static final String MESSAGE_ANIMAL_NOT_FOUND = "The animal '%1$s' is not found in the address book";
+    public static final String MESSAGE_DUPLICATE_FEEDING_SESSION =
+            "This feeding session already exists in the address book";
 
     private final Name personName;
     private final String animalName;
@@ -80,6 +82,10 @@ public class FeedCommand extends Command {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(
                         String.format(MESSAGE_ANIMAL_NOT_FOUND, animalName)));
+
+        if (model.hasFeedingSessionByDetails(animal.getId(), person.getId(), feedingTime)) {
+            throw new CommandException(MESSAGE_DUPLICATE_FEEDING_SESSION);
+        }
 
         FeedingSession newFeedingSession = new FeedingSession(animal.getId(), person.getId(), feedingTime, "");
 
