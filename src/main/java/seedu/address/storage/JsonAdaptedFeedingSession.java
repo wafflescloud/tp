@@ -21,19 +21,16 @@ class JsonAdaptedFeedingSession {
     private final String animalId;
     private final String personId;
     private final String dateTime;
-    private final String notes;
 
     @JsonCreator
     public JsonAdaptedFeedingSession(@JsonProperty("id") String id,
                                      @JsonProperty("animalId") String animalId,
                                      @JsonProperty("personId") String personId,
-                                     @JsonProperty("dateTime") String dateTime,
-                                     @JsonProperty("notes") String notes) {
+                                     @JsonProperty("dateTime") String dateTime) {
         this.id = id;
         this.animalId = animalId;
         this.personId = personId;
         this.dateTime = dateTime;
-        this.notes = notes;
     }
 
     public JsonAdaptedFeedingSession(FeedingSession source) {
@@ -41,7 +38,6 @@ class JsonAdaptedFeedingSession {
         animalId = source.getAnimalId().toString();
         personId = source.getPersonId().toString();
         dateTime = source.getDateTime().format(DATE_TIME_FORMATTER);
-        notes = source.getNotes();
     }
 
     public FeedingSession toModelType() throws IllegalValueException {
@@ -71,8 +67,6 @@ class JsonAdaptedFeedingSession {
             throw new IllegalValueException("Invalid UUID or DateTime format");
         }
 
-        final String modelNotes = notes != null ? notes : "";
-
-        return new FeedingSession(modelId, modelAnimalId, modelPersonId, modelDateTime, modelNotes);
+        return new FeedingSession(modelId, modelAnimalId, modelPersonId, modelDateTime);
     }
 }

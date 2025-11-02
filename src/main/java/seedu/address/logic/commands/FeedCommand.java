@@ -87,7 +87,7 @@ public class FeedCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_FEEDING_SESSION);
         }
 
-        FeedingSession newFeedingSession = new FeedingSession(animal.getId(), person.getId(), feedingTime, "");
+        FeedingSession newFeedingSession = new FeedingSession(animal.getId(), person.getId(), feedingTime);
 
         Person updatedPerson = person.addFeedingSessionId(newFeedingSession.getId());
 

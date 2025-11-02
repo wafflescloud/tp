@@ -8,8 +8,7 @@ import java.util.UUID;
 
 /**
  * Represents a FeedingSession in the address book.
- * A FeedingSession links a Person who fed an Animal at a specific date and time,
- * with optional notes about the feeding.
+ * A FeedingSession links a Person who fed an Animal at a specific date and time.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class FeedingSession {
@@ -185,7 +184,7 @@ public class FeedingSession {
      */
     @Override
     public String toString() {
-        return String.format("FeedingSession[id=%s, animalId=%s, personId=%s, dateTime=%s, notes=%s]",
+        return String.format("FeedingSession[id=%s, animalId=%s, personId=%s, dateTime=%s]",
                 id, animalId, personId, dateTime);
     }
 }
