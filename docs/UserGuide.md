@@ -535,7 +535,7 @@ the data of your previous Furiends home folder.<br>
 Action (in alphabetical order) | Format, Examples
 ----------------------|------------------------------------------------------------------------------------------------
 **Add Animal**                 | `add animal n/NAME d/DESCRIPTION l/LOCATION [t/TAG]…​` <br> e.g., `add animal n/Fluffy d/White cat l/Ang Mo Kio`
-**Add Person**                 | `add person n/NAME p/PHONE e/EMAIL [t/TAG]…​`<br>e.g.,`add person n/James Ho p/92224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Person**                 | `add person n/NAME p/PHONE e/EMAIL [t/TAG]…​`<br>e.g.,`add person n/James Ho p/92224444 e/jamesho@example.com t/friend t/colleague`
 **Clear**                      | `clear`
 **Delete Animal**              | `delete animal n/NAME`<br> e.g., `delete animal n/Fluffy`
 **Delete Feed**                | `delete feed n/ANIMAL_NAME f/PERSON_NAME dt/DATETIME`<br> e.g., `delete feed n/Fluffy f/John Doe dt/2005-04-09 10:00`
@@ -544,8 +544,8 @@ Action (in alphabetical order) | Format, Examples
 **Edit Person**                | `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… [f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]…​`<br> e.g.,`edit person John Doe n/James Lee e/jameslee@example.com`
 **Exit**                       | `exit`
 **Feed**                       | `feed f/PERSON_NAME n/ANIMAL_NAME dt/DATETIME`<br> e.g., `feed n/Fluffy f/John Doe dt/2005-04-09 10:00`
-**Find Animal**                | `find animal KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Fluffy n/Max
-**Find Person**                | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James t/family`t/cute`
+**Find Animal**                | `find animal KEYWORD [MORE_KEYWORDS]`<br> e.g., `find animal n/Fluffy n/Max`
+**Find Person**                | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find person n/James t/family t/cute`
 **Help**                       | `help [COMMAND]`<br> e.g. `help` <br> e.g. `help add person`
 **List**                       | `list`
 **Redo**                       | `redo`
