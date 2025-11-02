@@ -6,10 +6,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.animal.Animal;
+import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.person.Person;
 
+/**
+ * A utility class containing a list of {@code FeedingSession} objects to be used in tests,
+ * along with helpers to construct a typical AddressBook pre-populated with persons, animals,
+ * and feeding sessions.
+ */
 public class TypicalFeedingSessions {
 
     // FS1: Max fed by Alice on 2024-01-01 08:00
@@ -46,7 +51,6 @@ public class TypicalFeedingSessions {
 
     /**
      * Returns an {@code AddressBook} populated with typical persons, animals, and feeding sessions.
-     * This mirrors the style of TypicalPersons and TypicalAnimals helpers.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
@@ -70,7 +74,7 @@ public class TypicalFeedingSessions {
     }
 
     /**
-     * Returns a list of typical feeding sessions.
+     * Returns a list of typical {@code FeedingSession}s.
      */
     public static List<FeedingSession> getTypicalFeedingSessions() {
         return new ArrayList<>(Arrays.asList(FS1, FS2, FS3, FS4, FS5));

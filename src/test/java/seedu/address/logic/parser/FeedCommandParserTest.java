@@ -18,15 +18,14 @@ public class FeedCommandParserTest {
     // Test for all valid inputs: successful parsing with all prefixes present
     @Test
     public void parse_allFieldsPresent_success() {
-        String input = " f/James Tan n/Max dt/2025-12-25 09:00";
+        String input = " f/James Tan  n/Max   dt/2025-12-25 09:00  ";
         FeedCommand expected = new FeedCommand(new Name("James Tan"), new Name("Max"),
                 LocalDateTime.of(2025, 12, 25, 9, 0));
         assertParseSuccess(parser, input, expected);
     }
 
-    // Test for all valid inputs with extra whitespace: successful parsing
     @Test
-    public void parse_allFieldsPresent_withExtraWhitespace_success() {
+    public void parse_allFieldsPresentWithExtraWhitespace_success() {
         String input = "\n\t  f/  James Tan \t n/  Max  \n dt/ 2025-12-25 09:00  ";
         FeedCommand expected = new FeedCommand(new Name("James Tan"), new Name("Max"),
                 LocalDateTime.of(2025, 12, 25, 9, 0));
