@@ -14,24 +14,24 @@ Furiends is a **desktop app tailored towards animal lovers, specifically individ
 - [Overview of GUI](#overview-of-gui)
 - [Features](#features)
   - [Valid input formats](#valid-inputs-format)
-  - [Viewing help : `help`](#viewing-help--help)
+  - [Viewing help: `help`](#viewing-help-help)
   - [Adding a person: `add person`](#adding-a-person-add-person)
   - [Adding an animal: `add animal`](#adding-an-animal-add-animal)
-  - [Listing all contacts : `list`](#listing-all-contacts--list)
-  - [Editing a person : `edit person`](#editing-a-person--edit-person)
-  - [Editing an animal : `edit animal`](#editing-an-animal--edit-animal)
+  - [Listing all contacts: `list`](#listing-all-contacts-list)
+  - [Editing a person: `edit person`](#editing-a-person-edit-person)
+  - [Editing an animal: `edit animal`](#editing-an-animal-edit-animal)
   - [Locating people by name: `find person`](#locating-people-by-name-find-person)
   - [Locating animals by name: `find animal`](#locating-animals-by-name-find-animal)
-  - [Feeding an animal : `feed`](#feeding-an-animal--feed)
-  - [Deleting a person : `delete person`](#deleting-a-person--delete-person)
-  - [Deleting an animal : `delete animal`](#deleting-an-animal--delete-animal)
-  - [Deleting a feeding session : `delete feed`](#deleting-a-feeding-session--delete-feed)
+  - [Feeding an animal: `feed`](#feeding-an-animal-feed)
+  - [Deleting a person: `delete person`](#deleting-a-person-delete-person)
+  - [Deleting an animal: `delete animal`](#deleting-an-animal-delete-animal)
+  - [Deleting a feeding session: `delete feed`](#deleting-a-feeding-session-delete-feed)
   - [Viewing a person contact: `view person`](#viewing-a-person-contact-view-person)
   - [Viewing an animal contact: `view animal`](#viewing-an-animal-contact-view-animal)
-  - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+  - [Clearing all entries: `clear`](#clearing-all-entries-clear)
   - [Undoing the last change: `undo`](#undoing-the-last-change-undo)
   - [Redoing an undone change: `redo`](#redoing-an-undone-change-redo)
-  - [Exiting the program : `exit`](#exiting-the-program--exit)
+  - [Exiting the program: `exit`](#exiting-the-program-exit)
   - [Saving the data](#saving-the-data)
   - [Editing the data file](#editing-the-data-file)
 - [FAQ](#faq)
@@ -194,7 +194,7 @@ If you are using a PDF version of this document, be careful when copying and pas
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Displays a window, which links to the user guide, as well as a list of commands. <br>
 
@@ -247,13 +247,13 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
   * new animal contact card created: <br>
 ![addAnimalCard.png](images/addAnimalCard.png){style="width:400px; height:auto;"}
 
-### Listing all contacts : `list`
+### Listing all contacts: `list`
 
 Shows a list of all people and animals in Furiends.
 
 Format: `list`
 
-### Editing a person : `edit person`
+### Editing a person: `edit person`
 
 Edits an existing person in Furiends.
 
@@ -281,7 +281,7 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 *  `edit person Betty Crower n/Betsy Crower t/` <br>
    Edits the name of `Betty Crower` to be `Betsy Crower` and clears all existing tags.
 
-### Editing an animal : `edit animal`
+### Editing an animal: `edit animal`
 
 Edits an existing animal in Furiends.
 
@@ -355,7 +355,7 @@ After using `find` to filter out the contacts you want, you can use `list` to re
 to full display of all contacts. [Find out how!](#listing-all-people--list)
 </box>
 
-### Feeding an animal : `feed`
+### Feeding an animal: `feed`
 Records a feeding session between an animal and a person (feeder) in Furiends.
 
 Format: `feed f/PERSON_NAME n/ANIMAL_NAME dt/DATETIME`
@@ -375,7 +375,7 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 
   ![feedResult.png](images/feedResult.png){style="width:800px; height:auto;"}<br>
 
-### Deleting a person : `delete person`
+### Deleting a person: `delete person`
 
 Deletes the specified person from Furiends.
 
@@ -390,7 +390,7 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
   ![deletePerson.png](images/deletePerson.png){style="width:900px; height:auto;"}<br>
 
 
-### Deleting an animal : `delete animal`
+### Deleting an animal: `delete animal`
 
 Deletes the specified animal from Furiends.
 
@@ -404,7 +404,7 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
   * Feedback Box: <br>
   ![deleteAnimal.png](images/deleteAnimal.png){style="width:900px; height:auto;"}<br>
 
-### Deleting a feeding session : `delete feed`
+### Deleting a feeding session: `delete feed`
 Deletes a specified feeding session from Furiends.
 
 Format: `delete feed n/ANIMAL_NAME f/PERSON_NAME dt/DATETIME`
@@ -449,7 +449,7 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `view animal n/max` Also displays information for `Max`.
 ![viewAnimal.png](images/viewAnimal.png)
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from Furiends.
 
@@ -481,7 +481,7 @@ Format: `redo`
 Example:
 * `redo` Re-applies the last change that was undone.
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
