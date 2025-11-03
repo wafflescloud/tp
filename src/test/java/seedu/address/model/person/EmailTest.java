@@ -2,9 +2,9 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
-
 import org.junit.jupiter.api.Test;
+
+import static seedu.address.testutil.Assert.assertThrows;
 
 public class EmailTest {
 
@@ -39,8 +39,6 @@ public class EmailTest {
         assertFalse(Email.isValidEmail("peterjack@example.com ")); // trailing space
         assertFalse(Email.isValidEmail("peterjack@@example.com")); // double '@' symbol
         assertFalse(Email.isValidEmail("peter@jack@example.com")); // '@' symbol in local part
-        assertFalse(Email.isValidEmail("\"peter jack\"@example.com")); // quoted string allows spaces
-        assertFalse(Email.isValidEmail("user@[192.168.1.1]")); // IP address as domain
 
         // invalid domain
         assertFalse(Email.isValidEmail("peterjack@exam ple.com")); // spaces in domain name
@@ -51,11 +49,11 @@ public class EmailTest {
         assertFalse(Email.isValidEmail(longEmail));
 
         // valid emails according to RFC 5322
-        assertTrue(Email.isValidEmail("-PeterJack1190@example.com")); // leading '-'
-        assertTrue(Email.isValidEmail("PeterJack_1190@example.com")); // underscore in local part
-        assertTrue(Email.isValidEmail("PeterJack.1190@example.com")); // period in local part
-        assertTrue(Email.isValidEmail("PeterJack+1190@example.com")); // '+' symbol in local part
-        assertTrue(Email.isValidEmail("PeterJack-1190@example.com")); // hyphen in local part
+        assertTrue(Email.isValidEmail("-peterjack1190@example.com")); // leading '-'
+        assertTrue(Email.isValidEmail("peterjack_1190@example.com")); // underscore in local part
+        assertTrue(Email.isValidEmail("peterjack.1190@example.com")); // period in local part
+        assertTrue(Email.isValidEmail("peterjack+1190@example.com")); // '+' symbol in local part
+        assertTrue(Email.isValidEmail("peterjack-1190@example.com")); // hyphen in local part
         assertTrue(Email.isValidEmail("a@b")); // minimal
         assertTrue(Email.isValidEmail("test@localhost")); // alphabets only
         assertTrue(Email.isValidEmail("123@145")); // numeric local part and domain name
@@ -64,6 +62,8 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("if.you.dream.it_you.can.do.it@example.com")); // long local part
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // more than one period in domain
         assertTrue(Email.isValidEmail("!#$%&'*+-/=?^_`{|}~@example.com")); // special characters in local part
+        assertTrue(Email.isValidEmail("\"peter jack\"@example.com")); // quoted string allows spaces
+        assertTrue(Email.isValidEmail("user@[192.168.1.1]")); // IP address as domain
 
         // valid at exactly 998 characters
         String maxLengthEmail = "a".repeat(987) + "@test.com"; // exactly 998 characters
@@ -88,5 +88,9 @@ public class EmailTest {
 
         // different values -> returns false
         assertFalse(email.equals(new Email("other.valid@email")));
+
+        // case insensitive -> returns true
+        assertTrue(email.equals(new Email("VALID@EMAIL")));
+        assertTrue(email.equals(new Email("Valid@Email")));
     }
 }

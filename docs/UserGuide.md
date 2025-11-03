@@ -163,23 +163,27 @@ Back to [table of contents](#table-of-contents).
 * `EMAIL`
   * Must adhere to the **RFC5322** email format:
   * `local-part@domain`
-    * `local-part`: can contain letters, digits or special characters <br><br>
-    <box type="info" seamless>
-    
-    Periods `.` are allowed, but it **cannot** be at the start or the end of the `local-part`.
-    </box>
+    * `local-part`: can contain alphanumeric characters and special characters such as ``!#$%&'*+/=?^_`{|}~-`` <br><br>
     <box type="warning" seamless>
+    
+    Periods `.` are allowed in the `local-part`, but it **cannot** start or end with a period.
+    Consecutive periods `..` are also not allowed.
+    </box>
+    <box type="info" seamless>
 
-    **Special characters not supported:** Parentheses `()`, angle brackets `<>`, square brackets `[]`,
-  semicolons `;`, colons `:`, at symbols `@` (except as the separator), backslashes `\`,
-  commas `,`, and quotes `"` are **not allowed** in the `local-part`.
+    The `local-part` can also be a quoted string (enclosed in double quotes `"`), which allows 
+    additional special characters and spaces.
     </box>
   
     * `@`: must have separator symbol between `local-part` and `domain`.
-    * `domain`: must follow domain naming conventions and have a hierarchical structure of `example.com` <br><br>
-  * **Character limit: 988** (including `@` and all characters).
+    * `domain`: must follow domain naming conventions with a hierarchical structure (e.g., `example.com`)
+      * Can be a standard domain name with labels separated by periods
+      * Can be an IP address enclosed in square brackets `[` `]`
+      * Domain labels must start and end with alphanumeric characters, and can contain hyphens in between <br><br>
+  * **Character limit: 998** (including `@` and all characters).
   * Emails are unique, no duplicate emails accepted.
-  * e.g. `johndoe@email.com`, `he.he_123@gotmail.com` <br><br>
+  * Emails are **case-insensitive** for both `local-part` and `domain`.
+  * e.g. `johndoe@email.com`, `he.he_123@gotmail.com`, `user+tag@example.co.uk` <br><br>
 
 * `TAG`
   * Can only contain letters and digits.
