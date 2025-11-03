@@ -38,16 +38,20 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_NAME_CHOCO = "Choco Meow";
     public static final String VALID_NAME_KITTY = "Kitty Meow";
+    public static final String VALID_NAME_MAX = "Max";
     public static final String VALID_DESCRIPTION_CHOCO = "Brown Cat";
     public static final String VALID_DESCRIPTION_KITTY = "Grey Cat";
+    public static final String VALID_DESCRIPTION_MAX = "Golden Retriever";
     public static final String VALID_LOCATION_CHOCO = "Utown Residence";
     public static final String VALID_LOCATION_KITTY = "PGP";
+    public static final String VALID_LOCATION_MAX = "Dog Shelter";
     public static final String VALID_PHONE_AMY = "91111111";
     public static final String VALID_PHONE_BOB = "82222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_FRIENDLY = "friendly";
 
     public static final String VALID_NAME_BELLA = "Bella Boo";
     public static final String VALID_NAME_FLUFFY = "Fluffy Flakes";
