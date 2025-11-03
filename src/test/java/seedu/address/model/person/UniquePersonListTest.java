@@ -25,18 +25,18 @@ public class UniquePersonListTest {
 
     @Test
     public void contains_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.contains(null));
+        assertThrows(NullPointerException.class, () -> uniquePersonList.containsPerson(null));
     }
 
     @Test
     public void contains_personNotInList_returnsFalse() {
-        assertFalse(uniquePersonList.contains(ALICE));
+        assertFalse(uniquePersonList.containsPerson(ALICE));
     }
 
     @Test
     public void contains_personInList_returnsTrue() {
         uniquePersonList.add(ALICE);
-        assertTrue(uniquePersonList.contains(ALICE));
+        assertTrue(uniquePersonList.containsPerson(ALICE));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class UniquePersonListTest {
                 .withTags(VALID_TAG_HUSBAND)
                 .withFeedingSessionIds(new HashSet<>())
                 .build();
-        assertTrue(uniquePersonList.contains(editedAlice));
+        assertTrue(uniquePersonList.containsPerson(editedAlice));
     }
 
     @Test

@@ -5,14 +5,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditAnimalCommand.EditAnimalDescriptor;
+import seedu.address.model.Name;
 import seedu.address.model.animal.Animal;
-import seedu.address.model.animal.AnimalName;
 import seedu.address.model.animal.Description;
 import seedu.address.model.animal.Location;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class to help with building EditPersonDescriptor objects.
+ * A utility class to help with building EditAnimalDescriptor objects.
  */
 public class EditAnimalDescriptorBuilder {
 
@@ -34,13 +34,14 @@ public class EditAnimalDescriptorBuilder {
         descriptor.setName(animal.getName());
         descriptor.setDescription(animal.getDescription());
         descriptor.setLocation(animal.getLocation());
+        descriptor.setTags(animal.getTags());
     }
 
     /**
-     * Sets the {@code AnimalName} of the {@code EditAnimalDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code EditAnimalDescriptor} that we are building.
      */
     public EditAnimalDescriptorBuilder withName(String name) {
-        descriptor.setName(new AnimalName(name));
+        descriptor.setName(new Name(name));
         return this;
     }
 
@@ -69,7 +70,6 @@ public class EditAnimalDescriptorBuilder {
         descriptor.setTags(tagSet);
         return this;
     }
-
 
     public EditAnimalDescriptor build() {
         return descriptor;

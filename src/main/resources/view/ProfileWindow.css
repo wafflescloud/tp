@@ -1,5 +1,14 @@
+* {
+    -fx-background-color: #f9f3ec;
+}
+
 #profileContainer {
     -fx-background-color: #f9f3ec;
+    -fx-padding: 8 8;
+}
+
+#infoContainer {
+    -fx-padding: 8 8;
 }
 
 .label {
@@ -69,13 +78,58 @@
 #feedingSessionScrollPane {
     -fx-background-color: #f9f3ec;
     -fx-border-color: transparent;
-    -fx-padding: 0;
-    -fx-fit-to-width: true; /* Custom property — does not always work alone */
+    -fx-padding: 0 0 0 4; /* top right bottom left: add 4px left padding */
     -fx-max-width: Infinity;
-    -fx-pref-width: 100%;
 }
 
-#feedingSessionContainer {
+/* Ensure viewport and corner areas match background to avoid right-side color seam/padding */
+#feedingSessionScrollPane .viewport {
     -fx-background-color: #f9f3ec;
-    -fx-padding: 10 0
+}
+#feedingSessionScrollPane .corner {
+    -fx-background-color: #f9f3ec;
+}
+
+#feedingSessionsContainer {
+    -fx-background-color: #f9f3ec;
+    -fx-padding: 8 0 8 4; /* top right bottom left: left padding reduced to 4px */
+}
+
+/* Bordered feeding session row */
+.feeding-session-box {
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-background-color: white;
+    -fx-padding: 6 8;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* Bold date and time labels */
+.session-date, .session-time {
+    -fx-font-weight: bold;
+    -fx-background-color: transparent;
+    /* Avoid ellipsis even under tight space; controller also prevents shrinking */
+    -fx-text-overrun: clip;
+}
+
+/* Animal name remains normal weight; optional spacing adjust */
+.session-animal {
+    -fx-font-weight: normal;
+    -fx-background-color: transparent;
+}
+
+#feedingSessionScrollPane .scroll-bar:vertical {
+    -fx-pref-width: 8px;
+    -fx-background-color: #f9f3ec;
+    -fx-padding: 0 0 0 4; /* top right bottom left: add 4px left padding to scrollbar */
+}
+#feedingSessionScrollPane .scroll-bar:vertical .track {
+    -fx-background-color: #f9f3ec; /* match background so it doesn't look like extra padding */
+}
+#feedingSessionScrollPane .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(0,0,0,0.25);
+    -fx-background-insets: 0;
+    -fx-background-radius: 4;
 }

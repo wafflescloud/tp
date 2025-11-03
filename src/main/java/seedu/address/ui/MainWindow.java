@@ -172,7 +172,10 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        HelpFunctionWindow.hideAllWindows();
         helpWindow.hide();
+        AnimalProfileWindow.hideAllProfiles();
+        PersonProfileWindow.hideAllProfiles();
         primaryStage.hide();
     }
 
@@ -200,6 +203,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.getCommandToShowHelpFor() != null) {
+                HelpWindow.openCommandHelp(commandResult.getCommandToShowHelpFor());
             }
 
             if (commandResult.isExit()) {

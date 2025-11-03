@@ -1,9 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_KITTY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_KITTY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_KITTY;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -46,9 +42,16 @@ public class TypicalAnimals {
             .withLocation("Quarantine Zone")
             .build();
 
-    public static final Animal KITTY = new AnimalBuilder().withName(VALID_NAME_KITTY)
-            .withDescription(VALID_DESCRIPTION_KITTY)
-            .withLocation(VALID_LOCATION_KITTY)
+    public static final Animal MAX = new AnimalBuilder()
+            .withName("Max")
+            .withDescription("Black Cat")
+            .withLocation("Campus Library")
+            .build();
+
+    public static final Animal FLUFFY = new AnimalBuilder()
+            .withName("Fluffy")
+            .withDescription("White Persian Cat")
+            .withLocation("Student Dormitory")
             .build();
 
     private TypicalAnimals() {} // prevents instantiation
@@ -65,6 +68,6 @@ public class TypicalAnimals {
     }
 
     public static List<Animal> getTypicalAnimals() {
-        return new ArrayList<>(Arrays.asList(WHISKERS, LUNA, SIMBA, BELLA, OREO));
+        return new ArrayList<>(Arrays.asList(WHISKERS, LUNA, SIMBA, BELLA, OREO, MAX, FLUFFY));
     }
 }

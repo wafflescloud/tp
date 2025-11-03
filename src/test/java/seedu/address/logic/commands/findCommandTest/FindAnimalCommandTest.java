@@ -15,13 +15,14 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.model.ContactContainsKeywordsPredicate;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.animal.NameContainsKeywordsPredicateAnimal;
+import seedu.address.model.animal.Animal;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindAnimalCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindCommand} when finding animals.
  */
 public class FindAnimalCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -29,19 +30,19 @@ public class FindAnimalCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicateAnimal firstPredicate =
-                new NameContainsKeywordsPredicateAnimal(Collections.singletonList("first"));
-        NameContainsKeywordsPredicateAnimal secondPredicate =
-                new NameContainsKeywordsPredicateAnimal(Collections.singletonList("second"));
+        ContactContainsKeywordsPredicate<Animal> firstPredicate =
+                new ContactContainsKeywordsPredicate<>(Collections.singletonList("first"));
+        ContactContainsKeywordsPredicate<Animal> secondPredicate =
+                new ContactContainsKeywordsPredicate<>(Collections.singletonList("second"));
 
-        FindAnimalCommand findFirstCommand = new FindAnimalCommand(firstPredicate);
-        FindAnimalCommand findSecondCommand = new FindAnimalCommand(secondPredicate);
+        FindCommand<Animal> findFirstCommand = FindCommand.forAnimal(firstPredicate);
+        FindCommand<Animal> findSecondCommand = FindCommand.forAnimal(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindAnimalCommand findFirstCommandCopy = new FindAnimalCommand(firstPredicate);
+        FindCommand<Animal> findFirstCommandCopy = FindCommand.forAnimal(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -57,19 +58,18 @@ public class FindAnimalCommandTest {
     @Test
     public void execute_zeroKeywords_noAnimalFound() {
         String expectedMessage = String.format(Messages.MESSAGE_FIND_ANIMAL_SUCCESS, 0);
-        NameContainsKeywordsPredicateAnimal predicate = preparePredicate(" ");
-        FindAnimalCommand command = new FindAnimalCommand(predicate);
+        ContactContainsKeywordsPredicate<Animal> predicate = preparePredicate("NonExistentAnimalName12345");
+        FindCommand<Animal> command = FindCommand.forAnimal(predicate);
         expectedModel.updateFilteredAnimalList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredAnimalList());
     }
 
-
     @Test
     public void execute_multipleKeywords_multipleAnimalsFound() {
         String expectedMessage = String.format(Messages.MESSAGE_FIND_ANIMAL_SUCCESS, 3);
-        NameContainsKeywordsPredicateAnimal predicate = preparePredicate("Whiskers Luna Simba");
-        FindAnimalCommand command = new FindAnimalCommand(predicate);
+        ContactContainsKeywordsPredicate<Animal> predicate = preparePredicate("Whiskers Luna Simba");
+        FindCommand<Animal> command = FindCommand.forAnimal(predicate);
         expectedModel.updateFilteredAnimalList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(WHISKERS, LUNA, SIMBA), model.getFilteredAnimalList());
@@ -77,17 +77,18 @@ public class FindAnimalCommandTest {
 
     @Test
     public void toStringMethod() {
-        NameContainsKeywordsPredicateAnimal predicate =
-            new NameContainsKeywordsPredicateAnimal(Arrays.asList("keyword"));
-        FindAnimalCommand findCommand = new FindAnimalCommand(predicate);
-        String expected = FindAnimalCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        ContactContainsKeywordsPredicate<Animal> predicate =
+            new ContactContainsKeywordsPredicate<>(Arrays.asList("keyword"));
+        FindCommand<Animal> findCommand = FindCommand.forAnimal(predicate);
+        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate
+                + ", successMessageFormat=" + Messages.MESSAGE_FIND_ANIMAL_SUCCESS + "}";
         assertEquals(expected, findCommand.toString());
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicateAnimal}.
+     * Parses {@code userInput} into a {@code ContactContainsKeywordsPredicate}.
      */
-    private NameContainsKeywordsPredicateAnimal preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicateAnimal(Arrays.asList(userInput.split("\\s+")));
+    private ContactContainsKeywordsPredicate<Animal> preparePredicate(String userInput) {
+        return new ContactContainsKeywordsPredicate<>(Arrays.asList(userInput.split("\\s+")));
     }
 }

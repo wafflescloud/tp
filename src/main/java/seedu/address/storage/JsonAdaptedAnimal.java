@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.Name;
 import seedu.address.model.animal.Animal;
-import seedu.address.model.animal.AnimalName;
 import seedu.address.model.animal.Description;
 import seedu.address.model.animal.Location;
 import seedu.address.model.tag.Tag;
@@ -89,12 +89,12 @@ class JsonAdaptedAnimal {
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    AnimalName.class.getSimpleName()));
+                    Name.class.getSimpleName()));
         }
-        if (!AnimalName.isValidName(name)) {
-            throw new IllegalValueException(AnimalName.MESSAGE_CONSTRAINTS);
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final AnimalName modelName = new AnimalName(name);
+        final Name modelName = new Name(name);
 
         if (description == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

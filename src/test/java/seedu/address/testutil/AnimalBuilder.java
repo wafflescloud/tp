@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import seedu.address.model.Name;
 import seedu.address.model.animal.Animal;
-import seedu.address.model.animal.AnimalName;
 import seedu.address.model.animal.Description;
 import seedu.address.model.animal.Location;
 import seedu.address.model.tag.Tag;
@@ -21,7 +21,7 @@ public class AnimalBuilder {
     public static final String DEFAULT_LOCATION = "Shelter Room 2";
 
     private UUID id;
-    private AnimalName name;
+    private Name name;
     private Description description;
     private Location location;
     private Set<Tag> tags;
@@ -31,8 +31,8 @@ public class AnimalBuilder {
      * Creates an {@code AnimalBuilder} with default details.
      */
     public AnimalBuilder() {
-        id = null;
-        name = new AnimalName(DEFAULT_NAME);
+        id = null; // Will auto-generate when build() is called
+        name = new Name(DEFAULT_NAME);
         description = new Description(DEFAULT_DESCRIPTION);
         location = new Location(DEFAULT_LOCATION);
         tags = new HashSet<>();
@@ -54,13 +54,13 @@ public class AnimalBuilder {
     }
 
     /**
-     * Sets the {@code AnimalName} of the {@code Animal} that we are building.
+     * Sets the {@code Name} of the {@code Animal} that we are building.
      *
      * @param name The name to set.
      * @return This {@code AnimalBuilder} instance for chaining.
      */
     public AnimalBuilder withName(String name) {
-        this.name = new AnimalName(name);
+        this.name = new Name(name);
         return this;
     }
 
@@ -105,9 +105,12 @@ public class AnimalBuilder {
     /**
      * Builds and returns an {@link Animal} using the values configured in this builder.
      * <p>
-     * The returned animal will have an auto-generated identifier (as determined by the model)
-     * and will include the configured {@code name}, {@code description}, {@code location}, {@code tags},
-     * and {@code feedingSessionIds}.
+     * If this builder was initialized from an existing animal (or explicitly provided an ID),
+     * the same identifier will be used. Otherwise, the constructed animal will have an
+     * auto-generated identifier.
+     * <p>
+     * The returned animal will include the configured {@code name}, {@code description},
+     * {@code location}, {@code tags}, and {@code feedingSessionIds}.
      *
      * @return a new {@link Animal} instance based on the current builder state
      */

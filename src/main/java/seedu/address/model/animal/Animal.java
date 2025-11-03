@@ -12,6 +12,8 @@ import java.util.Set;
 import java.util.UUID;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.Contact;
+import seedu.address.model.Name;
 import seedu.address.model.feedingsession.FeedingSession;
 import seedu.address.model.tag.Tag;
 
@@ -19,53 +21,44 @@ import seedu.address.model.tag.Tag;
  * Represents an Animal in the pet store.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Animal {
-
-    // Identity fields
+public class Animal extends Contact {
+    // Identity fields (name is now in parent class)
     private final UUID id;
-    private final AnimalName name;
     private final Description description;
     private final Location location;
 
     // Data fields
-    private final Set<Tag> tags = new HashSet<>();
     private final Set<UUID> feedingSessionIds = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      * Creates a new Animal with auto-generated ID.
      */
-    public Animal(AnimalName name, Description description, Location location, Set<Tag> tags,
+    public Animal(Name name, Description description, Location location, Set<Tag> tags,
                   Set<UUID> feedingSessionIds) {
-        requireAllNonNull(name, description, location);
+        super(name, tags);
+        requireAllNonNull(description, location);
         this.id = UUID.randomUUID();
-        this.name = name;
         this.description = description;
         this.location = location;
-        this.tags.addAll(tags);
         this.feedingSessionIds.addAll(feedingSessionIds);
     }
 
     /**
      * Constructor with explicit ID (for deserialization).
      */
-    public Animal(UUID id, AnimalName name, Description description, Location location, Set<Tag> tags,
+    public Animal(UUID id, Name name, Description description, Location location, Set<Tag> tags,
                   Set<UUID> feedingSessionIds) {
-        requireAllNonNull(id, name, description, location);
+        super(name, tags);
+        requireAllNonNull(id, description, location);
         this.id = id;
-        this.name = name;
         this.description = description;
         this.location = location;
-        this.tags.addAll(tags);
         this.feedingSessionIds.addAll(feedingSessionIds);
     }
 
     public UUID getId() {
         return id;
-    }
-
-    public AnimalName getName() {
-        return name;
     }
 
     public Description getDescription() {
@@ -98,7 +91,7 @@ public class Animal {
     public Animal addFeedingSessionId(UUID sessionId) {
         Set<UUID> updatedSessions = new HashSet<>(feedingSessionIds);
         updatedSessions.add(sessionId);
-        return new Animal(id, name, description, location, tags, updatedSessions);
+        return new Animal(id, getName(), description, location, tags, updatedSessions);
     }
 
     /**
@@ -107,7 +100,7 @@ public class Animal {
     public Animal removeFeedingSessionId(UUID sessionId) {
         Set<UUID> updatedSessions = new HashSet<>(feedingSessionIds);
         updatedSessions.remove(sessionId);
-        return new Animal(id, name, description, location, tags, updatedSessions);
+        return new Animal(id, getName(), description, location, tags, updatedSessions);
     }
 
     /**
@@ -142,16 +135,11 @@ public class Animal {
     }
 
     /**
-     * Returns true if both animals have the same name.
+     * Returns true if both animals have the same name (case-insensitive and whitespace-normalized).
      * This defines a weaker notion of equality between two animals.
      */
     public boolean isSameAnimal(Animal otherAnimal) {
-        if (otherAnimal == this) {
-            return true;
-        }
-
-        return otherAnimal != null
-                && otherAnimal.getName().equals(getName());
+        return isSameContact(otherAnimal);
     }
 
     /**

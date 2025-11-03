@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model <<Rectangle>> {
+  Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+  Class AddressBook
+  Class ModelManager
+  Class UniquePersonList
+  Class UniqueAnimalList
+  Class UniqueFeedingSessionList
+  Class "undoStack\n:Stack" as UndoStack
+  Class "redoStack\n:Stack" as RedoStack
+}
+
+AddressBook .up.|> ReadOnlyAddressBook
+ModelManager -down-> "1" AddressBook
+ModelManager -right-> "1" UndoStack
+ModelManager -right-> "1" RedoStack
+
+AddressBook *-down-> "1" UniquePersonList
+AddressBook *-down-> "1" UniqueAnimalList
+AddressBook *-down-> "1" UniqueFeedingSessionList
+
+@enduml

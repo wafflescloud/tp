@@ -20,12 +20,19 @@ public class CommandResult {
     private final boolean exit;
 
     /**
+     * If non-null, the UI should show detailed help for this specific command.
+     * This allows logic to request a function-specific help window without directly invoking UI code.
+     */
+    private final String commandToShowHelpFor;
+
+    /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.commandToShowHelpFor = null;
     }
 
     /**
@@ -34,6 +41,16 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with an explicit command help target.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, String commandToShowHelpFor) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.commandToShowHelpFor = commandToShowHelpFor;
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +63,13 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    /**
+     * Returns the command name the UI should show help for, or null if not applicable.
+     */
+    public String getCommandToShowHelpFor() {
+        return commandToShowHelpFor;
     }
 
     @Override
@@ -78,5 +102,4 @@ public class CommandResult {
                 .add("exit", exit)
                 .toString();
     }
-
 }

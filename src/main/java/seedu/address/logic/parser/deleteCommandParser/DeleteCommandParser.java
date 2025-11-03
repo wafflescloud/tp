@@ -22,10 +22,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         Type type = new Type(typeAndRest[0]);
         String rest = " " + typeAndRest[1];
 
-        if (type.equals(CliSyntax.TYPE_PERSON)) {
-            return new DeletePersonCommandParser().parse(rest);
-        } else if (type.equals(CliSyntax.TYPE_ANIMAL)) {
-            return new DeleteAnimalCommandParser().parse(rest);
+        if (type.equals(CliSyntax.TYPE_PERSON) || type.equals(CliSyntax.TYPE_ANIMAL)) {
+            // Use unified parser for person and animal contacts
+            return new DeleteContactCommandParser().parse(trimmedArgs);
         } else if (type.equals(CliSyntax.TYPE_FEEDING_SESSION)) {
             return new DeleteFeedCommandParser().parse(rest);
         } else {

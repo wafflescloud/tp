@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,11 +13,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.animal.AnimalName;
+import seedu.address.model.Name;
 import seedu.address.model.animal.Description;
 import seedu.address.model.animal.Location;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.PersonName;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -41,33 +41,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code PersonName}.
+     * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static PersonName parsePersonName(String name) throws ParseException {
+    public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!PersonName.isValidName(trimmedName)) {
-            throw new ParseException(PersonName.MESSAGE_CONSTRAINTS);
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        return new PersonName(trimmedName);
-    }
-
-    /**
-     * Parses a {@code String name} into a {@code AnimalName}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code name} is invalid.
-     */
-    public static AnimalName parseAnimalName(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!AnimalName.isValidName(trimmedName)) {
-            throw new ParseException(AnimalName.MESSAGE_CONSTRAINTS);
-        }
-        return new AnimalName(trimmedName);
+        return new Name(trimmedName);
     }
 
     /**
@@ -165,9 +150,12 @@ public class ParserUtil {
         requireNonNull(datetime);
         String trimmedDateTime = datetime.trim();
         try {
-            return LocalDateTime.parse(trimmedDateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            DateTimeFormatter formatter = DateTimeFormatter
+                    .ofPattern("uuuu-MM-dd HH:mm")
+                    .withResolverStyle(ResolverStyle.STRICT);
+            return LocalDateTime.parse(trimmedDateTime, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("DateTime must be in format: yyyy-MM-dd HH:mm");
+            throw new ParseException("Date and Time should exist and must be in format: yyyy-MM-dd HH:mm");
         }
     }
 }
