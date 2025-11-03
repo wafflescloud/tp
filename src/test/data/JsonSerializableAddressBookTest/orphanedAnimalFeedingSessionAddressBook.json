@@ -1,0 +1,31 @@
+{
+  "persons": [
+    {
+      "id": "9a9a9a9a-0000-1111-2222-333333333333",
+      "name": "Feeder",
+      "phone": "90000002",
+      "email": "feeder@example.com",
+      "feedingSessionIds": []
+    }
+  ],
+  "animals": [
+    {
+      "id": "8b8b8b8b-4444-5555-6666-777777777777",
+      "name": "Orphan Animal",
+      "description": "Desc",
+      "location": "Loc",
+      "feedingSessionIds": [
+        "cdcdcdcd-cdcd-cdcd-cdcd-cdcdcdcdcdcd"
+      ]
+    }
+  ],
+  "feedingSessions": [
+    {
+      "id": "7c7c7c7c-8888-9999-aaaa-bbbbbbbbbbbb",
+      "animalId": "8b8b8b8b-4444-5555-6666-777777777777",
+      "personId": "9a9a9a9a-0000-1111-2222-333333333333",
+      "dateTime": "2024-07-02T11:30:00"
+    }
+  ]
+}
+

@@ -1,0 +1,13 @@
+{
+  "animals": [
+    {
+      "id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+      "name": "R@chel",
+      "description": "   ",
+      "location": "Shelter Room 1",
+      "tags": ["friendly"],
+      "feedingSessionIds": []
+    }
+  ]
+}
+

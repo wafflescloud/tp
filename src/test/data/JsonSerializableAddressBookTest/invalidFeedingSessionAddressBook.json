@@ -1,0 +1,29 @@
+{
+  "persons": [
+    {
+      "id": "11111111-0000-0000-0000-000000000000",
+      "name": "Valid Person",
+      "phone": "90000000",
+      "email": "valid@example.com",
+      "feedingSessionIds": []
+    }
+  ],
+  "animals": [
+    {
+      "id": "22222222-0000-0000-0000-000000000000",
+      "name": "Valid Animal",
+      "description": "Ok",
+      "location": "Room",
+      "feedingSessionIds": []
+    }
+  ],
+  "feedingSessions": [
+    {
+      "id": "33333333-0000-0000-0000-000000000000",
+      "animalId": "22222222-0000-0000-0000-000000000000",
+      "personId": "99999999-9999-9999-9999-999999999999",
+      "dateTime": "2024-13-01T08:00:00"
+    }
+  ]
+}
+
