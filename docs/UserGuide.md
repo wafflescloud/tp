@@ -45,37 +45,52 @@ Furiends can help you manage people, animals and their interactions efficiently.
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html). <br>
-   **Windows users:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).
+  **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html). <br>
+  **Windows users:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).
 
-   - To check the Java version in your device, open the terminal and type `java --version`.
-   - You should obtain an output like this:
-
-     ![versionCommand](images/versionCommand.png){style="width:900px; height:auto;"}<br>
+    - To check the Java version in your device, open the terminal and type `java --version`.
+    - You should obtain an output like below:
+      ```
+      java 17.0.12 2024-07-16 LTS
+      Java(TM) SE Runtime Environment (build 17.0.12+8-LTS-286)
+      Java HotSpot(TM) 64-Bit Server VM (build 17.0.12+8-LTS-286, mixed mode, sharing)
+      ```
 
 2. Download the latest `furiends.jar` file from [here](https://github.com/AY2526S1-CS2103T-W14-3/tp/releases).
 
-![GitHubReleases](images/furiendsGitHub.png){style="width:900px; height:auto;"}<br>
+![GitHubReleases](images/furiendsGithub.png){style="width:900px; height:auto;"}<br>
 
 <box type="tip" seamless>
 
-The file is usually in `downloads` after downloading it.
+The file is usually in the `Downloads` folder after downloading it.
 </box>
 
-3. Copy the file to the folder you want to use as the _home folder_ for your Furiends application.
+3. At the location where you want Furiends to be, create a folder with any name that you like!
 
-4. Open a command terminal, `cd` into the folder you put the `furiends.jar` file in.
-   - `<FURIENDS_DIRECTORY>` is the folder containing the `furiends.jar` file. <br>
-   - Use the command `cd <FURIENDS_DIRECTORY>`. <br><br>
+4. Then, copy the file `furiends.jar` into the folder created in (3).
 
-5. Use the `java -jar furiends.jar` command to run Furiends.
+5. Booting up Furiends:
 
+   **For Mac users:**
+   1. Open **Terminal** (you can find it in `Applications > Utilities > Terminal` or search using Spotlight with `Cmd + Space`).
+   2. Navigate to the folder containing `furiends.jar` using the `cd` command.
+      * For example, if the file is in your `Documents/Furiends` folder, type: `cd ~/Documents/Furiends`
+   3. Type `java -jar furiends.jar` and press Enter to launch Furiends.
+
+    <br>
+
+   **For Windows users:**
+   1. Navigate to the folder containing `furiends.jar` in **File Explorer**.
+   2. Right-click on the folder (or right-click on empty space inside the folder) and select **Open in Terminal**.
+   3. In the terminal window that opens, type `java -jar furiends.jar` and press Enter to launch Furiends.
+
+    <br>
 
    A GUI similar to the below should appear in a few seconds. Note how the application contains some sample data.<br>
    ![Ui](images/Ui.png){style="width:900px; height:auto;"}<br>
    For more details on the GUI, you can refer to the [Overview of GUI](#overview-of-gui) section.
 
-5. Type the command in the command box (displaying "Enter command here...") and press Enter to execute it.<br>
+6. Type the command in the command box (displaying "Enter command here...") and press Enter to execute it.<br>
    Here are some simple commands you can try:
 
    * `help` : Shows the help page with the full list of commands.
@@ -165,13 +180,13 @@ Back to [table of contents](#table-of-contents).
   * `local-part@domain`
     * `local-part`: can contain alphanumeric characters and special characters such as ``!#$%&'*+/=?^_`{|}~-`` <br><br>
     <box type="warning" seamless>
-    
+
     Periods `.` are allowed in the `local-part`, but it **cannot** start or end with a period.
     Consecutive periods `..` are also not allowed.
     </box>
     <box type="info" seamless>
 
-    The `local-part` can also be a quoted string (enclosed in double quotes `"`), which allows 
+    The `local-part` can also be a quoted string (enclosed in double quotes `"`), which allows
     additional special characters and spaces.
     </box>
 
