@@ -252,6 +252,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -278,6 +283,11 @@ public class AddCommandTest {
 
         @Override
         public void setAnimal(Animal target, Animal editedAnimal) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Animal> getAnimalList() {
             throw new AssertionError("This method should not be called.");
         }
 

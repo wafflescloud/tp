@@ -286,7 +286,46 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-before: always;"></div>
+## **Proposed Enhancements**
+This section describes some details on how certain planned enhancement features can be implemented in future iterations.
+
+### Flexibility for name and tag
+* Allow special characters like apostrophes `/` and `s/o` in names.
+
+* Allow valid characters like `'` in tags.
+
+* Ensures commands and storage handle more natural user input.
+
+### Duplicate Names with Unique Contact Identifiers
+
+* Names can be duplicated.
+
+* Phone numbers and emails must remain unique.
+
+* Commands may need indices or IDs to specify contacts unambiguously.
+
+### Index-Based Commands for Fast Typing
+
+* Use contact/animal indices instead of full names for commands.
+
+* Reduces typing effort and ambiguity.
+
+* Works in conjunction with duplicate names support.
+
+### More convenient closing of `help` and `view` windows
+* Enable users to close contact or help cards using a command or shortcut key (e.g. `Esc`).
+
+* Improves navigation and user experience.
+
+### Real time update of all windows
+* Opened help/profile windows do not automatically reflect edits occur in main window.
+
+* Requires live data binding, observer pattern, or refresh mechanism to stay updated.
+
+### Adding of profile pictures for contacts
+* Users are able to add/edit contacts' images
+
+<div style="page-break-before: always;"></div> 
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
