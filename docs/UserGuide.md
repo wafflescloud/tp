@@ -47,26 +47,26 @@ Furiends is a **desktop app tailored towards animal lovers, specifically individ
    **Windows users:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).
 
    - To check the Java version in your device, open the terminal and type `java --version`.
-
-![versionCommand](images/versionCommand.png){style="width:900px; height:auto;"}<br>
+   - You should obtain an output like this:
+   
+     ![versionCommand](images/versionCommand.png){style="width:900px; height:auto;"}<br>
 
 2. Download the latest `furiends.jar` file from [here](https://github.com/AY2526S1-CS2103T-W14-3/tp/releases).
 
 ![GitHubReleases](images/furiendsGitHub.png){style="width:900px; height:auto;"}<br>
 
-3. Copy the file to the folder you want to use as the _home folder_ for your Furiends application.
-
-4. Open a command terminal, `cd` into the folder you put the `furiends.jar` file in.
 <box type="tip" seamless>
 
 The file is usually in `downloads` after downloading it.
 </box>
 
-![Terminal](images/terminal.png){style="width:900px; height:auto;"}<br>
+3. Copy the file to the folder you want to use as the _home folder_ for your Furiends application.
 
-5. Use the `java -jar furiends.jar` command to run the application.
+4. Open a command terminal, `cd` into the folder you put the `furiends.jar` file in.
+   - `<FURIENDS_DIRECTORY>` is the folder containing the `furiends.jar` file. <br>
+   - Use the command `cd <FURIENDS_DIRECTORY>`. <br><br>
 
-![jarCommand](images/jarCommand.jpg){style="width:900px; height:auto;"}<br>
+5. Use the `java -jar furiends.jar` command to run Furiends.
 
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -78,11 +78,11 @@ The file is usually in `downloads` after downloading it.
 
    * `help` : Shows the help page with the full list of commands.
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all people's and animals' contacts.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all people's and animals' contacts.
 
-   * `exit` : Exits the app.
+   * `exit` : Exits the Furiends application.
 
 6. Refer to the [Features](#features) below for details of each command.
 
