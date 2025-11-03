@@ -40,13 +40,13 @@ AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 
 Person -up-|> Contact
-Contact *--> "1" Name : name
-Contact *--> "*" Tag : tags
+Contact *--> "1" Name
+Contact *--> "*" Tag
 
-Person *--> "1" UUID : id
-Person *--> "1" Phone : phone
-Person *--> "1" Email : email
-Person *--> "*" UUID : feedingSessionIds
+Person *--> "1" UUID
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "*" UUID
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
