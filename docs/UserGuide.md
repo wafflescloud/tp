@@ -573,7 +573,6 @@ Restores Furiends to the state before the last undo command.
 
 Format: `redo`
 
-* Only works immediately after an `undo` command.
 * If there are no changes to redo, an error message will be shown.
 ![redoError.png](images/redoError.png){style="width:900px; height:auto;"}<br>
 
