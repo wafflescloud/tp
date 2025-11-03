@@ -567,7 +567,10 @@ Reverts Furiends to its previous state before the last modifying command.
 
 Format: `undo`
 
-* Only works for commands that change Furiends (i.e. only after an add, edit, delete, clear, feed, or after a valid redo command).
+* You may only undo recent commands that change Furiends!
+
+  - Commands that change Furiends: add, edit, delete, clear, feed, or after a valid redo command.
+  - All other commands cannot be undone.
 * If there are no changes to undo, an error message will be shown.
 ![undoErrorMessage.png](images/undoError.png){style="width:900px; height:auto;"}<br>
 
