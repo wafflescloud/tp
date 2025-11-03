@@ -6,7 +6,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -38,6 +40,39 @@ public class JsonAdaptedPersonTest {
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
         assertEquals(BENSON, person.toModelType());
+    }
+
+    // test the getId() method
+    @Test
+    public void getId_fromAdaptedPerson_matchesSourceId() {
+        JsonAdaptedPerson adapted = new JsonAdaptedPerson(BENSON);
+        assertEquals(BENSON.getId().toString(), adapted.getId());
+
+        // Also verify when constructed directly with explicit values
+        JsonAdaptedPerson adaptedExplicit = new JsonAdaptedPerson(VALID_ID, VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_TAGS, VALID_FEEDING_SESSION_IDS);
+        assertEquals(VALID_ID, adaptedExplicit.getId());
+    }
+
+    // test the getFeedingSessionIds() method
+    @Test
+    public void getFeedingSessionIds_fromAdaptedPerson_containsAllSessionIds() {
+        JsonAdaptedPerson adapted = new JsonAdaptedPerson(BENSON);
+        List<String> actual = adapted.getFeedingSessionIds();
+        // Compare as sets to avoid order sensitivity
+        Set<String> expectedSet = new HashSet<>(VALID_FEEDING_SESSION_IDS);
+        Set<String> actualSet = new HashSet<>(actual);
+        assertEquals(expectedSet, actualSet);
+    }
+
+    // test throwing IllegalValueException due to providing invalid id
+    @Test
+    public void toModelType_invalidId_throwsIllegalValueException() {
+        String invalidId = "not-a-valid-uuid";
+        JsonAdaptedPerson person = new JsonAdaptedPerson(invalidId, VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_TAGS, VALID_FEEDING_SESSION_IDS);
+        String expectedMessage = "Invalid UUID format for id";
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
