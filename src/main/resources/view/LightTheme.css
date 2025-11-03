@@ -146,6 +146,13 @@
     -fx-padding: 0 0 0 0;
 }
 
+.list-view, .list-cell {
+    -fx-padding: 0;
+}
+.list-cell > * {
+    -fx-max-width: Infinity;
+}
+
 .list-cell:filled:even {
     -fx-background-color: -color-bg-tertiary-90;
 }
@@ -434,4 +441,9 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+/* Prevent resize cursor on main SplitPane divider to avoid implying it can be dragged */
+#mainSplitPane > .split-pane-divider {
+    -fx-cursor: default;
 }
