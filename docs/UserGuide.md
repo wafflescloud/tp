@@ -481,6 +481,11 @@ Format: `redo`
 Example:
 * `redo` Re-applies the last change that was undone.
 
+<box type="warning" seamless>
+
+Undo and Redo history does not persist across sessions
+</box>
+
 ### Exiting the program : `exit`
 
 Exits the program.
