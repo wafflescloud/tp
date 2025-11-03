@@ -25,7 +25,7 @@
 
 ## **Setting up, getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [_Setting up and getting started_](https://ay2526s1-cs2103t-w14-3.github.io/tp/SettingUp.html).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -431,7 +431,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to find a person by specifying the person’s name or substring of their name, or a tag name
-2. Furiends searches the contact list for a matching persons 
+2. Furiends searches the contact list for a matching persons
 3. Furiends shows the list of persons that match the search criteria
 
     Use case ends
@@ -555,7 +555,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends
 
-**Use case: UC09 - Add a feeding session** 
+**Use case: UC09 - Add a feeding session**
 
 **MSS**
 
@@ -573,14 +573,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. Furiends shows an error message.
 
         Use case ends
-  
+
 * 2b. The date and time provided is invalid.
 
     * 2b1. Furiends shows an error message.
 
         Use case ends
 
-**Use case: UC10 - Delete a feeding session** 
+**Use case: UC10 - Delete a feeding session**
 
 **MSS**
 1. User requests to delete a feeding session by specifying the person’s name, animal’s name, date and time of feeding together
@@ -629,7 +629,7 @@ Given below are instructions to test the app manually.
 <box type="info" seamless>
 
 **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing. 
+testers are expected to do more *exploratory* testing.
 
 </box>
 
@@ -639,9 +639,9 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder.
 
-   2. Open terminal and run `cd path_to_folder` to change directory to the location of the jar file. 
+   2. Open terminal and run `cd path_to_folder` to change directory to the location of the jar file.
    3. Run `java -jar furiends.jar`. <br>
-   Expected: Shows the GUI with sample contacts. The window size may not be optimum.  
+   Expected: Shows the GUI with sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
@@ -786,12 +786,12 @@ testers are expected to do more *exploratory* testing.
 
    1. To simulate a corrupted data file, remove the `id` field from one of the person entries in `addressbook.json` file located in the `data` folder where the `furiends.jar` file is located.
    2. The application will still launch, but no entries will be loaded.
-   3. To solve this, delete the corrupted `addressbook.json` file and relaunch the application. 
+   3. To solve this, delete the corrupted `addressbook.json` file and relaunch the application.
    4. A new `addressbook.json` file is created with sample data.<br>
 <br>
 
 2. Dealing with missing data files
 
-   1. To simulate a missing data file, delete the `addressbook.json` file located in the `data` folder where the `furiends.jar` file is located.  
-   2. To solve this, relaunch the application.  
+   1. To simulate a missing data file, delete the `addressbook.json` file located in the `data` folder where the `furiends.jar` file is located.
+   2. To solve this, relaunch the application.
    3. A new `addressbook.json` file is created with sample data.
