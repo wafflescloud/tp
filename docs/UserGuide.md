@@ -128,6 +128,8 @@ The GUI is made up of the following components:
 If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+Back to [table of contents](#table-of-contents).
+
 ### Valid Inputs Format
 * `NAME`/`PERSON_NAME`/`ANIMAL_NAME`
   * Can only contain letters (`A-Z` and `a-z` only).
@@ -187,10 +189,12 @@ If you are using a PDF version of this document, be careful when copying and pas
   * Character limit of 100 (including internal white spaces).
   * e.g. `AMK Street 3497`, `blk A7!`<br><br>
 * `KEYWORD`
-  * Comes in 2 different forms, `n/NAME` and `t/TAG` only.
+  * Comes in 2 different forms, `NAME` and `TAG` only.
   * Characters length of 1-30 allowed after removal of extra white spaces.
   * Only alphabets `A–Z`, `a–z`, digits `0-9`, hyphens `-`, and spaces allowed.
   * e.g. `n/bobby`, `n/Je`, `t/fluffy`, `t/fluf`
+
+Back to [table of contents](#table-of-contents).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -220,6 +224,8 @@ the corresponding command format to the command box as shown below.
 
 ![automatic copying](images/helpAutomaticInput.png){style="width:700px; height:auto;"} <br>
 
+Back to [table of contents](#table-of-contents).
+
 ### Adding a person: `add person`
 
 Adds a person to Furiends.<br>
@@ -233,7 +239,9 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `add person n/Betsy Crowe t/friend e/betsycrowe@example.com p/91234567 t/criminal`<br>
 ![addPersonOutputBox.png](images/addPersonOuputBox.png){style="width:700px; height:auto;"}
   * new person contact card created: <br>
-![personCard.png](images/personCard.png){style="width:400px; height:auto;"}
+![personCard.png](images/personCard.png){style="width:400px; height:auto;"} <br>
+
+Back to [table of contents](#table-of-contents).
 
 ### Adding an animal: `add animal`
 
@@ -243,15 +251,19 @@ Format: `add animal n/NAME d/DESCRIPTION l/LOCATION [t/TAG]…​`
 
 Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `add animal n/Fluffy d/White cat l/Ang Mo Kio t/shy`<br>
-![addAnimalOutputBox.png](images/addAnimalOutputBox.png){style="width:600px; height:auto;"}
+![addAnimalOutputBox.png](images/addAnimalOutputBox.png){style="width:600px; height:auto;"} <br>
   * new animal contact card created: <br>
-![addAnimalCard.png](images/addAnimalCard.png){style="width:400px; height:auto;"}
+![addAnimalCard.png](images/addAnimalCard.png){style="width:400px; height:auto;"} <br>
+
+Back to [table of contents](#table-of-contents).
 
 ### Listing all contacts : `list`
 
 Shows a list of all people and animals in Furiends.
 
 Format: `list`
+
+Back to [table of contents](#table-of-contents).
 
 ### Editing a person : `edit person`
 
@@ -281,6 +293,8 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 *  `edit person Betty Crower n/Betsy Crower t/` <br>
    Edits the name of `Betty Crower` to be `Betsy Crower` and clears all existing tags.
 
+Back to [table of contents](#table-of-contents).
+
 ### Editing an animal : `edit animal`
 
 Edits an existing animal in Furiends.
@@ -295,18 +309,19 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 *  `edit animal Fluffy l/Void Deck` Edits the location of the animal with name `Fluffy` to be `Void Deck`.
 *  `edit animal Kitty n/Catty t/` Edits the name of the animal with name `Kitty` to be `Catty` and clears all existing tags.
 
+Back to [table of contents](#table-of-contents).
+
 ### Locating people by name: `find person`
 
 Finds people whose names contain any of the given keywords.
 
-Format: `find person KEYWORD [MORE_KEYWORDS]...`
+Format: `find person [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]...`
 
 * The search is **case-insensitive**. e.g `hans` will match `Hans`.
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name and tag (when specified) are searched.
 * Substrings can be searched. e.g. `an` will match `Hans`, `Andy`.
 * People's names matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+  e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`.
 * Searching using tags must have the **exact case-insensitive spelling**.<br>
   e.g. `t/friends` will return the same result as `t/FRIENDS`.
   * Only people with the tag `friends` will be shown.
@@ -314,6 +329,12 @@ Format: `find person KEYWORD [MORE_KEYWORDS]...`
 
   People with the tag `friend` will not be shown as the spelling is not exactly the same.
   </box>
+* When there is both `[n/KEYWORD]` and `[t/KEYWORD]` present, it will conduct a substring search of names **and** a full string search of tags. <br>
+  * People's names with substring matching **at least one** `n/KEYWORD` **and** with tags **exactly matching** all `t/KEYWORD` will be returned. 
+  * e.g. `find person n/ber t/friends` will only return contacts with substring `ber` in their names and tagged with `friends`.
+    * `Bernice` with `t/friends, t/lover` will be returned. 
+    * `Berry` with no tags **will not** be returned.
+    * `Ber` with `t/friend` **will not** be returned.
 
 Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `find person n/alex n/dav` returns `Alex Yeoh`, `David Li`. Note that the 'animal' portion is still shown.<br>
@@ -328,11 +349,13 @@ After using `find` to filter out the contacts you want, you can use `list` to re
 to full display of all contacts. [Find out how!](#listing-all-people--list)
 </box>
 
+Back to [table of contents](#table-of-contents).
+
 ### Locating animals by name: `find animal`
 
 Finds animals whose names contain any of the given keywords.
 
-Format: `find animal KEYWORD [MORE_KEYWORDS]...`
+Format: `find animal [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]...`
 
 * The search is **case-insensitive**. e.g `fluffy` will match `Fluffy`.
 * The order of the keywords does not matter. e.g. `Cutie Pie` will match `Pie Cutie`.
@@ -343,6 +366,12 @@ Format: `find animal KEYWORD [MORE_KEYWORDS]...`
 * Searching using tags must have the **exact case-insensitive spelling**.<br>
   e.g. `t/fur` will return the same result as `t/FUR`.
   * Only aniamls with the tag `fur` will be shown.
+* When there is both `[n/KEYWORD]` and `[t/KEYWORD]` present, it will conduct a substring search of names **and** a full string search of tags. <br>
+* Animals' names with substring matching **at least one** `n/KEYWORD` **and** with tags **exactly matching** all `t/KEYWORD` will be returned.
+* e.g. `find animal n/ch t/fierce` will only return contacts with substring `ch` in their names and tagged with `fierce`.
+  * `Gochu` with `t/fierce, t/fat` will be returned.
+  * `Cherry` with no tags **will not** be returned.
+  * `Charlie` with `t/fire` **will not** be returned.
 
 Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `find animal n/max n/luna` returns `Max`, `Luna`. Note that the 'person' portion is still shown.<br>
@@ -354,6 +383,8 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 After using `find` to filter out the contacts you want, you can use `list` to return
 to full display of all contacts. [Find out how!](#listing-all-people--list)
 </box>
+
+Back to [table of contents](#table-of-contents).
 
 ### Feeding an animal : `feed`
 Records a feeding session between an animal and a person (feeder) in Furiends.
@@ -375,6 +406,8 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 
   ![feedResult.png](images/feedResult.png){style="width:800px; height:auto;"}<br>
 
+Back to [table of contents](#table-of-contents).
+
 ### Deleting a person : `delete person`
 
 Deletes the specified person from Furiends.
@@ -389,6 +422,7 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
   * Feedback Box: <br>
   ![deletePerson.png](images/deletePerson.png){style="width:900px; height:auto;"}<br>
 
+Back to [table of contents](#table-of-contents).
 
 ### Deleting an animal : `delete animal`
 
@@ -403,6 +437,8 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `delete animal n/Max` Deletes the animal with name `Max` from Furiends.
   * Feedback Box: <br>
   ![deleteAnimal.png](images/deleteAnimal.png){style="width:900px; height:auto;"}<br>
+
+Back to [table of contents](#table-of-contents).
 
 ### Deleting a feeding session : `delete feed`
 Deletes a specified feeding session from Furiends.
@@ -419,6 +455,8 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
   * Feedback Box: <br>
     ![deleteFeedingSession.png](images/deleteFeedingSession.png){style="width:700px; height:auto;"}<br>
 
+Back to [table of contents](#table-of-contents).
+
 ### Viewing a person contact: `view person`
 
 Displays detailed information about a specific person from Furiends.
@@ -432,7 +470,9 @@ Format: `view person n/NAME`
 Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `view person n/Alex Yeoh` Displays detailed information for the person named `Alex Yeoh`.
 * `view person n/alex yeoh` Also displays information for `Alex Yeoh`.
-![viewPerson.png](images/viewPerson.png)
+![viewPerson.png](images/viewPerson.png){style="width:800px; height:auto;"}<br>
+
+Back to [table of contents](#table-of-contents).
 
 ### Viewing an animal contact: `view animal`
 
@@ -447,7 +487,9 @@ Format: `view animal n/NAME`
 Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `view animal n/Max` Displays detailed information for the animal named `Max`.
 * `view animal n/max` Also displays information for `Max`.
-![viewAnimal.png](images/viewAnimal.png)
+![viewAnimal.png](images/viewAnimal.png){style="width:800px; height:auto;"}<br>
+
+Back to [table of contents](#table-of-contents).
 
 ### Clearing all entries : `clear`
 
@@ -461,12 +503,16 @@ Reverts Furiends to its previous state before the last modifying command.
 
 Format: `undo`
 
-* Only works for commands that change Furiends (e.g., add, edit, delete).
+* Only works for commands that change Furiends.
+* Commands that allow `undo`: `add`, `delete`, `edit`, `clear`
 * If there are no changes to undo, an error message will be shown.
 ![undoErrorMessage.png](images/undoError.png){style="width:900px; height:auto;"}<br>
 
 Example:
-* `undo` Reverts the last add, edit, or delete command.
+* `clear` command is executed: all existing (animal and people) contacts are deleted. 
+  * `undo` will revert this command, by recovering to the state before `clear` was executed.
+
+Back to [table of contents](#table-of-contents).
 
 ### Redoing an undone change: `redo`
 
@@ -481,6 +527,8 @@ Format: `redo`
 Example:
 * `redo` Re-applies the last change that was undone.
 
+Back to [table of contents](#table-of-contents).
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -490,6 +538,8 @@ Format: `exit`
 <box type="tip" seamless>
 You can also close the main window of GUI, by clicking on the cross at the top right hand corner, to close the whole program.
 </box>
+
+Back to [table of contents](#table-of-contents).
 
 ### Saving the data
 
@@ -506,19 +556,37 @@ If your changes to the data file makes its format invalid, Furiends will discard
 Furthermore, certain edits can cause Furiends to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
+<box type="tip" seamless>
+
+If you have edited the data file, `addressbook.json`, incorrectly, please delete the data file in the `data` folder and relaunch the jar file. <br>
+Do note that **all existing contacts** will be removed. The data file will be reverted to the original state. 
+</box>
+
+Back to [table of contents](#table-of-contents).
+
 ------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous Furiends home folder.<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Furiends home folder.<br>
 
 **Q**: How do I restore all the contacts after using `find` to filter?<br>
 **A**: In the command input, enter `list` to view all contacts.<br>
 
 **Q**: What should I do if an error message is shown in feedback box?<br>
-**A**: You can try again by correcting to the correct input following the feedback box. Or you can delete the wrong input and type `help` to get more help.<br>
+**A**: You can try again by correcting to the correct input following the feedback box. 
+Or you can delete the wrong input and type `help` to get more help.<br>
+
+**Q**: The app stopped working after I edited the data file, `addressbook.json`. What should I do? <br>
+<box type="warning" seamless>
+All existing contacts will be deleted after you perform this recovery step.
+</box>
+
+**A**: Delete the data file `addressbook.json` located in the `data` folder, where `furiends.jar` is located. 
+Relaunch the `jar` file. <br> 
+
+Back to [table of contents](#table-of-contents).
 
 ------------------------------------------------------------------------------------------------
 
@@ -527,10 +595,13 @@ the data of your previous Furiends home folder.<br>
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
+Back to [table of contents](#table-of-contents).
+
 ------------------------------------------------------------------------------------------------
 <div style="page-break-before: always;"></div>
 
 ## Command summary
+* Refer to input restrictions [here](#valid-inputs-format)!
 
 Action (in alphabetical order) | Format, Examples
 ----------------------|------------------------------------------------------------------------------------------------
@@ -544,11 +615,13 @@ Action (in alphabetical order) | Format, Examples
 **Edit Person**                | `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… [f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]…​`<br> e.g.,`edit person John Doe n/James Lee e/jameslee@example.com`
 **Exit**                       | `exit`
 **Feed**                       | `feed f/PERSON_NAME n/ANIMAL_NAME dt/DATETIME`<br> e.g., `feed n/Fluffy f/John Doe dt/2005-04-09 10:00`
-**Find Animal**                | `find animal KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Fluffy n/Max
-**Find Person**                | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James t/family`t/cute`
+**Find Animal**                | `find animal [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]`<br> e.g., `find n/Fluffy n/Max t/cute`
+**Find Person**                | `find person [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]`<br> e.g., `find n/James t/family`
 **Help**                       | `help [COMMAND]`<br> e.g. `help` <br> e.g. `help add person`
 **List**                       | `list`
 **Redo**                       | `redo`
 **Undo**                       | `undo`
 **View Person**                | `view person n/NAME`<br> e.g., `view person n/Alex Yeoh`
 **View Animal**                | `view animal n/NAME`<br> e.g., `view animal n/Max`
+
+Back to [table of contents](#table-of-contents).
