@@ -121,6 +121,9 @@ The GUI is made up of the following components:
 * Extra parameters for commands that do not take in parameters
   (such as `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `list 123`, it will be interpreted as `list`.
+
+* `person/animal` specifier is case-insensitive for all commands. <br>
+  e.g. `add person ...` and `add pErSon ...` will be parsed as the same command.
 </box>
 
 <box type="warning" seamless>
