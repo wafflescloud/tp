@@ -56,7 +56,7 @@ public class FeedingSessionTest {
     }
 
     @Test
-    public void constructor_withId_nullId_throwsNullPointerException() {
+    public void constructorWithId_nullId_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
             new FeedingSession(null, VALID_ANIMAL_ID, VALID_PERSON_ID, VALID_DATE_TIME));
     }

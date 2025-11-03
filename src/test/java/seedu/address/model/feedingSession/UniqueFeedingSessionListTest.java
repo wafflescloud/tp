@@ -61,14 +61,14 @@ public class UniqueFeedingSessionListTest {
     }
 
     @Test
-    public void contains_byUuid_feedingSessionInList_returnsTrue() {
+    public void containsUuid_sessionInList_returnsTrue() {
         FeedingSession session = new FeedingSession(SESSION_ID, ANIMAL_ID_1, PERSON_ID_1, DATE_TIME_1);
         uniqueFeedingSessionList.add(session);
         assertTrue(uniqueFeedingSessionList.contains(SESSION_ID));
     }
 
     @Test
-    public void contains_byUuid_feedingSessionNotInList_returnsFalse() {
+    public void containsUuid_sessionNotInList_returnsFalse() {
         assertFalse(uniqueFeedingSessionList.contains(UUID.randomUUID()));
     }
 
