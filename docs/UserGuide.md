@@ -6,7 +6,9 @@
 
 # Furiends User Guide
 
-Furiends is a **desktop app tailored towards animal lovers, specifically individuals who are tasked to feed stray animals.** It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Furiends can help you manage people and animals. Furiends can also allocate people to certain animals for scheduled feeding, faster than traditional GUI apps.
+Furiends is a **desktop application** tailored towards animal lovers, specifically individuals who are tasked to feed stray animals. 
+It is optimized for use of **text-based commands** while still providing **visual elements** such as windows and buttons to interact with the application. 
+Furiends can help you manage people, animals and their interactions efficiently. 
 
 ## Table of Contents
 
@@ -14,24 +16,24 @@ Furiends is a **desktop app tailored towards animal lovers, specifically individ
 - [Overview of GUI](#overview-of-gui)
 - [Features](#features)
   - [Valid input formats](#valid-inputs-format)
-  - [Viewing help : `help`](#viewing-help--help)
+  - [Viewing help: `help`](#viewing-help-help)
   - [Adding a person: `add person`](#adding-a-person-add-person)
   - [Adding an animal: `add animal`](#adding-an-animal-add-animal)
-  - [Listing all contacts : `list`](#listing-all-contacts--list)
-  - [Editing a person : `edit person`](#editing-a-person--edit-person)
-  - [Editing an animal : `edit animal`](#editing-an-animal--edit-animal)
-  - [Locating people by name: `find person`](#locating-people-by-name-find-person)
-  - [Locating animals by name: `find animal`](#locating-animals-by-name-find-animal)
-  - [Feeding an animal : `feed`](#feeding-an-animal--feed)
-  - [Deleting a person : `delete person`](#deleting-a-person--delete-person)
-  - [Deleting an animal : `delete animal`](#deleting-an-animal--delete-animal)
-  - [Deleting a feeding session : `delete feed`](#deleting-a-feeding-session--delete-feed)
+  - [Listing all contacts: `list`](#listing-all-contacts-list)
+  - [Editing a person: `edit person`](#editing-a-person-edit-person)
+  - [Editing an animal: `edit animal`](#editing-an-animal-edit-animal)
+  - [Finding people by name: `find person`](#finding-people-by-name-find-person)
+  - [Finding animals by name: `find animal`](#finding-animals-by-name-find-animal)
+  - [Feeding an animal: `feed`](#feeding-an-animal-feed)
+  - [Deleting a person: `delete person`](#deleting-a-person-delete-person)
+  - [Deleting an animal: `delete animal`](#deleting-an-animal-delete-animal)
+  - [Deleting a feeding session: `delete feed`](#deleting-a-feeding-session-delete-feed)
   - [Viewing a person contact: `view person`](#viewing-a-person-contact-view-person)
   - [Viewing an animal contact: `view animal`](#viewing-an-animal-contact-view-animal)
-  - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+  - [Clearing all entries: `clear`](#clearing-all-entries-clear)
   - [Undoing the last change: `undo`](#undoing-the-last-change-undo)
   - [Redoing an undone change: `redo`](#redoing-an-undone-change-redo)
-  - [Exiting the program : `exit`](#exiting-the-program--exit)
+  - [Exiting the program: `exit`](#exiting-the-program-exit)
   - [Saving the data](#saving-the-data)
   - [Editing the data file](#editing-the-data-file)
 - [FAQ](#faq)
@@ -47,42 +49,42 @@ Furiends is a **desktop app tailored towards animal lovers, specifically individ
    **Windows users:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).
 
    - To check the Java version in your device, open the terminal and type `java --version`.
-
-![versionCommand](images/versionCommand.png){style="width:900px; height:auto;"}<br>
+   - You should obtain an output like this:
+   
+     ![versionCommand](images/versionCommand.png){style="width:900px; height:auto;"}<br>
 
 2. Download the latest `furiends.jar` file from [here](https://github.com/AY2526S1-CS2103T-W14-3/tp/releases).
 
 ![GitHubReleases](images/furiendsGitHub.png){style="width:900px; height:auto;"}<br>
 
-3. Copy the file to the folder you want to use as the _home folder_ for your Furiends application.
-
-4. Open a command terminal, `cd` into the folder you put the `furiends.jar` file in.
 <box type="tip" seamless>
 
 The file is usually in `downloads` after downloading it.
 </box>
 
-![Terminal](images/terminal.png){style="width:900px; height:auto;"}<br>
+3. Copy the file to the folder you want to use as the _home folder_ for your Furiends application.
 
-5. Use the `java -jar furiends.jar` command to run the application.
+4. Open a command terminal, `cd` into the folder you put the `furiends.jar` file in.
+   - `<FURIENDS_DIRECTORY>` is the folder containing the `furiends.jar` file. <br>
+   - Use the command `cd <FURIENDS_DIRECTORY>`. <br><br>
 
-![jarCommand](images/jarCommand.jpg){style="width:900px; height:auto;"}<br>
+5. Use the `java -jar furiends.jar` command to run Furiends.
 
 
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the application contains some sample data.<br>
    ![Ui](images/Ui.png){style="width:900px; height:auto;"}<br>
-   For more details on the GUI, refer to the [Overview of GUI](#overview-of-gui) section.
+   For more details on the GUI, you can refer to the [Overview of GUI](#overview-of-gui) section.
 
 5. Type the command in the command box (displaying "Enter command here...") and press Enter to execute it.<br>
-   Some simple commands you can try:
+   Here are some simple commands you can try:
 
    * `help` : Shows the help page with the full list of commands.
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all people's and animals' contacts.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all people's and animals' contacts.
 
-   * `exit` : Exits the app.
+   * `exit` : Exits the Furiends application.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -94,7 +96,7 @@ The file is usually in `downloads` after downloading it.
 The GUI is made up of the following components:
 1. **Options Panel**: Contains menu bars to exit (File > Exit) and open the help panel (Help > Help).
 2. **Command Box**: Commands are entered in this text box. Press the Enter key to execute the command.
-3. **Feedback Box**: The app displays the result of the executed command in this box.
+3. **Feedback Box**: Furiends displays the result of the executed command in this box.
 4. **Person View**: Displays the list of people stored in Furiends.
 5. **Animal View**: Displays the list of animals stored in Furiends.
 
@@ -112,7 +114,7 @@ The GUI is made up of the following components:
   e.g `n/NAME ... [t/TAG]` can be used as `n/John Doe ... t/friend` (friend tag added)
   or as `n/John Doe ... `(no tag provided).
 
-* Items with `…` after them can be used multiple times, including zero times. <br>
+* Items with `…` after them can be used multiple times, including zero. <br>
   For example, `[t/TAG]…` can be omitted, used once as `t/friend`, or used multiple times as `t/friend t/family`.
 
 * Parameters can be in any order.<br>
@@ -133,8 +135,11 @@ Back to [table of contents](#table-of-contents).
 ### Valid Inputs Format
 * `NAME`/`PERSON_NAME`/`ANIMAL_NAME`
   * Can only contain letters (`A-Z` and `a-z` only).
+  
   * Character limit of 1-30 (after removal of additional white spaces).
+  
   * Person/animal names are unique, no duplicate names accepted.
+  
   * Case-insensitive.
   <box type="tip" seamless>
 
@@ -143,62 +148,90 @@ Back to [table of contents](#table-of-contents).
 
 * `PHONE`
   * Can only contain digits `0-9`.
+  
   * 8 digits strictly required.
+  
   * The starting digit must be `6`, `8` or `9`, following a valid Singapore number format.
+  
   * Phone numbers are unique, no duplicate numbers accepted.
+  
   * e.g. `91234567`, `81234567` <br><br>
 
 * `EMAIL`
   * Must adhere to the **RFC5322** email format:
   * `local-part@domain`
-    * `local-part`: can contain letters, digits or special characters
+    * `local-part`: can contain letters, digits or special characters <br><br>
     <box type="info" seamless>
-
+    
     Periods `.` are allowed, but it **cannot** be at the start or the end of the `local-part`.
     </box>
     <box type="warning" seamless>
 
     **Special characters not supported:** Parentheses `()`, angle brackets `<>`, square brackets `[]`,
-    semicolons `;`, colons `:`, at symbols `@` (except as the separator), backslashes `\`,
-    commas `,`, and quotes `"` are **not allowed** in the `local-part`.
+  semicolons `;`, colons `:`, at symbols `@` (except as the separator), backslashes `\`,
+  commas `,`, and quotes `"` are **not allowed** in the `local-part`.
     </box>
-
-    * `@`: must have separator symbol between `local-part` and `domain`
-    * `domain`: must follow domain naming conventions and have a hierarchical structure of `example.com`
+  
+    * `@`: must have separator symbol between `local-part` and `domain`.
+    * `domain`: must follow domain naming conventions and have a hierarchical structure of `example.com` <br><br>
   * **Character limit: 988** (including `@` and all characters).
-  * e.g. `johndoe@email.com`, `he.he_123@gotmail.com` <br>
-<br>
+  * Emails are unique, no duplicate emails accepted.
+  * e.g. `johndoe@email.com`, `he.he_123@gotmail.com` <br><br>
+
 * `TAG`
   * Can only contain letters and digits.
+  
   * Character limit of 30 (including all white spaces).
+  
   * e.g. `fluffy fur`, `cutie12 3`, `barker` <br>
 <br>
 * `DATETIME`
-  * Format: `YYYY-MM-DD HH:MM`
+  * Format: `YYYY-MM-DD HH:mm`
+  
   * Must be a valid date and time.
-    * `YYYY`: 4 digits year (e.g. `2025`).
-    * `MM`: 2 digits month (e.g. `March` is `03`) .
-    * `DD`: 2 digits day (e.g. `28`).
-    * `HH:MM`: 4 digits separated by `:` following the 24-hour clock (e.g. `7:05PM` is `19:05`)
+    * `YYYY` — 4 digits year.
+      * e.g. `2025`.
+      * Acceptable range of YYYY: any **positive** 4-digit integer between `0000` - `9999`.
+    * `MM` — 2 digits month.
+      * e.g. `March` is `03`, `October` is `10`. 
+      * Acceptable range of MM: any **positive** 2-digit integer between `01` - `12`.
+    * `DD` — 2 digits day 
+      * e.g. `02`, `28`.
+      * Acceptable range of DD: any **positive** 2-digit integer between
+        * For January, March, May, July, August, October, December: `01` - `31`.
+        * For February, non-leap years: `01` - `28`; leap years: `01` - `29`.
+        * For April, June, September, November: `01` - `30`. <br> 
+    * `HH:mm` — 4 digits separated by `:` following the 24-hour clock. 
+      * e.g. `7:05PM` is `19:05`.
+      * `HH` — 2 digits hours.
+        * Acceptable range of HH: any **positive** 2-digit integer between `00` - `23`.
+      * `mm` — 2 digits minutes.
+        * Acceptable range of mm: any **positive** 2-digit integer between `00` - `59`. <br><br>
+
   * Date and time is separated with **a single spacing**.
+  
   * e.g. `2025-10-01 18:59`, `2005-04-25 07:05` <br><br>
 * `DESCRIPTION`
   * Character limit of 200 (including internal white spaces).
+  
   * e.g. `cat that bites,,, meow`, `too fat need lose weight!` <br><br>
 * `LOCATION`
   * Character limit of 100 (including internal white spaces).
+  
   * e.g. `AMK Street 3497`, `blk A7!`<br><br>
 * `KEYWORD`
   * Comes in 2 different forms, `NAME` and `TAG` only.
   * Characters length of 1-30 allowed after removal of extra white spaces.
+  
   * Only alphabets `A–Z`, `a–z`, digits `0-9`, hyphens `-`, and spaces allowed.
+  
   * e.g. `n/bobby`, `n/Je`, `t/fluffy`, `t/fluf`
 
 Back to [table of contents](#table-of-contents).
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Displays a window, which links to the user guide, as well as a list of commands. <br>
 
@@ -257,7 +290,7 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 
 Back to [table of contents](#table-of-contents).
 
-### Listing all contacts : `list`
+### Listing all contacts: `list`
 
 Shows a list of all people and animals in Furiends.
 
@@ -323,9 +356,9 @@ Format: `find person [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]...`
 * People's names matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`.
 * Searching using tags must have the **exact case-insensitive spelling**.<br>
-  e.g. `t/friends` will return the same result as `t/FRIENDS`.
+  e.g. `t/friends` will return the same result as `t/FRIENDS`. 
   * Only people with the tag `friends` will be shown.
-  <box type="info" seamless>
+<box type="info" seamless>
 
   People with the tag `friend` will not be shown as the spelling is not exactly the same.
   </box>
@@ -393,10 +426,10 @@ Format: `feed f/PERSON_NAME n/ANIMAL_NAME dt/DATETIME`
 
 * **1 feeding session** can only involve **1 animal** and **1 person**.
 * 1 animal can have **more than 1 feeding sessions**. <br>
-  E.g. `Max` can have 2 different feeding sessions, 1 with `Alex Yeoh` and 1 with `Bernice Yu`.
+  e.g. `Max` can have 2 different feeding sessions, 1 with `Alex Yeoh` and 1 with `Bernice Yu`.
   * `Max` is being fed by 2 different people.
 * 1 person can feed **more than 1 animal**. <br>
-  E.g. `Alex Yeoh` can 2 different have feeding sessions, 1 with `Max` and 1 with `Luna`.
+  e.g. `Alex Yeoh` can 2 different have feeding sessions, 1 with `Max` and 1 with `Luna`.
   * `Alex Yeoh` is feeding 2 different animals.
 * `DATETIME` must be a valid day and time.
 * The order of `n/ANIMAL_NAME`, `f/PERSON_NAME` and `dt/DATETIME` does not matter.
@@ -424,7 +457,7 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 
 Back to [table of contents](#table-of-contents).
 
-### Deleting an animal : `delete animal`
+### Deleting an animal: `delete animal`
 
 Deletes the specified animal from Furiends.
 
@@ -491,7 +524,7 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 
 Back to [table of contents](#table-of-contents).
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from Furiends.
 
@@ -606,7 +639,7 @@ Back to [table of contents](#table-of-contents).
 Action (in alphabetical order) | Format, Examples
 ----------------------|------------------------------------------------------------------------------------------------
 **Add Animal**                 | `add animal n/NAME d/DESCRIPTION l/LOCATION [t/TAG]…​` <br> e.g., `add animal n/Fluffy d/White cat l/Ang Mo Kio`
-**Add Person**                 | `add person n/NAME p/PHONE e/EMAIL [t/TAG]…​`<br>e.g.,`add person n/James Ho p/92224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Person**                 | `add person n/NAME p/PHONE e/EMAIL [t/TAG]…​`<br>e.g.,`add person n/James Ho p/92224444 e/jamesho@example.com t/friend t/colleague`
 **Clear**                      | `clear`
 **Delete Animal**              | `delete animal n/NAME`<br> e.g., `delete animal n/Fluffy`
 **Delete Feed**                | `delete feed n/ANIMAL_NAME f/PERSON_NAME dt/DATETIME`<br> e.g., `delete feed n/Fluffy f/John Doe dt/2005-04-09 10:00`
