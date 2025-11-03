@@ -154,7 +154,6 @@ public class MainWindow extends UiPart<Stage> {
         animalListPanel = new AnimalListPanel(logic.getFilteredAnimalList(), logic.getFeedingSessionList(),
                 logic.getPersonList());
         animalListPanelPlaceholder.getChildren().add(animalListPanel.getRoot());
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
