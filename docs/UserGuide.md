@@ -165,13 +165,13 @@ Back to [table of contents](#table-of-contents).
   * `local-part@domain`
     * `local-part`: can contain alphanumeric characters and special characters such as ``!#$%&'*+/=?^_`{|}~-`` <br><br>
     <box type="warning" seamless>
-    
+
     Periods `.` are allowed in the `local-part`, but it **cannot** start or end with a period.
     Consecutive periods `..` are also not allowed.
     </box>
     <box type="info" seamless>
 
-    The `local-part` can also be a quoted string (enclosed in double quotes `"`), which allows 
+    The `local-part` can also be a quoted string (enclosed in double quotes `"`), which allows
     additional special characters and spaces.
     </box>
 
@@ -447,7 +447,15 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 
   ![feedResult.png](images/feedResult.png){style="width:800px; height:auto;"}<br>
 
-Back to [table of contents](#table-of-contents).
+<box type="info" seamless>
+
+**The earliest feeding date is displayed in the main gui** beside each contact with at least 1 feeding session.
+
+To view all feeding sessions associated to a contact, use the [View](#viewing-a-person-contact-view-person) command or double click on a contact to bring up the full contact information.
+
+</box>
+
+Back to [table of conents](#table-of-contents).
 
 ### Deleting a person : `delete person`
 
