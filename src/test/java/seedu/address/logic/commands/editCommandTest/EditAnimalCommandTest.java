@@ -24,9 +24,9 @@ import seedu.address.logic.commands.EditAnimalCommand.EditAnimalDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Name;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.animal.Animal;
-import seedu.address.model.animal.AnimalName;
 import seedu.address.testutil.AnimalBuilder;
 import seedu.address.testutil.EditAnimalDescriptorBuilder;
 
@@ -40,7 +40,7 @@ public class EditAnimalCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         // Build a descriptor with new values using a fresh Animal
         Animal descriptorSource = new AnimalBuilder().build();
-        AnimalName animalName = model.getFilteredAnimalList().get(0).getName();
+        Name animalName = model.getFilteredAnimalList().get(0).getName();
         EditAnimalDescriptor descriptor = new EditAnimalDescriptorBuilder(descriptorSource).build();
         EditAnimalCommand editCommand = new EditAnimalCommand(animalName, descriptor);
 
@@ -67,7 +67,7 @@ public class EditAnimalCommandTest {
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Index indexLastAnimal = Index.fromOneBased(model.getFilteredAnimalList().size());
         Animal lastAnimal = model.getFilteredAnimalList().get(indexLastAnimal.getZeroBased());
-        AnimalName lastAnimalName = lastAnimal.getName();
+        Name lastAnimalName = lastAnimal.getName();
 
         AnimalBuilder animalInList = new AnimalBuilder(lastAnimal);
         Animal editedAnimal = animalInList.withName(VALID_NAME_KITTY)
@@ -91,7 +91,7 @@ public class EditAnimalCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        AnimalName animalName = model.getFilteredAnimalList().get(0).getName();
+        Name animalName = model.getFilteredAnimalList().get(0).getName();
 
         EditAnimalCommand editCommand = new EditAnimalCommand(animalName, new EditAnimalDescriptor());
         Animal editedAnimal = model.getFilteredAnimalList().get(0);
@@ -110,7 +110,7 @@ public class EditAnimalCommandTest {
 
         Animal animalInFilteredList = model.getFilteredAnimalList().get(INDEX_FIRST_ANIMAL.getZeroBased());
         Animal editedAnimal = new AnimalBuilder(animalInFilteredList).withName(VALID_NAME_KITTY).build();
-        AnimalName animalName = model.getFilteredAnimalList().get(INDEX_FIRST_ANIMAL.getZeroBased()).getName();
+        Name animalName = model.getFilteredAnimalList().get(INDEX_FIRST_ANIMAL.getZeroBased()).getName();
 
         EditAnimalCommand editCommand = new EditAnimalCommand(animalName,
                 new EditAnimalDescriptorBuilder().withName(VALID_NAME_KITTY).build());
@@ -130,7 +130,7 @@ public class EditAnimalCommandTest {
         EditAnimalDescriptor descriptor = new EditAnimalDescriptorBuilder(firstAnimal).build();
 
         Animal secondAnimal = model.getFilteredAnimalList().get(INDEX_SECOND_ANIMAL.getZeroBased());
-        AnimalName secondAnimalName = secondAnimal.getName();
+        Name secondAnimalName = secondAnimal.getName();
         EditAnimalCommand editCommand = new EditAnimalCommand(secondAnimalName, descriptor);
 
         assertCommandFailure(editCommand, model, EditAnimalCommand.MESSAGE_DUPLICATE_ANIMAL);
@@ -143,7 +143,7 @@ public class EditAnimalCommandTest {
         // edit animal in filtered list into a duplicate in address book
         Animal animalInList = model.getAddressBook().getAnimalList().get(INDEX_SECOND_ANIMAL.getZeroBased());
         Animal animal = model.getFilteredAnimalList().get(INDEX_FIRST_ANIMAL.getZeroBased());
-        AnimalName animalName = animal.getName();
+        Name animalName = animal.getName();
         EditAnimalCommand editCommand = new EditAnimalCommand(animalName,
                 new EditAnimalDescriptorBuilder(animalInList).build());
 
@@ -152,8 +152,8 @@ public class EditAnimalCommandTest {
 
     @Test
     public void equals_animal() {
-        AnimalName firstAnimalName = new AnimalName(VALID_NAME_CHOCO);
-        AnimalName secondAnimalName = new AnimalName(VALID_NAME_KITTY);
+        Name firstAnimalName = new Name(VALID_NAME_CHOCO);
+        Name secondAnimalName = new Name(VALID_NAME_KITTY);
 
         final EditAnimalCommand standardCommand = new EditAnimalCommand(firstAnimalName, DESC_CHOCO);
 
@@ -180,7 +180,7 @@ public class EditAnimalCommandTest {
 
     @Test
     public void toStringMethod_animal() {
-        AnimalName animalName = new AnimalName(VALID_NAME_CHOCO);
+        Name animalName = new Name(VALID_NAME_CHOCO);
         EditAnimalDescriptor editAnimalDescriptor = new EditAnimalDescriptor();
         EditAnimalCommand editCommand = new EditAnimalCommand(animalName, editAnimalDescriptor);
         String expected = EditAnimalCommand.class.getCanonicalName() + "{name=" + animalName

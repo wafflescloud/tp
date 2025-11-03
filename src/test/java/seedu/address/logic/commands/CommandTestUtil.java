@@ -20,8 +20,8 @@ import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ContactContainsKeywordsPredicate;
-import seedu.address.model.ContactContainsKeywordsPredicate;
 import seedu.address.model.Model;
+import seedu.address.model.animal.Animal;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditAnimalDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -60,10 +60,10 @@ public class CommandTestUtil {
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String NAME_DESC_CHOCO = " " + PREFIX_NAME + VALID_NAME_CHOCO;
     public static final String NAME_DESC_KITTY = " " + PREFIX_NAME + VALID_NAME_KITTY;
-    public static final String DESCRIPTION_DESC_CHOCO = " " + PREFIX_DESCRIPTION + VALID_NAME_CHOCO;
-    public static final String DESCRIPTION_DESC_KITTY = " " + PREFIX_DESCRIPTION + VALID_NAME_KITTY;
-    public static final String LOCATION_DESC_CHOCO = " " + PREFIX_LOCATION + VALID_NAME_CHOCO;
-    public static final String LOCATION_DESC_KITTY = " " + PREFIX_LOCATION + VALID_NAME_KITTY;
+    public static final String DESCRIPTION_DESC_CHOCO = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_CHOCO;
+    public static final String DESCRIPTION_DESC_KITTY = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_KITTY;
+    public static final String LOCATION_DESC_CHOCO = " " + PREFIX_LOCATION + VALID_LOCATION_CHOCO;
+    public static final String LOCATION_DESC_KITTY = " " + PREFIX_LOCATION + VALID_LOCATION_KITTY;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
@@ -76,6 +76,7 @@ public class CommandTestUtil {
     public static final String LOCATION_DESC_BELLA = " " + PREFIX_LOCATION + VALID_LOCATION_BELLA;
     public static final String LOCATION_DESC_FLUFFY = " " + PREFIX_LOCATION + VALID_LOCATION_FLUFFY;
 
+    public static final String INVALID_NAME_MAX = "Max";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
