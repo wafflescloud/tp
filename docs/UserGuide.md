@@ -123,6 +123,9 @@ The GUI is made up of the following components:
 * Extra parameters for commands that do not take in parameters
   (such as `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `list 123`, it will be interpreted as `list`.
+
+* Command keywords, and type specifiers should be in lowercase. <br>
+  (Command keywords referring to `add`, `delete`, etc. Type specifiers referring to  `person`/`animal`.)
 </box>
 
 <box type="warning" seamless>
