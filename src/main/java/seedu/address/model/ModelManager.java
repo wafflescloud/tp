@@ -28,7 +28,9 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+    private final ObservableList<Person> personsList;
     private final FilteredList<Person> filteredPersons;
+    private final ObservableList<Animal> animalsList;
     private final FilteredList<Animal> filteredAnimals;
 
     private final Stack<State> undoStack;
@@ -42,7 +44,9 @@ public class ModelManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.personsList = this.addressBook.getPersonList();
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.animalsList = this.addressBook.getAnimalList();
         this.filteredAnimals = new FilteredList<>(this.addressBook.getAnimalList());
         this.undoStack = new Stack<>();
         this.redoStack = new Stack<>();
@@ -192,6 +196,11 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public ObservableList<Person> getPersonList() {
+        return personsList;
+    }
+
     // =========== Animal Operations =========================================================================
 
     @Override
@@ -239,6 +248,11 @@ public class ModelManager implements Model {
         saveState();
         requireAllNonNull(target, editedAnimal);
         addressBook.setAnimal(target, editedAnimal);
+    }
+
+    @Override
+    public ObservableList<Animal> getAnimalList() {
+        return animalsList;
     }
 
     // =========== Filtered Person List Accessors =============================================================

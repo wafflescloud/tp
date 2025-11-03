@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -20,6 +21,12 @@ public class PhoneTest {
     }
 
     @Test
+    public void constructor_trimsWhitespace() {
+        Phone phone = new Phone("  91234567  ");
+        assertEquals("91234567", phone.value);
+    }
+
+    @Test
     public void isValidPhone() {
         // null phone number
         assertThrows(NullPointerException.class, () -> Phone.isValidPhone(null));
@@ -27,16 +34,23 @@ public class PhoneTest {
         // invalid phone numbers
         assertFalse(Phone.isValidPhone("")); // empty string
         assertFalse(Phone.isValidPhone(" ")); // spaces only
-        assertFalse(Phone.isValidPhone("91")); // non 8-digit phone number
+        assertFalse(Phone.isValidPhone("91")); // less than 3 digits
+        assertFalse(Phone.isValidPhone("12")); // only 2 digits
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
-        assertFalse(Phone.isValidPhone("11111111"));
+        assertFalse(Phone.isValidPhone("93-121534")); // contains dash
+        assertFalse(Phone.isValidPhone("+6591234567")); // contains plus sign
 
         // valid phone numbers
-        assertTrue(Phone.isValidPhone("61234567")); // 8-digit beginning with 6
-        assertTrue(Phone.isValidPhone("93121534")); // 8-digit beginning with 9
-        assertTrue(Phone.isValidPhone("81234444")); // 8-digits beginning with 8
+        assertTrue(Phone.isValidPhone("123")); // exactly 3 digits
+        assertTrue(Phone.isValidPhone("1234")); // 4 digits
+        assertTrue(Phone.isValidPhone("11111111")); // 8 digits starting with 1
+        assertTrue(Phone.isValidPhone("61234567")); // 8 digits starting with 6
+        assertTrue(Phone.isValidPhone("93121534")); // 8 digits starting with 9
+        assertTrue(Phone.isValidPhone("81234444")); // 8 digits starting with 8
+        assertTrue(Phone.isValidPhone("999")); // 3 digits starting with 9
+        assertTrue(Phone.isValidPhone("12345678901234567890")); // very long number
     }
 
     @Test
@@ -57,5 +71,21 @@ public class PhoneTest {
 
         // different values -> returns false
         assertFalse(phone.equals(new Phone("99512345")));
+
+        // whitespace differences (trimmed) -> returns true
+        assertTrue(phone.equals(new Phone("  91234567  ")));
+    }
+
+    @Test
+    public void hashCode_samePhone_returnsSameHashCode() {
+        Phone phone1 = new Phone("91234567");
+        Phone phone2 = new Phone("91234567");
+        assertEquals(phone1.hashCode(), phone2.hashCode());
+    }
+
+    @Test
+    public void toStringMethod() {
+        Phone phone = new Phone("91234567");
+        assertEquals("91234567", phone.toString());
     }
 }

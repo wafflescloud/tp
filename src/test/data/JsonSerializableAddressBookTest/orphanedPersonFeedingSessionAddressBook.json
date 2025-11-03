@@ -1,0 +1,31 @@
+{
+  "persons": [
+    {
+      "id": "0d0d0d0d-1111-2222-3333-444444444444",
+      "name": "Test Person",
+      "phone": "91234567",
+      "email": "tester@example.com",
+      "feedingSessionIds": [
+        "abababab-abab-abab-abab-abababababab"
+      ]
+    }
+  ],
+  "animals": [
+    {
+      "id": "1e1e1e1e-aaaa-bbbb-cccc-555555555555",
+      "name": "Test Animal",
+      "description": "Desc",
+      "location": "Loc",
+      "feedingSessionIds": []
+    }
+  ],
+  "feedingSessions": [
+    {
+      "id": "2f2f2f2f-cccc-dddd-eeee-666666666666",
+      "animalId": "1e1e1e1e-aaaa-bbbb-cccc-555555555555",
+      "personId": "0d0d0d0d-1111-2222-3333-444444444444",
+      "dateTime": "2024-06-01T10:00:00"
+    }
+  ]
+}
+
