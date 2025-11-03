@@ -146,6 +146,13 @@
     -fx-padding: 0 0 0 0;
 }
 
+.list-view, .list-cell {
+    -fx-padding: 0;
+}
+.list-cell > * {
+    -fx-max-width: Infinity;
+}
+
 .list-cell:filled:even {
     -fx-background-color: -color-bg-tertiary-90;
 }

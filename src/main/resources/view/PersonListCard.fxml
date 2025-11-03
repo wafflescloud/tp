@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" maxWidth="Infinity">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="250" />
-      <ColumnConstraints hgrow="ALWAYS" minWidth="0" />
+      <ColumnConstraints percentWidth="65" fillWidth="true" minWidth="0" hgrow="ALWAYS" />
+      <ColumnConstraints percentWidth="35" fillWidth="true" minWidth="0" hgrow="ALWAYS" />
     </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" fillWidth="true">
       <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
@@ -26,19 +26,17 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" styleClass="cell_big_label" />
+        <Label fx:id="name" styleClass="cell_big_label" HBox.hgrow="ALWAYS" maxWidth="Infinity" textOverrun="ELLIPSIS" />
       </HBox>
-      <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" />
-      <Label fx:id="email" styleClass="cell_small_label" />
+      <FlowPane fx:id="tags" maxWidth="Infinity" />
+      <Label fx:id="phone" styleClass="cell_small_label" maxWidth="Infinity" textOverrun="ELLIPSIS" />
+      <Label fx:id="email" styleClass="cell_small_label" maxWidth="Infinity" textOverrun="ELLIPSIS" />
     </VBox>
 
     <StackPane fx:id="feedingBox"
                GridPane.columnIndex="1"
-               GridPane.halignment="RIGHT"
                GridPane.valignment="CENTER"
-               GridPane.hgrow="NEVER"
-               maxWidth="150"
+               GridPane.hgrow="ALWAYS"
                minHeight="80"
                style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 2; -fx-background-radius: 10; -fx-border-radius: 10;">
       <GridPane.margin>
@@ -51,13 +49,13 @@
         <Insets top="5" right="15" bottom="5" left="5" />
       </padding>
 
-      <VBox fx:id="feedingVBox">
+      <VBox fx:id="feedingVBox" fillWidth="true">
         <padding>
           <Insets top="5" right="5" bottom="5" left="10" />
         </padding>
-        <Label fx:id="animalName" styleClass="cell_big_label" />
-        <Label fx:id="feedingDate" styleClass="cell_small_label" />
-        <Label fx:id="feedingTime" styleClass="cell_small_label" />
+        <Label fx:id="animalName" styleClass="cell_big_label" maxWidth="Infinity" textOverrun="ELLIPSIS" />
+        <Label fx:id="feedingDate" styleClass="cell_small_label" maxWidth="Infinity" textOverrun="ELLIPSIS" />
+        <Label fx:id="feedingTime" styleClass="cell_small_label" maxWidth="Infinity" textOverrun="ELLIPSIS" />
       </VBox>
     </StackPane>
   </GridPane>
