@@ -37,7 +37,7 @@ import seedu.address.testutil.PersonBuilder;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditPersonCommand.
  */
-public class EditCommandTest {
+public class EditPersonCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -213,7 +213,7 @@ public class EditCommandTest {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditPersonCommand editCommand = new EditPersonCommand(personName, editPersonDescriptor);
         String expected = EditPersonCommand.class.getCanonicalName() + "{name=" + personName
-                + ", editDescriptor=" + editPersonDescriptor + "}";
+                + ", editPersonDescriptor=" + editPersonDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
 
@@ -223,7 +223,7 @@ public class EditCommandTest {
         EditAnimalDescriptor editAnimalDescriptor = new EditAnimalDescriptor();
         EditAnimalCommand editCommand = new EditAnimalCommand(animalName, editAnimalDescriptor);
         String expected = EditAnimalCommand.class.getCanonicalName() + "{name=" + animalName
-                + ", editDescriptor=" + editAnimalDescriptor + "}";
+                + ", editAnimalDescriptor=" + editAnimalDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
 }

@@ -117,7 +117,7 @@ public class EditPersonCommand extends EditCommand {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("editDescriptor", editPersonDescriptor)
+                .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }
 
