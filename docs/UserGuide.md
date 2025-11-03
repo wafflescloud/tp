@@ -45,8 +45,8 @@ Furiends can help you manage people, animals and their interactions efficiently.
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
-  **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html). <br>
-  **Windows users:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).
+  **For Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html). <br>
+  **For Windows users:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).
 
     - To check the Java version in your device, open the terminal and type `java --version`.
     - You should obtain an output like below:
@@ -58,7 +58,7 @@ Furiends can help you manage people, animals and their interactions efficiently.
 
 2. Download the latest `furiends.jar` file from [here](https://github.com/AY2526S1-CS2103T-W14-3/tp/releases).
 
-![GitHubReleases](images/furiendsGithub.png){style="width:900px; height:auto;"}<br>
+![GitHubReleases](images/furiendsGithub.png){style="width:900px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);"}<br>
 
 <box type="tip" seamless>
 
@@ -87,7 +87,7 @@ The file is usually in the `Downloads` folder after downloading it.
     <br>
 
    A GUI similar to the below should appear in a few seconds. Note how the application contains some sample data.<br>
-   ![Ui](images/Ui.png){style="width:900px; height:auto;"}<br>
+   ![Ui](images/ui.png){style="width:900px; height:auto;"}<br>
    For more details on the GUI, you can refer to the [Overview of GUI](#overview-of-gui) section.
 
 6. Type the command in the command box (displaying "Enter command here...") and press Enter to execute it.<br>
@@ -106,14 +106,16 @@ The file is usually in the `Downloads` folder after downloading it.
 ------------------------------------------------------------------------------------------------
 
 ## Overview of GUI
-![Ui](images/Ui_explanation.png){style="width:900px; height:auto;"}
+![Ui](images/uiExplanation.png){style="width:900px; height:auto;"}
 
 The GUI is made up of the following components:
 1. **Options Panel**: Contains menu bars to exit (File > Exit) and open the help panel (Help > Help).
 2. **Command Box**: Commands are entered in this text box. Press the Enter key to execute the command.
 3. **Feedback Box**: Furiends displays the result of the executed command in this box.
-4. **Person View**: Displays the list of people stored in Furiends.
-5. **Animal View**: Displays the list of animals stored in Furiends.
+4. **Person List**: Displays the list of people stored in Furiends.
+   * The **feeding session** shown under each person indicates the earliest feeding session for the animals that person is feeding.
+5. **Animal List**: Displays the list of animals stored in Furiends.
+   * The **feeding session** shown under each animal indicates the earliest feeding session for the people feeding that animal.
 
 ------------------------------------------------------------------------------------------------
 
@@ -159,6 +161,7 @@ Back to [table of contents](#table-of-contents).
   * Person/animal names are unique, no duplicate names accepted.
 
   * Case-insensitive.
+
   <box type="tip" seamless>
 
     Input `john` is the same as `JOHN`.
@@ -173,7 +176,9 @@ Back to [table of contents](#table-of-contents).
 
   * Phone numbers are unique, no duplicate numbers accepted.
 
-  * e.g. `91234567`, `81234567` <br><br>
+  * e.g. `91234567`, `81234567`
+
+<br>
 
 * `EMAIL`
   * Must adhere to the **RFC5322** email format:
@@ -198,54 +203,84 @@ Back to [table of contents](#table-of-contents).
   * **Character limit: 998** (including `@` and all characters).
   * Emails are unique, no duplicate emails accepted.
   * Emails are **case-insensitive** for both `local-part` and `domain`.
-  * e.g. `johndoe@email.com`, `he.he_123@gotmail.com`, `user+tag@example.co.uk` <br><br>
+  * e.g. `johndoe@email.com`, `he.he_123@gotmail.com`, `user+tag@example.co.uk`
+
+  <br>
 
 * `TAG`
   * Can only contain letters and digits.
 
   * Character limit of 30 (including all white spaces).
 
-  * e.g. `fluffy fur`, `cutie12 3`, `barker` <br>
+  * e.g. `fluffy fur`, `cutie12 3`, `barker`
+
 <br>
+
 * `DATETIME`
   * Format: `YYYY-MM-DD HH:mm`
 
   * Must be a valid date and time.
-    * `YYYY` — 4 digits year.
-      * e.g. `2025`.
-      * Acceptable range of YYYY: any **positive** 4-digit integer between `0000` - `9999`.
-    * `MM` — 2 digits month.
-      * e.g. `March` is `03`, `October` is `10`.
-      * Acceptable range of MM: any **positive** 2-digit integer between `01` - `12`.
-    * `DD` — 2 digits day
-      * e.g. `02`, `28`.
-      * Acceptable range of DD: any **positive** 2-digit integer between
-        * For January, March, May, July, August, October, December: `01` - `31`.
-        * For February, non-leap years: `01` - `28`; leap years: `01` - `29`.
-        * For April, June, September, November: `01` - `30`. <br>
-    * `HH:mm` — 4 digits separated by `:` following the 24-hour clock.
-      * e.g. `7:05PM` is `19:05`.
-      * `HH` — 2 digits hours.
-        * Acceptable range of HH: any **positive** 2-digit integer between `00` - `23`.
-      * `mm` — 2 digits minutes.
-        * Acceptable range of mm: any **positive** 2-digit integer between `00` - `59`. <br><br>
 
-  * Date and time is separated with **a single spacing**.
+    * `YYYY` — 4-digit year
+      * e.g. `2025`
+      * Acceptable range: `0000` - `9999`
 
-  * e.g. `2025-10-01 18:59`, `2005-04-25 07:05` <br><br>
+    <br>
+
+    * `MM` — 2-digit month
+      * e.g. `March` is `03`, `October` is `10`
+      * Acceptable range: `01` - `12`
+
+    <br>
+
+    * `DD` — 2-digit day
+      * e.g. `02`, `28`
+      * Acceptable range depends on the month:
+        * `01` - `31`: January, March, May, July, August, October, December
+        * `01` - `30`: April, June, September, November
+        * `01` - `28`: February (non-leap years)
+        * `01` - `29`: February (leap years)
+
+    <br>
+
+    * `HH:mm` — 4 digits separated by `:` following the 24-hour clock
+      * e.g. `7:05PM` is `19:05`
+      * `HH` — 2-digit hours
+        * Acceptable range: `00` - `23`
+      * `mm` — 2-digit minutes
+        * Acceptable range: `00` - `59`
+
+  <br>
+
+  * Date and time must be separated by **a single space**
+  * e.g. `2025-10-01 18:59`, `2005-04-25 07:05`
+
+  <br>
+
 * `DESCRIPTION`
   * Character limit of 200 (including internal white spaces).
 
-  * e.g. `cat that bites,,, meow`, `too fat need lose weight!` <br><br>
+  * e.g. `cat that bites,,, meow`, `too fat need lose weight!`
+
+  <br>
+
 * `LOCATION`
   * Character limit of 100 (including internal white spaces).
 
-  * e.g. `AMK Street 3497`, `blk A7!`<br><br>
+  * e.g. `AMK Street 3497`, `blk A7!`
+
+  <br>
+
 * `KEYWORD`
   * Comes in 2 different forms, `NAME` and `TAG` only.
+
   * Characters length of 1-30 allowed after removal of extra white spaces.
+
   * Only alphabets `A–Z`, `a–z`, digits `0-9`, and spaces allowed.
+
   * e.g. `n/bobby`, `n/Max 1`, `t/fluffy`, `t/fluf`
+
+<br>
 
 Back to [table of contents](#table-of-contents).
 
@@ -290,9 +325,7 @@ Format: `add person n/NAME p/PHONE e/EMAIL [t/TAG]…​`
 Examples: refer to input restrictions [here](#valid-inputs-format)!
 * `add person n/John Doe p/98765432 e/johnd@example.com`
 * `add person n/Betsy Crowe t/friend e/betsycrowe@example.com p/91234567 t/criminal`<br>
-![addPersonOutputBox.png](images/addPersonOuputBox.png){style="width:700px; height:auto;"}
-  * new person contact card created: <br>
-![personCard.png](images/personCard.png){style="width:400px; height:auto;"} <br>
+  ![addPersonExample.png](images/addPersonExample.png){style="width:700px; height:auto;"}
 
 Back to [table of contents](#table-of-contents).
 
@@ -302,11 +335,9 @@ Adds an animal to Furiends.
 
 Format: `add animal n/NAME d/DESCRIPTION l/LOCATION [t/TAG]…​`
 
-Examples: refer to input restrictions [here](#valid-inputs-format)!
+Examples: refer to input restrictions [here](#valid-inputs-format)
 * `add animal n/Fluffy d/White cat l/Ang Mo Kio t/shy`<br>
-![addAnimalOutputBox.png](images/addAnimalOutputBox.png){style="width:600px; height:auto;"} <br>
-  * new animal contact card created: <br>
-![addAnimalCard.png](images/addAnimalCard.png){style="width:400px; height:auto;"} <br>
+  ![addAnimalExample.png](images/addAnimalExample.png){style="width:700px; height:auto;"}
 
 Back to [table of contents](#table-of-contents).
 
@@ -331,20 +362,28 @@ Format: `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
   * i.e adding of tags is not cumulative.
 
 <box type="tip" seamless>
-
 You can remove all the person’s tags by typing `t/` without
 specifying any tags after it.
 </box>
 
-Examples: refer to input restrictions [here](#valid-inputs-format)!
-*  `edit person Bernice Yu p/61234567 e/johndoe@example.com t/lover` <br>
-   Edits the phone number and email address of the person with name `Bernice Yu` to be `61234567`
-   and `johndoe@example.com` respectively. <br>
-   `Bernice Yu` will now only have the new added tag, `lover`, instead of the original tags.
-  * Before: ![beforeEditPerson.png](images/beforeEditPerson.png){style="width:50%; height:auto;"}
-  * After :![afterEditPerson.png](images/afterEditPerson.png){style="width:50%; height:auto;"}
+Examples: refer to input restrictions [here](#valid-inputs-format)
+*  Example below: `edit person Bernice Yu p/61234567 e/johndoe@example.com t/lover` <br>
+
+    Edits the phone number and email address of the person with name `Bernice Yu` to be `61234567`
+   and `johndoe@example.com` respectively.
+
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin: 20px 0;">
+      <img src="images/editPersonExampleBefore.png" style="width:450px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Before editing">
+      <span style="font-size: 48px; color: #666;">↓</span>
+      <img src="images/editPersonExampleAfter.png" style="width:450px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="After editing">
+    </div>
+
+
+    `Bernice Yu` will now only have the new added tag, `lover`, instead of the original tags.
+
 *  `edit person Betty Crower n/Betsy Crower t/` <br>
-   Edits the name of `Betty Crower` to be `Betsy Crower` and clears all existing tags.
+
+    Edits the name of `Betty Crower` to be `Betsy Crower` and clears all existing tags.
 
 Back to [table of contents](#table-of-contents).
 
@@ -358,7 +397,7 @@ Format: `edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION] [t/TAG]…​`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-Examples: refer to input restrictions [here](#valid-inputs-format)!
+Examples: refer to input restrictions [here](#valid-inputs-format)
 *  `edit animal Fluffy l/Void Deck` Edits the location of the animal with name `Fluffy` to be `Void Deck`.
 *  `edit animal Kitty n/Catty t/` Edits the name of the animal with name `Kitty` to be `Catty` and clears all existing tags.
 
@@ -381,9 +420,9 @@ Format: `find person [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]...`
   e.g. `t/friends` will return the same result as `t/FRIENDS`.
   * Only people with the tag `friends` will be shown.
 <box type="info" seamless>
-
   People with the tag `friend` will not be shown as the spelling is not exactly the same.
-  </box>
+</box>
+
 * When there is both `[n/KEYWORD]` and `[t/KEYWORD]` present, it will conduct a substring search of names **and** a full string search of tags. <br>
   * People's names with substring matching **at least one** `n/KEYWORD` **and** with tags **exactly matching** all `t/KEYWORD` will be returned.
   * e.g. `find person n/ber t/friends` will only return contacts with substring `ber` in their names and tagged with `friends`.
@@ -391,17 +430,18 @@ Format: `find person [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]...`
     * `Berry` with no tags **will not** be returned.
     * `Ber` with `t/friend` **will not** be returned.
 
-Examples: refer to input restrictions [here](#valid-inputs-format)!
+Examples: refer to input restrictions [here](#valid-inputs-format)
 * `find person n/alex n/dav` returns `Alex Yeoh`, `David Li`. Note that the 'animal' portion is still shown.<br>
 
-  ![result for 'find n/alex n/dav'.png](images/findAlexDavidResult.png){style="width:800px; height:auto;"}<br>
+  ![result for 'find n/alex n/dav'.png](images/findPersonExampleOne.png){style="width:800px; height:auto;"}<br>
 * `find person t/friends` returns `Alex Yeoh`, `Betsy Crowe`. Note that the 'animal' portion is still shown.<br>
 
-  ![reuslt for 'find t/friends'.png](images/findPersonTag.png){style="width:800px; height:auto;"}<br>
+  ![reuslt for 'find t/friends'.png](images/findPersonExampleTwo.png){style="width:800px; height:auto;"}<br>
 <box type="info" seamless>
 
 After using `find` to filter out the contacts you want, you can use `list` to return
-to full display of all contacts. [Find out how!](#listing-all-people--list)
+to full display of all contacts. <br>
+[Find out how](#listing-all-contacts-list)!
 </box>
 
 Back to [table of contents](#table-of-contents).
@@ -429,15 +469,15 @@ Format: `find animal [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]...`
   * `Cherry` with no tags **will not** be returned.
   * `Charlie` with `t/fire` **will not** be returned.
 
-Examples: refer to input restrictions [here](#valid-inputs-format)!
+Examples: refer to input restrictions [here](#valid-inputs-format)
 * `find animal n/max n/luna` returns `Max`, `Luna`. Note that the 'person' portion is still shown.<br>
 
-  ![result of find max luna.png](images/findMaxLunaResult.png){style="width:800px; height:auto;"}
-
+  ![result of find max luna.png](images/findAnimalExample.png){style="width:800px; height:auto;"}
 <box type="info" seamless>
 
 After using `find` to filter out the contacts you want, you can use `list` to return
-to full display of all contacts. [Find out how!](#listing-all-people--list)
+to full display of all contacts. <br>
+[Find out how](#listing-all-contacts-list)!
 </box>
 
 Back to [table of contents](#table-of-contents).
@@ -457,10 +497,22 @@ Format: `feed f/PERSON_NAME n/ANIMAL_NAME dt/DATETIME`
 * `DATETIME` must be a valid day and time.
 * The order of `n/ANIMAL_NAME`, `f/PERSON_NAME` and `dt/DATETIME` does not matter.
 
-Examples: refer to input restrictions [here](#valid-inputs-format)!
+Examples: refer to input restrictions [here](#valid-inputs-format)
 * `feed f/Alex Yeoh n/Max dt/2025-01-24 09:00` will assign `Alex Yeoh` and `Max` to the same feeding session. <br>
 
-  ![feedResult.png](images/feedResult.png){style="width:800px; height:auto;"}<br>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin: 20px 0;">
+  <div style="display: flex; align-items: center; gap: 20px;">
+    <img src="images/feedPersonExampleBefore.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Person before feeding">
+    <span style="font-size: 48px; color: #666;">→</span>
+    <img src="images/feedPersonExampleAfter.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Person after feeding">
+  </div>
+  <div style="display: flex; align-items: center; gap: 20px;">
+    <img src="images/feedAnimalExampleBefore.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Animal before feeding">
+    <span style="font-size: 48px; color: #666;">→</span>
+    <img src="images/feedAnimalExampleAfter.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Animal after feeding">
+  </div>
+</div>
+
 
 Back to [table of contents](#table-of-contents).
 
@@ -473,10 +525,9 @@ Format: `delete person n/NAME`
 * Deletes the person with the specified `NAME`.
 * The name is **case-insensitive**.
 
-Examples: refer to input restrictions [here](#valid-inputs-format)!
+Examples: refer to input restrictions [here](#valid-inputs-format)
 * `delete person n/Alex Yeoh` Deletes the person with name `Alex Yeoh` from Furiends.
-  * Feedback Box: <br>
-  ![deletePerson.png](images/deletePerson.png){style="width:900px; height:auto;"}<br>
+  ![deletePerson.png](images/deletePersonExample.png){style="width:900px; height:auto;"}<br>
 
 Back to [table of contents](#table-of-contents).
 
@@ -489,10 +540,9 @@ Format: `delete animal n/NAME`
 * Deletes the animal with the specified `NAME`.
 * The name is **case-insensitive**.
 
-Examples: refer to input restrictions [here](#valid-inputs-format)!
+Examples: refer to input restrictions [here](#valid-inputs-format)
 * `delete animal n/Max` Deletes the animal with name `Max` from Furiends.
-  * Feedback Box: <br>
-  ![deleteAnimal.png](images/deleteAnimal.png){style="width:900px; height:auto;"}<br>
+  ![deleteAnimal.png](images/deleteAnimalExample.png){style="width:900px; height:auto;"}<br>
 
 Back to [table of contents](#table-of-contents).
 
@@ -506,25 +556,30 @@ Format: `delete feed n/ANIMAL_NAME f/PERSON_NAME dt/DATETIME`
 * `DATETIME` must be a valid day and time.
 * The order of `n/ANIMAL_NAME`, `f/PERSON_NAME` and `dt/DATETIME` does not matter.
 
-Examples: refer to input restrictions [here](#valid-inputs-format)!
-* `delete feed n/Max f/Alex Yeoh dt/2025-01-24 09:00` Deletes the feeding session between `Max` and `Alex Yeoh` at `24 Jan 2025 09:00` from Furiends.
-  * Feedback Box: <br>
-    ![deleteFeedingSession.png](images/deleteFeedingSession.png){style="width:700px; height:auto;"}<br>
+Examples: refer to input restrictions [here](#valid-inputs-format)
+* `delete feed n/Max f/Alex Yeoh dt/2025-01-24 09:00` <br>
+  Deletes the feeding session between `Max` and `Alex Yeoh` at `24 Jan 2025 09:00` from Furiends.
+  ![deleteFeedingSession.png](images/deleteFeedExample.png){style="width:900px; height:auto;"}<br>
 
 Back to [table of contents](#table-of-contents).
 
 <box type="warning" seamless>
 
-**Cascade deletion between Person, Animal and Feeding Session:** <br>
-For a person and animal associated to the same feeding session,
+**Cascade deletion between Person, Animal and Feeding Session:**
 
-Scenario 1:
-Deleting either the person or animal will cause the associated feeding session to be deleted as well. The feeding session will no longer be displayed with the other animal or person respectively.
+For a person and animal associated to the same feeding session:
 
-Scenario 2:
-Deleting the feeding session will cause the feeding session to no longer be displayed with both the associated person and animal.
+**Scenario 1: Deleting a Person or Animal**
+* Deleting either the person or animal will cause the associated feeding session to be deleted as well.
+* The feeding session will no longer be displayed with the other animal or person respectively.
 
-You may use undo to revert the deletion.
+**Scenario 2: Deleting a Feeding Session**
+* Deleting the feeding session will cause it to no longer be displayed with both the associated person and animal.
+
+<box type="tip" seamless>
+
+You may use `undo` to revert the deletion.
+</box>
 
 </box>
 
@@ -535,13 +590,13 @@ Displays detailed information about a specific person from Furiends.
 Format: `view person n/NAME`
 
 * Views the person's contact information with the specified `NAME`.
-* The name is **case-insensitive**, but must be the full name.
+* The name is **case-insensitive**, but it must be the full name.
 * Shows the person's complete contact information in a detailed view.
 
-Examples: refer to input restrictions [here](#valid-inputs-format)!
+Examples: refer to input restrictions [here](#valid-inputs-format)
 * `view person n/Alex Yeoh` Displays detailed information for the person named `Alex Yeoh`.
 * `view person n/alex yeoh` Also displays information for `Alex Yeoh`.
-![viewPerson.png](images/viewPerson.png){style="width:800px; height:auto;"}<br>
+![viewPerson.png](images/viewPersonExample.png){style="width:800px; height:auto;"}<br>
 
 Back to [table of contents](#table-of-contents).
 
@@ -552,13 +607,13 @@ Displays detailed information about a specific animal from Furiends.
 Format: `view animal n/NAME`
 
 * Views the animal's contact information with the specified `NAME`.
-* The name is **case-insensitive**, but must be the full name.
+* The name is **case-insensitive**, but it must be the full name.
 * Shows the animal's complete information in a detailed view.
 
-Examples: refer to input restrictions [here](#valid-inputs-format)!
+Examples: refer to input restrictions [here](#valid-inputs-format)
 * `view animal n/Max` Displays detailed information for the animal named `Max`.
 * `view animal n/max` Also displays information for `Max`.
-![viewAnimal.png](images/viewAnimal.png){style="width:800px; height:auto;"}<br>
+  ![viewAnimal.png](images/viewAnimalExample.png){style="width:800px; height:auto;"}<br>
 
 Back to [table of contents](#table-of-contents).
 
@@ -576,7 +631,7 @@ Format: `undo`
 
 * Only works for commands that change Furiends (i.e. only after an add, edit, delete, clear, feed, or after a valid redo command).
 * If there are no changes to undo, an error message will be shown.
-![undoErrorMessage.png](images/undoError.png){style="width:900px; height:auto;"}<br>
+  ![undoErrorMessage.png](images/undoExample.png){style="width:900px; height:auto;"}<br>
 
 Example:
 * `clear` command is executed: all existing (animal and people) contacts are deleted.
@@ -591,7 +646,7 @@ Restores Furiends to the state before the last undo command.
 Format: `redo`
 
 * If there are no changes to redo, an error message will be shown.
-![redoError.png](images/redoError.png){style="width:900px; height:auto;"}<br>
+  ![redoError.png](images/redoExample.png){style="width:900px; height:auto;"}<br>
 
 Example:
 * `redo` Re-applies the last change that was undone.
