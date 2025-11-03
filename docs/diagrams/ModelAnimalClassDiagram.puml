@@ -40,13 +40,13 @@ AddressBook *--> "1" UniqueAnimalList
 UniqueAnimalList --> "~*all" Animal
 
 Animal -up-|> Contact
-Contact *--> "1" Name : name
-Contact *--> "*" Tag : tags
+Contact *--> "1" Name
+Contact *--> "*" Tag
 
-Animal *--> "1" UUID : id
-Animal *--> "1" Description : description
-Animal *--> "1" Location : location
-Animal *--> "*" UUID : feedingSessionIds
+Animal *--> "1" UUID
+Animal *--> "1" Description
+Animal *--> "1" Location
+Animal *--> "*" UUID
 
 Animal -[hidden]up--> I
 UniqueAnimalList -[hidden]right-> I

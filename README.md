@@ -1,4 +1,5 @@
 [![Java CI](https://github.com/AY2526S1-CS2103T-W14-3/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2526S1-CS2103T-W14-3/tp/actions/workflows/gradle.yml)
+[![codecov](https://codecov.io/github/AY2526S1-CS2103T-W14-3/tp/graph/badge.svg?token=C1BS3MZXE8)](https://codecov.io/github/AY2526S1-CS2103T-W14-3/tp)
 # Furiends
 Furiends is a simple contact-management app designed for NUS cat caretakers.
 ![Ui](docs/images/homepage.png)
