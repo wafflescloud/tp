@@ -435,3 +435,8 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+/* Prevent resize cursor on main SplitPane divider to avoid implying it can be dragged */
+#mainSplitPane > .split-pane-divider {
+    -fx-cursor: default;
+}
