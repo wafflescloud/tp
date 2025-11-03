@@ -504,8 +504,6 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
   * Feedback Box: <br>
     ![deleteFeedingSession.png](images/deleteFeedingSession.png){style="width:700px; height:auto;"}<br>
 
-Back to [table of contents](#table-of-contents).
-
 <box type="warning" seamless>
 
 **Cascade deletion between Person, Animal and Feeding Session:** <br>
@@ -517,9 +515,11 @@ Deleting either the person or animal will cause the associated feeding session t
 Scenario 2:
 Deleting the feeding session will cause the feeding session to no longer be displayed with both the associated person and animal.
 
-You may use undo to revert the deletion.
+You may use [undo](#undoing-the-last-change-undo) to revert the deletion!
 
 </box>
+
+Back to [table of contents](#table-of-contents).
 
 ### Viewing a person contact: `view person`
 
