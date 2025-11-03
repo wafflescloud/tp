@@ -257,7 +257,7 @@ Format: `list`
 
 Edits an existing person in Furiends.
 
-Format: `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… [f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]…​`
+Format: `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
 * Edits the person with the specified `NAME`. The name is **case-insensitive**.
 * At least one of the optional fields must be provided.
