@@ -146,7 +146,7 @@ public class AnimalProfileWindow extends UiPart<Stage> {
      */
     public void show() {
         Stage stage = getRoot();
-        stage.setWidth(400);
+        stage.setWidth(430);
         stage.setHeight(300);
         stage.show();
         stage.centerOnScreen();
