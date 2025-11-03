@@ -53,10 +53,7 @@ public class FindCommand<T extends Contact> extends Command {
             + "2. To find an animal:\n"
             + "Example: " + COMMAND_WORD + " "
             + TYPE_ANIMAL + " n/ma n/lu\n"
-            + "Example (tags): " + COMMAND_WORD + " " + TYPE_ANIMAL + " t/friendly t/small\n\n"
-            + "Alternatively, use:\n"
-            + PERSON_MESSAGE_USAGE + "\n\n"
-            + ANIMAL_MESSAGE_USAGE;
+            + "Example (tags): " + COMMAND_WORD + " " + TYPE_ANIMAL + " t/friendly t/small\n\n";
 
     private final Predicate<T> predicate;
     private final Function<Model, List<T>> listGetter;

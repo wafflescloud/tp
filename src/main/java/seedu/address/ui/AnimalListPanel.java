@@ -67,8 +67,12 @@ public class AnimalListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new AnimalCard(animal, getIndex() + 1,
-                    feedingSessionList, personList).getRoot());
+                AnimalCard card = new AnimalCard(animal, getIndex() + 1, feedingSessionList, personList);
+                Region root = card.getRoot();
+                root.setMinWidth(0);
+                root.setMaxWidth(Double.MAX_VALUE);
+                root.prefWidthProperty().bind(animalListView.widthProperty().subtract(16));
+                setGraphic(root);
             }
         }
     }

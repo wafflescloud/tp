@@ -30,7 +30,7 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
-        String trimmedName = name.trim();
+        String trimmedName = name.trim().replaceAll("\\s+", " ");
         checkArgument(isValidName(trimmedName), MESSAGE_CONSTRAINTS);
         fullName = trimmedName;
     }

@@ -52,6 +52,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label feedingTime;
     @FXML
+    private Label moreCount;
+    @FXML
     private StackPane feedingBox;
 
     /**
@@ -101,9 +103,29 @@ public class PersonCard extends UiPart<Region> {
                 DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
                 feedingTime.setText(earliest.getDateTime().format(timeFormatter));
             }
+
+            if (moreCount != null) {
+                long totalSessions = feedingSessions == null ? 0
+                        : feedingSessions.stream().filter(s -> s.involvesPerson(person.getId())).count();
+                long remaining = Math.max(0, totalSessions - 1);
+                if (remaining > 0) {
+                    moreCount.setText("+" + remaining + " more...");
+                    moreCount.setVisible(true);
+                    moreCount.setManaged(true);
+                } else {
+                    moreCount.setText("");
+                    moreCount.setVisible(false);
+                    moreCount.setManaged(false);
+                }
+            }
         } else if (feedingBox != null) {
             feedingBox.setVisible(false);
             feedingBox.setManaged(false);
+            if (moreCount != null) {
+                moreCount.setText("");
+                moreCount.setVisible(false);
+                moreCount.setManaged(false);
+            }
         }
     }
 }

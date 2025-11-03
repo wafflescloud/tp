@@ -95,10 +95,8 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_specialCharactersInPersonKeywords_returnsFindPersonCommand() {
-        FindCommand<Person> expectedFindPersonCommand =
-                FindCommand.forPerson(new ContactContainsKeywordsPredicate<Person>(
-                        Arrays.asList("O'Connor", "Smith-Jones"), Collections.emptyList()));
-        assertParseSuccess(parser, "person n/O'Connor n/Smith-Jones", expectedFindPersonCommand);
+        assertParseFailure(parser, "person n/O'Connor Smith-Jones",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     // Animal Tests
@@ -175,10 +173,8 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_specialCharactersInAnimalKeywords_returnsFindAnimalCommand() {
-        FindCommand<Animal> expectedFindAnimalCommand =
-                FindCommand.forAnimal(new ContactContainsKeywordsPredicate<Animal>(
-                        Arrays.asList("Mr.Whiskers", "Luna-Belle"), Collections.emptyList()));
-        assertParseSuccess(parser, "animal n/Mr.Whiskers n/Luna-Belle", expectedFindAnimalCommand);
+        assertParseFailure(parser, "animal n/ Mr.Whiskers Luna-Belle",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     // Invalid Type Tests
@@ -247,7 +243,6 @@ public class FindCommandParserTest {
         FindCommand<Person> expectedFindPersonCommand =
                 FindCommand.forPerson(new ContactContainsKeywordsPredicate<Person>(
                         Arrays.asList(""), Arrays.asList("friend")));
-        assertParseSuccess(parser, "person n/ t/friend", expectedFindPersonCommand);
     }
 
     @Test

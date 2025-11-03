@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Stack;
 import java.util.UUID;
 import java.util.function.Predicate;
@@ -285,6 +286,14 @@ public class ModelManager implements Model {
     public boolean hasFeedingSession(FeedingSession feedingSession) {
         requireNonNull(feedingSession);
         return addressBook.hasFeedingSession(feedingSession);
+    }
+
+    @Override
+    public boolean hasFeedingSessionByDetails(UUID animalId, UUID personId, LocalDateTime dateTime) {
+        requireNonNull(animalId);
+        requireNonNull(personId);
+        requireNonNull(dateTime);
+        return addressBook.hasFeedingSessionByDetails(animalId, personId, dateTime);
     }
 
     @Override
