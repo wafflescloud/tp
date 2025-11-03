@@ -563,7 +563,10 @@ Format: `redo`
 Example:
 * `redo` Re-applies the last change that was undone.
 
-Back to [table of contents](#table-of-contents).
+<box type="warning" seamless>
+
+Undo and Redo history does not persist across sessions
+</box>
 
 ### Exiting the program : `exit`
 
