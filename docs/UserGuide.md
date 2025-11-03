@@ -354,6 +354,8 @@ Finds people whose names contain any of the given keywords.
 Format: `find person [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]...`
 
 * The search is **case-insensitive**. e.g `hans` will match `Hans`.
+* Separate keywords should be individually prefixed with `n/`
+* The order of the keywords does not matter. e.g. `n/Hans n/Bo` will match the name`Bo Hans`.
 * Only the name and tag (when specified) are searched.
 * Substrings can be searched. e.g. `an` will match `Hans`, `Andy`.
 * People's names matching at least one keyword will be returned (i.e. `OR` search).
@@ -394,7 +396,8 @@ Finds animals whose names contain any of the given keywords.
 Format: `find animal [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]...`
 
 * The search is **case-insensitive**. e.g `fluffy` will match `Fluffy`.
-* The order of the keywords does not matter. e.g. `Cutie Pie` will match `Pie Cutie`.
+* Separate keywords should be individually prefixed with `n/`
+* The order of the keywords does not matter. e.g. `n/Cutie n/Pie` will match `Pie Cutie`.
 * Only the name and tag (when specified) are searched.
 * Substrings can be matched e.g. `Fluff` will match `Fluffy` and `Kerfluff`.
 * Animals' name matching at least one keyword will be returned (i.e. `OR` search).
