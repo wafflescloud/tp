@@ -28,6 +28,7 @@
 Refer to the guide [_Setting up and getting started_](https://ay2526s1-cs2103t-w14-3.github.io/tp/SettingUp.html).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before: always;"></div>
 
 ## **Design**
 
@@ -132,6 +133,8 @@ The `Model` component manages three main entity types: Person, Animal, and Feedi
 * `AddressBook` contains three unique lists: `UniquePersonList`, `UniqueAnimalList`, and `UniqueFeedingSessionList`
 * `ModelManager` maintains the `AddressBook` and manages undo/redo functionality with `undoStack` and `redoStack`
 
+<div style="page-break-before: always;"></div>
+
 #### Person Model
 
 <puml src="diagrams/ModelPersonClassDiagram.puml" />
@@ -143,6 +146,8 @@ The Person model stores:
 * `Email email` - Email address
 * `Set<Tag> tags` - Tags for categorization
 * `Set<UUID> feedingSessionIds` - References to feeding sessions by UUID
+
+<div style="page-break-before: always;"></div>
 
 #### Animal Model
 
@@ -156,6 +161,8 @@ The Animal model stores:
 * `Set<Tag> tags` - Tags for categorization
 * `Set<UUID> feedingSessionIds` - References to feeding sessions by UUID
 
+<div style="page-break-before: always;"></div>
+
 #### FeedingSession Model
 
 <puml src="diagrams/ModelFeedingSessionClassDiagram.puml"/>
@@ -165,6 +172,8 @@ The FeedingSession model links Person and Animal entities:
 * `UUID animalId` - Reference to the Animal being fed
 * `UUID personId` - Reference to the Person feeding
 * `LocalDateTime dateTime` - When the feeding occurred
+
+<div style="page-break-before: always;"></div>
 
 #### Undo/Redo Implementation
 
@@ -191,6 +200,8 @@ The `Model` component implements undo/redo functionality using two stacks that s
    * Restores the address book to that previous state
 
 <puml src="diagrams/UndoActivityDiagram.puml" alt="UndoActivityDiagram" width="400" />
+
+<div style="page-break-before: always;"></div>
 
 3. **Redo Operation**: When the user executes `redo`, the system:
    * Pushes the current state to `undoStack`
@@ -274,6 +285,8 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-before: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -368,6 +381,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends
 
+<div style="page-break-before: always;"></div>
 
 **Use case: UC02 - Delete a person**
 
@@ -555,6 +569,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends
 
+<div style="page-break-before: always;"></div>
+
 **Use case: UC09 - Add a feeding session**
 
 **MSS**
@@ -612,6 +628,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 10. This product is not required to handle sending notifications to users about feeding times.
 
 *{More to be added}*
+
+<div style="page-break-before: always;"></div>
 
 ### Glossary
 
@@ -683,6 +701,8 @@ testers are expected to do more *exploratory* testing.
    Command: `feed n/Max f/Alex Yeoh` <br>
    Expected: No feeding session added. Error details shown in the status message: `Invalid command format! ...` <br>
 
+<div style="page-break-before: always;"></div>
+
 ### Editing a person or animal
 
 1. Valid test case - Editing a person's details <br>
@@ -747,6 +767,8 @@ testers are expected to do more *exploratory* testing.
    Prerequisite: Animal `Max` exists in the list with tag `Shy`. (Should be present from pre-loaded data) <br>
    Command: `find animal n/Max t/shy` <br>
    Expected: Out of all animals tagged as `shy`, only animal `Max` is shown in the list. <br>
+
+<div style="page-break-before: always;"></div>
 
 ### Deleting a person or animal
 
