@@ -291,10 +291,10 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ### Product scope
 
 **Target user profile**:
-* is a member of Cats of NUS
+* is a stray animal feeder
 * has a need to manage a significant number of contacts
-* will like to manage a significant number of contacts of other cat caretakers
-* will like to keep track of the cats present around campus
+* will like to manage a significant number of contacts of other animal caretakers
+* will like to keep track of the animals present around campus
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -303,7 +303,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 **Value proposition**:
 * manage contacts faster than a typical mouse/GUI driven app
-* keep track of cats' details around campus
+* keep track of animals' details around campus
 
 
 
@@ -625,7 +625,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Cats of NUS**: A society in NUS for cats lover and care takers
+* **Cats of NUS**: A society in NUS for cat lovers and care takers
 * **PIC**: Person in charge of the members of the Cats of NUS
 * **General User**: Users that fits the target audience of this address book
 
@@ -646,9 +646,11 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Open terminal and run `cd path_to_folder` to change directory to the location of the jar file. 
+   3. Run `java -jar furiends.jar`. <br>
+   Expected: Shows the GUI with sample contacts. The window size may not be optimum.  
 
 2. Saving window preferences
 
