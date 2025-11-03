@@ -6,10 +6,10 @@ skinparam ArrowFontSize 12
 start
 :User executes 'redo' command;
 
-if (redoStack empty?) then ([yes])
+if () then ([redo stack Empty])
   :Throw CommandException\n"No more commands to redo!";
   stop
-else ([no])
+else ([else])
   :Push current state to undoStack;
   :Pop next state from redoStack;
   :Restore address book\nto next state;
