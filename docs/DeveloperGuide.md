@@ -323,14 +323,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | general animal feeder in NUS                         | add contact entry of an existing feeder of NUS                                               | keep track of their information for future references and stay in contact with them        |
 | `* * *`  | general animal feeder in NUS                         | delete contact entry of an existing feeder of NUS                                            | remove irrelevant contacts that I do not need to keep track of anymore                     |
 | `* * *`  | general animal feeder in NUS                         | edit contact entry of an existing feeder of NUS                                              | keep their information updated so as to stay in contact with them                          |
-| `* * *`  | member of Cats of NUS                                | view the list of added contact entries of Cats of NUS members                                | keep track of all contact entries of added members                                         |
-| `* * *`  | member of Cats of NUS                                | view the list of added contact entries of cats                                               | keep track of all contract entries of added cats and monitor them easily                   |
-| `* * *`  | member of Cats of NUS                                | add a contact entry of a Cats of NUS member                                                  | keep track of his/her information for later use                                            |
-| `* * *`  | member of Cats of NUS                                | add a contact entry of a cat                                                                 | keep track of its information for later use                                                |
-| `* * *`  | member of Cats of NUS                                | delete a contact entry of a Cats of NUS member                                               | remove irrelevant entries that I do not need to keep track of anymore                      |
-| `* * *`  | member of Cats of NUS                                | delete a contact entry of a cat                                                              | remove irrelevant entries that I do not need to keep track of anymore                      |
-| `* * *`  | member of Cats of NUS                                | edit a contact entry of a Cats of NUS member                                                 | update any new information or change                                                       |
-| `* * *`  | member of Cats of NUS                                | edit a contact entry of a cat                                                                | update any new information or change                                                       |
+| `* * *`  | general animal feeder in NUS                         | view the list of added contact entries of Cats of NUS members                                | keep track of all contact entries of added members                                         |
+| `* * *`  | general animal feeder in NUS                         | view the list of added contact entries of cats                                               | keep track of all contract entries of added cats and monitor them easily                   |
 | `* *`    | new user                                             | want to browse a preset list of caretakers found in NUS                                      | learn more about the existing caretakers in campus and get acquainted with them            |
 | `* *`    | new user                                             | want to browse a preset list of animals found in NUS                                         | understand more about the diversity of animals around campus                               |
 | `* *`    | new user                                             | view detailed instructions on how to use a specific command quickly                          | understand how to use each command quickly and effectively                                 |
@@ -346,8 +340,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | member of Cats of NUS                                | view a specific contact entry of a cat                                                       | access details of the cat quickly                                                          |
 | `*`      | Person-In-Charge (PIC) of the members of Cats of NUS | add feeding sessions                                                                         | assign cats and feeders to a specific feeding session for better organisation              |
 | `*`      | PIC of the members of Cats of NUS                    | remove feeding sessions                                                                      | keep up to date with existing and upcoming feeding sessions                                |
-
-
 
 ### Use cases
 
@@ -617,7 +609,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. The software should work without requiring an installer.
 7. The graphical user interface (GUI) should support standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%, and be usable for resolutions 1280x720 and higher and for screen scale 150%.
 8. The software should be packaged into a single JAR file.
-9. This product is not required to handle messaging/calling other Cats of NUS members.
+9. This product is not required to handle messaging/calling other users.
 10. This product is not required to handle sending notifications to users about feeding times.
 
 *{More to be added}*
