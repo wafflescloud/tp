@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.TYPE_ANIMAL;
 import static seedu.address.logic.parser.CliSyntax.TYPE_PERSON;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -48,6 +49,12 @@ public class FindCommandParser implements Parser<FindCommand<?>> {
         boolean hasTags = tagValues != null && !tagValues.isEmpty();
 
         if (!hasNames && !hasTags) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        if (Stream.of(nameValues, tagValues)
+                .flatMap(List::stream)
+                .anyMatch(s -> !s.isEmpty() && !s.matches("[\\p{Alnum} ]+"))) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
