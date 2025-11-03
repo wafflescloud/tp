@@ -42,6 +42,8 @@ Furiends can help you manage people, animals and their interactions efficiently.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
@@ -77,14 +79,16 @@ The file is usually in the `Downloads` folder after downloading it.
       * For example, if the file is in your `Documents/Furiends` folder, type: `cd ~/Documents/Furiends`
    3. Type `java -jar furiends.jar` and press Enter to launch Furiends.
 
-    <br>
+  <br>
+
+<div style="page-break-after: always;"></div>
 
    **For Windows users:**
    1. Navigate to the folder containing `furiends.jar` in **File Explorer**.
    2. Right-click on the folder (or right-click on empty space inside the folder) and select **Open in Terminal**.
    3. In the terminal window that opens, type `java -jar furiends.jar` and press Enter to launch Furiends.
 
-    <br>
+  <br>
 
    A GUI similar to the below should appear in a few seconds. Note how the application contains some sample data.<br>
    ![Ui](images/ui.png){style="width:900px; height:auto;"}<br>
@@ -105,6 +109,8 @@ The file is usually in the `Downloads` folder after downloading it.
 
 ------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Overview of GUI
 ![Ui](images/uiExplanation.png){style="width:900px; height:auto;"}
 
@@ -118,6 +124,8 @@ The GUI is made up of the following components:
    * The **feeding session** shown under each animal indicates the earliest feeding session for the people feeding that animal.
 
 ------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -151,6 +159,8 @@ If you are using a PDF version of this document, be careful when copying and pas
 </box>
 
 Back to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
 
 ### Valid Inputs Format
 * `NAME`/`PERSON_NAME`/`ANIMAL_NAME`
@@ -286,6 +296,8 @@ Back to [table of contents](#table-of-contents).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help: `help`
 
 Displays a window, which links to the user guide, as well as a list of commands. <br>
@@ -314,6 +326,8 @@ the corresponding command format to the command box as shown below.
 
 Back to [table of contents](#table-of-contents).
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a person: `add person`
 
 Adds a person to Furiends.<br>
@@ -329,6 +343,8 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 
 Back to [table of contents](#table-of-contents).
 
+<div style="page-break-after: always;"></div>
+
 ### Adding an animal: `add animal`
 
 Adds an animal to Furiends.
@@ -341,6 +357,8 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
 
 Back to [table of contents](#table-of-contents).
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all contacts: `list`
 
 Shows a list of all people and animals in Furiends.
@@ -348,6 +366,8 @@ Shows a list of all people and animals in Furiends.
 Format: `list`
 
 Back to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a person : `edit person`
 
@@ -387,6 +407,8 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
 
 Back to [table of contents](#table-of-contents).
 
+<div style="page-break-after: always;"></div>
+
 ### Editing an animal : `edit animal`
 
 Edits an existing animal in Furiends.
@@ -402,6 +424,8 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
 *  `edit animal Kitty n/Catty t/` Edits the name of the animal with name `Kitty` to be `Catty` and clears all existing tags.
 
 Back to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
 
 ### Locating people by name: `find person`
 
@@ -446,6 +470,8 @@ to full display of all contacts. <br>
 
 Back to [table of contents](#table-of-contents).
 
+<div style="page-break-after: always;"></div>
+
 ### Locating animals by name: `find animal`
 
 Finds animals whose names contain any of the given keywords.
@@ -481,6 +507,8 @@ to full display of all contacts. <br>
 </box>
 
 Back to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
 
 ### Feeding an animal : `feed`
 Records a feeding session between an animal and a person (feeder) in Furiends.
@@ -524,6 +552,8 @@ To view all feeding sessions associated to a contact, use the [View](#viewing-a-
 
 Back to [table of conents](#table-of-contents).
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a person : `delete person`
 
 Deletes the specified person from Furiends.
@@ -539,6 +569,8 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
 
 Back to [table of contents](#table-of-contents).
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting an animal: `delete animal`
 
 Deletes the specified animal from Furiends.
@@ -553,6 +585,8 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
   ![deleteAnimal.png](images/deleteAnimalExample.png){style="width:900px; height:auto;"}<br>
 
 Back to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a feeding session : `delete feed`
 Deletes a specified feeding session from Furiends.
@@ -591,6 +625,8 @@ You may use `undo` to revert the deletion.
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing a person contact: `view person`
 
 Displays detailed information about a specific person from Furiends.
@@ -607,6 +643,8 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
 ![viewPerson.png](images/viewPersonExample.png){style="width:800px; height:auto;"}<br>
 
 Back to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing an animal contact: `view animal`
 
@@ -625,11 +663,15 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
 
 Back to [table of contents](#table-of-contents).
 
+<div style="page-break-after: always;"></div>
+
 ### Clearing all entries: `clear`
 
 Clears all entries from Furiends.
 
 Format: `clear`
+
+<div style="page-break-after: always;"></div>
 
 ### Undoing the last change: `undo`
 
@@ -650,6 +692,8 @@ Example:
 
 Back to [table of contents](#table-of-contents).
 
+<div style="page-break-after: always;"></div>
+
 ### Redoing an undone change: `redo`
 
 Restores Furiends to the state before the last undo command.
@@ -667,6 +711,8 @@ Example:
 Undo and Redo history does not persist across sessions
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -678,6 +724,8 @@ You can also close the main window of GUI, by clicking on the cross at the top r
 </box>
 
 Back to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
 
 ### Saving the data
 
@@ -704,6 +752,8 @@ Back to [table of contents](#table-of-contents).
 
 ------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -728,6 +778,8 @@ Back to [table of contents](#table-of-contents).
 
 ------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
@@ -736,6 +788,7 @@ Back to [table of contents](#table-of-contents).
 Back to [table of contents](#table-of-contents).
 
 ------------------------------------------------------------------------------------------------
+
 <div style="page-break-before: always;"></div>
 
 ## Command summary
