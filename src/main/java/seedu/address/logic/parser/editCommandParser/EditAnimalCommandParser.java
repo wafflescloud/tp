@@ -11,11 +11,11 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditAnimalCommand;
 import seedu.address.logic.commands.EditAnimalCommand.EditAnimalDescriptor;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.Messages;
 import seedu.address.model.Name;
 import seedu.address.model.tag.Tag;
 
