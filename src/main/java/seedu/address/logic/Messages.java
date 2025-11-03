@@ -76,6 +76,7 @@ public class Messages {
                 .append("; Location: ")
                 .append(animal.getLocation())
                 .append("; Tags: ");
+        animal.getTags().forEach(builder::append);
         return builder.toString();
     }
 
