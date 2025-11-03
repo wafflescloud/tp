@@ -11,14 +11,9 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should be a valid Singapore number which only contain numbers.\n"
-                    + "It should be 8 digits long, starting with digit 6, 8, or 9.";
+            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
 
-    /*
-     * Phone number should be 8 digits long,
-     * and the first digit should be 6, 8, or 9.
-     */
-    public static final String VALIDATION_REGEX = "^[689]\\d{7}$";
+    public static final String VALIDATION_REGEX = "\\d{3,}";
 
     public final String value;
 
@@ -29,8 +24,9 @@ public class Phone {
      */
     public Phone(String phone) {
         requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-        value = phone;
+        String trimmedPhone = phone.trim();
+        checkArgument(isValidPhone(trimmedPhone), MESSAGE_CONSTRAINTS);
+        value = trimmedPhone;
     }
 
     /**
