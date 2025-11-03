@@ -1,8 +1,10 @@
 {
   "persons": [ {
+    "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
     "name": "Hans Muster",
     "phone": "9482424",
     "email": "invalid@email!3e",
-    "address": "4th street"
+    "address": "4th street",
+    "feedingSessionIds": []
   } ]
 }

@@ -1,0 +1,62 @@
+{
+  "_comment": "Typical feeding sessions with linked persons and animals (IDs are deterministic for tests)",
+  "persons": [
+    {
+      "id": "10101010-aaaa-aaaa-aaaa-000000000001",
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "tags": ["feeder"],
+      "feedingSessionIds": [
+        "50505050-cccc-cccc-cccc-000000000001"
+      ]
+    },
+    {
+      "id": "20202020-aaaa-aaaa-aaaa-000000000002",
+      "name": "Benson Meier",
+      "phone": "98765432",
+      "email": "johnd@example.com",
+      "tags": ["volunteer"],
+      "feedingSessionIds": [
+        "60606060-cccc-cccc-cccc-000000000002"
+      ]
+    }
+  ],
+  "animals": [
+    {
+      "id": "30303030-bbbb-bbbb-bbbb-000000000001",
+      "name": "Max",
+      "description": "Black Cat",
+      "location": "Campus Library",
+      "tags": ["campus", "black"],
+      "feedingSessionIds": [
+        "50505050-cccc-cccc-cccc-000000000001"
+      ]
+    },
+    {
+      "id": "40404040-bbbb-bbbb-bbbb-000000000002",
+      "name": "Luna",
+      "description": "Shy but affectionate Siamese cat.",
+      "location": "Shelter Room 1",
+      "tags": ["shy", "affectionate"],
+      "feedingSessionIds": [
+        "60606060-cccc-cccc-cccc-000000000002"
+      ]
+    }
+  ],
+  "feedingSessions": [
+    {
+      "id": "50505050-cccc-cccc-cccc-000000000001",
+      "animalId": "30303030-bbbb-bbbb-bbbb-000000000001",
+      "personId": "10101010-aaaa-aaaa-aaaa-000000000001",
+      "dateTime": "2024-01-01T08:00:00"
+    },
+    {
+      "id": "60606060-cccc-cccc-cccc-000000000002",
+      "animalId": "40404040-bbbb-bbbb-bbbb-000000000002",
+      "personId": "20202020-aaaa-aaaa-aaaa-000000000002",
+      "dateTime": "2024-02-15T12:00:00"
+    }
+  ]
+}
+
