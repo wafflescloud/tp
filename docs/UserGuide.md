@@ -189,8 +189,8 @@ If you are using a PDF version of this document, be careful when copying and pas
 * `KEYWORD`
   * Comes in 2 different forms, `n/NAME` and `t/TAG` only.
   * Characters length of 1-30 allowed after removal of extra white spaces.
-  * Only alphabets `A–Z`, `a–z`, digits `0-9`, hyphens `-`, and spaces allowed.
-  * e.g. `n/bobby`, `n/Je`, `t/fluffy`, `t/fluf`
+  * Only alphabets `A–Z`, `a–z`, digits `0-9`, and spaces allowed.
+  * e.g. `n/bobby`, `n/Max 1`, `t/fluffy`, `t/fluf`
 
 --------------------------------------------------------------------------------------------------------------------
 
