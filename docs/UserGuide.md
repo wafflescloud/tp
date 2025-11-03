@@ -6,7 +6,9 @@
 
 # Furiends User Guide
 
-Furiends is a **desktop app tailored towards animal lovers, specifically individuals who are tasked to feed stray animals.** It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Furiends can help you manage people and animals. Furiends can also allocate people to certain animals for scheduled feeding, faster than traditional GUI apps.
+Furiends is a **desktop application** tailored towards animal lovers, specifically individuals who are tasked to feed stray animals. 
+It is optimized for use of **text-based commands** while still providing **visual elements** such as windows and buttons to interact with the application. 
+Furiends can help you manage people, animals and their interactions efficiently. 
 
 ## Table of Contents
 
