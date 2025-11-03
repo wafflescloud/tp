@@ -42,7 +42,7 @@ public class Email {
      * Returns if a given string is a valid email.
      */
     public static boolean isValidEmail(String test) {
-        return test.length() <= 998 && test.matches(VALIDATION_REGEX);
+        return test.length() <= 998 && test.toLowerCase().matches(VALIDATION_REGEX);
     }
 
     @Override
