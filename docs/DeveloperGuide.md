@@ -788,7 +788,8 @@ testers are expected to do more *exploratory* testing.
    1. To simulate a corrupted data file, remove the `id` field from one of the person entries in `addressbook.json` file located in the `data` folder where the `furiends.jar` file is located.
    2. The application will still launch, but no entries will be loaded.
    3. To solve this, delete the corrupted `addressbook.json` file and relaunch the application. 
-   4. A new `addressbook.json` file is created with sample data.
+   4. A new `addressbook.json` file is created with sample data.<br>
+<br>
 
 2. Dealing with missing data files
 
