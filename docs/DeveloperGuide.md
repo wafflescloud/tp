@@ -478,6 +478,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends
 
+<div style="page-break-before: always;"></div>
 
 **Use case: UC04 - Find a person**
 

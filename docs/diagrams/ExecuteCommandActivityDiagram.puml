@@ -5,12 +5,12 @@ skinparam ArrowFontSize 12
 start
 :User executes command;
 
-if (Command modifies\naddress book?) then ([yes])
+if () then ([command modifies address book])
   :Call Model#saveState();
   :Save current state to undoStack;
   :Clear redoStack;
   :Execute command;
-else ([no])
+else ([else])
   :Execute command;
 endif
 
