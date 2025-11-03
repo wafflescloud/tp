@@ -53,6 +53,8 @@ public class AnimalCard extends UiPart<Region> {
     @FXML
     private Label feedingTime;
     @FXML
+    private Label moreCount; // New label to show "+N more..."
+    @FXML
     private StackPane feedingBox;
 
     /**
@@ -102,9 +104,30 @@ public class AnimalCard extends UiPart<Region> {
                 DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
                 feedingTime.setText(earliest.getDateTime().format(timeFormatter));
             }
+
+            // Set the "+N more..." label if there are additional sessions beyond the earliest one
+            if (moreCount != null) {
+                long totalSessions = feedingSessions == null ? 0
+                        : feedingSessions.stream().filter(s -> s.involvesAnimal(animal.getId())).count();
+                long remaining = Math.max(0, totalSessions - 1);
+                if (remaining > 0) {
+                    moreCount.setText("+" + remaining + " more...");
+                    moreCount.setVisible(true);
+                    moreCount.setManaged(true);
+                } else {
+                    moreCount.setText("");
+                    moreCount.setVisible(false);
+                    moreCount.setManaged(false);
+                }
+            }
         } else if (feedingBox != null) {
             feedingBox.setVisible(false);
             feedingBox.setManaged(false);
+            if (moreCount != null) {
+                moreCount.setText("");
+                moreCount.setVisible(false);
+                moreCount.setManaged(false);
+            }
         }
     }
 }
