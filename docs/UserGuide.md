@@ -6,9 +6,9 @@
 
 # Furiends User Guide
 
-Furiends is a **desktop application** tailored towards animal lovers, specifically individuals who are tasked to feed stray animals. 
-It is optimized for use of **text-based commands** while still providing **visual elements** such as windows and buttons to interact with the application. 
-Furiends can help you manage people, animals and their interactions efficiently. 
+Furiends is a **desktop application** tailored towards animal lovers, specifically individuals who are tasked to feed stray animals.
+It is optimized for use of **text-based commands** while still providing **visual elements** such as windows and buttons to interact with the application.
+Furiends can help you manage people, animals and their interactions efficiently.
 
 ## Table of Contents
 
@@ -50,7 +50,7 @@ Furiends can help you manage people, animals and their interactions efficiently.
 
    - To check the Java version in your device, open the terminal and type `java --version`.
    - You should obtain an output like this:
-   
+
      ![versionCommand](images/versionCommand.png){style="width:900px; height:auto;"}<br>
 
 2. Download the latest `furiends.jar` file from [here](https://github.com/AY2526S1-CS2103T-W14-3/tp/releases).
@@ -138,11 +138,11 @@ Back to [table of contents](#table-of-contents).
 ### Valid Inputs Format
 * `NAME`/`PERSON_NAME`/`ANIMAL_NAME`
   * Can only contain letters (`A-Z` and `a-z` only).
-  
+
   * Character limit of 1-30 (after removal of additional white spaces).
-  
+
   * Person/animal names are unique, no duplicate names accepted.
-  
+
   * Case-insensitive.
   <box type="tip" seamless>
 
@@ -151,13 +151,13 @@ Back to [table of contents](#table-of-contents).
 
 * `PHONE`
   * Can only contain digits `0-9`.
-  
+
   * 8 digits strictly required.
-  
+
   * The starting digit must be `6`, `8` or `9`, following a valid Singapore number format.
-  
+
   * Phone numbers are unique, no duplicate numbers accepted.
-  
+
   * e.g. `91234567`, `81234567` <br><br>
 
 * `EMAIL`
@@ -165,7 +165,7 @@ Back to [table of contents](#table-of-contents).
   * `local-part@domain`
     * `local-part`: can contain letters, digits or special characters <br><br>
     <box type="info" seamless>
-    
+
     Periods `.` are allowed, but it **cannot** be at the start or the end of the `local-part`.
     </box>
     <box type="warning" seamless>
@@ -174,7 +174,7 @@ Back to [table of contents](#table-of-contents).
   semicolons `;`, colons `:`, at symbols `@` (except as the separator), backslashes `\`,
   commas `,`, and quotes `"` are **not allowed** in the `local-part`.
     </box>
-  
+
     * `@`: must have separator symbol between `local-part` and `domain`.
     * `domain`: must follow domain naming conventions and have a hierarchical structure of `example.com` <br><br>
   * **Character limit: 988** (including `@` and all characters).
@@ -183,28 +183,28 @@ Back to [table of contents](#table-of-contents).
 
 * `TAG`
   * Can only contain letters and digits.
-  
+
   * Character limit of 30 (including all white spaces).
-  
+
   * e.g. `fluffy fur`, `cutie12 3`, `barker` <br>
 <br>
 * `DATETIME`
   * Format: `YYYY-MM-DD HH:mm`
-  
+
   * Must be a valid date and time.
     * `YYYY` — 4 digits year.
       * e.g. `2025`.
       * Acceptable range of YYYY: any **positive** 4-digit integer between `0000` - `9999`.
     * `MM` — 2 digits month.
-      * e.g. `March` is `03`, `October` is `10`. 
+      * e.g. `March` is `03`, `October` is `10`.
       * Acceptable range of MM: any **positive** 2-digit integer between `01` - `12`.
-    * `DD` — 2 digits day 
+    * `DD` — 2 digits day
       * e.g. `02`, `28`.
       * Acceptable range of DD: any **positive** 2-digit integer between
         * For January, March, May, July, August, October, December: `01` - `31`.
         * For February, non-leap years: `01` - `28`; leap years: `01` - `29`.
-        * For April, June, September, November: `01` - `30`. <br> 
-    * `HH:mm` — 4 digits separated by `:` following the 24-hour clock. 
+        * For April, June, September, November: `01` - `30`. <br>
+    * `HH:mm` — 4 digits separated by `:` following the 24-hour clock.
       * e.g. `7:05PM` is `19:05`.
       * `HH` — 2 digits hours.
         * Acceptable range of HH: any **positive** 2-digit integer between `00` - `23`.
@@ -212,22 +212,22 @@ Back to [table of contents](#table-of-contents).
         * Acceptable range of mm: any **positive** 2-digit integer between `00` - `59`. <br><br>
 
   * Date and time is separated with **a single spacing**.
-  
+
   * e.g. `2025-10-01 18:59`, `2005-04-25 07:05` <br><br>
 * `DESCRIPTION`
   * Character limit of 200 (including internal white spaces).
-  
+
   * e.g. `cat that bites,,, meow`, `too fat need lose weight!` <br><br>
 * `LOCATION`
   * Character limit of 100 (including internal white spaces).
-  
+
   * e.g. `AMK Street 3497`, `blk A7!`<br><br>
 * `KEYWORD`
   * Comes in 2 different forms, `NAME` and `TAG` only.
   * Characters length of 1-30 allowed after removal of extra white spaces.
-  
+
   * Only alphabets `A–Z`, `a–z`, digits `0-9`, hyphens `-`, and spaces allowed.
-  
+
   * e.g. `n/bobby`, `n/Je`, `t/fluffy`, `t/fluf`
 
 Back to [table of contents](#table-of-contents).
@@ -361,16 +361,16 @@ Format: `find person [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]...`
 * People's names matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`.
 * Searching using tags must have the **exact case-insensitive spelling**.<br>
-  e.g. `t/friends` will return the same result as `t/FRIENDS`. 
+  e.g. `t/friends` will return the same result as `t/FRIENDS`.
   * Only people with the tag `friends` will be shown.
 <box type="info" seamless>
 
   People with the tag `friend` will not be shown as the spelling is not exactly the same.
   </box>
 * When there is both `[n/KEYWORD]` and `[t/KEYWORD]` present, it will conduct a substring search of names **and** a full string search of tags. <br>
-  * People's names with substring matching **at least one** `n/KEYWORD` **and** with tags **exactly matching** all `t/KEYWORD` will be returned. 
+  * People's names with substring matching **at least one** `n/KEYWORD` **and** with tags **exactly matching** all `t/KEYWORD` will be returned.
   * e.g. `find person n/ber t/friends` will only return contacts with substring `ber` in their names and tagged with `friends`.
-    * `Bernice` with `t/friends, t/lover` will be returned. 
+    * `Bernice` with `t/friends, t/lover` will be returned.
     * `Berry` with no tags **will not** be returned.
     * `Ber` with `t/friend` **will not** be returned.
 
@@ -496,6 +496,21 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
 
 Back to [table of contents](#table-of-contents).
 
+<box type="warning" seamless>
+
+**Cascade deletion between Person, Animal and Feeding Session:** <br>
+For a person and animal associated to the same feeding session,
+
+Scenario 1:
+Deleting either the person or animal will cause the associated feeding session to be deleted as well. The feeding session will no longer be displayed with the other animal or person respectively.
+
+Scenario 2:
+Deleting the feeding session will cause the feeding session to no longer be displayed with both the associated person and animal.
+
+You may use undo to revert the deletion.
+
+</box>
+
 ### Viewing a person contact: `view person`
 
 Displays detailed information about a specific person from Furiends.
@@ -547,7 +562,7 @@ Format: `undo`
 ![undoErrorMessage.png](images/undoError.png){style="width:900px; height:auto;"}<br>
 
 Example:
-* `clear` command is executed: all existing (animal and people) contacts are deleted. 
+* `clear` command is executed: all existing (animal and people) contacts are deleted.
   * `undo` will revert this command, by recovering to the state before `clear` was executed.
 
 Back to [table of contents](#table-of-contents).
@@ -600,7 +615,7 @@ Furthermore, certain edits can cause Furiends to behave in unexpected ways (e.g.
 <box type="tip" seamless>
 
 If you have edited the data file, `addressbook.json`, incorrectly, please delete the data file in the `data` folder and relaunch the jar file. <br>
-Do note that **all existing contacts** will be removed. The data file will be reverted to the original state. 
+Do note that **all existing contacts** will be removed. The data file will be reverted to the original state.
 </box>
 
 Back to [table of contents](#table-of-contents).
@@ -616,7 +631,7 @@ Back to [table of contents](#table-of-contents).
 **A**: In the command input, enter `list` to view all contacts.<br>
 
 **Q**: What should I do if an error message is shown in feedback box?<br>
-**A**: You can try again by correcting to the correct input following the feedback box. 
+**A**: You can try again by correcting to the correct input following the feedback box.
 Or you can delete the wrong input and type `help` to get more help.<br>
 
 **Q**: The app stopped working after I edited the data file, `addressbook.json`. What should I do? <br>
@@ -624,8 +639,8 @@ Or you can delete the wrong input and type `help` to get more help.<br>
 All existing contacts will be deleted after you perform this recovery step.
 </box>
 
-**A**: Delete the data file `addressbook.json` located in the `data` folder, where `furiends.jar` is located. 
-Relaunch the `jar` file. <br> 
+**A**: Delete the data file `addressbook.json` located in the `data` folder, where `furiends.jar` is located.
+Relaunch the `jar` file. <br>
 
 Back to [table of contents](#table-of-contents).
 
