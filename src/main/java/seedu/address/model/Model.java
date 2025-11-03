@@ -126,6 +126,9 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /** Returns an unmodifiable view of the person list */
+    ObservableList<Person> getPersonList();
+
     // =========== Filtered Person List Accessors ============================================================
 
     /** Returns an unmodifiable view of the filtered person list */
@@ -162,6 +165,9 @@ public interface Model {
      * The animal identity of {@code editedAnimal} must not be the same as another existing animal in the address book.
      */
     void setAnimal(Animal target, Animal editedAnimal);
+
+    /** Returns an unmodifiable view of the animal list */
+    ObservableList<Animal> getAnimalList();
 
     // =========== Filtered Animal List Accessors ===========================================================
 
