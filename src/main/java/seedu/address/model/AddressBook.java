@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -224,6 +225,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasFeedingSession(FeedingSession session) {
         requireNonNull(session);
         return feedingSessions.contains(session);
+    }
+
+    /**
+     * Returns true if a feeding session with the same animal, person, and datetime exists in the address book.
+     */
+    public boolean hasFeedingSessionByDetails(UUID animalId, UUID personId, LocalDateTime dateTime) {
+        return feedingSessions.containsByDetails(animalId, personId, dateTime);
     }
 
     /**
