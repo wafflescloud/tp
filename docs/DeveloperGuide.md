@@ -27,9 +27,6 @@ Refer to the guide [_Setting up and getting started_](https://ay2526s1-cs2103t-w
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-before: always;"></div>
 
-<div style="page-break-after: always;"></div>
-
-## **Table Of Contents**
 <!-- * Table of Contents -->
 <page-nav-print />
 
