@@ -102,7 +102,7 @@ public class EditAnimalCommand extends EditCommand {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("editDescriptor", editAnimalDescriptor)
+                .add("editAnimalDescriptor", editAnimalDescriptor)
                 .toString();
     }
 

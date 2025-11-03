@@ -150,8 +150,7 @@ public class Person extends Contact {
         }
 
         Person otherPerson = (Person) other;
-        return id.equals(otherPerson.id)
-                && getName().equals(otherPerson.getName())
+        return getName().equals(otherPerson.getName())
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && getTags().equals(otherPerson.getTags())
