@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -69,6 +70,8 @@ class JsonAdaptedFeedingSession {
             modelDateTime = LocalDateTime.parse(dateTime, DATE_TIME_FORMATTER);
         } catch (IllegalArgumentException e) {
             throw new IllegalValueException("Invalid UUID or DateTime format");
+        } catch (DateTimeParseException e) {
+            throw new IllegalValueException("Corrupted DateTime field: " + dateTime);
         }
 
         final String modelNotes = notes != null ? notes : "";
