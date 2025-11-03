@@ -165,7 +165,6 @@ The FeedingSession model links Person and Animal entities:
 * `UUID animalId` - Reference to the Animal being fed
 * `UUID personId` - Reference to the Person feeding
 * `LocalDateTime dateTime` - When the feeding occurred
-* `String notes` - Optional notes about the feeding
 
 #### Undo/Redo Implementation
 

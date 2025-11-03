@@ -41,9 +41,11 @@ public class FeedCommand extends Command {
             Time: %3$s""";
     public static final String MESSAGE_PERSON_NOT_FOUND = "The person '%1$s' is not found in the address book";
     public static final String MESSAGE_ANIMAL_NOT_FOUND = "The animal '%1$s' is not found in the address book";
+    public static final String MESSAGE_DUPLICATE_FEEDING_SESSION =
+            "This feeding session already exists in the address book";
 
     private final Name personName;
-    private final String animalName;
+    private final Name animalName;
     private final LocalDateTime feedingTime;
 
     /**
@@ -53,7 +55,7 @@ public class FeedCommand extends Command {
      * @param animalName Name of the animal being fed
      * @param feedingTime Time when the feeding occurs
      */
-    public FeedCommand(Name personName, String animalName, LocalDateTime feedingTime) {
+    public FeedCommand(Name personName, Name animalName, LocalDateTime feedingTime) {
         requireNonNull(personName);
         requireNonNull(animalName);
         requireNonNull(feedingTime);
@@ -76,12 +78,16 @@ public class FeedCommand extends Command {
 
         List<Animal> animalList = model.getFilteredAnimalList();
         Animal animal = animalList.stream()
-                .filter(a -> a.getName().fullName.equals(animalName))
+                .filter(a -> a.getName().equals(animalName))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(
                         String.format(MESSAGE_ANIMAL_NOT_FOUND, animalName)));
 
-        FeedingSession newFeedingSession = new FeedingSession(animal.getId(), person.getId(), feedingTime, "");
+        if (model.hasFeedingSessionByDetails(animal.getId(), person.getId(), feedingTime)) {
+            throw new CommandException(MESSAGE_DUPLICATE_FEEDING_SESSION);
+        }
+
+        FeedingSession newFeedingSession = new FeedingSession(animal.getId(), person.getId(), feedingTime);
 
         Person updatedPerson = person.addFeedingSessionId(newFeedingSession.getId());
 

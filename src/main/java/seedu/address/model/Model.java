@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.function.Predicate;
 
@@ -191,6 +192,11 @@ public interface Model {
      * Returns true if a feeding session with the same identity exists in the address book.
      */
     boolean hasFeedingSession(FeedingSession feedingSession);
+
+    /**
+     * Returns true if a feeding session with the same animal, person, and datetime exists in the address book.
+     */
+    boolean hasFeedingSessionByDetails(UUID animalId, UUID personId, LocalDateTime dateTime);
 
     /**
      * Returns a feeding session by its ID.
