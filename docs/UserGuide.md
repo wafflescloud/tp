@@ -487,6 +487,14 @@ Examples: refer to input restrictions [here](#valid-inputs-format)!
   * Feedback Box: <br>
   ![deleteAnimal.png](images/deleteAnimal.png){style="width:900px; height:auto;"}<br>
 
+<box type="warning" seamless>
+
+When `deleting` after a [`find`](#finding-people-by-name-find-person) command, only contacts that show up on the GUI (contacts that are found) can be deleted.
+
+Be sure to use [`list`](#listing-all-contacts-list) to ensure all contacts can be deleted!
+
+</box>
+
 Back to [table of contents](#table-of-contents).
 
 ### Deleting a feeding session : `delete feed`
