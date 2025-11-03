@@ -8,8 +8,7 @@ import java.util.UUID;
 
 /**
  * Represents a FeedingSession in the address book.
- * A FeedingSession links a Person who fed an Animal at a specific date and time,
- * with optional notes about the feeding.
+ * A FeedingSession links a Person who fed an Animal at a specific date and time.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class FeedingSession {
@@ -17,7 +16,6 @@ public class FeedingSession {
     private final UUID animalId;
     private final UUID personId;
     private final LocalDateTime dateTime;
-    private final String notes;
 
     /**
      * Constructs a FeedingSession with auto-generated ID.
@@ -26,9 +24,8 @@ public class FeedingSession {
      * @param animalId The UUID of the animal being fed.
      * @param personId The UUID of the person feeding the animal.
      * @param dateTime The date and time when the feeding occurred.
-     * @param notes Optional notes about the feeding (can be null, will be stored as empty string).
      */
-    public FeedingSession(UUID animalId, UUID personId, LocalDateTime dateTime, String notes) {
+    public FeedingSession(UUID animalId, UUID personId, LocalDateTime dateTime) {
         requireNonNull(animalId);
         requireNonNull(personId);
         requireNonNull(dateTime);
@@ -36,7 +33,6 @@ public class FeedingSession {
         this.animalId = animalId;
         this.personId = personId;
         this.dateTime = dateTime;
-        this.notes = notes != null ? notes : "";
     }
 
     /**
@@ -47,9 +43,8 @@ public class FeedingSession {
      * @param animalId The UUID of the animal being fed.
      * @param personId The UUID of the person feeding the animal.
      * @param dateTime The date and time when the feeding occurred.
-     * @param notes Optional notes about the feeding (can be null, will be stored as empty string).
      */
-    public FeedingSession(UUID id, UUID animalId, UUID personId, LocalDateTime dateTime, String notes) {
+    public FeedingSession(UUID id, UUID animalId, UUID personId, LocalDateTime dateTime) {
         requireNonNull(id);
         requireNonNull(animalId);
         requireNonNull(personId);
@@ -58,7 +53,6 @@ public class FeedingSession {
         this.animalId = animalId;
         this.personId = personId;
         this.dateTime = dateTime;
-        this.notes = notes != null ? notes : "";
     }
 
     /**
@@ -105,15 +99,6 @@ public class FeedingSession {
      */
     public LocalDateTime getFeedingTime() {
         return dateTime;
-    }
-
-    /**
-     * Returns the notes about this feeding session.
-     *
-     * @return The notes as a String (empty string if no notes were provided).
-     */
-    public String getNotes() {
-        return notes;
     }
 
     /**
@@ -199,7 +184,7 @@ public class FeedingSession {
      */
     @Override
     public String toString() {
-        return String.format("FeedingSession[id=%s, animalId=%s, personId=%s, dateTime=%s, notes=%s]",
-                id, animalId, personId, dateTime, notes);
+        return String.format("FeedingSession[id=%s, animalId=%s, personId=%s, dateTime=%s]",
+                id, animalId, personId, dateTime);
     }
 }

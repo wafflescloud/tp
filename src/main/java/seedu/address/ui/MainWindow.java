@@ -2,12 +2,16 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -55,6 +59,9 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    @FXML
+    private SplitPane mainSplitPane;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -71,6 +78,31 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+    }
+
+    @FXML
+    private void initialize() {
+        // Prevent dragging the divider between person and animal panels.
+        // Use runLater to ensure the SplitPane skin (and its divider nodes) are created.
+        Platform.runLater(() -> disableDividerDragging(mainSplitPane));
+        // Also re-apply when the skin is (re)created to be robust across theme/skin changes
+        if (mainSplitPane != null) {
+            mainSplitPane.skinProperty().addListener((obs, oldSkin, newSkin) ->
+                    Platform.runLater(() -> disableDividerDragging(mainSplitPane)));
+        }
+    }
+
+    private void disableDividerDragging(SplitPane splitPane) {
+        if (splitPane == null) {
+            return;
+        }
+        // Lock the divider visually at its configured position and consume drag events
+        splitPane.lookupAll(".split-pane-divider").forEach(divider -> {
+            divider.addEventFilter(MouseEvent.MOUSE_PRESSED, Event::consume);
+            divider.addEventFilter(MouseEvent.DRAG_DETECTED, Event::consume);
+            divider.addEventFilter(MouseEvent.MOUSE_DRAGGED, Event::consume);
+            divider.addEventFilter(MouseEvent.MOUSE_RELEASED, Event::consume);
+        });
     }
 
     public Stage getPrimaryStage() {

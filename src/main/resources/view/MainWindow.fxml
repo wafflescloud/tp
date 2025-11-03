@@ -46,7 +46,7 @@
           </padding>
         </StackPane>
 
-        <SplitPane VBox.vgrow="ALWAYS" dividerPositions="0.5">
+        <SplitPane fx:id="mainSplitPane" id="mainSplitPane" VBox.vgrow="ALWAYS" dividerPositions="0.5">
           <VBox fx:id="personList" styleClass="pane-with-border">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />

@@ -38,7 +38,7 @@ public class FeedCommandParser implements Parser<FeedCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FEEDER, PREFIX_NAME, PREFIX_DATETIME);
 
         Name personName = ParserUtil.parseName(argMultimap.getValue(PREFIX_FEEDER).get());
-        String animalName = argMultimap.getValue(PREFIX_NAME).get().trim();
+        Name animalName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         LocalDateTime feedingTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
 
         return new FeedCommand(personName, animalName, feedingTime);
