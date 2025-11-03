@@ -170,13 +170,11 @@ Back to [table of contents](#table-of-contents).
 * `PHONE`
   * Can only contain digits `0-9`.
 
-  * 8 digits strictly required.
-
-  * The starting digit must be `6`, `8` or `9`, following a valid Singapore number format.
+  * Minimum 3 digits required.
 
   * Phone numbers are unique, no duplicate numbers accepted.
 
-  * e.g. `91234567`, `81234567`
+  * e.g. `123`, `91234567`, `81234567`
 
 <br>
 
