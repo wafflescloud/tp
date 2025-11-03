@@ -15,6 +15,7 @@ import seedu.address.logic.commands.EditAnimalCommand;
 import seedu.address.logic.commands.EditAnimalCommand.EditAnimalDescriptor;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.Messages;
 import seedu.address.model.Name;
 import seedu.address.model.tag.Tag;
 
@@ -37,6 +38,10 @@ public class EditAnimalCommandParser implements Parser<EditCommand> {
 
         String animalName = argMultimap.getPreamble().trim();
 
+        if (animalName.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_LOCATION);
 
         EditAnimalDescriptor editAnimalDescriptor = new EditAnimalDescriptor();
@@ -57,7 +62,12 @@ public class EditAnimalCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        return new EditAnimalCommand(new Name(animalName), editAnimalDescriptor);
+        try {
+            Name targetName = ParserUtil.parseName(animalName);
+            return new EditAnimalCommand(targetName, editAnimalDescriptor);
+        } catch (ParseException pe) {
+            throw new ParseException(Messages.MESSAGE_INVALID_ANIMAL_DISPLAYED_NAME);
+        }
     }
 
     /**
