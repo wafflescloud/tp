@@ -63,11 +63,11 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<puml src="diagrams/ComponentManagers.puml" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="300"/>
 
 The sections below give more details of each component.
 
@@ -125,7 +125,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2526S1-CS2103T-W14-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelOverallClassDiagram.puml" width="500" />
+<puml src="diagrams/ModelOverallClassDiagram.puml" width="500"/>
 
 The `Model` component manages three main entity types: Person, Animal, and FeedingSession.
 
@@ -158,7 +158,7 @@ The Animal model stores:
 
 #### FeedingSession Model
 
-<puml src="diagrams/ModelFeedingSessionClassDiagram.puml" />
+<puml src="diagrams/ModelFeedingSessionClassDiagram.puml"/>
 
 The FeedingSession model links Person and Animal entities:
 * `UUID id` - Unique identifier for each feeding session
@@ -183,7 +183,7 @@ The `Model` component implements undo/redo functionality using two stacks that s
    * Pushes the current `AddressBook` state onto the `undoStack`
    * Clears the `redoStack` (executing a new command invalidates redo history)
 
-<puml src="diagrams/ExecuteCommandActivityDiagram.puml" alt="ExecuteCommandActivityDiagram" width="400" />
+<puml src="diagrams/ExecuteCommandActivityDiagram.puml" alt="ExecuteCommandActivityDiagram" width="400"/>
 
 2. **Undo Operation**: When the user executes `undo`, the system:
    * Pushes the current state to `redoStack`
@@ -197,7 +197,7 @@ The `Model` component implements undo/redo functionality using two stacks that s
    * Pops the next state from `redoStack`
    * Restores the address book to that next state
 
-<puml src="diagrams/RedoActivityDiagram.puml" alt="RedoActivityDiagram" width="400" />
+<puml src="diagrams/RedoActivityDiagram.puml" alt="RedoActivityDiagram" width="400"/>
 
 <br>
 
@@ -207,7 +207,7 @@ The following sequence diagram shows how an undo operation goes through the `Log
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model"/>
 
 Commands that modify the address book and thus support undo/redo:
 * `add person` / `add animal` / `feed` - Add entities

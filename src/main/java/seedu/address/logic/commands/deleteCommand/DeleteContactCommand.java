@@ -35,6 +35,10 @@ public class DeleteContactCommand<T extends Contact> extends DeleteCommand {
                                String successMessageFormat,
                                String notFoundMessage) {
         requireNonNull(name);
+        assert listGetter != null;
+        assert successMessageFormat != null;
+        assert notFoundMessage != null;
+
         this.name = name;
         this.listGetter = listGetter;
         this.deleteAction = deleteAction;
