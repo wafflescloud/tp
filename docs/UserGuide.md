@@ -264,8 +264,6 @@ Format: `list`
 
 Back to [table of contents](#table-of-contents).
 
-<div style="page-break-after: always;"></div>
-
 ### Editing a person : `edit person`
 
 Use the `edit person` command to update an existing person's details in Furiends.
@@ -618,7 +616,7 @@ Format: `undo`
 
 * You may only undo recent commands that change Furiends!
 
-  - Commands that change Furiends: [`add person`](#adding-a-person-add-person), [`add animal`](#adding-an-animal-add-animal), [`edit person`](#editing-a-person-edit-person), [`edit animal`](#editing-an-animal-edit-animal), [`delete person`](#deleting-a-person-delete-person), [`delete animal`](#deleting-an-animal-delete-animal), [`clear`](#clearing-all-entries-clear), [`feed`](#feeding-an-animal-feed), or after a valid [`redo`](#redoing-an-undone-change-redo) command.
+  - Commands that change Furiends: [`add person`](#adding-a-person-add-person), [`add animal`](#adding-an-animal-add-animal), [`edit person`](#editing-a-person-edit-person), [`edit animal`](#editing-an-animal-edit-animal), [`delete person`](#deleting-a-person-delete-person), [`delete animal`](#deleting-an-animal-delete-animal), [`delete feed`](#deleting-a-feeding-session-delete-feed), [`clear`](#clearing-all-entries-clear), [`feed`](#feeding-an-animal-feed), or after a valid [`redo`](#redoing-an-undone-change-redo) command.
   - All other commands cannot be undone.
 * If there are no changes to undo, an error message will be shown.
   ![undoErrorMessage.png](images/undoExample.png){style="width:900px; height:auto;"}<br>
@@ -645,7 +643,8 @@ Example:
 
 <box type="warning" seamless>
 
-Undo and Redo history **does not persist** across sessions
+Undo and Redo history **does not persist** between application restarts. <br>
+When you close and reopen Furiends, the undo/redo history will be cleared.
 </box>
 <br>
 
