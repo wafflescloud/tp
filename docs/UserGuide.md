@@ -90,7 +90,7 @@ The file is usually in the `Downloads` folder after downloading it.
 <br>
 <div style="text-align: center;">
 
-![widowsFileExplorer](images/windowsOpenInTerminal.png){style="width:500px; height:auto; border-radius:6px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);"}
+![widowsFileExplorer](images/windowsOpenInTerminal.png){style="width:500px; height:auto;"}
 
 </div>
 <br>
@@ -571,13 +571,11 @@ Format: `feed f/PERSON_NAME n/ANIMAL_NAME dt/DATETIME`
 * `DATETIME` must be a valid day and time.
 * The order of `n/ANIMAL_NAME`, `f/PERSON_NAME` and `dt/DATETIME` does not matter.
 
-<div style="page-break-after: always;"></div>
-
 Examples: refer to input restrictions [here](#valid-inputs-format)
 * `feed f/Alex Yeoh n/Max dt/2025-01-24 09:00` <br>
    This command assigns `Alex Yeoh` and `Max` to the same feeding session. <br>
 
-<!-- <div style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin: 20px 0;">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin: 20px 0;">
   <div style="display: flex; align-items: center; gap: 20px;">
     <img src="images/feedPersonExampleBefore.png" style="width:400px; height:auto;" alt="Person before feeding">
     <span style="font-size: 48px; color: #666;">→</span>
@@ -588,15 +586,6 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
     <span style="font-size: 48px; color: #666;">→</span>
     <img src="images/feedAnimalExampleAfter.png" style="width:400px; height:auto;" alt="Animal after feeding">
   </div>
-</div> -->
-
-
-<div style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin: 20px 0;">
-  <img src="images/feedPersonExampleBefore.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Person before feeding">
-  <img src="images/feedAnimalExampleBefore.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Animal before feeding">
-  <span style="font-size: 30px; color: #666;">↓</span>
-  <img src="images/feedPersonExampleAfter.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Person after feeding">
-  <img src="images/feedAnimalExampleAfter.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Animal after feeding">
 </div>
 
 <box type="info" seamless>
@@ -882,8 +871,8 @@ Action (in alphabetical order) | Format, Examples
 **Edit Person**                | `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… ​`<br> e.g.,`edit person John Doe n/James Lee e/jameslee@example.com`
 **Exit**                       | `exit`
 **Feed**                       | `feed f/PERSON_NAME n/ANIMAL_NAME dt/DATETIME`<br> e.g., `feed n/Fluffy f/John Doe dt/2005-04-09 10:00`
-**Find Animal**                | `find animal [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]`<br> e.g., `find n/Fluffy n/Max t/cute`
-**Find Person**                | `find person [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]`<br> e.g., `find n/James t/family`
+**Find Animal**                | `find animal [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]`<br> e.g., `find animal n/Fluffy n/Max t/cute`
+**Find Person**                | `find person [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]`<br> e.g., `find person n/James t/family`
 **Help**                       | `help [COMMAND]`<br> e.g. `help` <br> e.g. `help add person`
 **List**                       | `list`
 **Redo**                       | `redo`
