@@ -13,7 +13,7 @@ Furiends can help you manage people, animals and their interactions efficiently.
 ## Table of Contents
 
 - [Quick start](#quick-start)
-- [Overview of GUI](#overview-of-gui)
+- [Overview of Interface](#overview-of-interface)
 - [Features](#features)
   - [Valid input formats](#valid-inputs-format)
   - [Viewing help: `help`](#viewing-help-help)
@@ -59,8 +59,7 @@ Furiends can help you manage people, animals and their interactions efficiently.
       ```
 
 2. Download the latest `furiends.jar` file from [here](https://github.com/AY2526S1-CS2103T-W14-3/tp/releases).
-
-![GitHubReleases](images/furiendsGithub.png){style="width:900px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);"}<br>
+  ![GitHubReleases](images/furiendsGithub.png){style="width:900px; height:auto;"}<br>
 
 <box type="tip" seamless>
 
@@ -87,7 +86,10 @@ The file is usually in the `Downloads` folder after downloading it.
    **For Windows users:**
    1. Navigate to the folder containing `furiends.jar` in **File Explorer**.
    2. Right-click on the folder (or right-click on empty space inside the folder) and select **Open in Terminal**.
-   3. In the terminal window that opens, type `java -jar furiends.jar` and press Enter to launch Furiends.
+   <div style="text-align: center;">
+  ![widowsFileExplorer](images/windowsOpenInTerminal.png){style="width:500px; height:auto; border-radius:6px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);"}
+</div>
+   4. In the terminal window that opens, type `java -jar furiends.jar` and press Enter to launch Furiends.
    
     <br>
 
@@ -96,14 +98,16 @@ The file is usually in the `Downloads` folder after downloading it.
    2. Navigate to the folder containing `furiends.jar` using the `cd` command.
    3. Type `java -jar furiends.jar` and press Enter to launch Furiends.
    
+
+<br>
+
 <div style="page-break-after: always;"></div>
 
-A GUI similar to the below should appear in a few seconds. Note how the application contains some sample data.<br>
-![Ui](images/ui.png){style="width:900px; height:auto;"}<br>
-For more details on the GUI, you can refer to the [Overview of GUI](#overview-of-gui) section.
+   A interface similar to the below should appear in a few seconds. Note how the application contains some sample data.<br>
+   ![Ui](images/ui.png){style="width:90 0px; height:auto;"}<br>
+   For more details on the interface, you can refer to the [Overview of Interface](#overview-of-interface) section.
 
-
-6. Type the command in the command box (displaying "Enter command here...") and press Enter to execute it.
+6. Type the command in the command box (displaying *"Enter command here..."*) and press Enter to execute it.
 <br><br>
   Here are some simple commands you can try:
 
@@ -125,10 +129,10 @@ Back to [table of contents](#table-of-contents).
 
 <div style="page-break-after: always;"></div>
 
-## Overview of GUI
+## Overview of Interface
 ![Ui](images/uiExplanation.png){style="width:900px; height:auto;"}
 
-The GUI is made up of the following components:
+The interface of Furiends is made up of the following components:
 1. **Options Panel**: Contains menu bars to exit (File > Exit) and open the help panel (Help > Help).
 2. **Command Box**: Commands are entered in this text box. Press the Enter key to execute the command.
 3. **Feedback Box**: Furiends displays the result of the executed command in this box.
@@ -204,7 +208,7 @@ Use the `help` command to displays a window, which links to the user guide, as w
 
 Format: `help [COMMAND]` <br>
 
-You can open the general help window (in the image below) by entering `help` in the command box.
+You can open the general help window *(in the image below)* by entering `help` in the command box.
 
 ![help message](images/helpMessage.png){style="width:700px; height:auto;"}
 
@@ -214,9 +218,10 @@ You can also open this window by entering `help [COMMAND]` in the command box. <
 
 <div style="page-break-after: always;"></div>
 
-In the example below, when clicking the `help` command (as shown in the image above), a new window will pop up to show
-the details of the `help` command and its usage.
-(The window shown below can also be opened by entering `help help` in the command box.)
+In the example below, when clicking the `help` command *(as shown in the image above)*, a new window will pop up to show
+the details of the `help` command and its usage. <br>
+
+The window shown below can also be opened by entering `help help` in the command box.
 
 ![help window](images/helpWindowExample.png){style="width:700px; height:auto;"}
 
@@ -284,6 +289,7 @@ Format: `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
   * i.e adding of tags is not cumulative.
 
 <box type="tip" seamless>
+
 You can remove all the person’s tags by typing `t/` without
 specifying any tags after it.
 </box>
@@ -295,9 +301,11 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
    and `johndoe@example.com` respectively.
 
     <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin: 20px 0;">
-      <img src="images/editPersonExampleBefore.png" style="width:430px; height:auto; border-radius:10px; box-shadow: 0 8px 13px rgba(0,0,0,0.3);" alt="Before editing">
-      <span style="font-size: 25px; color: #666;">↓</span>
-      <img src="images/editPersonExampleAfter.png" style="width:430px; height:auto; border-radius:10px; box-shadow: 0 8px 13px rgba(0,0,0,0.3);" alt="After editing">
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <img src="images/editPersonExampleBefore.png" style="width:400px; height:auto;" alt="Before editing">
+        <span style="font-size: 48px; color: #666;">→</span>
+        <img src="images/editPersonExampleAfter.png" style="width:400px; height:auto;" alt="After editing">
+      </div>
     </div>
 
 
@@ -308,7 +316,6 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
 
 
 Back to [table of contents](#table-of-contents).
-
 <div style="page-break-after: always;"></div>
 
 ### Editing an animal : `edit animal`
@@ -358,6 +365,7 @@ Format: `find person [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]...`
   e.g. `t/friends` will return the same result as `t/FRIENDS`.
   * Only people with the tag `friends` will be shown.
 <box type="info" seamless>
+
   People with the tag `friend` will not be shown as the spelling is not exactly the same.
 </box>
 
@@ -375,6 +383,8 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
    This command returns `Alex Yeoh`, `David Li`. Note that the 'animal' portion is still shown.<br>
 
   ![result for 'find n/alex n/dav'.png](images/findPersonExampleOne.png){style="width:800px; height:auto;"}<br>
+<div style="page-break-after: always;"></div>
+
 * `find person t/friends` <br>
   This command returns `Alex Yeoh`, `Betsy Crowe`. Note that the 'animal' portion is still shown.<br>
 
@@ -454,23 +464,33 @@ Format: `feed f/PERSON_NAME n/ANIMAL_NAME dt/DATETIME`
 * `DATETIME` must be a valid day and time.
 * The order of `n/ANIMAL_NAME`, `f/PERSON_NAME` and `dt/DATETIME` does not matter.
 
+<div style="page-break-after: always;"></div>
+
 Examples: refer to input restrictions [here](#valid-inputs-format)
 * `feed f/Alex Yeoh n/Max dt/2025-01-24 09:00` <br>
    This command assigns `Alex Yeoh` and `Max` to the same feeding session. <br>
 
-<div style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin: 20px 0;">
+<!-- <div style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin: 20px 0;">
   <div style="display: flex; align-items: center; gap: 20px;">
-    <img src="images/feedPersonExampleBefore.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Person before feeding">
+    <img src="images/feedPersonExampleBefore.png" style="width:400px; height:auto;" alt="Person before feeding">
     <span style="font-size: 48px; color: #666;">→</span>
-    <img src="images/feedPersonExampleAfter.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Person after feeding">
+    <img src="images/feedPersonExampleAfter.png" style="width:400px; height:auto;" alt="Person after feeding">
   </div>
   <div style="display: flex; align-items: center; gap: 20px;">
-    <img src="images/feedAnimalExampleBefore.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Animal before feeding">
+    <img src="images/feedAnimalExampleBefore.png" style="width:400px; height:auto;" alt="Animal before feeding">
     <span style="font-size: 48px; color: #666;">→</span>
-    <img src="images/feedAnimalExampleAfter.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Animal after feeding">
+    <img src="images/feedAnimalExampleAfter.png" style="width:400px; height:auto;" alt="Animal after feeding">
   </div>
-</div>
+</div> -->
 
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin: 20px 0;">
+  <img src="images/feedPersonExampleBefore.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Person before feeding">
+  <img src="images/feedAnimalExampleBefore.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Animal before feeding">
+  <span style="font-size: 30px; color: #666;">↓</span>
+  <img src="images/feedPersonExampleAfter.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Person after feeding">
+  <img src="images/feedAnimalExampleAfter.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Animal after feeding">
+</div>
 
 <box type="info" seamless>
 
@@ -515,6 +535,14 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
 * `delete animal n/Max` <br>
   This command deletes the animal with name `Max` from Furiends.
   ![deleteAnimal.png](images/deleteAnimalExample.png){style="width:900px; height:auto;"}<br>
+
+<box type="warning" seamless>
+
+When `deleting` after a [`find`](#finding-people-by-name-find-person) command, only contacts that show up on the GUI (contacts that are found) can be deleted.
+
+Be sure to use [`list`](#listing-all-contacts-list) to ensure all contacts can be deleted!
+
+</box>
 
 Back to [table of contents](#table-of-contents).
 
@@ -603,8 +631,6 @@ Back to [table of contents](#table-of-contents).
 
 <div style="page-break-after: always;"></div>
 
-Back to [table of contents](#table-of-contents).
-
 ### Undoing the last change: `undo`
 
 Use the `undo` command to revert Furiends to its previous state before the last modifying command.
@@ -613,7 +639,7 @@ Format: `undo`
 
 * You may only undo recent commands that change Furiends!
 
-  - Commands that change Furiends: `add`, `edit`, `delete`, `clear`, `feed`, or after a valid redo command.
+  - Commands that change Furiends: [`add person`](#adding-a-person-add-person), [`add animal`](#adding-an-animal-add-animal), [`edit person`](#editing-a-person-edit-person), [`edit animal`](#editing-an-animal-edit-animal), [`delete person`](#deleting-a-person-delete-person), [`delete animal`](#deleting-an-animal-delete-animal), [`clear`](#clearing-all-entries-clear), [`feed`](#feeding-an-animal-feed), or after a valid [`redo`](#redoing-an-undone-change-redo) command.
   - All other commands cannot be undone.
 * If there are no changes to undo, an error message will be shown.
   ![undoErrorMessage.png](images/undoExample.png){style="width:900px; height:auto;"}<br>
@@ -739,14 +765,14 @@ Back to [table of contents](#table-of-contents).
 
 Action (in alphabetical order) | Format, Examples
 ----------------------|------------------------------------------------------------------------------------------------
-**Add Animal**                 | `add animal n/NAME d/DESCRIPTION l/LOCATION [t/TAG]…​` <br> e.g., `add animal n/Fluffy d/White cat l/Ang Mo Kio`
+**Add Animal**                 | `add animal n/NAME d/DESCRIPTION l/LOCATION [t/TAG]…​` <br> e.g., `add animal n/Fluffy d/White cat l/Ang Mo Kio t/friendly`
 **Add Person**                 | `add person n/NAME p/PHONE e/EMAIL [t/TAG]…​`<br>e.g.,`add person n/James Ho p/92224444 e/jamesho@example.com t/friend t/colleague`
 **Clear**                      | `clear`
 **Delete Animal**              | `delete animal n/NAME`<br> e.g., `delete animal n/Fluffy`
 **Delete Feed**                | `delete feed n/ANIMAL_NAME f/PERSON_NAME dt/DATETIME`<br> e.g., `delete feed n/Fluffy f/John Doe dt/2005-04-09 10:00`
 **Delete Person**              | `delete person n/NAME`<br> e.g., `delete person n/John Doe`
 **Edit Animal**                | `edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION] [t/TAG]…`<br> e.g., `edit animal Fluffy l/Void Deck`
-**Edit Person**                | `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… [f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]…​`<br> e.g.,`edit person John Doe n/James Lee e/jameslee@example.com`
+**Edit Person**                | `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… ​`<br> e.g.,`edit person John Doe n/James Lee e/jameslee@example.com`
 **Exit**                       | `exit`
 **Feed**                       | `feed f/PERSON_NAME n/ANIMAL_NAME dt/DATETIME`<br> e.g., `feed n/Fluffy f/John Doe dt/2005-04-09 10:00`
 **Find Animal**                | `find animal [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]`<br> e.g., `find n/Fluffy n/Max t/cute`
