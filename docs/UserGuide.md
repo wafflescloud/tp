@@ -59,8 +59,7 @@ Furiends can help you manage people, animals and their interactions efficiently.
       ```
 
 2. Download the latest `furiends.jar` file from [here](https://github.com/AY2526S1-CS2103T-W14-3/tp/releases).
-
-![GitHubReleases](images/furiendsGithub.png){style="width:900px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);"}<br>
+  ![GitHubReleases](images/furiendsGithub.png){style="width:900px; height:auto;"}<br>
 
 <box type="tip" seamless>
 
@@ -400,9 +399,11 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
    and `johndoe@example.com` respectively.
 
     <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin: 20px 0;">
-      <img src="images/editPersonExampleBefore.png" style="width:430px; height:auto; border-radius:10px; box-shadow: 0 8px 13px rgba(0,0,0,0.3);" alt="Before editing">
-      <span style="font-size: 25px; color: #666;">↓</span>
-      <img src="images/editPersonExampleAfter.png" style="width:430px; height:auto; border-radius:10px; box-shadow: 0 8px 13px rgba(0,0,0,0.3);" alt="After editing">
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <img src="images/editPersonExampleBefore.png" style="width:400px; height:auto;" alt="Before editing">
+        <span style="font-size: 48px; color: #666;">→</span>
+        <img src="images/editPersonExampleAfter.png" style="width:400px; height:auto;" alt="After editing">
+      </div>
     </div>
 
 
@@ -565,14 +566,14 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
 
 <div style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin: 20px 0;">
   <div style="display: flex; align-items: center; gap: 20px;">
-    <img src="images/feedPersonExampleBefore.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Person before feeding">
+    <img src="images/feedPersonExampleBefore.png" style="width:400px; height:auto;" alt="Person before feeding">
     <span style="font-size: 48px; color: #666;">→</span>
-    <img src="images/feedPersonExampleAfter.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Person after feeding">
+    <img src="images/feedPersonExampleAfter.png" style="width:400px; height:auto;" alt="Person after feeding">
   </div>
   <div style="display: flex; align-items: center; gap: 20px;">
-    <img src="images/feedAnimalExampleBefore.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Animal before feeding">
+    <img src="images/feedAnimalExampleBefore.png" style="width:400px; height:auto;" alt="Animal before feeding">
     <span style="font-size: 48px; color: #666;">→</span>
-    <img src="images/feedAnimalExampleAfter.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Animal after feeding">
+    <img src="images/feedAnimalExampleAfter.png" style="width:400px; height:auto;" alt="Animal after feeding">
   </div>
 </div>
 
