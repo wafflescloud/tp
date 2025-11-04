@@ -13,7 +13,7 @@ Furiends can help you manage people, animals and their interactions efficiently.
 ## Table of Contents
 
 - [Quick start](#quick-start)
-- [Overview of GUI](#overview-of-gui)
+- [Overview of Interface](#overview-of-interface)
 - [Features](#features)
   - [Valid input formats](#valid-inputs-format)
   - [Viewing help: `help`](#viewing-help-help)
@@ -90,12 +90,12 @@ The file is usually in the `Downloads` folder after downloading it.
 
   <br>
 
-   A GUI similar to the below should appear in a few seconds. Note how the application contains some sample data.<br>
+   A interface similar to the below should appear in a few seconds. Note how the application contains some sample data.<br>
    ![Ui](images/ui.png){style="width:900px; height:auto;"}<br>
-   For more details on the GUI, you can refer to the [Overview of GUI](#overview-of-gui) section.
+   For more details on the interface, you can refer to the [Overview of Interface](#overview-of-interface) section.
 <div style="page-break-after: always;"></div>
 
-6. Type the command in the command box (displaying "Enter command here...") and press Enter to execute it.
+6. Type the command in the command box (displaying *"Enter command here..."*) and press Enter to execute it.
 <br><br>
   Here are some simple commands you can try:
 
@@ -114,10 +114,10 @@ The file is usually in the `Downloads` folder after downloading it.
 
 <div style="page-break-after: always;"></div>
 
-## Overview of GUI
+## Overview of Interface
 ![Ui](images/uiExplanation.png){style="width:900px; height:auto;"}
 
-The GUI is made up of the following components:
+The interface of Furiends is made up of the following components:
 1. **Options Panel**: Contains menu bars to exit (File > Exit) and open the help panel (Help > Help).
 2. **Command Box**: Commands are entered in this text box. Press the Enter key to execute the command.
 3. **Feedback Box**: Furiends displays the result of the executed command in this box.
@@ -309,7 +309,7 @@ Use the `help` command to displays a window, which links to the user guide, as w
 
 Format: `help [COMMAND]` <br>
 
-You can open the general help window (in the image below) by entering `help` in the command box.
+You can open the general help window *(in the image below)* by entering `help` in the command box.
 
 ![help message](images/helpMessage.png){style="width:700px; height:auto;"}
 
@@ -319,9 +319,10 @@ You can also open this window by entering `help [COMMAND]` in the command box. <
 
 <div style="page-break-after: always;"></div>
 
-In the example below, when clicking the `help` command (as shown in the image above), a new window will pop up to show
-the details of the `help` command and its usage.
-(The window shown below can also be opened by entering `help help` in the command box.)
+In the example below, when clicking the `help` command *(as shown in the image above)*, a new window will pop up to show
+the details of the `help` command and its usage. <br>
+
+The window shown below can also be opened by entering `help help` in the command box.
 
 ![help window](images/helpWindowExample.png){style="width:700px; height:auto;"}
 
@@ -389,6 +390,7 @@ Format: `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
   * i.e adding of tags is not cumulative.
 
 <box type="tip" seamless>
+
 You can remove all the person’s tags by typing `t/` without
 specifying any tags after it.
 </box>
@@ -463,6 +465,7 @@ Format: `find person [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]...`
   e.g. `t/friends` will return the same result as `t/FRIENDS`.
   * Only people with the tag `friends` will be shown.
 <box type="info" seamless>
+
   People with the tag `friend` will not be shown as the spelling is not exactly the same.
 </box>
 
@@ -708,8 +711,6 @@ Back to [table of contents](#table-of-contents).
 
 <div style="page-break-after: always;"></div>
 
-Back to [table of contents](#table-of-contents).
-
 ### Undoing the last change: `undo`
 
 Use the `undo` command to revert Furiends to its previous state before the last modifying command.
@@ -718,7 +719,7 @@ Format: `undo`
 
 * You may only undo recent commands that change Furiends!
 
-  - Commands that change Furiends: `add`, `edit`, `delete`, `clear`, `feed`, or after a valid redo command.
+  - Commands that change Furiends: `add`, `edit`, `delete`, `clear`, `feed`, or after a valid `redo` command.
   - All other commands cannot be undone.
 * If there are no changes to undo, an error message will be shown.
   ![undoErrorMessage.png](images/undoExample.png){style="width:900px; height:auto;"}<br>
@@ -844,14 +845,14 @@ Back to [table of contents](#table-of-contents).
 
 Action (in alphabetical order) | Format, Examples
 ----------------------|------------------------------------------------------------------------------------------------
-**Add Animal**                 | `add animal n/NAME d/DESCRIPTION l/LOCATION [t/TAG]…​` <br> e.g., `add animal n/Fluffy d/White cat l/Ang Mo Kio`
+**Add Animal**                 | `add animal n/NAME d/DESCRIPTION l/LOCATION [t/TAG]…​` <br> e.g., `add animal n/Fluffy d/White cat l/Ang Mo Kio t/friendly`
 **Add Person**                 | `add person n/NAME p/PHONE e/EMAIL [t/TAG]…​`<br>e.g.,`add person n/James Ho p/92224444 e/jamesho@example.com t/friend t/colleague`
 **Clear**                      | `clear`
 **Delete Animal**              | `delete animal n/NAME`<br> e.g., `delete animal n/Fluffy`
 **Delete Feed**                | `delete feed n/ANIMAL_NAME f/PERSON_NAME dt/DATETIME`<br> e.g., `delete feed n/Fluffy f/John Doe dt/2005-04-09 10:00`
 **Delete Person**              | `delete person n/NAME`<br> e.g., `delete person n/John Doe`
 **Edit Animal**                | `edit animal NAME [n/NAME] [d/DESCRIPTION] [l/LOCATION] [t/TAG]…`<br> e.g., `edit animal Fluffy l/Void Deck`
-**Edit Person**                | `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… [f/ANIMAL_NAME dt/YYYY-MM-DD HH:MM]…​`<br> e.g.,`edit person John Doe n/James Lee e/jameslee@example.com`
+**Edit Person**                | `edit person NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]… ​`<br> e.g.,`edit person John Doe n/James Lee e/jameslee@example.com`
 **Exit**                       | `exit`
 **Feed**                       | `feed f/PERSON_NAME n/ANIMAL_NAME dt/DATETIME`<br> e.g., `feed n/Fluffy f/John Doe dt/2005-04-09 10:00`
 **Find Animal**                | `find animal [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]`<br> e.g., `find n/Fluffy n/Max t/cute`
