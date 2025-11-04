@@ -88,12 +88,19 @@ The file is usually in the `Downloads` folder after downloading it.
    2. Right-click on the folder (or right-click on empty space inside the folder) and select **Open in Terminal**.
    3. In the terminal window that opens, type `java -jar furiends.jar` and press Enter to launch Furiends.
 
-  <br>
+<br>
+<div style="text-align: center;">
+
+![widowsFileExplorer](images/windowsOpenInTerminal.png){style="width:500px; height:auto; border-radius:6px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);"}
+
+</div>
+<br>
+
+<div style="page-break-after: always;"></div>
 
    A interface similar to the below should appear in a few seconds. Note how the application contains some sample data.<br>
-   ![Ui](images/ui.png){style="width:900px; height:auto;"}<br>
+   ![Ui](images/ui.png){style="width:90 0px; height:auto;"}<br>
    For more details on the interface, you can refer to the [Overview of Interface](#overview-of-interface) section.
-<div style="page-break-after: always;"></div>
 
 6. Type the command in the command box (displaying *"Enter command here..."*) and press Enter to execute it.
 <br><br>
@@ -402,9 +409,9 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
    and `johndoe@example.com` respectively.
 
     <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin: 20px 0;">
-      <img src="images/editPersonExampleBefore.png" style="width:430px; height:auto; border-radius:10px; box-shadow: 0 8px 13px rgba(0,0,0,0.3);" alt="Before editing">
+      <img src="images/editPersonExampleBefore.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 13px rgba(0,0,0,0.3);" alt="Before editing">
       <span style="font-size: 25px; color: #666;">↓</span>
-      <img src="images/editPersonExampleAfter.png" style="width:430px; height:auto; border-radius:10px; box-shadow: 0 8px 13px rgba(0,0,0,0.3);" alt="After editing">
+      <img src="images/editPersonExampleAfter.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 13px rgba(0,0,0,0.3);" alt="After editing">
     </div>
 
 
@@ -415,7 +422,6 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
 
 
 Back to [table of contents](#table-of-contents).
-
 <div style="page-break-after: always;"></div>
 
 ### Editing an animal : `edit animal`
@@ -483,6 +489,8 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
    This command returns `Alex Yeoh`, `David Li`. Note that the 'animal' portion is still shown.<br>
 
   ![result for 'find n/alex n/dav'.png](images/findPersonExampleOne.png){style="width:800px; height:auto;"}<br>
+<div style="page-break-after: always;"></div>
+
 * `find person t/friends` <br>
   This command returns `Alex Yeoh`, `Betsy Crowe`. Note that the 'animal' portion is still shown.<br>
 
@@ -562,11 +570,13 @@ Format: `feed f/PERSON_NAME n/ANIMAL_NAME dt/DATETIME`
 * `DATETIME` must be a valid day and time.
 * The order of `n/ANIMAL_NAME`, `f/PERSON_NAME` and `dt/DATETIME` does not matter.
 
+<div style="page-break-after: always;"></div>
+
 Examples: refer to input restrictions [here](#valid-inputs-format)
 * `feed f/Alex Yeoh n/Max dt/2025-01-24 09:00` <br>
    This command assigns `Alex Yeoh` and `Max` to the same feeding session. <br>
 
-<div style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin: 20px 0;">
+<!-- <div style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin: 20px 0;">
   <div style="display: flex; align-items: center; gap: 20px;">
     <img src="images/feedPersonExampleBefore.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Person before feeding">
     <span style="font-size: 48px; color: #666;">→</span>
@@ -577,8 +587,16 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
     <span style="font-size: 48px; color: #666;">→</span>
     <img src="images/feedAnimalExampleAfter.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Animal after feeding">
   </div>
-</div>
+</div> -->
 
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin: 20px 0;">
+  <img src="images/feedPersonExampleBefore.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Person before feeding">
+  <img src="images/feedAnimalExampleBefore.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Animal before feeding">
+  <span style="font-size: 30px; color: #666;">↓</span>
+  <img src="images/feedPersonExampleAfter.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Person after feeding">
+  <img src="images/feedAnimalExampleAfter.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Animal after feeding">
+</div>
 
 <box type="info" seamless>
 
@@ -727,7 +745,7 @@ Format: `undo`
 
 * You may only undo recent commands that change Furiends!
 
-  - Commands that change Furiends: `add`, `edit`, `delete`, `clear`, `feed`, or after a valid `redo` command.
+  - Commands that change Furiends: [`add person`](#adding-a-person-add-person), [`add animal`](#adding-an-animal-add-animal), [`edit person`](#editing-a-person-edit-person), [`edit animal`](#editing-an-animal-edit-animal), [`delete person`](#deleting-a-person-delete-person), [`delete animal`](#deleting-an-animal-delete-animal), [`clear`](#clearing-all-entries-clear), [`feed`](#feeding-an-animal-feed), or after a valid [`redo`](#redoing-an-undone-change-redo) command.
   - All other commands cannot be undone.
 * If there are no changes to undo, an error message will be shown.
   ![undoErrorMessage.png](images/undoExample.png){style="width:900px; height:auto;"}<br>
