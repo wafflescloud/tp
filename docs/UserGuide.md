@@ -570,11 +570,13 @@ Format: `feed f/PERSON_NAME n/ANIMAL_NAME dt/DATETIME`
 * `DATETIME` must be a valid day and time.
 * The order of `n/ANIMAL_NAME`, `f/PERSON_NAME` and `dt/DATETIME` does not matter.
 
+<div style="page-break-after: always;"></div>
+
 Examples: refer to input restrictions [here](#valid-inputs-format)
 * `feed f/Alex Yeoh n/Max dt/2025-01-24 09:00` <br>
    This command assigns `Alex Yeoh` and `Max` to the same feeding session. <br>
 
-<div style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin: 20px 0;">
+<!-- <div style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin: 20px 0;">
   <div style="display: flex; align-items: center; gap: 20px;">
     <img src="images/feedPersonExampleBefore.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Person before feeding">
     <span style="font-size: 48px; color: #666;">→</span>
@@ -585,8 +587,16 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
     <span style="font-size: 48px; color: #666;">→</span>
     <img src="images/feedAnimalExampleAfter.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Animal after feeding">
   </div>
-</div>
+</div> -->
 
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin: 20px 0;">
+  <img src="images/feedPersonExampleBefore.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Person before feeding">
+  <img src="images/feedAnimalExampleBefore.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Animal before feeding">
+  <span style="font-size: 30px; color: #666;">↓</span>
+  <img src="images/feedPersonExampleAfter.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Person after feeding">
+  <img src="images/feedAnimalExampleAfter.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);" alt="Animal after feeding">
+</div>
 
 <box type="info" seamless>
 

@@ -315,6 +315,8 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Proposed Enhancements**
 This section describes some details on how certain planned enhancement features can be implemented in future iterations.
 
