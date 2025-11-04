@@ -178,135 +178,17 @@ Back to [table of contents](#table-of-contents).
 
 <div style="page-break-after: always;"></div>
 
-### Valid Inputs Format
-* `NAME`/`PERSON_NAME`/`ANIMAL_NAME`
-  * Can only contain letters (`A-Z` and `a-z` only).
-
-  * Character limit of 1-30 (after removal of additional white spaces).
-
-  * Person/animal names are unique, no duplicate names accepted.
-
-  * Case-insensitive.
-
-  <box type="tip" seamless>
-
-    Input `john` is the same as `JOHN`.
-  </box>
-
-* `PHONE`
-  * Can only contain digits `0-9`.
-
-  * Minimum 3 digits required.
-
-  * Phone numbers are unique, no duplicate numbers accepted.
-
-  * e.g. `123`, `91234567`, `81234567`
-
-<br>
-
-<div style="page-break-after: always;"></div>
-
-* `EMAIL`
-  * Must adhere to the **RFC5322** email format:
-  * `local-part@domain`
-    * `local-part`: can contain alphanumeric characters and special characters such as ``!#$%&'*+/=?^_`{|}~-`` <br><br>
-    <box type="warning" seamless>
-
-    Periods `.` are allowed in the `local-part`, but it **cannot** start or end with a period.
-    Consecutive periods `..` are also not allowed.
-    </box>
-    <box type="info" seamless>
-
-    The `local-part` can also be a quoted string (enclosed in double quotes `"`), which allows
-    additional special characters and spaces.
-    </box>
-
-    * `@`: must have separator symbol between `local-part` and `domain`.
-    * `domain`: must follow domain naming conventions with a hierarchical structure (e.g., `example.com`)
-      * Can be a standard domain name with labels separated by periods
-      * Can be an IP address enclosed in square brackets `[` `]`
-      * Domain labels must start and end with alphanumeric characters, and can contain hyphens in between <br><br>
-  * **Character limit: 998** (including `@` and all characters).
-  * Emails are unique, no duplicate emails accepted.
-  * Emails are **case-insensitive** for both `local-part` and `domain`.
-  * e.g. `johndoe@email.com`, `he.he_123@gotmail.com`, `user+tag@example.co.uk`
-
-  <br>
-
-* `TAG`
-  * Can only contain letters and digits.
-
-  * Character limit of 30 (including all white spaces).
-
-  * e.g. `fluffy fur`, `cutie12 3`, `barker`
-
-<br>
-
-<div style="page-break-after: always;"></div>
-
-* `DATETIME`
-  * Format: `YYYY-MM-DD HH:mm`
-
-  * Must be a valid date and time.
-
-    * `YYYY` — 4-digit year
-      * e.g. `2025`
-      * Acceptable range: `0000` - `9999`
-
-    <br>
-
-    * `MM` — 2-digit month
-      * e.g. `March` is `03`, `October` is `10`
-      * Acceptable range: `01` - `12`
-
-    <br>
-
-    * `DD` — 2-digit day
-      * e.g. `02`, `28`
-      * Acceptable range depends on the month:
-        * `01` - `31`: January, March, May, July, August, October, December
-        * `01` - `30`: April, June, September, November
-        * `01` - `28`: February (non-leap years)
-        * `01` - `29`: February (leap years)
-
-    <br>
-
-    * `HH:mm` — 4 digits separated by `:` following the 24-hour clock
-      * e.g. `7:05PM` is `19:05`
-      * `HH` — 2-digit hours
-        * Acceptable range: `00` - `23`
-      * `mm` — 2-digit minutes
-        * Acceptable range: `00` - `59`
-
-  <br>
-
-  * Date and time must be separated by **a single space**
-  * e.g. `2025-10-01 18:59`, `2005-04-25 07:05`
-
-  <br>
-
-* `DESCRIPTION`
-  * Character limit of 200 (including internal white spaces).
-
-  * e.g. `cat that bites,,, meow`, `too fat need lose weight!`
-
-  <br>
-
-* `LOCATION`
-  * Character limit of 100 (including internal white spaces).
-
-  * e.g. `AMK Street 3497`, `blk A7!`
-
-<div style="page-break-after: always;"></div>
-
-* `KEYWORD`
-  * Comes in 2 different forms, `NAME` and `TAG` only.
-
-  * Characters length of 1-30 allowed after removal of extra white spaces.
-
-  * Only alphabets `A–Z`, `a–z`, digits `0-9`, and spaces allowed.
-
-  * e.g. `n/bobby`, `n/Max 1`, `t/fluffy`, `t/fluf`
+### Valid inputs format
+| Parameter   | Prefix       | Format                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|-------------|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| NAME        | `n/`         | <ul><li>Letters `A-Z` and `a-z` only.</li><li>Character limit of 30 (before trimming extra white spaces).</li><li>Person/animal names are unique. No duplicate names are accepted.</li><li>Case-insensitive.</li><li>e.g. `john` is the same as `JOHN`.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| PHONE       | `p/`         | <ul><li>Digits `0-9` only.</li><li>Minimum 3 digits.</li><li>Phone numbers are unique.</li><li>e.g. `123`, `91234567`, `81234567`.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| EMAIL | `e/` | <ul><li>Format `local-part@domain`.</li><li>`local-part`: <ul><li>Alphanumeric and special characters `!#$%&'*+/=?^_{\|}~-` are allowed.</li><li>Periods `.` allowed but the `local-part` cannot start or end with a `.` and no consecutive periods `..`.</li><li>`local-part` may be enclosed in double quotes (" "), which allows additional special characters and spaces.</li></ul><li>`domain`: must follow domain naming conventions with a hierarchical structure (e.g. `example.com`) <ul><li>Can be a standard domain name with labels separated by periods `.`</li><li>Can be an IP address enclosed in square brackets `[` `]` </li><li> Domain labels mus start and end with alphanumeric characters, and can contain hyphens in between.</li></ul><li>Character limit 998.</li><li>Emails should be unique. Duplicate emails are not accepted. </li><li>Emails are **case-insensitive** for both `local-part` and `domain` .</li><li>e.g. `johndoe@email.com`, `he.he_123@gotmail.com`, `user+tag@example.co.uk`.</li></ul> |
+| TAG         | `t/`         | <ul><li>Can only contain letters and digits.</li><li>Character limit of 30 (including white spaces).</li><li>e.g. `fluffy fur`, `cutie12 3`, `barker`.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| DATETIME    | `dt/`        | <ul><li>Format `YYYY-MM-DD HH:mm`.</li><li>Valid date and time.</li><li>`YYYY`: 4-digit year.</li><ul><li>Acceptable range: `0000` - `9999`</li></ul><li>`MM`: 2-digit month.<ul><li>Acceptable range: `01` - `12`</li><li>e.g. `March` is `03`, `October` is `10`.</li></ul><li>`DD`: 2-digit day.</li><ul><li>Acceptable range depends on the month:</li><ul><li>`01` - `31`: January, March, May, July, August, October, December</li><li>`01` - `30`: April, June, September, November</li><li>`01` - `28`: February (non-leap years)</li><li>`01` - `29`: February (leap years)</li></ul></ul> <li>`HH:mm`: 4 digits separated by `:` following the 24-hour clock (0000H - 2359H) </li><ul><li>`HH`: 2-digit hour</li><ul><li>Acceptable range: `00` - `23`</li></ul><li>`mm`: 2-digit minutes</li><ul><li>Acceptable range: `00` - `59`</li></ul></ul></li><li>Date and time must be separated by **a single space**.</li><li>e.g. `2025-10-01 18:59`, `2005-04-25 07:05`.</li></ul>                                               |
+| DESCRIPTION | `d/`         | <ul><li>Character limit of 200 (including internal white spaces).</li><li>e.g. `cat that bites,,, meow`, `too fat need lose weight!`.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| LOCATION    | `l/`         | <ul><li>Character limit of 100 (including internal white spaces).</li><li>e.g. `AMK Street 3497`, `blk A7!`.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| KEYWORD     | `n/` or `t/` | <ul><li>Comes in 2 different forms, `NAME` and `TAG` only.</li><li>Only alphabets `A-Z`, `a-z`, digits `0-9` and spaces allowed.<li>e.g. `n/bobby`, `n/Max 1`, `t/fluffy`, `t/fluf`.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
 <br>
 
