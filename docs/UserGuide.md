@@ -624,6 +624,14 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
   This command deletes the animal with name `Max` from Furiends.
   ![deleteAnimal.png](images/deleteAnimalExample.png){style="width:900px; height:auto;"}<br>
 
+<box type="warning" seamless>
+
+When `deleting` after a [`find`](#finding-people-by-name-find-person) command, only contacts that show up on the GUI (contacts that are found) can be deleted.
+
+Be sure to use [`list`](#listing-all-contacts-list) to ensure all contacts can be deleted!
+
+</box>
+
 Back to [table of contents](#table-of-contents).
 
 <div style="page-break-after: always;"></div>
