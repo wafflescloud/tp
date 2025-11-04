@@ -32,8 +32,14 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
+    /** Returns an unmodifiable view of the list of persons */
+    ObservableList<Person> getPersonList();
+
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the list of animals */
+    ObservableList<Animal> getAnimalList();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Animal> getFilteredAnimalList();

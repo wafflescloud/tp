@@ -21,6 +21,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ContactContainsKeywordsPredicate;
 import seedu.address.model.Model;
+import seedu.address.model.animal.Animal;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditAnimalDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -37,16 +38,20 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_NAME_CHOCO = "Choco Meow";
     public static final String VALID_NAME_KITTY = "Kitty Meow";
+    public static final String VALID_NAME_MAX = "Max";
     public static final String VALID_DESCRIPTION_CHOCO = "Brown Cat";
     public static final String VALID_DESCRIPTION_KITTY = "Grey Cat";
+    public static final String VALID_DESCRIPTION_MAX = "Golden Retriever";
     public static final String VALID_LOCATION_CHOCO = "Utown Residence";
     public static final String VALID_LOCATION_KITTY = "PGP";
+    public static final String VALID_LOCATION_MAX = "Dog Shelter";
     public static final String VALID_PHONE_AMY = "91111111";
     public static final String VALID_PHONE_BOB = "82222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_FRIENDLY = "friendly";
 
     public static final String VALID_NAME_BELLA = "Bella Boo";
     public static final String VALID_NAME_FLUFFY = "Fluffy Flakes";
@@ -59,10 +64,10 @@ public class CommandTestUtil {
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String NAME_DESC_CHOCO = " " + PREFIX_NAME + VALID_NAME_CHOCO;
     public static final String NAME_DESC_KITTY = " " + PREFIX_NAME + VALID_NAME_KITTY;
-    public static final String DESCRIPTION_DESC_CHOCO = " " + PREFIX_DESCRIPTION + VALID_NAME_CHOCO;
-    public static final String DESCRIPTION_DESC_KITTY = " " + PREFIX_DESCRIPTION + VALID_NAME_KITTY;
-    public static final String LOCATION_DESC_CHOCO = " " + PREFIX_LOCATION + VALID_NAME_CHOCO;
-    public static final String LOCATION_DESC_KITTY = " " + PREFIX_LOCATION + VALID_NAME_KITTY;
+    public static final String DESCRIPTION_DESC_CHOCO = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_CHOCO;
+    public static final String DESCRIPTION_DESC_KITTY = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_KITTY;
+    public static final String LOCATION_DESC_CHOCO = " " + PREFIX_LOCATION + VALID_LOCATION_CHOCO;
+    public static final String LOCATION_DESC_KITTY = " " + PREFIX_LOCATION + VALID_LOCATION_KITTY;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
@@ -75,6 +80,7 @@ public class CommandTestUtil {
     public static final String LOCATION_DESC_BELLA = " " + PREFIX_LOCATION + VALID_LOCATION_BELLA;
     public static final String LOCATION_DESC_FLUFFY = " " + PREFIX_LOCATION + VALID_LOCATION_FLUFFY;
 
+    public static final String INVALID_NAME_MAX = "Max";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -157,6 +163,20 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new ContactContainsKeywordsPredicate<>(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the animal at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showAnimalAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredAnimalList().size());
+
+        Animal animal = model.getFilteredAnimalList().get(targetIndex.getZeroBased());
+        final String[] splitName = animal.getName().fullName.split("\\s+");
+        model.updateFilteredAnimalList(new ContactContainsKeywordsPredicate<>(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredAnimalList().size());
     }
 
 }

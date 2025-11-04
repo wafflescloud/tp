@@ -148,13 +148,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getFeedingSessionList(),
-                logic.getFilteredAnimalList());
+                logic.getAnimalList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         animalListPanel = new AnimalListPanel(logic.getFilteredAnimalList(), logic.getFeedingSessionList(),
-                logic.getFilteredPersonList());
+                logic.getPersonList());
         animalListPanelPlaceholder.getChildren().add(animalListPanel.getRoot());
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 

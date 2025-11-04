@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -45,6 +46,124 @@ public class ContactContainsKeywordsPredicateTest {
 
         // different keywords -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
+
+        // different name keywords only -> returns false
+        ContactContainsKeywordsPredicate<Person> differentNamePredicate =
+                new ContactContainsKeywordsPredicate<>(secondNameKeywords, firstTagKeywords);
+        assertFalse(firstPredicate.equals(differentNamePredicate));
+
+        // different tag keywords only -> returns false
+        ContactContainsKeywordsPredicate<Person> differentTagPredicate =
+                new ContactContainsKeywordsPredicate<>(firstNameKeywords, secondTagKeywords);
+        assertFalse(firstPredicate.equals(differentTagPredicate));
+
+        // both null keywords -> returns true
+        ContactContainsKeywordsPredicate<Person> nullPredicate1 =
+                new ContactContainsKeywordsPredicate<>(null, null);
+        ContactContainsKeywordsPredicate<Person> nullPredicate2 =
+                new ContactContainsKeywordsPredicate<>(null, null);
+        assertTrue(nullPredicate1.equals(nullPredicate2));
+
+        // one null name keywords, one non-null -> returns false
+        ContactContainsKeywordsPredicate<Person> oneNullNamePredicate =
+                new ContactContainsKeywordsPredicate<>(null, firstTagKeywords);
+        assertFalse(firstPredicate.equals(oneNullNamePredicate));
+
+        // one null tag keywords, one non-null -> returns false
+        ContactContainsKeywordsPredicate<Person> oneNullTagPredicate =
+                new ContactContainsKeywordsPredicate<>(firstNameKeywords, null);
+        assertFalse(firstPredicate.equals(oneNullTagPredicate));
+    }
+
+    @Test
+    public void hashCode_sameValues_returnsSameHashCode() {
+        List<String> nameKeywords = Collections.singletonList("Alice");
+        List<String> tagKeywords = Collections.singletonList("friend");
+
+        ContactContainsKeywordsPredicate<Person> predicate1 =
+                new ContactContainsKeywordsPredicate<>(nameKeywords, tagKeywords);
+        ContactContainsKeywordsPredicate<Person> predicate2 =
+                new ContactContainsKeywordsPredicate<>(nameKeywords, tagKeywords);
+
+        assertEquals(predicate1.hashCode(), predicate2.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentValues_returnsDifferentHashCode() {
+        ContactContainsKeywordsPredicate<Person> predicate1 =
+                new ContactContainsKeywordsPredicate<>(Collections.singletonList("Alice"),
+                        Collections.singletonList("friend"));
+        ContactContainsKeywordsPredicate<Person> predicate2 =
+                new ContactContainsKeywordsPredicate<>(Collections.singletonList("Bob"),
+                        Collections.singletonList("colleague"));
+
+        assertNotEquals(predicate1.hashCode(), predicate2.hashCode());
+    }
+
+    @Test
+    public void hashCode_nullKeywords_returnsConsistentHashCode() {
+        ContactContainsKeywordsPredicate<Person> predicate1 =
+                new ContactContainsKeywordsPredicate<>(null, null);
+        ContactContainsKeywordsPredicate<Person> predicate2 =
+                new ContactContainsKeywordsPredicate<>(null, null);
+
+        assertEquals(predicate1.hashCode(), predicate2.hashCode());
+    }
+
+    @Test
+    public void test_nullNameKeywords_matchesAll() {
+        // null name keywords should match any name
+        ContactContainsKeywordsPredicate<Person> predicate =
+                new ContactContainsKeywordsPredicate<>(null, Collections.singletonList("friend"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withTags("friend").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("Bob").withTags("friend").build()));
+    }
+
+    @Test
+    public void test_emptyNameKeywords_matchesAll() {
+        // empty name keywords should match any name
+        ContactContainsKeywordsPredicate<Person> predicate =
+                new ContactContainsKeywordsPredicate<>(Collections.emptyList(),
+                        Collections.singletonList("friend"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withTags("friend").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("Bob").withTags("friend").build()));
+    }
+
+    @Test
+    public void test_nullTagKeywords_matchesAll() {
+        // null tag keywords should match any tags
+        ContactContainsKeywordsPredicate<Person> predicate =
+                new ContactContainsKeywordsPredicate<>(Collections.singletonList("Alice"), null);
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withTags("friend").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withTags("enemy").build()));
+    }
+
+    @Test
+    public void test_emptyTagKeywords_matchesAll() {
+        // empty tag keywords should match any tags
+        ContactContainsKeywordsPredicate<Person> predicate =
+                new ContactContainsKeywordsPredicate<>(Collections.singletonList("Alice"),
+                        Collections.emptyList());
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withTags("friend").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withTags("enemy").build()));
+    }
+
+    @Test
+    public void test_bothKeywordsNull_matchesAll() {
+        // both null should match everything
+        ContactContainsKeywordsPredicate<Person> predicate =
+                new ContactContainsKeywordsPredicate<>(null, null);
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withTags("friend").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("Bob").withTags("enemy").build()));
+    }
+
+    @Test
+    public void test_bothKeywordsEmpty_matchesAll() {
+        // both empty should match everything
+        ContactContainsKeywordsPredicate<Person> predicate =
+                new ContactContainsKeywordsPredicate<>(Collections.emptyList(), Collections.emptyList());
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withTags("friend").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("Bob").withTags("enemy").build()));
     }
 
     @Test
@@ -183,6 +302,30 @@ public class ContactContainsKeywordsPredicateTest {
                 new ContactContainsKeywordsPredicate<>(Collections.singletonList("Alice"),
                         Collections.singletonList("enemy"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withTags("friend").build()));
+    }
+
+    @Test
+    public void test_tagsMatchButNameDoesNot_returnsFalse() {
+        ContactContainsKeywordsPredicate<Person> predicate =
+                new ContactContainsKeywordsPredicate<>(Collections.singletonList("Bob"),
+                        Collections.singletonList("friend"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withTags("friend").build()));
+    }
+
+    @Test
+    public void testPersonNoTags_tagKeywordsGiven_returnsFalse() {
+        ContactContainsKeywordsPredicate<Person> predicate =
+                new ContactContainsKeywordsPredicate<>(Collections.emptyList(),
+                        Collections.singletonList("friend"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
+    }
+
+    @Test
+    public void testAnimalNoTags_tagKeywordsGiven_returnsFalse() {
+        ContactContainsKeywordsPredicate<Animal> predicate =
+                new ContactContainsKeywordsPredicate<>(Collections.emptyList(),
+                        Collections.singletonList("friendly"));
+        assertFalse(predicate.test(new AnimalBuilder().withName("Whiskers").build()));
     }
 
     @Test

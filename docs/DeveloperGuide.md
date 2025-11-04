@@ -6,9 +6,6 @@
 
 # Furiends Developer Guide
 
-<!-- * Table of Contents -->
-<page-nav-print />
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -28,6 +25,12 @@
 Refer to the guide [_Setting up and getting started_](https://ay2526s1-cs2103t-w14-3.github.io/tp/SettingUp.html).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before: always;"></div>
+
+<!-- * Table of Contents -->
+<page-nav-print />
+
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -38,6 +41,8 @@ Refer to the guide [_Setting up and getting started_](https://ay2526s1-cs2103t-w
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
+
+<div style="page-break-after: always;"></div>
 
 **Main components of the architecture**
 
@@ -63,13 +68,17 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
+
+<div style="page-break-after: always;"></div>
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<puml src="diagrams/ComponentManagers.puml" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="300"/>
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -88,6 +97,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2526S1-CS2103T-W14-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
@@ -95,6 +106,8 @@ The `UI` component,
 Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+
+<div style="page-break-after: always;"></div>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete person Jack")` API call as an example.
 
@@ -113,6 +126,8 @@ How the `Logic` component works:
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-after: always;"></div>
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
@@ -122,19 +137,24 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 * All `XYZTypeCommand` inherit from their respective `XYZCommand` so that they can be treated similarly where possible
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2526S1-CS2103T-W14-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelOverallClassDiagram.puml" width="500" />
+<puml src="diagrams/ModelOverallClassDiagram.puml" width="480"/>
 
 The `Model` component manages three main entity types: Person, Animal, and FeedingSession.
 
 * `AddressBook` contains three unique lists: `UniquePersonList`, `UniqueAnimalList`, and `UniqueFeedingSessionList`
 * `ModelManager` maintains the `AddressBook` and manages undo/redo functionality with `undoStack` and `redoStack`
+<div style="page-break-after: always;"></div>
+
+<div style="page-break-before: always;"></div>
 
 #### Person Model
 
-<puml src="diagrams/ModelPersonClassDiagram.puml" />
+<puml src="diagrams/ModelPersonClassDiagram.puml" width="480"/>
 
 The Person model stores:
 * `UUID id` - Unique identifier for each person
@@ -143,10 +163,13 @@ The Person model stores:
 * `Email email` - Email address
 * `Set<Tag> tags` - Tags for categorization
 * `Set<UUID> feedingSessionIds` - References to feeding sessions by UUID
+<div style="page-break-after: always;"></div>
+
+<div style="page-break-before: always;"></div>
 
 #### Animal Model
 
-<puml src="diagrams/ModelAnimalClassDiagram.puml" />
+<puml src="diagrams/ModelAnimalClassDiagram.puml" width="480"/>
 
 The Animal model stores:
 * `UUID id` - Unique identifier for each animal
@@ -155,16 +178,21 @@ The Animal model stores:
 * `Location location` - Where the animal is located
 * `Set<Tag> tags` - Tags for categorization
 * `Set<UUID> feedingSessionIds` - References to feeding sessions by UUID
+<div style="page-break-after: always;"></div>
+
+<div style="page-break-before: always;"></div>
 
 #### FeedingSession Model
 
-<puml src="diagrams/ModelFeedingSessionClassDiagram.puml" />
+<puml src="diagrams/ModelFeedingSessionClassDiagram.puml"/>
 
 The FeedingSession model links Person and Animal entities:
 * `UUID id` - Unique identifier for each feeding session
 * `UUID animalId` - Reference to the Animal being fed
 * `UUID personId` - Reference to the Person feeding
 * `LocalDateTime dateTime` - When the feeding occurred
+
+<div style="page-break-after: always;"></div>
 
 #### Undo/Redo Implementation
 
@@ -183,7 +211,9 @@ The `Model` component implements undo/redo functionality using two stacks that s
    * Pushes the current `AddressBook` state onto the `undoStack`
    * Clears the `redoStack` (executing a new command invalidates redo history)
 
-<puml src="diagrams/ExecuteCommandActivityDiagram.puml" alt="ExecuteCommandActivityDiagram" width="400" />
+<puml src="diagrams/ExecuteCommandActivityDiagram.puml" alt="ExecuteCommandActivityDiagram" width="370"/>
+
+<div style="page-break-after: always;"></div>
 
 2. **Undo Operation**: When the user executes `undo`, the system:
    * Pushes the current state to `redoStack`
@@ -192,14 +222,18 @@ The `Model` component implements undo/redo functionality using two stacks that s
 
 <puml src="diagrams/UndoActivityDiagram.puml" alt="UndoActivityDiagram" width="400" />
 
+<div style="page-break-after: always;"></div>
+
 3. **Redo Operation**: When the user executes `redo`, the system:
    * Pushes the current state to `undoStack`
    * Pops the next state from `redoStack`
    * Restores the address book to that next state
 
-<puml src="diagrams/RedoActivityDiagram.puml" alt="RedoActivityDiagram" width="400" />
+<puml src="diagrams/RedoActivityDiagram.puml" alt="RedoActivityDiagram" width="400"/>
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
@@ -207,7 +241,7 @@ The following sequence diagram shows how an undo operation goes through the `Log
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model"/>
 
 Commands that modify the address book and thus support undo/redo:
 * `add person` / `add animal` / `feed` - Add entities
@@ -220,12 +254,15 @@ Commands that do not modify the address book and thus do not support undo/redo:
 * `find` - Finds persons/animals
 * `help` - Shows help information
 * `exit` - Exits the application
+<div style="page-break-after: always;"></div>
 
 <box type="info" seamless>
 
 **Note:** If a command fails its execution (e.g., deleting a non-existent person), it will not call `Model#saveState()`, so the address book state will not be saved into the `undoStack`.
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 #### How the Model Works
 
@@ -257,6 +294,7 @@ The `Model` component:
 
 * **Does not depend on other components** as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components.
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -269,11 +307,54 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+<div style="page-break-after: always;"></div>
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## **Proposed Enhancements**
+This section describes some details on how certain planned enhancement features can be implemented in future iterations.
+
+### Flexibility for name and tag
+* Allow special characters like apostrophes `/` and `s/o` in names.
+
+* Allow valid characters like `'` in tags.
+
+* Ensures commands and storage handle more natural user input.
+
+### Duplicate Names with Unique Contact Identifiers
+
+* Names can be duplicated.
+
+* Phone numbers and emails must remain unique.
+
+* Commands may need indices or IDs to specify contacts unambiguously.
+
+### Index-Based Commands for Fast Typing
+
+* Use contact/animal indices instead of full names for commands.
+
+* Reduces typing effort and ambiguity.
+
+* Works in conjunction with duplicate names support.
+
+### More convenient closing of `help` and `view` windows
+* Enable users to close contact or help cards using a command or shortcut key (e.g. `Esc`).
+
+* Improves navigation and user experience.
+
+### Real time update of all windows
+* Opened help/profile windows do not automatically reflect edits occur in main window.
+
+* Requires live data binding, observer pattern, or refresh mechanism to stay updated.
+
+### Adding of profile pictures for contacts
+* Users are able to add/edit contacts' images
+
+<div style="page-break-before: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -284,6 +365,8 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -304,7 +387,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 * manage contacts faster than a typical mouse/GUI driven app
 * keep track of animals' details around campus
 
-
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -340,6 +423,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Person-In-Charge (PIC) of the members of Cats of NUS | add feeding sessions                                                                         | assign cats and feeders to a specific feeding session for better organisation              |
 | `*`      | PIC of the members of Cats of NUS                    | remove feeding sessions                                                                      | keep up to date with existing and upcoming feeding sessions                                |
 
+<div style="page-break-after: always;"></div>
+
 ### Use cases
 
 (For all use cases below, the **System** is `Furiends` and the **Actor** is the `user`, where `user` refers to a cat caretaker using the Furiends app to manage contacts, unless specified otherwise)
@@ -368,6 +453,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends
 
+<div style="page-break-after: always;"></div>
 
 **Use case: UC02 - Delete a person**
 
@@ -391,6 +477,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends
 
+<div style="page-break-after: always;"></div>
 
 **Use case: UC03 - Edit a person**
 
@@ -425,6 +512,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends
 
+<div style="page-break-after: always;"></div>
 
 **Use case: UC04 - Find a person**
 
@@ -449,6 +537,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends
 
+<div style="page-break-after: always;"></div>
 
 **Use case: UC05 - Add an animal**
 
@@ -474,6 +563,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends
 
+<div style="page-break-after: always;"></div>
 
 **Use case: UC06 - Delete an animal**
 
@@ -497,6 +587,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends
 
+<div style="page-break-after: always;"></div>
 
 **Use case: UC07 - Edit an animal**
 
@@ -531,6 +622,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends
 
+<div style="page-break-after: always;"></div>
 
 **Use case: UC08 - Find an animal**
 
@@ -554,6 +646,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. Furiends shows an empty result message.
 
         Use case ends
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC09 - Add a feeding session**
 
@@ -580,6 +674,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC10 - Delete a feeding session**
 
 **MSS**
@@ -598,6 +694,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends
 
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 1. The software should work on any mainstream OS as long as it has Java 17 or above installed.
@@ -613,6 +710,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+<div style="page-break-after: always;"></div>
+
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
@@ -621,6 +720,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **General User**: Users that fits the target audience of this address book
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -650,6 +751,8 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a person or animal
 
 1. Valid test case - Adding a person <br>
@@ -673,6 +776,8 @@ testers are expected to do more *exploratory* testing.
    Command: `add animal n/Max d/Golden Retriever, friendly and well-trained l/Block A, Kennel 1 t/Shy` <br>
    Expected: No person added. Error details shown in the status message: `This animal already exists in the address book.` <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a feeding session
 
 1. Valid test case - Adding a feeding session <br>
@@ -682,6 +787,8 @@ testers are expected to do more *exploratory* testing.
 2. Invalid test case - Adding a feeding session with missing details <br>
    Command: `feed n/Max f/Alex Yeoh` <br>
    Expected: No feeding session added. Error details shown in the status message: `Invalid command format! ...` <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a person or animal
 
@@ -706,6 +813,8 @@ testers are expected to do more *exploratory* testing.
    Prerequisite: Person `Bernice Yu` already exists in the list. (Should be present from pre-loaded data) <br>
    Command: `edit person John Doe n/Bernice Yu` <br>
    Expected: No person updated. Error details shown in the status message: `This person already exists in the address book.` <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Finding a person or animal
 
@@ -743,10 +852,14 @@ testers are expected to do more *exploratory* testing.
    Prerequisite: Only animal `Max` exist in the list with tag `Shy`. (Should be present from pre-loaded data) <br>
    Command: `find animal t/shy` <br>
    Expected: Only animal `Max` is shown in the list <br>
+<div style="page-break-after: always;"></div>
+
 8. Valid test case - Finding an animal by name and tag <br>
    Prerequisite: Animal `Max` exists in the list with tag `Shy`. (Should be present from pre-loaded data) <br>
    Command: `find animal n/Max t/shy` <br>
    Expected: Out of all animals tagged as `shy`, only animal `Max` is shown in the list. <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a person or animal
 
@@ -769,6 +882,8 @@ testers are expected to do more *exploratory* testing.
    Command: `delete animal n/Fluffy` <br>
    Expected: No animal deleted. Error details shown in the status message: `The animal's name provided is invalid` <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a feeding session
 
 1. Valid test case - Deleting a feeding session <br>
@@ -779,6 +894,8 @@ testers are expected to do more *exploratory* testing.
    Prerequisite: Feeding session with person `Bernice Yu` and animal `Luna` on `2025-11-20 10:00` does not exist in the list. <br>
    Command: `delete feed n/Luna f/Bernice Yu dt/2025-11-20 10:00` <br>
    Expected: No feeding session deleted. Error details shown in the status message: `No feeding session found with the specified details` <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 

@@ -1,0 +1,62 @@
+{
+  "_comment": "AddressBook save file which contains the same Animal values as in TypicalAnimals#getTypicalAddressBook()",
+  "animals": [
+    {
+      "id": "11111111-1111-1111-1111-111111111111",
+      "name": "Whiskers",
+      "description": "A playful tabby cat.",
+      "location": "Shelter Room 2",
+      "tags": ["playful", "shelter"],
+      "feedingSessionIds": []
+    },
+    {
+      "id": "22222222-2222-2222-2222-222222222222",
+      "name": "Luna",
+      "description": "Shy but affectionate Siamese cat.",
+      "location": "Shelter Room 1",
+      "tags": ["shy", "affectionate"],
+      "feedingSessionIds": []
+    },
+    {
+      "id": "33333333-3333-3333-3333-333333333333",
+      "name": "Simba",
+      "description": "Curious ginger kitten who loves to climb.",
+      "location": "Shelter Room 3",
+      "tags": ["curious", "kitten"],
+      "feedingSessionIds": []
+    },
+    {
+      "id": "44444444-4444-4444-4444-444444444444",
+      "name": "Bella",
+      "description": "Gentle Ragdoll cat with blue eyes.",
+      "location": "Shelter Room 4",
+      "tags": ["gentle", "ragdoll"],
+      "feedingSessionIds": []
+    },
+    {
+      "id": "55555555-5555-5555-5555-555555555555",
+      "name": "Oreo",
+      "description": "Black and white Tuxedo cat, very active.",
+      "location": "Quarantine Zone",
+      "tags": ["active", "tuxedo"],
+      "feedingSessionIds": []
+    },
+    {
+      "id": "66666666-6666-6666-6666-666666666666",
+      "name": "Max",
+      "description": "Black Cat",
+      "location": "Campus Library",
+      "tags": ["campus", "black"],
+      "feedingSessionIds": []
+    },
+    {
+      "id": "77777777-7777-7777-7777-777777777777",
+      "name": "Fluffy",
+      "description": "White Persian Cat",
+      "location": "Student Dormitory",
+      "tags": ["white", "persian"],
+      "feedingSessionIds": []
+    }
+  ]
+}
+
