@@ -78,7 +78,8 @@ The file is usually in the `Downloads` folder after downloading it.
    1. Navigate to the folder you had placed `furiends.jar` in using the Finder application.
       * You can launch Finder by using Spotlight `(command + space)` and typing `Finder`, then pressing Enter.
    2. Right-click on the folder (or right-click on empty space inside the folder) and select **New Terminal at Folder**.
-   ![FuriendsSetupMac](images/furiendsSetupMac.png){style="width:700px; height:auto;"}
+      ![macFinder](images/macOpenInTerminal.png){style="width:500px; height:auto;"}
+
    3. Type `java -jar furiends.jar` in the launched terminal and press Enter to launch Furiends.
 
     <br>
@@ -87,12 +88,8 @@ The file is usually in the `Downloads` folder after downloading it.
    1. Navigate to the folder containing `furiends.jar` in **File Explorer**.
    2. Right-click on the folder (or right-click on empty space inside the folder) and select **Open in Terminal**.
    3. In the terminal window that opens, type `java -jar furiends.jar` and press Enter to launch Furiends.
+      ![widowsFileExplorer](images/windowsOpenInTerminal.png){style="width:500px; height:auto;"}
 
-<div style="text-align: center;">
-
-![widowsFileExplorer](images/windowsOpenInTerminal.png){style="width:500px; height:auto;"}
-
-</div>
 
 <div style="page-break-after: always;"></div>
 
