@@ -14,6 +14,8 @@
 
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
+* GitHub Copilot was used to increase the productivity of writing code in the project (ie. used as an auto-complete tool)
+
 * The undo/redo implementation was inspired by the proposed undo/redo feature in [AddressBook-Level3](https://se-education.org/addressbook-level3/), adapted to use a stack-based approach with `State` snapshots instead of the `VersionedAddressBook` pattern
 
 * The UUID-based entity relationship design for managing Person-Animal-FeedingSession relationships was inspired by database design principles to avoid circular dependencies
