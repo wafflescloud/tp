@@ -88,12 +88,19 @@ The file is usually in the `Downloads` folder after downloading it.
    2. Right-click on the folder (or right-click on empty space inside the folder) and select **Open in Terminal**.
    3. In the terminal window that opens, type `java -jar furiends.jar` and press Enter to launch Furiends.
 
-  <br>
+<br>
+<div style="text-align: center;">
+
+![widowsFileExplorer](images/windowsOpenInTerminal.png){style="width:500px; height:auto; border-radius:6px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);"}
+
+</div>
+<br>
+
+<div style="page-break-after: always;"></div>
 
    A interface similar to the below should appear in a few seconds. Note how the application contains some sample data.<br>
-   ![Ui](images/ui.png){style="width:900px; height:auto;"}<br>
+   ![Ui](images/ui.png){style="width:90 0px; height:auto;"}<br>
    For more details on the interface, you can refer to the [Overview of Interface](#overview-of-interface) section.
-<div style="page-break-after: always;"></div>
 
 6. Type the command in the command box (displaying *"Enter command here..."*) and press Enter to execute it.
 <br><br>
@@ -719,7 +726,7 @@ Format: `undo`
 
 * You may only undo recent commands that change Furiends!
 
-  - Commands that change Furiends: `add`, `edit`, `delete`, `clear`, `feed`, or after a valid `redo` command.
+  - Commands that change Furiends: [`add person`](#adding-a-person-add-person), [`add animal`](#adding-an-animal-add-animal), [`edit person`](#editing-a-person-edit-person), [`edit animal`](#editing-an-animal-edit-animal), [`delete person`](#deleting-a-person-delete-person), [`delete animal`](#deleting-an-animal-delete-animal), [`clear`](#clearing-all-entries-clear), [`feed`](#feeding-an-animal-feed), or after a valid [`redo`](#redoing-an-undone-change-redo) command.
   - All other commands cannot be undone.
 * If there are no changes to undo, an error message will be shown.
   ![undoErrorMessage.png](images/undoExample.png){style="width:900px; height:auto;"}<br>

@@ -847,13 +847,13 @@ testers are expected to do more *exploratory* testing.
 6. Valid test case - Finding an animal by substring of name <br>
    Prerequisite: Animal `Max` exists in the list (Should be present from pre-loaded data), and there are no other animals with names containing the substring "ma" <br>
    Command: `find animal n/Ma` <br>
-   Expected: Only animal `Max` is shown in the list <br>
+   Expected: Only animal `Max` is shown in the list
+   <div style="page-break-after: always;"></div>
 7. Valid test case - Finding an animal by tag <br>
    Prerequisite: Only animal `Max` exist in the list with tag `Shy`. (Should be present from pre-loaded data) <br>
    Command: `find animal t/shy` <br>
-   Expected: Only animal `Max` is shown in the list <br>
-<div style="page-break-after: always;"></div>
-
+   Expected: Only animal `Max` is shown in the list
+   <br>
 8. Valid test case - Finding an animal by name and tag <br>
    Prerequisite: Animal `Max` exists in the list with tag `Shy`. (Should be present from pre-loaded data) <br>
    Command: `find animal n/Max t/shy` <br>
