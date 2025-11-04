@@ -409,9 +409,9 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
    and `johndoe@example.com` respectively.
 
     <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin: 20px 0;">
-      <img src="images/editPersonExampleBefore.png" style="width:430px; height:auto; border-radius:10px; box-shadow: 0 8px 13px rgba(0,0,0,0.3);" alt="Before editing">
+      <img src="images/editPersonExampleBefore.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 13px rgba(0,0,0,0.3);" alt="Before editing">
       <span style="font-size: 25px; color: #666;">↓</span>
-      <img src="images/editPersonExampleAfter.png" style="width:430px; height:auto; border-radius:10px; box-shadow: 0 8px 13px rgba(0,0,0,0.3);" alt="After editing">
+      <img src="images/editPersonExampleAfter.png" style="width:400px; height:auto; border-radius:10px; box-shadow: 0 8px 13px rgba(0,0,0,0.3);" alt="After editing">
     </div>
 
 
@@ -422,7 +422,6 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
 
 
 Back to [table of contents](#table-of-contents).
-
 <div style="page-break-after: always;"></div>
 
 ### Editing an animal : `edit animal`
@@ -490,6 +489,8 @@ Examples: refer to input restrictions [here](#valid-inputs-format)
    This command returns `Alex Yeoh`, `David Li`. Note that the 'animal' portion is still shown.<br>
 
   ![result for 'find n/alex n/dav'.png](images/findPersonExampleOne.png){style="width:800px; height:auto;"}<br>
+<div style="page-break-after: always;"></div>
+
 * `find person t/friends` <br>
   This command returns `Alex Yeoh`, `Betsy Crowe`. Note that the 'animal' portion is still shown.<br>
 
