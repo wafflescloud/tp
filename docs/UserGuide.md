@@ -464,6 +464,7 @@ Format: `find person [n/KEYWORD] [t/KEYWORD] [MORE_KEYWORDS]...`
   e.g. `t/friends` will return the same result as `t/FRIENDS`.
   * Only people with the tag `friends` will be shown.
 <box type="info" seamless>
+
   People with the tag `friend` will not be shown as the spelling is not exactly the same.
 </box>
 

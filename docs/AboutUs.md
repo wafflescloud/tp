@@ -47,7 +47,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/morpheuschoo)]
 [[portfolio](team/morpheuschoo.md)]
 
-* Role: Vscdoe Expert (with Github Copilot)
+* Role: Vscode Expert (with Github Copilot)
 * Responsibilities: Data
 
 ### She Jingling
