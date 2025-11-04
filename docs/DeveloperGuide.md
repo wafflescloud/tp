@@ -354,6 +354,23 @@ This section describes some details on how certain planned enhancement features 
 ### Adding of profile pictures for contacts
 * Users are able to add/edit contacts' images
 
+### Improve specificity of error messages
+* For invalid commands, inform users which specific parameter was invalid, with a relevant error message explaining the constraints and example use of that parameter.
+
+* For person and animal related commands like `add`, `delete`, `edit`, `find`, specify whether the error was due to the `person` or `animal` part of the command, instead of a general error message showing examples for both person and animal commands.
+
+### Inform users explicitly when save file is corrupted
+* When the save file is corrupted and cannot be loaded, inform users explicitly in the Feedback Box instead of silently creating a new empty address book.
+
+* A backup of the corrupted save file can be created for users to recover data manually, while the empty address book allows users to continue using the app without interruption.
+
+* This allows users to be aware of data corruption issues and take action to recover their data.
+
+### Display feeding sessions more easily
+* Feeding sessions are currently only shown in the detailed view of a person/animal, which may not be obvious to users.
+
+* The Main Window's view of Feeding Sessions can be improved to show a list of scrollable feeding sessions instead of the earliest Feeding Session.
+
 <div style="page-break-before: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
