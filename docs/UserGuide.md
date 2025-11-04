@@ -76,10 +76,11 @@ The file is usually in the `Downloads` folder after downloading it.
 5. Booting up Furiends:
 
    **For Mac users:**
-   1. Open **Terminal** (you can find it in `Applications > Utilities > Terminal` or search using Spotlight with `Cmd + Space`).
-   2. Navigate to the folder containing `furiends.jar` using the `cd` command.
-      * For example, if the file is in your `Documents/Furiends` folder, type: `cd ~/Documents/Furiends`
-   3. Type `java -jar furiends.jar` and press Enter to launch Furiends.
+   1. Navigate to the folder you had placed `furiends.jar` in using the Finder application.
+      * You can launch Finder by using Spotlight `(command + space)` and typing `Finder`, then pressing Enter.
+   2. Right-click on the folder (or right-click on empty space inside the folder) and select **New Terminal at Folder**.
+   ![FuriendsSetupMac](images/furiendsSetupMac.png){style="width:700px; height:auto;"}
+   3. Type `java -jar furiends.jar` in the launched terminal and press Enter to launch Furiends.
 
     <br>
 
@@ -87,13 +88,20 @@ The file is usually in the `Downloads` folder after downloading it.
    1. Navigate to the folder containing `furiends.jar` in **File Explorer**.
    2. Right-click on the folder (or right-click on empty space inside the folder) and select **Open in Terminal**.
    3. In the terminal window that opens, type `java -jar furiends.jar` and press Enter to launch Furiends.
+   
+    <br>
 
-  <br>
-
-   A GUI similar to the below should appear in a few seconds. Note how the application contains some sample data.<br>
-   ![Ui](images/ui.png){style="width:900px; height:auto;"}<br>
-   For more details on the GUI, you can refer to the [Overview of GUI](#overview-of-gui) section.
+   **For more advanced users (who are comfortable with using the terminal):**
+   1. Open a terminal of your choice.
+   2. Navigate to the folder containing `furiends.jar` using the `cd` command.
+   3. Type `java -jar furiends.jar` and press Enter to launch Furiends.
+   
 <div style="page-break-after: always;"></div>
+
+A GUI similar to the below should appear in a few seconds. Note how the application contains some sample data.<br>
+![Ui](images/ui.png){style="width:900px; height:auto;"}<br>
+For more details on the GUI, you can refer to the [Overview of GUI](#overview-of-gui) section.
+
 
 6. Type the command in the command box (displaying "Enter command here...") and press Enter to execute it.
 <br><br>
@@ -110,6 +118,9 @@ The file is usually in the `Downloads` folder after downloading it.
 
 7. Refer to the [Features](#features) below for details of each command.
 
+Back to [table of contents](#table-of-contents).
+
+
 ------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
@@ -125,6 +136,8 @@ The GUI is made up of the following components:
    * The **feeding session** shown under each person indicates the earliest feeding session for the animals that person is feeding.
 5. **Animal List**: Displays the list of animals stored in Furiends.
    * The **feeding session** shown under each animal indicates the earliest feeding session for the people feeding that animal.
+
+Back to [table of contents](#table-of-contents).
 
 ------------------------------------------------------------------------------------------------
 
